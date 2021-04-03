@@ -1,4 +1,7 @@
 @@ -1,85 +1,15 @@
+# DB Assets
+*.db
+
 # Built application files
 *.apk
 *.aar
