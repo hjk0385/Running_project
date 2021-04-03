@@ -15,15 +15,14 @@ public class CourseSuggester {
     private final List<Dot> imageDot;
     private final List<Dot> mapDot;
 
-    public CourseSuggester(String imageLocation, String mapDBLocation,
+    public CourseSuggester(Bitmap image,
                            double startX, double startY,
                            double endX, double endY) {
-        imageDot = this.loadImage(imageLocation);
-        mapDot = this.loadAddress(mapDBLocation, startX, startY, endX, endY);
+        imageDot = this.loadImage(image);
+        mapDot = this.loadAddress(startX, startY, endX, endY);
     }
 
-    private List<Dot> loadImage(String imageLocation) {
-        Bitmap image = BitmapFactory.decodeFile(imageLocation);
+    private List<Dot> loadImage(Bitmap image) {
         List<Dot> imageDot = new ArrayList<>();
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
@@ -42,8 +41,7 @@ public class CourseSuggester {
     }
 
     //load Map
-    private List<Dot> loadAddress(String mapDBLocation,
-                                  double startX, double startY,
+    private List<Dot> loadAddress(double startX, double startY,
                                   double endX, double endY) {
         //load data
         MapDAO mapDAO = new MapDAO();
