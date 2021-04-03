@@ -1,13 +1,13 @@
 package com.trainer.courserunner.courseguider;
 
-import androidx.core.util.Supplier;
+import java.util.List;
+import com.trainer.courserunner.coursesuggest.DotAddress;
 
 public interface MapDrawer {
-    void drawpath(double startLongitude, double startLatitude,
-                  double endLongitude, double endLatitude,
-                  Supplier<String> overlayType);
-    void drawUserPath(double startLongitude, double startLatitude,
-                      double endLongitude, double endLatitude);
-    void drawUserLogPath(double startLongitude, double startLatitude,
-                         double endLongitude, double endLatitude);
+    //draw -> drawId
+    Object drawMarker(DotAddress address);
+    Object drawPolylineOverlay(List<DotAddress> addressList);
+    Object drawPathOverleay(List<DotAddress> addressList);
+    //clear
+    void clearDraw(Object drawObject);
 }

@@ -21,4 +21,12 @@ public class DotAddress extends Dot {
         double height = endY - startY;
         return (y - startY) / height;
     }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
 }
