@@ -15,7 +15,7 @@ public class CourseTestActivity extends NavermapActivity {
         AssetManager assetManager = getResources().getAssets();
         MapDBDownloader.download(assetManager,getApplicationContext());
         //DB load test
-
+        Log.v("MY_USE_TAG","DB Copy Success");
         
     }
 

@@ -16,15 +16,10 @@ public class MapDBDownloader extends MapDBInfo {
             mapDBAssetInput = assetManager.open(mapDBAssetLocation);
             mapDBOutput = context.openFileOutput(mapDBAssetLocation,Context.MODE_PRIVATE);
             copyFile(mapDBAssetInput, mapDBOutput);
+            mapDBAssetInput.close();
+            mapDBOutput.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                mapDBAssetInput.close();
-                mapDBOutput.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
