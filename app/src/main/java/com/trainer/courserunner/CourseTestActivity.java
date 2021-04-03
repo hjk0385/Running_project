@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.trainer.courserunner.coursesuggest.CourseSuggester;
 import com.trainer.courserunner.managedata.MapDBDownloader;
 
 public class CourseTestActivity extends NavermapActivity {
@@ -12,10 +13,10 @@ public class CourseTestActivity extends NavermapActivity {
         super.onCreate(savedInstanceState);
 
         AssetManager assetManager = getResources().getAssets();
-        MapDBDownloader.download(assetManager);
-        //로그 테스트
-        Log.v("MY_TAG_test","Download test success");
+        MapDBDownloader.download(assetManager,getApplicationContext());
+        //DB load test
 
+        
     }
 
 }

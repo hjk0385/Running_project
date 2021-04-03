@@ -9,14 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <activity android:name=".NavermapActivity"></activity>
+        <activity android:name=".NavermapActivity">
+        </activity>
         <activity android:name=".MainActivity">
+        </activity>
+
+        <activity android:name=".CourseTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 네이버 지도 API 키 설정 -->
+        </activity>
+
+        <!-- 네이버 지도 API 키 설정 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="YOUR_CLIENT_ID_HERE" />

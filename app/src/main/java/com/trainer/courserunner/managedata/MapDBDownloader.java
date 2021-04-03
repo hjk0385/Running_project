@@ -1,5 +1,6 @@
 package com.trainer.courserunner.managedata;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 
 import java.io.FileOutputStream;
@@ -8,12 +9,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class MapDBDownloader extends MapDBInfo {
-    static public void download(AssetManager assetManager) {
+    static public void download(AssetManager assetManager, Context context) {
         InputStream mapDBAssetInput = null;
         OutputStream mapDBOutput = null;
         try {
             mapDBAssetInput = assetManager.open(mapDBAssetLocation);
-            mapDBOutput = new FileOutputStream(mapDBLocation);
+            mapDBOutput = context.openFileOutput(mapDBAssetLocation,Context.MODE_PRIVATE);
             copyFile(mapDBAssetInput, mapDBOutput);
         } catch (IOException e) {
             e.printStackTrace();

@@ -92,7 +92,6 @@ public class CourseSuggester {
     //코스 제안
     public List<DotAddress> suggestPath() {
         List<Dot> addressDotList = extractionDots(this.mapDot, this.imageDot);
-        List<DotAddress> addressPathList = makeCourse(addressDotList);
-        return addressPathList;
+        return makeCourse(addressDotList);
     }
 }

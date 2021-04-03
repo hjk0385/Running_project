@@ -1,19 +1,45 @@
 package com.trainer.courserunner;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.trainer.courserunner.courseguider.CourseOverseer;
-import com.trainer.courserunner.courseguider.MapDrawer;
 
 public class CourseGuideActivity extends NavermapActivity {
-    CourseOverseer courseOverseer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        courseOverseer = new CourseOverseer((MapDrawer) this);
-        //thread start
+        new CourseOverseer().execute();
+    }
 
+    class CourseOverseer extends AsyncTask<Object,Object,Object> {
 
+        @Override
+        protected Object doInBackground(Object... objects) {
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+        }
+
+        @Override
+        protected void onProgressUpdate(Object... values) {
+            super.onProgressUpdate(values);
+        }
+
+        //function
+        private void oversightMap() {
+            //this.mapDrawer.drawpath();
+        }
+
+        private void oversightSound() {
+
+        }
     }
 }
