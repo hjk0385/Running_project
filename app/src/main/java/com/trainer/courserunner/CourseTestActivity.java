@@ -15,7 +15,7 @@ public class CourseTestActivity extends NavermapActivity {
         MapDBDownloader.download(assetManager);
         //로그 테스트
         Log.v("MY_TAG_test","Download test success");
-        //DAO, 커넥터 수정
+
     }
 
 }
