@@ -5,9 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-public class MapDAO extends MapDBConnector{
-    public MapDAO(String dbLocation) {
-        super(dbLocation);
+public class MapDAO {
+    private static SQLiteDatabase mapDB = null;
+
+    public MapDAO() {
+        if (mapDB == null) {
+            MapDAO.mapDB = SQLiteDatabase.openDatabase(MapDBInfo.getMapDBLocation(), null, SQLiteDatabase.OPEN_READONLY);
+        }
     }
 
     public ArrayList<MapDTO> getScopeAddress(double startX, double startY,
@@ -20,7 +24,7 @@ public class MapDAO extends MapDBConnector{
                 String.valueOf(endX),
                 String.valueOf(endY)
         };
-        Cursor cursor = this.getDBConnection().rawQuery(sql, whereArgs);
+        Cursor cursor = mapDB.rawQuery(sql, whereArgs);
         ArrayList<MapDTO> Address = new ArrayList<>();
         while (cursor.moveToNext()) {
             Address.add(new MapDTO(cursor.getDouble(cursor.getColumnIndex("longitude")),

@@ -46,7 +46,7 @@ public class CourseSuggester {
                                   double startX, double startY,
                                   double endX, double endY) {
         //load data
-        MapDAO mapDAO = new MapDAO(mapDBLocation);
+        MapDAO mapDAO = new MapDAO();
         List<MapDTO> scopeAddress = mapDAO.getScopeAddress(startX, startY, endX, endY);
         //convert dot
         List<Dot> addressDotList = new ArrayList<Dot>();

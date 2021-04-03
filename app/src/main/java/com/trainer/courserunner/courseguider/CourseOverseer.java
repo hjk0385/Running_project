@@ -1,27 +1,28 @@
 package com.trainer.courserunner.courseguider;
 
-public class CourseOverseer implements Runnable{
-    private MapDrawer mapDrawer=null;
-    private boolean active=true;
+public class CourseOverseer implements Runnable {
+    private MapDrawer mapDrawer = null;
+    private boolean active = true;
 
-    public CourseOverseer(MapDrawer mapDrawer){
-        this.mapDrawer=mapDrawer;
+    public CourseOverseer(MapDrawer mapDrawer) {
+        this.mapDrawer = mapDrawer;
     }
 
-    public void stop(){
-        this.active=false;
+    public void stop() {
+        this.active = false;
     }
 
-    private void oversightMap(){
+    private void oversightMap() {
         //this.mapDrawer.drawpath();
     }
-    private void oversightSound(){
+
+    private void oversightSound() {
 
     }
 
     @Override
     public void run() {
-        while(active){
+        while (active) {
             oversightMap();
             oversightSound();
             try {
