@@ -18,20 +18,21 @@ public class CourseGuideActivity extends NavermapActivity {
         super.onCreate(savedInstanceState);
         //debug
         List<DotAddress> course = new ArrayList<>();
-        courseOverseer=new CourseOverseer(this,course);
+        courseOverseer = new CourseOverseer(this, course);
     }
 
-    class CourseOverseerTasker extends AsyncTask<CourseOverseer,Void,Void>{
+    class CourseOverseerTasker extends AsyncTask<CourseOverseer, Void, Void> {
         boolean active;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            active=true;
+            active = true;
         }
 
         @Override
         protected Void doInBackground(CourseOverseer... courseOverseers) {
-            while(active){
+            while (active) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -53,7 +54,7 @@ public class CourseGuideActivity extends NavermapActivity {
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            active=false;
+            active = false;
         }
     }
 }
