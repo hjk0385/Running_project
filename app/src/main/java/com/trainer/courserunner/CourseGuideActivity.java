@@ -3,10 +3,6 @@ package com.trainer.courserunner;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.trainer.courserunner.coursesuggest.DotAddress;
-
-import java.util.List;
-
 
 public class CourseGuideActivity extends NavermapActivity {
     @Override
@@ -16,12 +12,12 @@ public class CourseGuideActivity extends NavermapActivity {
 
     }
 
-    class CourseOverseerMap extends AsyncTask<Object,Object,Object> {
+    class CourseOverseerMap extends AsyncTask<Object, Object, Object> {
 
 
         @Override
         protected Object doInBackground(Object... objects) {
-            while(true){
+            while (true) {
                 //oversightMap
                 //1초 대기
                 try {

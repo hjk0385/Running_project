@@ -1,7 +1,6 @@
 package com.trainer.courserunner.coursesuggest;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import com.trainer.courserunner.managedata.MapDAO;

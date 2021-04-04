@@ -1,29 +1,22 @@
 package com.trainer.courserunner.managedata;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
 import android.util.Log;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MapDAO {
     private static SQLiteDatabase mapDB = null;
-    public static void initMapDB(Context context){
-        String[] expansionFiles=ObbLoader.getAPKExpansionFiles(context,1,0);
-        String dbLocation=expansionFiles[0];
-        if(mapDB==null){
+
+    public static void initMapDB(Context context) {
+        String[] expansionFiles = ObbLoader.getAPKExpansionFiles(context, 1, 0);
+        String dbLocation = expansionFiles[0];
+        if (mapDB == null) {
             MapDAO.mapDB = SQLiteDatabase.openDatabase(dbLocation, null, SQLiteDatabase.OPEN_READONLY);
-        }
-        else{
-            Log.v("Load Success","Load Success");
+        } else {
+            Log.v("DBLOG", "DB Load Success");
         }
     }
 

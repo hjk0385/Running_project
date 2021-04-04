@@ -1,6 +1,5 @@
 package com.trainer.courserunner;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;

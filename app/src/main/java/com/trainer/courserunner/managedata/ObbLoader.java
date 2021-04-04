@@ -22,19 +22,19 @@ public class ObbLoader {
 
             // Check that expansion file path exists
             if (expPath.exists()) {
-                if ( mainVersion > 0 ) {
+                if (mainVersion > 0) {
                     String strMainPath = expPath + File.separator + "main." +
                             mainVersion + "." + packageName + ".obb";
                     File main = new File(strMainPath);
-                    if ( main.isFile() ) {
+                    if (main.isFile()) {
                         ret.add(strMainPath);
                     }
                 }
-                if ( patchVersion > 0 ) {
+                if (patchVersion > 0) {
                     String strPatchPath = expPath + File.separator + "patch." +
                             mainVersion + "." + packageName + ".obb";
                     File main = new File(strPatchPath);
-                    if ( main.isFile() ) {
+                    if (main.isFile()) {
                         ret.add(strPatchPath);
                     }
                 }
