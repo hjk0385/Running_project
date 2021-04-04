@@ -24,23 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NavermapActivity extends AppCompatActivity implements OnMapReadyCallback, MapDrawer {
-    private NaverMap naverMap;
-    private FusedLocationSource locationSource;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
+    protected NaverMap naverMap;
 
-    protected double userLongitude;
-    protected double userLatitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navermap);
-        //위치 객체 가져오기
-        locationSource=new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
-        naverMap.addOnLocationChangeListener(location -> {
-            userLatitude=location.getLatitude();
-            userLongitude=location.getLongitude();
-        });
-
         //그리기 API 활용을 위한 NaverMap 가져오기
         FragmentManager fm = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.navermap_fragment);
@@ -50,28 +39,12 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         }
         mapFragment.getMapAsync(this);
         //
-
     }
-    //OnMapReadyCallback
+
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         //획득된 NaverMap를 클래스 객체에 저장
         this.naverMap = naverMap;
-        naverMap.setLocationSource(locationSource);
-        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,  @NonNull int[] grantResults) {
-        if (locationSource.onRequestPermissionsResult(
-                requestCode, permissions, grantResults)) {
-            if (!locationSource.isActivated()) { // 권한 거부됨
-                naverMap.setLocationTrackingMode(LocationTrackingMode.None);
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(
-                requestCode, permissions, grantResults);
     }
 
     @Override
