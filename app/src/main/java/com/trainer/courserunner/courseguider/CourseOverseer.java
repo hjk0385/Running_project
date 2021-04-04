@@ -20,16 +20,16 @@ public class CourseOverseer {
     Object overlayPassedPath;
     Object overlayRemainPath;
 
-    public CourseOverseer(MapDrawer mapDrawer, List<DotAddress> addressList,double startX,double startY,double endX,double endY) {
+    public CourseOverseer(MapDrawer mapDrawer, List<DotAddress> addressList, double startX, double startY, double endX, double endY) {
         //info
-        this.mapDrawer=mapDrawer;
-        this.startX=startX;
-        this.startY=startY;
-        this.endX=endX;
-        this.endY=endY;
+        this.mapDrawer = mapDrawer;
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
         //path
-        this.pathNumber=addressList.size();
-        this.passedPath=new ArrayList<>();
+        this.pathNumber = addressList.size();
+        this.passedPath = new ArrayList<>();
         this.remainPath = new ArrayList<>(addressList);
         //overlay
         overlayPassedPath = null;
@@ -48,7 +48,7 @@ public class CourseOverseer {
     }
 
     public void refresh(double longitude, double latitude) {
-        refresh(new DotAddress(startX,startY,endX,endY,longitude,latitude));
+        refresh(new DotAddress(startX, startY, endX, endY, longitude, latitude));
     }
 
     private boolean oversightLocation(DotAddress currentLocation) {

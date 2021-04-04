@@ -5,10 +5,12 @@ import java.util.List;
 
 public class Dots {
     protected List<Dot> dots;
-    public Dots(){
-        dots=new ArrayList<>();
+
+    public Dots() {
+        dots = new ArrayList<>();
     }
-    public Dot getClosestDot(Dot dot) {
+
+    static public Dot getClosestDot(List<Dot> dots, Dot dot) {
         Dot closestDot = dots.get(0);
         for (int i = 1; i < dots.size(); i++) {
             if (closestDot.getCost(dot) >
@@ -18,7 +20,8 @@ public class Dots {
         }
         return closestDot;
     }
-    static public Dot getClosestDot(List<Dot> dots,Dot dot) {
+
+    public Dot getClosestDot(Dot dot) {
         Dot closestDot = dots.get(0);
         for (int i = 1; i < dots.size(); i++) {
             if (closestDot.getCost(dot) >

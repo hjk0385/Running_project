@@ -7,19 +7,17 @@ import androidx.annotation.NonNull;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.util.FusedLocationSource;
-import com.trainer.courserunner.NavermapActivity;
 
 public class NavermapUserLocationActivity extends NavermapActivity {
-    protected FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
-
+    protected FusedLocationSource locationSource;
     protected double userLongitude;
     protected double userLatitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        locationSource=new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+        locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
     }
 
     @Override
@@ -28,8 +26,8 @@ public class NavermapUserLocationActivity extends NavermapActivity {
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         naverMap.addOnLocationChangeListener(location -> {
-            userLatitude=location.getLatitude();
-            userLongitude=location.getLongitude();
+            userLatitude = location.getLatitude();
+            userLongitude = location.getLongitude();
         });
     }
 

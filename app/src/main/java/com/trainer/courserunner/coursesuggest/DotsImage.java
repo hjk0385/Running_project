@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class DotsImage extends Dots{
-    public DotsImage(Bitmap image){
+public class DotsImage extends Dots {
+    public DotsImage(Bitmap image) {
         super();
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
@@ -24,9 +24,10 @@ public class DotsImage extends Dots{
             }
         }
     }
-    public List<Dot> quantization(DotsScopeMap scopeMap){
-        HashSet<Dot> mapDots=new HashSet<>();
-        for(Dot dot:dots){
+
+    public List<Dot> quantization(DotsScopeMap scopeMap) {
+        HashSet<Dot> mapDots = new HashSet<>();
+        for (Dot dot : dots) {
             mapDots.add(scopeMap.getClosestDot(dot));
         }
         return new ArrayList<Dot>(mapDots);
