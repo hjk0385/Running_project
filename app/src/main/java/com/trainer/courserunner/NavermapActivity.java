@@ -1,9 +1,11 @@
 package com.trainer.courserunner;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Consumer;
 import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
@@ -45,19 +47,21 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public Object drawMarker(DotAddress address) {
+    public Object drawMarker(DotAddress address, Consumer<Object> property) {
         //setting
         double longitude = address.getLongitude();
         double latitude = address.getLatitude();
         //draw
         Marker marker = new Marker();
         marker.setPosition(new LatLng(latitude, longitude));
+        //속성
+        property.accept(marker);
         marker.setMap(this.naverMap);
         return marker;
     }
 
     @Override
-    public Object drawPolylineOverlay(List<DotAddress> addressList) {
+    public Object drawPolylineOverlay(List<DotAddress> addressList, Consumer<Object> property) {
         //setting
         List<LatLng> lngList = new ArrayList<>();
         for (DotAddress address : addressList) {
@@ -68,12 +72,13 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         //draw
         PolylineOverlay polyline = new PolylineOverlay();
         polyline.setCoords(lngList);
+        property.accept(polyline);
         polyline.setMap(naverMap);
         return polyline;
     }
 
     @Override
-    public Object drawPathOverleay(List<DotAddress> addressList) {
+    public Object drawPathOverleay(List<DotAddress> addressList, Consumer<Object> property) {
         //setting
         List<LatLng> lngList = new ArrayList<>();
         for (DotAddress address : addressList) {
@@ -84,8 +89,30 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         //draw
         PathOverlay pathOverlay = new PathOverlay();
         pathOverlay.setCoords(lngList);
+        property.accept(pathOverlay);
         pathOverlay.setMap(naverMap);
         return pathOverlay;
+    }
+
+    @Override
+    public Object drawPath(List<DotAddress> addressList) {
+        return drawPolylineOverlay(addressList, (Object object) -> {
+            ((PolylineOverlay) object).setColor(Color.BLACK);
+        });
+    }
+
+    @Override
+    public Object drawRemainPath(List<DotAddress> addressList) {
+        return drawPolylineOverlay(addressList, (Object object) -> {
+            ((PolylineOverlay) object).setColor(Color.RED);
+        });
+    }
+
+    @Override
+    public Object drawPassedPath(List<DotAddress> addressList) {
+        return drawPolylineOverlay(addressList, (Object object) -> {
+            ((PolylineOverlay) object).setColor(Color.BLUE);
+        });
     }
 
     @Override

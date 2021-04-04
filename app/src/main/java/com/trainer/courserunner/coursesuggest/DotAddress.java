@@ -12,6 +12,7 @@ public class DotAddress extends Dot {
         this.latitude = y;
     }
 
+
     private static double normalizeX(double startX, double endX, double x) {
         double width = endX - startX;
         return (x - startX) / width;
@@ -29,4 +30,13 @@ public class DotAddress extends Dot {
     public double getLatitude() {
         return latitude;
     }
+
+    public double getX() {
+        return longitude;
+    }
+
+    public double getY() {
+        return latitude;
+    }
+
 }
