@@ -37,7 +37,7 @@ public class CourseGuideActivity extends NavermapActivity{
             inputStream.close();
             CourseSuggester courseSuggester = new CourseSuggester(bitmap,startx,starty,endx,endy);
             List<DotAddress> addressList=courseSuggester.suggestPath();
-            courseOverseer=new CourseOverseer(this,addressList);
+            courseOverseer=new CourseOverseer(this,addressList,startx,starty,endx,endy);
             courseOverseerTasker=new CourseOverseerTasker();
             courseOverseerTasker.execute();
         } catch (IOException e) {
