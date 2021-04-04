@@ -1,3 +1,5 @@
+package com.trainer.courserunner;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,7 +10,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.trainer.courserunner.NavermapActivity;
 
 public class NavermapUserLocationActivity extends NavermapActivity {
-    private FusedLocationSource locationSource;
+    protected FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
 
     protected double userLongitude;

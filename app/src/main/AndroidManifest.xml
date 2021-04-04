@@ -10,9 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <activity android:name=".NavermapActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
 
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".NavermapActivity"></activity>
+        <activity android:name=".NavermapUserLocationActivity"></activity>
+        <activity android:name=".CourseGuideActivity"></activity>
         <activity android:name=".CourseTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

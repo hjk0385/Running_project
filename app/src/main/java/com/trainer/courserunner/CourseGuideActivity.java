@@ -7,6 +7,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.naver.maps.map.LocationTrackingMode;
+import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.trainer.courserunner.courseguider.CourseOverseer;
 import com.trainer.courserunner.coursesuggest.CourseSuggester;
@@ -18,71 +22,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseGuideActivity extends NavermapActivity{
+public class CourseGuideActivity extends NavermapUserLocationActivity{
     CourseOverseer courseOverseer;
-    CourseOverseerTasker courseOverseerTasker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //debug -> release intent
+        Bitmap bitmap=null;
         try {
-            double startx = 126.7687037;
-            double starty = 37.4916138;
-            double endx = 126.779899;
-            double endy = 37.506515;
             AssetManager assetManager = getResources().getAssets();
             InputStream inputStream = assetManager.open("testbitmap1.png");
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            bitmap = BitmapFactory.decodeStream(inputStream);
             inputStream.close();
-            CourseSuggester courseSuggester = new CourseSuggester(bitmap,startx,starty,endx,endy);
-            List<DotAddress> addressList=courseSuggester.suggestPath();
-            courseOverseer=new CourseOverseer(this,addressList,startx,starty,endx,endy);
-            courseOverseerTasker=new CourseOverseerTasker();
-            courseOverseerTasker.execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
-        courseOverseer = new CourseOverseer(this, course);
-        */
+        double startx = 126.7687037;
+        double starty = 37.4916138;
+        double endx = 126.779899;
+        double endy = 37.506515;
+        CourseSuggester courseSuggester = new CourseSuggester(bitmap,startx,starty,endx,endy);
+        courseOverseer=new CourseOverseer(this,courseSuggester.suggestPath(),startx,starty,endx,endy);
     }
 
-    class CourseOverseerTasker extends AsyncTask<Void, Void, Void> {
-        boolean active;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            active = true;
-        }
-
-        @Override
-        protected Void doInBackground(Void... values) {
-            while (active) {
-                try {
-                    Thread.sleep(1000);
-                    publishProgress();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-            //위치 새로고침
+    @Override
+    public void onMapReady(@NonNull NaverMap naverMap) {
+        super.onMapReady(naverMap);
+        naverMap.setLocationSource(locationSource);
+        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+        naverMap.addOnLocationChangeListener(location -> {
+            userLatitude=location.getLatitude();
+            userLongitude=location.getLongitude();
             courseOverseer.refresh(userLongitude,userLatitude);
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-            active = false;
-        }
+        });
     }
-    //권한 지정과 위치추적 설정 + 변경이벤트의 구현 및 그 리스너에서 현재 위치를 저장하는 변수의 지정의 구현
-
 }

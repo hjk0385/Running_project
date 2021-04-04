@@ -6,32 +6,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseOverseer {
+    //Info
     MapDrawer mapDrawer;
-    Object overlayPassedPath;
-    Object overlayRemainPath;
+    double startX;
+    double startY;
+    double endX;
+    double endY;
+    //Path
+    int pathNumber;
     List<DotAddress> passedPath;
     List<DotAddress> remainPath;
-    int pathNumber;
+    //Overlay
+    Object overlayPassedPath;
+    Object overlayRemainPath;
 
-    double startx;
-    double starty;
-    double endx;
-    double endy;
-
-    public CourseOverseer(MapDrawer mapDrawer, List<DotAddress> addressList,double startx,double starty,double endx,double endy) {
-        this.mapDrawer = mapDrawer;
-        pathNumber = addressList.size();
-        passedPath = new ArrayList<>();
-        remainPath = new ArrayList<>(addressList);
+    public CourseOverseer(MapDrawer mapDrawer, List<DotAddress> addressList,double startX,double startY,double endX,double endY) {
+        //info
+        this.mapDrawer=mapDrawer;
+        this.startX=startX;
+        this.startY=startY;
+        this.endX=endX;
+        this.endY=endY;
+        //path
+        this.pathNumber=addressList.size();
+        this.passedPath=new ArrayList<>();
+        this.remainPath = new ArrayList<>(addressList);
+        //overlay
         overlayPassedPath = null;
         overlayRemainPath = null;
+        //overlay reset
         refreshRemainPath();
-
-        this.startx=startx;
-        this.starty=starty;
-        this.endx=endx;
-        this.endy=endy;
-
     }
 
     public void refresh(DotAddress currentLocation) {
@@ -44,7 +48,7 @@ public class CourseOverseer {
     }
 
     public void refresh(double longitude, double latitude) {
-        refresh(new DotAddress(startx,starty,endx,endy,longitude,latitude));
+        refresh(new DotAddress(startX,startY,endX,endY,longitude,latitude));
     }
 
     private boolean oversightLocation(DotAddress currentLocation) {
@@ -52,6 +56,7 @@ public class CourseOverseer {
             return false;
         }
         DotAddress currentGoal = remainPath.get(0);
+        //0.0001이하의 거리를 가지면 완료된 코스지점으로 바뀐다.
         if (currentGoal.getCost(currentLocation) <= 0.0001) {
             passedPath.add(currentGoal);
             remainPath.remove(currentGoal);
