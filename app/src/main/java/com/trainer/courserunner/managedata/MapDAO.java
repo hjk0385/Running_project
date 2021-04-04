@@ -1,16 +1,29 @@
 package com.trainer.courserunner.managedata;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
+import android.util.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MapDAO {
     private static SQLiteDatabase mapDB = null;
-
-    public MapDAO() {
-        if (mapDB == null) {
-            MapDAO.mapDB = SQLiteDatabase.openDatabase(MapDBInfo.getMapDBLocation(), null, SQLiteDatabase.OPEN_READONLY);
+    public static void initMapDB(Context context){
+        String[] expansionFiles=ObbLoader.getAPKExpansionFiles(context,1,0);
+        String dbLocation=expansionFiles[0];
+        if(mapDB==null){
+            MapDAO.mapDB = SQLiteDatabase.openDatabase(dbLocation, null, SQLiteDatabase.OPEN_READONLY);
+        }
+        else{
+            Log.v("Load Success","Load Success");
         }
     }
 
@@ -36,3 +49,9 @@ public class MapDAO {
         return Address;
     }
 }
+
+/*
+    obb 확장
+    https://gogorchg.tistory.com/entry/Android-Expansion-file-%EC%9D%B4%EC%9A%A9%ED%95%98%EA%B8%B0-1
+
+*/

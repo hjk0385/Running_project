@@ -1,6 +1,7 @@
 @@ -1,85 +1,15 @@
 # DB Assets
-*.db
+AddressDB.*
+*db
 
 # Built application files
 *.apk
