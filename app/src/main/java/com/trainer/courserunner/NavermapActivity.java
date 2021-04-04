@@ -9,12 +9,14 @@ import androidx.core.util.Consumer;
 import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
+import com.naver.maps.map.util.FusedLocationSource;
 import com.trainer.courserunner.courseguider.MapDrawer;
 import com.trainer.courserunner.coursesuggest.DotAddress;
 
@@ -23,11 +25,21 @@ import java.util.List;
 
 public class NavermapActivity extends AppCompatActivity implements OnMapReadyCallback, MapDrawer {
     private NaverMap naverMap;
+    private FusedLocationSource locationSource;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
 
+    protected double userLongitude;
+    protected double userLatitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navermap);
+        //위치 객체 가져오기
+        locationSource=new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+        naverMap.addOnLocationChangeListener(location -> {
+            userLatitude=location.getLatitude();
+            userLongitude=location.getLongitude();
+        });
 
         //그리기 API 활용을 위한 NaverMap 가져오기
         FragmentManager fm = getSupportFragmentManager();
@@ -38,12 +50,28 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         }
         mapFragment.getMapAsync(this);
         //
-    }
 
+    }
+    //OnMapReadyCallback
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         //획득된 NaverMap를 클래스 객체에 저장
         this.naverMap = naverMap;
+        naverMap.setLocationSource(locationSource);
+        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,  @NonNull int[] grantResults) {
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions, grantResults)) {
+            if (!locationSource.isActivated()) { // 권한 거부됨
+                naverMap.setLocationTrackingMode(LocationTrackingMode.None);
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(
+                requestCode, permissions, grantResults);
     }
 
     @Override

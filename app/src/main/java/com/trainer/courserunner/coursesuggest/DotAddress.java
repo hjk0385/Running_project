@@ -38,5 +38,4 @@ public class DotAddress extends Dot {
     public double getY() {
         return latitude;
     }
-
 }

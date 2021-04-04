@@ -13,7 +13,12 @@ public class CourseOverseer {
     List<DotAddress> remainPath;
     int pathNumber;
 
-    public CourseOverseer(MapDrawer mapDrawer, List<DotAddress> addressList) {
+    double startx;
+    double starty;
+    double endx;
+    double endy;
+
+    public CourseOverseer(MapDrawer mapDrawer, List<DotAddress> addressList,double startx,double starty,double endx,double endy) {
         this.mapDrawer = mapDrawer;
         pathNumber = addressList.size();
         passedPath = new ArrayList<>();
@@ -21,6 +26,12 @@ public class CourseOverseer {
         overlayPassedPath = null;
         overlayRemainPath = null;
         refreshRemainPath();
+
+        this.startx=startx;
+        this.starty=starty;
+        this.endx=endx;
+        this.endy=endy;
+
     }
 
     public void refresh(DotAddress currentLocation) {
@@ -30,6 +41,10 @@ public class CourseOverseer {
             refreshRemainPath();
             checkMiddleGoal();
         }
+    }
+
+    public void refresh(double longitude, double latitude) {
+        refresh(new DotAddress(startx,starty,endx,endy,longitude,latitude));
     }
 
     private boolean oversightLocation(DotAddress currentLocation) {
