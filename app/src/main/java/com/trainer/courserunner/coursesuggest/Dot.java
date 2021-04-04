@@ -1,5 +1,7 @@
 package com.trainer.courserunner.coursesuggest;
 
+import java.util.List;
+
 public abstract class Dot {
     private final double normalizeX;
     private final double normalizeY;
