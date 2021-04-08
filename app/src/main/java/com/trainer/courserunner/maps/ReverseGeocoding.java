@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 public class ReverseGeocoding {
     public static String getJsonData(Double latitude,Double longtitude){
         String requestUrl= "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc" +
@@ -30,10 +32,10 @@ public class ReverseGeocoding {
         InputStream iStream=null;
         try{
             URL url = new URL(strUrl);
-            HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+            HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
             //설정
             urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("X-NCP-APIGW-API-KEY-ID","");
+            urlConnection.setRequestProperty("X-NCP-APIGW-API-KEY-ID","hzqct6qd8n");
             urlConnection.setRequestProperty("X-NCP-APIGW-API-KEY","");
             urlConnection.connect();
             iStream=urlConnection.getInputStream();
