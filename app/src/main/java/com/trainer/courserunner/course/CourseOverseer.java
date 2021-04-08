@@ -1,6 +1,7 @@
-package com.trainer.courserunner.courseguider;
+package com.trainer.courserunner.course;
 
-import com.trainer.courserunner.coursesuggest.DotAddress;
+import com.trainer.courserunner.maps.MapDrawer;
+import com.trainer.courserunner.scopetype.ScopeDotAddress;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +15,13 @@ public class CourseOverseer {
     double endY;
     //Path
     int pathNumber;
-    List<DotAddress> passedPath;
-    List<DotAddress> remainPath;
+    List<ScopeDotAddress> passedPath;
+    List<ScopeDotAddress> remainPath;
     //Overlay
     Object overlayPassedPath;
     Object overlayRemainPath;
 
-    public CourseOverseer(MapDrawer mapDrawer, List<DotAddress> addressList, double startX, double startY, double endX, double endY) {
+    public CourseOverseer(MapDrawer mapDrawer, List<ScopeDotAddress> addressList, double startX, double startY, double endX, double endY) {
         //info
         this.mapDrawer = mapDrawer;
         this.startX = startX;
@@ -38,7 +39,7 @@ public class CourseOverseer {
         refreshRemainPath();
     }
 
-    public void refresh(DotAddress currentLocation) {
+    public void refresh(ScopeDotAddress currentLocation) {
         boolean changed = oversightLocation(currentLocation);
         if (changed) {
             refreshPassedPath();
@@ -48,14 +49,14 @@ public class CourseOverseer {
     }
 
     public void refresh(double longitude, double latitude) {
-        refresh(new DotAddress(startX, startY, endX, endY, longitude, latitude));
+        refresh(new ScopeDotAddress(startX, startY, endX, endY, longitude, latitude));
     }
 
-    private boolean oversightLocation(DotAddress currentLocation) {
+    private boolean oversightLocation(ScopeDotAddress currentLocation) {
         if (remainPath.size() == 0) {
             return false;
         }
-        DotAddress currentGoal = remainPath.get(0);
+        ScopeDotAddress currentGoal = remainPath.get(0);
         //0.0001이하의 거리를 가지면 완료된 코스지점으로 바뀐다.
         if (currentGoal.getCost(currentLocation) <= 0.0001) {
             passedPath.add(currentGoal);

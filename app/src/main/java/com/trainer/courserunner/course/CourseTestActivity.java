@@ -1,24 +1,15 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.course;
 
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.trainer.courserunner.coursesuggest.CourseSuggester;
-import com.trainer.courserunner.coursesuggest.DotAddress;
-import com.trainer.courserunner.managedata.MapDAO;
-import com.trainer.courserunner.managedata.MapDTO;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
+import com.trainer.courserunner.maps.NavermapActivity;
 
 public class CourseTestActivity extends NavermapActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
         MapDAO.initMapDB(this);
         MapDAO.initMapDB(this);
 
@@ -38,13 +29,14 @@ public class CourseTestActivity extends NavermapActivity {
             AssetManager assetManager = getResources().getAssets();
             InputStream inputStream = assetManager.open("testbitmap1.png");
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            List<DotAddress> dotAddressList = (new CourseSuggester(bitmap, startx, starty, endx, endy)).suggestPath();
-            for (DotAddress address : dotAddressList) {
+            List<ScopeDotAddress> dotAddressList = (new CourseSuggester(bitmap, startx, starty, endx, endy)).suggestPath();
+            for (ScopeDotAddress address : dotAddressList) {
                 Log.v("DBLOG2", String.valueOf(address.getX()) + " " + String.valueOf(address.getY()));
             }
             inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
 }

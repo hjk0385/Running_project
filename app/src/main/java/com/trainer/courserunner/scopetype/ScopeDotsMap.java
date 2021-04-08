@@ -1,17 +1,17 @@
-package com.trainer.courserunner.coursesuggest;
+package com.trainer.courserunner.scopetype;
 
 import com.trainer.courserunner.managedata.MapDAO;
 import com.trainer.courserunner.managedata.MapDTO;
 
 import java.util.List;
 
-public class DotsScopeMap extends Dots {
-    public DotsScopeMap(double startX, double startY,
+public class ScopeDotsMap extends ScopeDots {
+    public ScopeDotsMap(double startX, double startY,
                         double endX, double endY) {
         super();
         List<MapDTO> scopeAddress = MapDAO.getScopeAddress(startX, startY, endX, endY);
         for (MapDTO address : scopeAddress) {
-            dots.add(new DotAddress(startX, startY, endX, endY, address.getX(), address.getY()));
+            dots.add(new ScopeDotAddress(startX, startY, endX, endY, address.getX(), address.getY()));
         }
     }
 }

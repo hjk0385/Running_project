@@ -1,4 +1,4 @@
-package com.trainer.courserunner.coursesuggest;
+package com.trainer.courserunner.scopetype;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class DotsImage extends Dots {
-    public DotsImage(Bitmap image) {
+public class ScopeDotsImage extends ScopeDots {
+    public ScopeDotsImage(Bitmap image) {
         super();
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
@@ -19,17 +19,17 @@ public class DotsImage extends Dots {
 
                 //100~255인 점들만 추출(그려진 점들)(임의기준)
                 if (red >= 100) {
-                    dots.add(new DotRGB(image.getWidth(), image.getHeight(), x, y));
+                    scopeDots.add(new ScopeDotPixel(image.getWidth(), image.getHeight(), x, y));
                 }
             }
         }
     }
 
-    public List<Dot> quantization(DotsScopeMap scopeMap) {
-        HashSet<Dot> mapDots = new HashSet<>();
-        for (Dot dot : dots) {
-            mapDots.add(scopeMap.getClosestDot(dot));
+    public List<ScopeDot> quantization(ScopeDotsMap scopeMap) {
+        HashSet<ScopeDot> mapScopeDots = new HashSet<>();
+        for (ScopeDot scopeDot : scopeDots) {
+            mapScopeDots.add(scopeMap.getClosestDot(scopeDot));
         }
-        return new ArrayList<Dot>(mapDots);
+        return new ArrayList<ScopeDot>(mapScopeDots);
     }
 }

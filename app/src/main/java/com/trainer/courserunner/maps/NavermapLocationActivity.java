@@ -1,5 +1,6 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.maps;
 
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,7 +9,7 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.util.FusedLocationSource;
 
-public class NavermapUserLocationActivity extends NavermapActivity {
+public class NavermapLocationActivity extends NavermapActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     protected FusedLocationSource locationSource;
     protected double userLongitude;
@@ -25,10 +26,12 @@ public class NavermapUserLocationActivity extends NavermapActivity {
         super.onMapReady(naverMap);
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-        naverMap.addOnLocationChangeListener(location -> {
-            userLatitude = location.getLatitude();
-            userLongitude = location.getLongitude();
-        });
+        naverMap.addOnLocationChangeListener(this::onLocationChangeListener);
+    }
+
+    public void onLocationChangeListener(Location location) {
+        this.userLatitude=location.getLatitude();
+        this.userLongitude=location.getLongitude();
     }
 
     @Override
