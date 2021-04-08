@@ -15,7 +15,13 @@ public class ReverseGeocoding {
         requestUrl=requestUrl.replace("좌표계","epsg:4326");
         requestUrl=requestUrl.replace("변환_작업_이름","epsg:4326");
         requestUrl=requestUrl.replace("출력_형식","json");
-        return ReverseGeocoding.downloadUrl(requestUrl);
+        String geoJson=null;
+        try {
+            geoJson = ReverseGeocoding.downloadUrl(requestUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return geoJson;
     }
 
     private static String downloadUrl(String strUrl) throws IOException{
