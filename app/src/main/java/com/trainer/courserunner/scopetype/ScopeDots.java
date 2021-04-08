@@ -16,6 +16,16 @@ public abstract class ScopeDots {
         }
         return closestScopeDot;
     }
+    static public ScopeDot getClosestDot(List<ScopeDot> scopeDotList, ScopeDot scopeDot){
+        ScopeDot closestScopeDot = scopeDotList.get(0);
+        for (int i = 1; i < scopeDotList.size(); i++) {
+            if (closestScopeDot.getCost(scopeDot) >
+                    scopeDotList.get(i).getCost(scopeDot)) {
+                closestScopeDot = scopeDotList.get(i);
+            }
+        }
+        return closestScopeDot;
+    }
     public List<ScopeDot> quantization(ScopeDots scopeDots){
         //입력으로 받은 ScopeDots를 현재 ScopeDots로 변환한다.
         HashSet<ScopeDot> quantizationDots = new HashSet<>();
@@ -24,5 +34,4 @@ public abstract class ScopeDots {
         }
         return new ArrayList<>(quantizationDots);
     }
-
 }

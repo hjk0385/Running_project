@@ -39,6 +39,8 @@ public class CourseTestActivity extends NavermapActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
+
+        /*
         double startX = 126.7087037;
         double startY = 37.4916138;
         double endX = 126.779899;
@@ -56,6 +58,7 @@ public class CourseTestActivity extends NavermapActivity {
         c.drawPoint(1,2,MyPaint);
         c.drawPoint(1,3,MyPaint);
         c.drawPoint(1,4,MyPaint);
+        */
 
         /*
         List<ScopeDot> dots=new ArrayList<>();

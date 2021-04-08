@@ -12,35 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSuggester {
-    static List<ScopeDotAddress> suggestPath(){
-
-
-
-    }
-
-
-    private List<ScopeDotAddress> course;
-
-    public CourseSuggester(Bitmap image,
-                           double startX, double startY,
-                           double endX, double endY) {
-        course=new ArrayList<>();
-        ScopeDotsImage dotsImage = new ScopeDotsImage(image);
-        ScopeDotsMap dotsScopeMap = new ScopeDotsMap(startX, startY, endX, endY);
-        //make course
-        List<ScopeDot> scopeScopeDots = dotsImage.quantization(dotsScopeMap);
-        ScopeDot currentScopeDot = scopeScopeDots.get(0);
-        scopeScopeDots.remove(currentScopeDot);
-        course.add((ScopeDotAddress) currentScopeDot);
-        while (scopeScopeDots.size() != 0) {
-            currentScopeDot = ScopeDots.getClosestDot(scopeScopeDots, currentScopeDot);
-            scopeScopeDots.remove(currentScopeDot);
-            course.add((ScopeDotAddress) currentScopeDot);
+    static List<ScopeDotAddress> suggestPath(ScopeDotsImage scopeDotsImage,ScopeDotsMap scopeDotsMap){
+        List<ScopeDotAddress> course=new ArrayList<>();
+        List<ScopeDot> scopeDotList=scopeDotsMap.quantization(scopeDotsImage);
+        //최소거리 연산
+        ScopeDot currentScopeDot = scopeDotList.get(0);
+        scopeDotList.remove(currentScopeDot);
+        course.add((ScopeDotAddress)currentScopeDot);
+        while (scopeDotList.size() != 0) {
+            currentScopeDot = ScopeDots.getClosestDot(scopeDotList, currentScopeDot);
+            scopeDotList.remove(currentScopeDot);
+            course.add((ScopeDotAddress)currentScopeDot);
         }
-    }
-
-    //코스 제안
-    public List<ScopeDotAddress> suggestPath() {
         return course;
     }
 }
