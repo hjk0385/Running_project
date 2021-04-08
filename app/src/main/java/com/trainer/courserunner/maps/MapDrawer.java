@@ -8,17 +8,18 @@ import java.util.List;
 
 public interface MapDrawer {
     //draw
-    Object drawMarker(ScopeDotAddress address, Consumer<Object> property);
+    Object drawMarker(ScopeDotAddress address);
 
     Object drawPolyline(List<ScopeDotAddress> addressList, Consumer<Object> property);
 
-    Object drawPath(List<ScopeDotAddress> addressList, Consumer<Object> property);
+    Object drawPathline(List<ScopeDotAddress> addressList, Consumer<Object> property);
+
+    //default draw
+    Object drawPolyline(List<ScopeDotAddress> addressList);
+    Object drawPathline(List<ScopeDotAddress> addressList);
 
     //draw Function
-    Object drawPath(List<ScopeDotAddress> addressList);
-
     Object drawRemainPath(List<ScopeDotAddress> addressList);
-
     Object drawPassedPath(List<ScopeDotAddress> addressList);
 
     //clear

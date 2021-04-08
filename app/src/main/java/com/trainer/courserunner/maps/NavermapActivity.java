@@ -1,6 +1,7 @@
 package com.trainer.courserunner.maps;
 
 import android.graphics.Color;
+import android.graphics.Path;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -45,15 +46,12 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public Object drawMarker(ScopeDotAddress address, Consumer<Object> property) {
-        //setting
+    public Object drawMarker(ScopeDotAddress address) {
         double longitude = address.getLongitude();
         double latitude = address.getLatitude();
         //draw
         Marker marker = new Marker();
         marker.setPosition(new LatLng(latitude, longitude));
-        //속성
-        property.accept(marker);
         marker.setMap(this.naverMap);
         return marker;
     }
@@ -76,7 +74,7 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public Object drawPath(List<ScopeDotAddress> addressList, Consumer<Object> property) {
+    public Object drawPathline(List<ScopeDotAddress> addressList, Consumer<Object> property) {
         //setting
         List<LatLng> lngList = new ArrayList<>();
         for (ScopeDotAddress address : addressList) {
@@ -93,9 +91,16 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public Object drawPath(List<ScopeDotAddress> addressList) {
+    public Object drawPolyline(List<ScopeDotAddress> addressList) {
         return drawPolyline(addressList, (Object object) -> {
             ((PolylineOverlay) object).setColor(Color.BLACK);
+        });
+    }
+
+    @Override
+    public Object drawPathline(List<ScopeDotAddress> addressList) {
+        return drawPolyline(addressList, (Object object) -> {
+            ((PathOverlay) object).setColor(Color.BLACK);
         });
     }
 

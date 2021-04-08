@@ -8,10 +8,9 @@ import java.util.List;
 public class ScopeDotsMap extends ScopeDots {
     public ScopeDotsMap(double startX, double startY,
                         double endX, double endY) {
-        super();
-        List<MapDTO> scopeAddress = MapDAO.getScopeAddress(startX, startY, endX, endY);
-        for (MapDTO address : scopeAddress) {
-            dots.add(new ScopeDotAddress(startX, startY, endX, endY, address.getX(), address.getY()));
+        List<MapDTO> scopeMapAddress = MapDAO.getScopeAddress(startX, startY, endX, endY);
+        for (MapDTO address : scopeMapAddress) {
+            scopeDotList.add(new ScopeDotAddress(startX, startY, endX, endY, address.getX(), address.getY()));
         }
     }
 }

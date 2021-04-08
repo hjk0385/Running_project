@@ -8,14 +8,23 @@ import com.trainer.courserunner.scopetype.ScopeDots;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSuggester {
+    static List<ScopeDotAddress> suggestPath(){
+
+
+
+    }
+
+
     private List<ScopeDotAddress> course;
 
     public CourseSuggester(Bitmap image,
                            double startX, double startY,
                            double endX, double endY) {
+        course=new ArrayList<>();
         ScopeDotsImage dotsImage = new ScopeDotsImage(image);
         ScopeDotsMap dotsScopeMap = new ScopeDotsMap(startX, startY, endX, endY);
         //make course
