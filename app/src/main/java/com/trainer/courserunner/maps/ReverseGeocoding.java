@@ -8,8 +8,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ReverseGeocoding {
-    public static String getJsonData(double Latitude,double Longtitude){
-
+    public static String getJsonData(Double latitude,Double longtitude){
+        String requestUrl= "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc" +
+                "?coords={입력_좌표}&sourcecrs={좌표계}&orders={변환_작업_이름}&output={출력_형식}";
+        requestUrl=requestUrl.replace("입력_좌표",latitude.toString()+","+longtitude.toString());
+        requestUrl=requestUrl.replace("좌표계","epsg:4326");
+        requestUrl=requestUrl.replace("변환_작업_이름","epsg:4326");
+        requestUrl=requestUrl.replace("출력_형식","json");
+        return ReverseGeocoding.downloadUrl(requestUrl);
     }
 
     private static String downloadUrl(String strUrl) throws IOException{
@@ -21,8 +27,8 @@ public class ReverseGeocoding {
             HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
             //설정
             urlConnection.setRequestMethod("GET");
-            
-
+            urlConnection.setRequestProperty("X-NCP-APIGW-API-KEY-ID","");
+            urlConnection.setRequestProperty("X-NCP-APIGW-API-KEY","");
             urlConnection.connect();
             iStream=urlConnection.getInputStream();
             iStream.read(buffer);
