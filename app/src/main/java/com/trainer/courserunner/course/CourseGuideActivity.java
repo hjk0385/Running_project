@@ -38,10 +38,11 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         double starty = 37.4916138;
         double endx = 126.779899;
         double endy = 37.506515;
-
+        /*
         //구현 실행 내용
         CourseSuggester courseSuggester = new CourseSuggester(bitmap, startx, starty, endx, endy);
         courseOverseer = new CourseOverseer(this, courseSuggester.suggestPath(), startx, starty, endx, endy);
+        */
     }
 
     @Override

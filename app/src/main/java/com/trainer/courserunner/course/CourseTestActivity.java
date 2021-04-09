@@ -18,6 +18,7 @@ import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.managedata.MapDAO;
 import com.trainer.courserunner.managedata.MapDTO;
 import com.trainer.courserunner.maps.NavermapActivity;
+import com.trainer.courserunner.maps.ReverseGeocoding;
 import com.trainer.courserunner.scopetype.ScopeDot;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.scopetype.ScopeDotPixel;
@@ -39,8 +40,10 @@ public class CourseTestActivity extends NavermapActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-
         /*
+        String temp = ReverseGeocoding.getJsonData(37.474235, 126.697562);
+        */
+
         double startX = 126.7087037;
         double startY = 37.4916138;
         double endX = 126.779899;
@@ -58,9 +61,9 @@ public class CourseTestActivity extends NavermapActivity {
         c.drawPoint(1,2,MyPaint);
         c.drawPoint(1,3,MyPaint);
         c.drawPoint(1,4,MyPaint);
-        */
 
-        /*
+
+
         List<ScopeDot> dots=new ArrayList<>();
         dots.add(new ScopeDotPixel(10,10,1,1));
         dots.add(new ScopeDotPixel(10,10,1,2));
@@ -69,13 +72,13 @@ public class CourseTestActivity extends NavermapActivity {
         dots.add(new ScopeDotPixel(10,10,2,4));
         dots.add(new ScopeDotPixel(10,10,3,4));
         dots.add(new ScopeDotPixel(10,10,4,4));
-        */
 
-        /*
-        ScopeDotsImage sdi = new ScopeDotsImage(bm);
-        List<ScopeDotAddress> temp= new CourseSuggester(bm,startX,startY,endX,endY).suggestPath();
+
+        ScopeDotsImage scopeDotsImage=new ScopeDotsImage(dots);
+        ScopeDotsMap scopeDotsMap=new ScopeDotsMap(startX,startY,endX,endY);
+        List<ScopeDotAddress> temp= CourseSuggester.suggestPath(scopeDotsImage,scopeDotsMap);
         this.drawPolyline(temp);
-        */
+
     }
 
 }

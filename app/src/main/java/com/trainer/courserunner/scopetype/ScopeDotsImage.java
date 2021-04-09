@@ -24,4 +24,8 @@ public class ScopeDotsImage extends ScopeDots {
             }
         }
     }
+    //test : public release : private
+    public ScopeDotsImage(List<ScopeDot> dots) {
+        this.scopeDotList=dots;
+    }
 }

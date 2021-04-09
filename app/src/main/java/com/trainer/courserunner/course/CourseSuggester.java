@@ -13,17 +13,7 @@ import java.util.List;
 
 public class CourseSuggester {
     static List<ScopeDotAddress> suggestPath(ScopeDotsImage scopeDotsImage,ScopeDotsMap scopeDotsMap){
-        List<ScopeDotAddress> course=new ArrayList<>();
-        List<ScopeDot> scopeDotList=scopeDotsMap.quantization(scopeDotsImage);
-        //최소거리 연산
-        ScopeDot currentScopeDot = scopeDotList.get(0);
-        scopeDotList.remove(currentScopeDot);
-        course.add((ScopeDotAddress)currentScopeDot);
-        while (scopeDotList.size() != 0) {
-            currentScopeDot = ScopeDots.getClosestDot(scopeDotList, currentScopeDot);
-            scopeDotList.remove(currentScopeDot);
-            course.add((ScopeDotAddress)currentScopeDot);
-        }
-        return course;
+        ScopeDotsMap quantizationImage=scopeDotsMap.quantizationToScopeDotsMap(scopeDotsImage);
+        return quantizationImage.getShortestPath();
     }
 }

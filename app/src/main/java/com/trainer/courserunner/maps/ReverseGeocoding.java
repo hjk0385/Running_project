@@ -32,7 +32,7 @@ public class ReverseGeocoding {
         InputStream iStream=null;
         try{
             URL url = new URL(strUrl);
-            HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
+            HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
             //설정
             urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("X-NCP-APIGW-API-KEY-ID","hzqct6qd8n");
@@ -41,12 +41,15 @@ public class ReverseGeocoding {
             iStream=urlConnection.getInputStream();
             iStream.read(buffer);
             s=new String(buffer);
+            Log.v("TEMPTEMP",s);
         }
         catch (Exception e){
             Log.d("Download Error",e.toString());
         }
         finally {
-            iStream.close();
+            if(iStream!=null) {
+                iStream.close();
+            }
         }
         return s;
     }
