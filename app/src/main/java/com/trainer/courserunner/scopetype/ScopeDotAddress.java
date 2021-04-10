@@ -1,12 +1,12 @@
-package com.trainer.courserunner.coursesuggest;
+package com.trainer.courserunner.scopetype;
 
-public class DotAddress extends Dot {
+public class ScopeDotAddress extends ScopeDot {
     double longitude; //경도(x)
     double latitude; //위도(y)
 
-    public DotAddress(double startX, double startY,
-                      double endX, double endY,
-                      double x, double y) {
+    public ScopeDotAddress(double startX, double startY,
+                           double endX, double endY,
+                           double x, double y) {
         super(normalizeX(startX, endX, x), normalizeY(startY, endY, y));
         this.longitude = x;
         this.latitude = y;
@@ -27,6 +27,14 @@ public class DotAddress extends Dot {
     }
 
     public double getLatitude() {
+        return latitude;
+    }
+
+    public double getX() {
+        return longitude;
+    }
+
+    public double getY() {
         return latitude;
     }
 }

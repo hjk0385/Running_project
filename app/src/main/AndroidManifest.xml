@@ -6,20 +6,30 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <activity android:name=".NavermapActivity"></activity>
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".maps.NavermapActivity"></activity>
+        <activity android:name=".maps.NavermapLocationActivity"></activity>
+        <activity android:name=".course.CourseGuideActivity"></activity>
+        <activity android:name=".course.CourseTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 네이버 지도 API 키 설정 -->
+        </activity>
+
+        <!-- 네이버 지도 API 키 설정 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="YOUR_CLIENT_ID_HERE" />
+            android:value="hzqct6qd8n" />
     </application>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

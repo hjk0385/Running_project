@@ -1,7 +1,7 @@
-package com.trainer.courserunner.coursesuggest;
+package com.trainer.courserunner.scopetype;
 
-public class DotRGB extends Dot {
-    public DotRGB(int imageWidth, int imageHeight, int x, int y) {
+public class ScopeDotPixel extends ScopeDot {
+    public ScopeDotPixel(int imageWidth, int imageHeight, int x, int y) {
         super(normalizeX(imageWidth, x), normalizeY(imageHeight, y));
     }
 

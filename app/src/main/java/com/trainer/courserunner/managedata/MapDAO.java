@@ -1,17 +1,28 @@
 package com.trainer.courserunner.managedata;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MapDAO extends MapDBConnector{
-    public MapDAO(String dbLocation) {
-        super(dbLocation);
+public class MapDAO {
+    private static SQLiteDatabase mapDB = null;
+
+    public static void initMapDB(Context context) {
+        String[] expansionFiles = ObbLoader.getAPKExpansionFiles(context, 1, 0);
+        String dbLocation = expansionFiles[0];
+        if (mapDB == null) {
+            MapDAO.mapDB = SQLiteDatabase.openDatabase(dbLocation, null, SQLiteDatabase.OPEN_READONLY);
+        } else {
+            Log.v("DBLOG", "DB Load Success");
+        }
     }
 
-    public ArrayList<MapDTO> getScopeAddress(double startX, double startY,
-                                             double endX, double endY) {
+    public static List<MapDTO> getScopeAddress(double startX, double startY,
+                                               double endX, double endY) {
         String sql = "SELECT longitude, latitude FROM addresstable " +
                 "WHERE longitude > ? AND latitude > ? AND longitude < ? AND latitude< ?";
         String[] whereArgs = new String[]{
@@ -20,7 +31,7 @@ public class MapDAO extends MapDBConnector{
                 String.valueOf(endX),
                 String.valueOf(endY)
         };
-        Cursor cursor = this.getDBConnection().rawQuery(sql, whereArgs);
+        Cursor cursor = mapDB.rawQuery(sql, whereArgs);
         ArrayList<MapDTO> Address = new ArrayList<>();
         while (cursor.moveToNext()) {
             Address.add(new MapDTO(cursor.getDouble(cursor.getColumnIndex("longitude")),
