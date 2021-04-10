@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.naver.maps.map.NaverMap;
+import com.trainer.courserunner.maps.Geocoding;
 import com.trainer.courserunner.maps.NavermapActivity;
 import com.trainer.courserunner.maps.ReverseGeocoding;
 
@@ -18,10 +19,10 @@ public class CourseTestActivity extends NavermapActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-        //양자화과정에서 추가적인 연산을 수행한다. 겹치는 것은 합치기
         ReverseGeocoding reverseGeocoding= new ReverseGeocoding(this,(String s)-> Log.v("Reverse GEOTEST",s));
         reverseGeocoding.requestReverseGeocoding(37.3595963,127.1054328);
-
+        Geocoding geocoding=new Geocoding(this,(String s)-> Log.v("GEOTEST",s));
+        geocoding.requestGeocoding("분당구 불정로 6");
         /*
         String temp = ReverseGeocoding.getJsonData(37.474235, 126.697562);
         */

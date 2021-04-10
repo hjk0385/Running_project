@@ -11,7 +11,7 @@ public class ReverseGeocoding extends BaseGeocoding{
         super(context, resultConsumer);
     }
     public void requestReverseGeocoding(Double latitude,Double longtitude){
-        String url="https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=LATITUDE,LONGTITUDE";
+        String url="https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=LONGTITUDE,LATITUDE&output=json";
         url=url.replace("LATITUDE",latitude.toString());
         url=url.replace("LONGTITUDE",longtitude.toString());
         requestUrl(url);

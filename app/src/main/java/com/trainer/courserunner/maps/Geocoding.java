@@ -9,7 +9,7 @@ public class Geocoding extends BaseGeocoding{
         super(context, resultConsumer);
     }
     public void requestGeocoding(String address){
-        String url="https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=ADDRESS";
+        String url="https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=ADDRESS&output=json";
         url=url.replace("ADDRESS",address);
         requestUrl(url);
     }
