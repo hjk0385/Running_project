@@ -12,6 +12,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import androidx.core.util.Consumer;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,18 +42,15 @@ public class BaseGeocoding {
                     }
                 }
         ){
-            //request를 재지정
+            //Header 지정
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> hashMap=new HashMap<>(super.getHeaders());
                 hashMap.put("X-NCP-APIGW-API-KEY-ID","hzqct6qd8n");
-                hashMap.put("X-NCP-APIGW-API-KEY","비밀키");
+                hashMap.put("X-NCP-APIGW-API-KEY","");
                 return hashMap;
             }
         };
-        //request property
-
-        //
         request.setShouldCache(false);
         requestQueue.add(request);
     }

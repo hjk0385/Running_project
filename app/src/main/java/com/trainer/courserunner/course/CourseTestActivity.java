@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 
 import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.maps.Geocoding;
@@ -19,10 +20,18 @@ public class CourseTestActivity extends NavermapActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-        ReverseGeocoding reverseGeocoding= new ReverseGeocoding(this,(String s)-> Log.v("Reverse GEOTEST",s));
-        reverseGeocoding.requestReverseGeocoding(37.3595963,127.1054328);
-        Geocoding geocoding=new Geocoding(this,(String s)-> Log.v("GEOTEST",s));
-        geocoding.requestGeocoding("분당구 불정로 6");
+        ReverseGeocoding reverseGeocoding= new ReverseGeocoding(this,(String s)->
+                Log.v("Reverse GEOTEST",ReverseGeocoding.convertJsonToAddress(s)));
+        reverseGeocoding.requestReverseGeocoding(37.5538369,126.9757842);
+        Geocoding geocoding=new Geocoding(this,
+                (String s)-> {
+                Pair<Double,Double> temp= Geocoding.convertJsonToLatitudeLongtitude(s);
+            Log.v("GEOTEST",temp.first+","+temp.second);
+                                }
+                                );
+        geocoding.requestGeocoding("서울특별시 중구 남대문로5가 827");
+
+
         /*
         String temp = ReverseGeocoding.getJsonData(37.474235, 126.697562);
         */
