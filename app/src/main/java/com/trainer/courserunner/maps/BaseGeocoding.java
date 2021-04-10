@@ -21,6 +21,10 @@ import java.util.Map;
 public class BaseGeocoding {
     private RequestQueue requestQueue;
     private Consumer<String> resultConsumer;
+
+    private final static String clientId="hzqct6qd8n";
+    private final static String secretKey="";
+
     public BaseGeocoding(Context context, Consumer<String> resultConsumer){
         requestQueue= Volley.newRequestQueue(context);
         this.resultConsumer=resultConsumer;
@@ -46,8 +50,8 @@ public class BaseGeocoding {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> hashMap=new HashMap<>(super.getHeaders());
-                hashMap.put("X-NCP-APIGW-API-KEY-ID","hzqct6qd8n");
-                hashMap.put("X-NCP-APIGW-API-KEY","");
+                hashMap.put("X-NCP-APIGW-API-KEY-ID",clientId);
+                hashMap.put("X-NCP-APIGW-API-KEY",secretKey);
                 return hashMap;
             }
         };
