@@ -30,7 +30,7 @@ public abstract class ScopeDots {
         //입력으로 받은 ScopeDots를 현재 ScopeDots로 변환한다.
         HashSet<ScopeDot> quantizationDots = new HashSet<>();
         for (ScopeDot scopeDot : scopeDots.scopeDotList) {
-            quantizationDots.add(getClosestDot(scopeDot));
+            quantizationDots.add(this.getClosestDot(scopeDot));
         }
         return new ArrayList<>(quantizationDots);
     }

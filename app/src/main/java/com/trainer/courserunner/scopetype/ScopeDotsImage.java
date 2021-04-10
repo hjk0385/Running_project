@@ -18,7 +18,7 @@ public class ScopeDotsImage extends ScopeDots {
                 int blue = Color.blue(rgb);
 
                 int colorLimit = 100;
-                if (red >= colorLimit||green>=colorLimit||blue>=colorLimit) {
+                if (red <= colorLimit||green<=colorLimit||blue<=colorLimit) {
                     scopeDotList.add(new ScopeDotPixel(image.getWidth(),image.getHeight(),x,y));
                 }
             }
