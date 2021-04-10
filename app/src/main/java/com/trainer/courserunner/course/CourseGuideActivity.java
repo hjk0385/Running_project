@@ -6,12 +6,6 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-
-import com.naver.maps.map.LocationTrackingMode;
-import com.naver.maps.map.NaverMap;
-import com.trainer.courserunner.course.CourseOverseer;
-import com.trainer.courserunner.course.CourseSuggester;
 import com.trainer.courserunner.maps.NavermapLocationActivity;
 
 import java.io.IOException;

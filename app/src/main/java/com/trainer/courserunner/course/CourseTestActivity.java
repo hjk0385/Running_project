@@ -20,15 +20,15 @@ public class CourseTestActivity extends NavermapActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-        ReverseGeocoding reverseGeocoding= new ReverseGeocoding(this,(String s)->
-                Log.v("Reverse GEOTEST",ReverseGeocoding.convertJsonToAddress(s)));
-        reverseGeocoding.requestReverseGeocoding(37.5538369,126.9757842);
-        Geocoding geocoding=new Geocoding(this,
-                (String s)-> {
-                Pair<Double,Double> temp= Geocoding.convertJsonToLatitudeLongtitude(s);
-            Log.v("GEOTEST",temp.first+","+temp.second);
-                                }
-                                );
+        ReverseGeocoding reverseGeocoding = new ReverseGeocoding(this, (String s) ->
+                Log.v("Reverse GEOTEST", ReverseGeocoding.convertJsonToAddress(s)));
+        reverseGeocoding.requestReverseGeocoding(37.5538369, 126.9757842);
+        Geocoding geocoding = new Geocoding(this,
+                (String s) -> {
+                    Pair<Double, Double> temp = Geocoding.convertJsonToLatitudeLongtitude(s);
+                    Log.v("GEOTEST", temp.first + "," + temp.second);
+                }
+        );
         geocoding.requestGeocoding("서울특별시 중구 남대문로5가 827");
 
 

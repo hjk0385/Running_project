@@ -16,10 +16,12 @@ public interface MapDrawer {
 
     //default draw
     Object drawPolyline(List<ScopeDotAddress> addressList);
+
     Object drawPathline(List<ScopeDotAddress> addressList);
 
     //draw Function
     Object drawRemainPath(List<ScopeDotAddress> addressList);
+
     Object drawPassedPath(List<ScopeDotAddress> addressList);
 
     //clear

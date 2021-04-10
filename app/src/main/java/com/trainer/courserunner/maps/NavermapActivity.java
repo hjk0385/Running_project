@@ -1,7 +1,6 @@
 package com.trainer.courserunner.maps;
 
 import android.graphics.Color;
-import android.graphics.Path;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;

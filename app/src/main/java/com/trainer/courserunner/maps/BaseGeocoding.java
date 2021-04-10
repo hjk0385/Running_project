@@ -3,6 +3,8 @@ package com.trainer.courserunner.maps;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.core.util.Consumer;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,26 +12,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import androidx.core.util.Consumer;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class BaseGeocoding {
+    private final static String clientId = "hzqct6qd8n";
+    private final static String secretKey = "";
     private RequestQueue requestQueue;
     private Consumer<String> resultConsumer;
 
-    private final static String clientId="hzqct6qd8n";
-    private final static String secretKey="";
-
-    public BaseGeocoding(Context context, Consumer<String> resultConsumer){
-        requestQueue= Volley.newRequestQueue(context);
-        this.resultConsumer=resultConsumer;
+    public BaseGeocoding(Context context, Consumer<String> resultConsumer) {
+        requestQueue = Volley.newRequestQueue(context);
+        this.resultConsumer = resultConsumer;
     }
-    public void requestUrl(String url){
+
+    public void requestUrl(String url) {
         StringRequest request = new StringRequest(
                 Request.Method.GET,
                 url,
@@ -42,16 +40,16 @@ public class BaseGeocoding {
                 new Response.ErrorListener() { //에러 발생시 호출될 리스너 객체
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.v("Network","Network Error");
+                        Log.v("Network", "Network Error");
                     }
                 }
-        ){
+        ) {
             //Header 지정
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> hashMap=new HashMap<>(super.getHeaders());
-                hashMap.put("X-NCP-APIGW-API-KEY-ID",clientId);
-                hashMap.put("X-NCP-APIGW-API-KEY",secretKey);
+                Map<String, String> hashMap = new HashMap<>(super.getHeaders());
+                hashMap.put("X-NCP-APIGW-API-KEY-ID", clientId);
+                hashMap.put("X-NCP-APIGW-API-KEY", secretKey);
                 return hashMap;
             }
         };

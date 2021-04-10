@@ -30,8 +30,8 @@ public class NavermapLocationActivity extends NavermapActivity {
     }
 
     public void onLocationChangeListener(Location location) {
-        this.userLatitude=location.getLatitude();
-        this.userLongitude=location.getLongitude();
+        this.userLatitude = location.getLatitude();
+        this.userLongitude = location.getLongitude();
     }
 
     @Override

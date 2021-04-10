@@ -15,8 +15,8 @@ public class ScopeDotsMap extends ScopeDots {
         }
     }
 
-    private ScopeDotsMap(List<ScopeDot> scopeDotList){
-        this.scopeDotList=scopeDotList;
+    private ScopeDotsMap(List<ScopeDot> scopeDotList) {
+        this.scopeDotList = scopeDotList;
     }
 
     public ScopeDotsMap quantizationToScopeDotsMap(ScopeDots scopeDots) {
@@ -24,16 +24,16 @@ public class ScopeDotsMap extends ScopeDots {
         return new ScopeDotsMap(scopeDotList);
     }
 
-    public List<ScopeDotAddress> getShortestPath(){
-        List<ScopeDotAddress> course=new ArrayList<>();
-        List<ScopeDot> remainDots=new ArrayList<ScopeDot>(this.scopeDotList);
+    public List<ScopeDotAddress> getShortestPath() {
+        List<ScopeDotAddress> course = new ArrayList<>();
+        List<ScopeDot> remainDots = new ArrayList<ScopeDot>(this.scopeDotList);
         ScopeDot currentScopeDot = remainDots.get(0);
         remainDots.remove(currentScopeDot);
-        course.add((ScopeDotAddress)currentScopeDot);
+        course.add((ScopeDotAddress) currentScopeDot);
         while (remainDots.size() != 0) {
             currentScopeDot = ScopeDots.getClosestDot(remainDots, currentScopeDot);
             remainDots.remove(currentScopeDot);
-            course.add((ScopeDotAddress)currentScopeDot);
+            course.add((ScopeDotAddress) currentScopeDot);
         }
         return course;
     }
