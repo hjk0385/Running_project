@@ -14,4 +14,12 @@ public abstract class ScopeDot {
         double yCost = this.normalizeY - scopeDot.normalizeY;
         return Math.sqrt(xCost * xCost + yCost * yCost);
     }
+
+    public double getNormalizeX() {
+        return normalizeX;
+    }
+
+    public double getNormalizeY() {
+        return normalizeY;
+    }
 }

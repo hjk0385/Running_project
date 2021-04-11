@@ -24,6 +24,22 @@ public class ScopeDotsMap extends ScopeDots {
         return new ScopeDotsMap(scopeDotList);
     }
 
+    public ScopeDotsMap quantizationToScopeDotsMap(ScopeDots scopeDots,double precision) {
+        List<ScopeDot> scopeDotList = this.quantization(scopeDots);
+        List<ScopeDot> scopePrecisionDotList = new ArrayList<>();
+        int xNumber= (int) (1/precision);
+        int yNumber= (int) (1/precision);
+        for(int i=0;i<xNumber;i++){
+            for(int j=0;j<yNumber;j++){
+
+            }
+        }
+        return new ScopeDotsMap(scopeDotList);
+    }
+
+    
+
+
     public List<ScopeDotAddress> getShortestPath() {
         List<ScopeDotAddress> course = new ArrayList<>();
         List<ScopeDot> remainDots = new ArrayList<ScopeDot>(this.scopeDotList);
