@@ -31,13 +31,51 @@ public class ScopeDotsMap extends ScopeDots {
         int yNumber= (int) (1/precision);
         for(int i=0;i<xNumber;i++){
             for(int j=0;j<yNumber;j++){
-
+                scopePrecisionDotList.add(getRepresentationDotAddress(scopeDotList,precision,i*precision,j*precision));
             }
         }
-        return new ScopeDotsMap(scopeDotList);
+        return new ScopeDotsMap(scopePrecisionDotList);
     }
 
-    
+    private ScopeDot getRepresentationDotAddress(List<ScopeDot> scopeDotAddressList, double precision,
+                                                              double pixelStartX, double pixelStartY) {
+        double pixelEndX = pixelStartX + precision;
+        double pixelEndY = pixelStartY + precision;
+
+        //픽셀추출
+        List<ScopeDot> extractionAddress=new ArrayList<>();
+        for (ScopeDot scopeDotAddress : scopeDotAddressList) {
+            double x = scopeDotAddress.getNormalizeX();
+            double y = scopeDotAddress.getNormalizeY();
+            if (pixelStartX < x && x < pixelEndX) {
+                if (pixelStartY < y && y < pixelEndY) {
+                    extractionAddress.add(scopeDotAddress);
+                }
+            }
+        }
+
+        //비용계산
+        double[] costs=new double[extractionAddress.size()];
+        int i=0;
+        for(ScopeDot scopeDotAddress1 : scopeDotAddressList){
+            costs[i]=0;
+            for (ScopeDot scopeDotAddress2 : scopeDotAddressList) {
+                costs[i]+=scopeDotAddress1.getCost(scopeDotAddress2);
+            }
+            i+=1;
+        }
+
+        //픽셀생성
+        double lowestCost=costs[0];
+        int lowestCostPixel=0;
+        for(i=1;i<extractionAddress.size();i++){
+            if(costs[i]<lowestCost){
+                lowestCost=costs[i];
+                lowestCostPixel=i;
+            }
+        }
+        return extractionAddress.get(lowestCostPixel);
+    }
 
 
     public List<ScopeDotAddress> getShortestPath() {
