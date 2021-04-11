@@ -63,7 +63,7 @@ public class CourseTestActivity extends NavermapActivity {
         AssetManager assetManager = getAssets();
         Bitmap bitmap = null;
         try {
-            InputStream inputStream=assetManager.open("testbitmap3.png");
+            InputStream inputStream=assetManager.open("testbitmap2.png");
             bitmap = BitmapFactory.decodeStream(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,7 +73,9 @@ public class CourseTestActivity extends NavermapActivity {
         ScopeDotsMap scopeDotsMap=new ScopeDotsMap(startX,startY,endX,endY);
         List<ScopeDotAddress> temp= CourseSuggester.suggestPath(scopeDotsImage,scopeDotsMap);
         this.drawCourse(temp);
-
+        for(ScopeDotAddress temp2:temp){
+            this.drawOverlayMarker(temp2);
+        }
     }
 
 }

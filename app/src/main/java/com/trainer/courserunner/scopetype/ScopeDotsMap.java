@@ -20,61 +20,63 @@ public class ScopeDotsMap extends ScopeDots {
     }
 
     public ScopeDotsMap quantizationToScopeDotsMap(ScopeDots scopeDots) {
-        List<ScopeDot> scopeDotList = this.quantization(scopeDots);
-        return new ScopeDotsMap(scopeDotList);
+        return new ScopeDotsMap(this.quantization(scopeDots));
     }
 
-    public ScopeDotsMap quantizationToScopeDotsMap(ScopeDots scopeDots,double precision) {
+    public ScopeDotsMap quantizationToScopeDotsMap(ScopeDots scopeDots, double precision) {
+        //scope
         List<ScopeDot> scopeDotList = this.quantization(scopeDots);
-        List<ScopeDot> scopePrecisionDotList = new ArrayList<>();
-        int xNumber= (int) (1/precision);
-        int yNumber= (int) (1/precision);
-        for(int i=0;i<xNumber;i++){
-            for(int j=0;j<yNumber;j++){
-                scopePrecisionDotList.add(getRepresentationDotAddress(scopeDotList,precision,i*precision,j*precision));
+        List<ScopeDot> representationScopeDotList = new ArrayList<>();
+        //calculate
+        int xNumber = (int) (1 / precision);
+        int yNumber = (int) (1 / precision);
+        for (int i = 0; i < xNumber; i++) {
+            for (int j = 0; j < yNumber; j++) {
+                ScopeDot scopeDot = getRepresentationDotAddress(scopeDotList, precision, i * precision, j * precision);
+                if (scopeDot != null) {
+                    representationScopeDotList.add(scopeDot);
+                }
             }
         }
-        return new ScopeDotsMap(scopePrecisionDotList);
+        return new ScopeDotsMap(representationScopeDotList);
     }
 
     private ScopeDot getRepresentationDotAddress(List<ScopeDot> scopeDotAddressList, double precision,
-                                                              double pixelStartX, double pixelStartY) {
+                                                 double pixelStartX, double pixelStartY) {
         double pixelEndX = pixelStartX + precision;
         double pixelEndY = pixelStartY + precision;
-
         //픽셀추출
-        List<ScopeDot> extractionAddress=new ArrayList<>();
+        List<ScopeDot> extractionDots = new ArrayList<>();
         for (ScopeDot scopeDotAddress : scopeDotAddressList) {
             double x = scopeDotAddress.getNormalizeX();
             double y = scopeDotAddress.getNormalizeY();
             if (pixelStartX < x && x < pixelEndX) {
                 if (pixelStartY < y && y < pixelEndY) {
-                    extractionAddress.add(scopeDotAddress);
+                    extractionDots.add(scopeDotAddress);
                 }
             }
         }
-
-        //비용계산
-        double[] costs=new double[extractionAddress.size()];
-        int i=0;
-        for(ScopeDot scopeDotAddress1 : scopeDotAddressList){
-            costs[i]=0;
+        if(extractionDots.size()==0){
+            return null;
+        }
+        return extractionDots.get(0);
+        /*
+        //모든 픽셀과 가까이 있는 점을 대표점으로 지정
+        double lowestCost=1;
+        ScopeDot representationDot=null;
+        for (ScopeDot scopeDotAddress1 : scopeDotAddressList) {
+            double cost=0;
             for (ScopeDot scopeDotAddress2 : scopeDotAddressList) {
-                costs[i]+=scopeDotAddress1.getCost(scopeDotAddress2);
+                cost += scopeDotAddress1.getCost(scopeDotAddress2);
             }
-            i+=1;
+            if(lowestCost>cost){
+                lowestCost=cost;
+                representationDot=scopeDotAddress1;
+            }
         }
+        return representationDot;
 
-        //픽셀생성
-        double lowestCost=costs[0];
-        int lowestCostPixel=0;
-        for(i=1;i<extractionAddress.size();i++){
-            if(costs[i]<lowestCost){
-                lowestCost=costs[i];
-                lowestCostPixel=i;
-            }
-        }
-        return extractionAddress.get(lowestCostPixel);
+         */
     }
 
 

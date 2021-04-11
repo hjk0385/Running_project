@@ -8,7 +8,9 @@ import java.util.List;
 
 public class CourseSuggester {
     static List<ScopeDotAddress> suggestPath(ScopeDotsImage scopeDotsImage, ScopeDotsMap scopeDotsMap) {
-        ScopeDotsMap quantizationImage = scopeDotsMap.quantizationToScopeDotsMap(scopeDotsImage);
+        //ScopeDotsMap quantizationImage = scopeDotsMap.quantizationToScopeDotsMap(scopeDotsImage);
+        //test
+        ScopeDotsMap quantizationImage = scopeDotsMap.quantizationToScopeDotsMap(scopeDotsImage,0.1);
         return quantizationImage.getShortestPath();
     }
 }
