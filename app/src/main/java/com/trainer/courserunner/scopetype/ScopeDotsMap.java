@@ -14,15 +14,24 @@ public class ScopeDotsMap extends ScopeDots {
             scopeDotList.add(new ScopeDotAddress(startX, startY, endX, endY, address.getX(), address.getY()));
         }
     }
-
     private ScopeDotsMap(List<ScopeDot> scopeDotList) {
         this.scopeDotList = scopeDotList;
     }
+    public List<ScopeDotAddress> getFlagAddresses(){
+        List<ScopeDotAddress> scopeDotAddressList=new ArrayList<>();
+        for(ScopeDot scopeDot:this.scopeDotList){
+            scopeDotAddressList.add((ScopeDotAddress)scopeDot);
+        }
+        return scopeDotAddressList;
+    }
 
+    //legacy quantization
     public ScopeDotsMap quantizationToScopeDotsMap(ScopeDots scopeDots) {
         return new ScopeDotsMap(this.quantization(scopeDots));
     }
+    //
 
+    //new quantization
     public ScopeDotsMap quantizationToScopeDotsMap(ScopeDots scopeDots, double precision) {
         //scope
         List<ScopeDot> scopeDotList = this.quantization(scopeDots);
@@ -60,38 +69,6 @@ public class ScopeDotsMap extends ScopeDots {
             return null;
         }
         return extractionDots.get(0);
-        /*
-        //모든 픽셀과 가까이 있는 점을 대표점으로 지정
-        double lowestCost=1;
-        ScopeDot representationDot=null;
-        for (ScopeDot scopeDotAddress1 : scopeDotAddressList) {
-            double cost=0;
-            for (ScopeDot scopeDotAddress2 : scopeDotAddressList) {
-                cost += scopeDotAddress1.getCost(scopeDotAddress2);
-            }
-            if(lowestCost>cost){
-                lowestCost=cost;
-                representationDot=scopeDotAddress1;
-            }
-        }
-        return representationDot;
-
-         */
     }
-
-
-    public List<ScopeDotAddress> getShortestPath() {
-        List<ScopeDotAddress> course = new ArrayList<>();
-        List<ScopeDot> remainDots = new ArrayList<ScopeDot>(this.scopeDotList);
-        ScopeDot currentScopeDot = remainDots.get(0);
-        remainDots.remove(currentScopeDot);
-        course.add((ScopeDotAddress) currentScopeDot);
-        while (remainDots.size() != 0) {
-            currentScopeDot = ScopeDots.getClosestDot(remainDots, currentScopeDot);
-            remainDots.remove(currentScopeDot);
-            course.add((ScopeDotAddress) currentScopeDot);
-        }
-        return course;
-    }
-
+    //
 }
