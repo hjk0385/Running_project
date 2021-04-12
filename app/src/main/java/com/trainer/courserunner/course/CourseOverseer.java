@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseOverseer {
-    //Info
+    //drawer
     MapDrawer mapDrawer;
+    //Info
     double startX;
     double startY;
     double endX;
@@ -22,8 +23,9 @@ public class CourseOverseer {
     Object overlayRemainPath;
 
     public CourseOverseer(MapDrawer mapDrawer, List<ScopeDotAddress> addressList, double startX, double startY, double endX, double endY) {
-        //info
+        //drawer
         this.mapDrawer = mapDrawer;
+        //info
         this.startX = startX;
         this.startY = startY;
         this.endX = endX;
