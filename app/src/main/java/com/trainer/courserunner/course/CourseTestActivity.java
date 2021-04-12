@@ -16,6 +16,7 @@ import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.managedata.MapDAO;
 import com.trainer.courserunner.maps.Geocoding;
 import com.trainer.courserunner.maps.NavermapActivity;
+import com.trainer.courserunner.maps.NavermapLocationActivity;
 import com.trainer.courserunner.maps.ReverseGeocoding;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
@@ -25,7 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class CourseTestActivity extends NavermapActivity {
+public class CourseTestActivity extends NavermapLocationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class CourseTestActivity extends NavermapActivity {
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
+        super.onMapReady(naverMap);
         this.naverMap = naverMap;
         /*
         ReverseGeocoding reverseGeocoding = new ReverseGeocoding(this, (String s) ->
