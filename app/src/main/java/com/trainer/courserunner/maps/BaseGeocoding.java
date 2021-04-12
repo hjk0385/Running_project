@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class BaseGeocoding {
     private final static String clientId = "hzqct6qd8n";
-    private final static String secretKey = "";
+    private final static String secretKey = "h7mPcAg2BDnbJZ2BHLTEe5h3C8QNy98JnpZ4mzuK";
     private RequestQueue requestQueue;
     private Consumer<String> resultConsumer;
 
