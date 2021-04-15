@@ -30,6 +30,7 @@ public abstract class NavermapLocationActivity extends NavermapActivity {
         onMapReady();
     }
 
+    //위치변동시마다 호출될 메소드
     public void onLocationChangeListener(Location location) {
         this.userLatitude = location.getLatitude();
         this.userLongitude = location.getLongitude();

@@ -6,5 +6,5 @@ import androidx.room.Insert;
 @Dao
 public interface CoursePathDao {
     @Insert
-    public long insertCoursePaths(CoursePath... coursePaths);
+    public long insertCoursePath(CoursePath coursePaths);
 }

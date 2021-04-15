@@ -6,13 +6,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.trainer.courserunner.managedata.AssetLoader;
 import com.trainer.courserunner.maps.NavermapLocationActivity;
+import com.trainer.courserunner.rooms.AppDatabase;
+import com.trainer.courserunner.rooms.AppDatabaseInstance;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.scopetype.ScopeDotLocation;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
+import com.trainer.courserunner.scopetype.ScopeMapInfo;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,34 +29,26 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
     public void onMapReady() {
-        //그대로 가져와서 CourseOverseer에 넘기면 기존 코스를 그려주고 이런저런 처리들을 모두 해준다음에 대기하기만 하면 된다.
-
-
-        //test code
-        double startx = 126.7687037;
-        double starty = 37.4916138;
-        double endx = 126.779899;
-        double endy = 37.506515;
-
-        ScopeDotsImage image=new ScopeDotsImage(AssetLoader.loadImage(this,"testbitmap1.png"));
-        ScopeDotsMap maps=new ScopeDotsMap(startx,starty,endx,endy);
-        ScopeDotLocation currentLocation=new ScopeDotLocation(startx,starty,endx,endy,startx,endy);
-
-        List<ScopeDotAddress> course=CourseSuggester.suggestPath(image,maps,currentLocation);
-
-        courseOverseer = new CourseOverseer(this);
-        courseOverseer.startOverseer(course,currentLocation);
+        ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
+                37.506515, 126.779899);
+        //course make
+        ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap1.png"));
+        ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
+        ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo,scopeMapInfo.getStartX(),scopeMapInfo.getStartY());
+        //테스트코드 - 나중에 인텐드로 코스번호만 받아서 처리가능
+        AppDatabaseInstance appDatabase =new AppDatabaseInstance(this);
+        CourseMaker courseMaker = new CourseMaker(appDatabase);
+        Long course_id=courseMaker.makeCourse(image,maps,currentLocation);
+        Log.v("temp",course_id.toString());
     }
+
 
     @Override
     public void onLocationChangeListener(Location location) {
         super.onLocationChangeListener(location);
-        courseOverseer.refreshOversight(userLongitude, userLatitude);
     }
 }

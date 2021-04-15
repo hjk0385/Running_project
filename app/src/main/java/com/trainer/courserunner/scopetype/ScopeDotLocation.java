@@ -1,21 +1,15 @@
 package com.trainer.courserunner.scopetype;
 
 public class ScopeDotLocation extends ScopeDotAddress{
-    double startX;
-    double startY;
-    double endX;
-    double endY;
-    public ScopeDotLocation(double startX, double startY, double endX, double endY, double x, double y) {
-        super(startX, startY, endX, endY, x, y);
-        this.startX=startX;
-        this.startY=startY;
-        this.endX=endX;
-        this.endY=endY;
+    ScopeMapInfo scopeMapInfo;
+    public ScopeDotLocation(ScopeMapInfo scopeMapInfo, double x, double y) {
+        super(scopeMapInfo, x, y);
+        this.scopeMapInfo=scopeMapInfo;
     }
     public void refreshLocation(double latitude,double longtitude){
         this.latitude=latitude;
         this.longitude=longtitude;
-        this.normalizeX=normalizeX(this.startX,this.endX,longtitude);
-        this.normalizeY=normalizeY(this.startY,this.endY,latitude);
+        this.normalizeX=normalizeX(scopeMapInfo.getStartX(),scopeMapInfo.getEndX(),longtitude);
+        this.normalizeY=normalizeY(scopeMapInfo.getStartY(),scopeMapInfo.getEndY(),latitude);
     }
 }

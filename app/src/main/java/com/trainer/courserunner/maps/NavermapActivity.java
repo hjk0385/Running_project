@@ -23,7 +23,7 @@ import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class NavermapActivity extends AppCompatActivity implements OnMapReadyCallback, MapDrawer {
+public class NavermapActivity extends AppCompatActivity implements OnMapReadyCallback, MapDrawer {
     protected NaverMap naverMap;
 
     @Override
@@ -43,9 +43,60 @@ public abstract class NavermapActivity extends AppCompatActivity implements OnMa
         mapFragment.getMapAsync(this);
     }
 
-    
+    @Override
+    public void onMapReady(@NonNull NaverMap naverMap) {
+        this.naverMap=naverMap;
+    }
 
+    @Override
+    public Object drawOverlayMarker(DrawingAddress address) {
+        double longitude = address.getLongitude();
+        double latitude = address.getLatitude();
+        //draw
+        Marker marker = new Marker();
+        marker.setPosition(new LatLng(latitude, longitude));
+        marker.setMap(this.naverMap);
+        return marker;
+    }
 
+    @Override
+    public Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property) {
+        //setting
+        List<LatLng> lngList = new ArrayList<>();
+        for (DrawingAddress drawingAddress : drawingPath.getPath()) {
+            double longitude = drawingAddress.getLongitude();
+            double latitude = drawingAddress.getLatitude();
+            lngList.add(new LatLng(latitude, longitude));
+        }
+        //draw
+        PolylineOverlay polyline = new PolylineOverlay();
+        polyline.setCoords(lngList);
+        property.accept(polyline);
+        polyline.setMap(naverMap);
+        return polyline;
+    }
+
+    @Override
+    public Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property) {
+        //setting
+        List<LatLng> lngList = new ArrayList<>();
+        for (DrawingAddress drawingAddress : drawingPath.getPath()) {
+            double longitude = drawingAddress.getLongitude();
+            double latitude = drawingAddress.getLatitude();
+            lngList.add(new LatLng(latitude, longitude));
+        }
+        //draw
+        PathOverlay pathOverlay = new PathOverlay();
+        pathOverlay.setCoords(lngList);
+        property.accept(pathOverlay);
+        pathOverlay.setMap(naverMap);
+        return pathOverlay;
+    }
+
+    @Override
+    public Object drawCourse(DrawingPath drawingPath) {
+        return drawOverlayPathline(drawingPath,(Object object) -> ((PathOverlay) object).setColor(Color.BLACK));
+    }
 
     @Override
     public void clearDraw(Object drawObject) {
