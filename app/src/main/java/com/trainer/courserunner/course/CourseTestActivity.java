@@ -41,41 +41,10 @@ public class CourseTestActivity extends NavermapLocationActivity {
         try {
             InputStream inputStream=assetManager.open("testbitmap1.png");
             ScopeDotsImage scopeDotsImage=new ScopeDotsImage(BitmapFactory.decodeStream(inputStream));
-            ScopeDotsMap scopeDotsMap=new ScopeDotsMap(startX,startY,endX,endY);
-            List<ScopeDotAddress> temp= CourseSuggester.suggestPath(scopeDotsImage,scopeDotsMap,new ScopeDotAddress(startX,startY,endX,endY,
-                    startX,startY));
-            this.drawCourse(temp);
-            for(ScopeDotAddress temp2:temp){
-                this.drawOverlayMarker(temp2);
-            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        CoursePath a=new CoursePath();
-        a.course_id=1;
-        a.coordinate_number=1;
-        a.latitude=startY;
-        a.longtitude=startX;
-        //CourseDao
-
-        db.courseDao().insertCourse(a);
-
-
-        CoursePath[] data=db.courseDao().loadAllCourse();
-        Log.v("dataaa", String.valueOf(data[0].course_id));
-
-        /*
-        Course a=new Course();
-        a.course_id=1;
-        a.coordinate_number=1;
-        a.latitude=startY;
-        a.longtitude=startX;
-        //CourseDao
-
-        db.courseDao().insertCourse(a);
-
-         */
     }
 }
