@@ -27,12 +27,14 @@ public abstract class NavermapLocationActivity extends NavermapActivity {
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         naverMap.addOnLocationChangeListener(this::onLocationChangeListener);
+        onMapReady();
     }
 
     public void onLocationChangeListener(Location location) {
         this.userLatitude = location.getLatitude();
         this.userLongitude = location.getLongitude();
     }
+    abstract public void onMapReady();
 
     @Override
     public void onRequestPermissionsResult(int requestCode,

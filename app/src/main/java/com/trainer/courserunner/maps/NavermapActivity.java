@@ -107,7 +107,7 @@ public abstract class NavermapActivity extends AppCompatActivity implements OnMa
     @Override
     public Object drawCourse(List<ScopeDotAddress> addressList) {
         return drawOverlayPathline(addressList,(Object object) -> {
-            ((PathOverlay) object).setColor(Color.BLUE);
+            ((PathOverlay) object).setColor(Color.BLACK);
         });
     }
 

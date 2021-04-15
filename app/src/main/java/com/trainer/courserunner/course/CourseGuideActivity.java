@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 
+import com.trainer.courserunner.managedata.AssetLoader;
 import com.trainer.courserunner.maps.NavermapLocationActivity;
 
 import java.io.IOException;
@@ -13,30 +14,27 @@ import java.io.InputStream;
 
 
 public class CourseGuideActivity extends NavermapLocationActivity {
+    CourseSuggesterDrawer courseSuggesterDrawer;
     CourseOverseer courseOverseer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //debug -> release intent
-        Bitmap bitmap = null;
-        try {
-            AssetManager assetManager = getResources().getAssets();
-            InputStream inputStream = assetManager.open("testbitmap1.png");
-            bitmap = BitmapFactory.decodeStream(inputStream);
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
+    }
+
+    @Override
+    public void onMapReady() {
         double startx = 126.7687037;
         double starty = 37.4916138;
         double endx = 126.779899;
         double endy = 37.506515;
-        /*
-        //구현 실행 내용
+
+        CourseSuggesterDrawer=new CourseSuggesterDrawer(AssetLoader(this,"testbitmap1.png"),)
+
         CourseSuggester courseSuggester = new CourseSuggester(bitmap, startx, starty, endx, endy);
         courseOverseer = new CourseOverseer(this, courseSuggester.suggestPath(), startx, starty, endx, endy);
-        */
     }
 
     @Override
