@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScopeDotsMap extends ScopeDots {
-    public ScopeDotsMap(double startX, double startY,
-                        double endX, double endY) {
-        List<MapDTO> scopeMapAddress = MapDAO.getScopeAddress(startX, startY, endX, endY);
+    ScopeMapInfo scopeMapInfo;
+    public ScopeDotsMap(ScopeMapInfo scopeMapInfo) {
+        List<MapDTO> scopeMapAddress = MapDAO.getScopeAddress(scopeMapInfo);
         for (MapDTO address : scopeMapAddress) {
-            scopeDotList.add(new ScopeDotAddress(startX, startY, endX, endY, address.getX(), address.getY()));
+            scopeDotList.add(new ScopeDotAddress(scopeMapInfo, address.getX(), address.getY()));
         }
+        this.scopeMapInfo=scopeMapInfo;
     }
     private ScopeDotsMap(List<ScopeDot> scopeDotList) {
         this.scopeDotList = scopeDotList;
@@ -71,4 +72,8 @@ public class ScopeDotsMap extends ScopeDots {
         return extractionDots.get(0);
     }
     //
+
+    public ScopeMapInfo getScopeMapInfo() {
+        return scopeMapInfo;
+    }
 }

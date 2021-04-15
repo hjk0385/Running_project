@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.trainer.courserunner.scopetype.ScopeMapInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,15 +23,14 @@ public class MapDAO {
         }
     }
 
-    public static List<MapDTO> getScopeAddress(double startX, double startY,
-                                               double endX, double endY) {
+    public static List<MapDTO> getScopeAddress(ScopeMapInfo scopeMapInfo) {
         String sql = "SELECT longitude, latitude FROM addresstable " +
                 "WHERE longitude > ? AND latitude > ? AND longitude < ? AND latitude< ?";
         String[] whereArgs = new String[]{
-                String.valueOf(startX),
-                String.valueOf(startY),
-                String.valueOf(endX),
-                String.valueOf(endY)
+                String.valueOf(scopeMapInfo.getStartX()),
+                String.valueOf(scopeMapInfo.getStartY()),
+                String.valueOf(scopeMapInfo.getEndX()),
+                String.valueOf(scopeMapInfo.getEndY())
         };
         Cursor cursor = mapDB.rawQuery(sql, whereArgs);
         ArrayList<MapDTO> Address = new ArrayList<>();

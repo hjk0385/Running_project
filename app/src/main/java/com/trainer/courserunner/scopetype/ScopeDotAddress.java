@@ -4,10 +4,10 @@ public class ScopeDotAddress extends ScopeDot {
     protected double longitude; //경도(x)
     protected double latitude; //위도(y)
 
-    public ScopeDotAddress(double startX, double startY,
-                           double endX, double endY,
+    public ScopeDotAddress(ScopeMapInfo scopeMapInfo,
                            double x, double y) {
-        super(normalizeX(startX, endX, x), normalizeY(startY, endY, y));
+        super(normalizeX(scopeMapInfo.getStartX(), scopeMapInfo.getEndX(), x),
+                normalizeY(scopeMapInfo.getStartY(), scopeMapInfo.getEndY(), y));
         this.longitude = x;
         this.latitude = y;
     }

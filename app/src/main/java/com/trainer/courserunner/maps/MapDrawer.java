@@ -9,6 +9,10 @@ import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import java.util.List;
 
 public interface MapDrawer {
+
+
+
+
     //draw
     Object drawOverlayMarker(DrawingAddress address);
 

@@ -30,7 +30,10 @@ public abstract class NavermapActivity extends AppCompatActivity implements OnMa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navermap);
-        // 그리기 API 활용을 위한 NaverMap 가져오기
+        settingNavermap();
+    }
+
+    private void settingNavermap(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.navermap_fragment);
         if (mapFragment == null) {
@@ -38,43 +41,11 @@ public abstract class NavermapActivity extends AppCompatActivity implements OnMa
             fragmentManager.beginTransaction().add(R.id.navermap_fragment, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
-        // 완료 -> onMapReady
     }
 
-    @Override
-    public void onMapReady(@NonNull NaverMap naverMap) {
-        this.naverMap = naverMap;
-    }
+    
 
-    @Override
-    public Object drawOverlayMarker(DrawingAddress address) {
-        return null;
-    }
 
-    @Override
-    public Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property) {
-        return null;
-    }
-
-    @Override
-    public Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property) {
-        return null;
-    }
-
-    @Override
-    public Object drawRemainPath(DrawingPath drawingPath) {
-        return null;
-    }
-
-    @Override
-    public Object drawPassedPath(DrawingPath drawingPath) {
-        return null;
-    }
-
-    @Override
-    public Object drawCourse(DrawingPath drawingPath) {
-        return null;
-    }
 
     @Override
     public void clearDraw(Object drawObject) {
