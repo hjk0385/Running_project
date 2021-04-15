@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface MapDrawer {
     //draw
-    Object drawOverlayMarker(ScopeDotAddress address);
+    Object drawOverlayMarker(DrawingAddress address);
 
     Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property);
 
@@ -21,7 +21,7 @@ public interface MapDrawer {
 
     Object drawPassedPath(DrawingPath drawingPath);
 
-    Object drawCourse(DrawingPath addressList);
+    Object drawCourse(DrawingPath drawingPath);
     //clear
     void clearDraw(Object drawObject);
 }

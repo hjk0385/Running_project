@@ -16,6 +16,8 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
 import com.trainer.courserunner.R;
+import com.trainer.courserunner.drawtype.DrawingAddress;
+import com.trainer.courserunner.drawtype.DrawingPath;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
 
 import java.util.ArrayList;
@@ -45,70 +47,33 @@ public abstract class NavermapActivity extends AppCompatActivity implements OnMa
     }
 
     @Override
-    public Object drawOverlayMarker(ScopeDotAddress address) {
-        double longitude = address.getLongitude();
-        double latitude = address.getLatitude();
-        //draw
-        Marker marker = new Marker();
-        marker.setPosition(new LatLng(latitude, longitude));
-        marker.setMap(this.naverMap);
-        return marker;
+    public Object drawOverlayMarker(DrawingAddress address) {
+        return null;
     }
 
     @Override
-    public Object drawOverlayPolyline(List<ScopeDotAddress> addressList, Consumer<Object> property) {
-        //setting
-        List<LatLng> lngList = new ArrayList<>();
-        for (ScopeDotAddress address : addressList) {
-            double longitude = address.getLongitude();
-            double latitude = address.getLatitude();
-            lngList.add(new LatLng(latitude, longitude));
-        }
-        //draw
-        PolylineOverlay polyline = new PolylineOverlay();
-        polyline.setCoords(lngList);
-        property.accept(polyline);
-        polyline.setMap(naverMap);
-        return polyline;
+    public Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property) {
+        return null;
     }
 
     @Override
-    public Object drawOverlayPathline(List<ScopeDotAddress> addressList, Consumer<Object> property) {
-        //setting
-        List<LatLng> lngList = new ArrayList<>();
-        for (ScopeDotAddress address : addressList) {
-            double longitude = address.getLongitude();
-            double latitude = address.getLatitude();
-            lngList.add(new LatLng(latitude, longitude));
-        }
-        //draw
-        PathOverlay pathOverlay = new PathOverlay();
-        pathOverlay.setCoords(lngList);
-        property.accept(pathOverlay);
-        pathOverlay.setMap(naverMap);
-        return pathOverlay;
-    }
-
-
-    @Override
-    public Object drawRemainPath(List<ScopeDotAddress> addressList) {
-        return drawOverlayPolyline(addressList, (Object object) -> {
-            ((PolylineOverlay) object).setColor(Color.RED);
-        });
+    public Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property) {
+        return null;
     }
 
     @Override
-    public Object drawPassedPath(List<ScopeDotAddress> addressList) {
-        return drawOverlayPolyline(addressList, (Object object) -> {
-            ((PolylineOverlay) object).setColor(Color.BLUE);
-        });
+    public Object drawRemainPath(DrawingPath drawingPath) {
+        return null;
     }
 
     @Override
-    public Object drawCourse(List<ScopeDotAddress> addressList) {
-        return drawOverlayPathline(addressList,(Object object) -> {
-            ((PathOverlay) object).setColor(Color.BLACK);
-        });
+    public Object drawPassedPath(DrawingPath drawingPath) {
+        return null;
+    }
+
+    @Override
+    public Object drawCourse(DrawingPath drawingPath) {
+        return null;
     }
 
     @Override
