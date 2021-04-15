@@ -7,7 +7,7 @@ import androidx.room.Room;
 public class AppDatabaseInstance {
     private AppDatabase appDatabase=null;
     public AppDatabaseInstance(Context context){
-        appDatabase=Room.databaseBuilder(context,AppDatabase.class,"database21").allowMainThreadQueries().build();
+        appDatabase=Room.databaseBuilder(context,AppDatabase.class,"database211").allowMainThreadQueries().build();
     }
     public AppDatabase getAppDatabase(){
         return appDatabase;

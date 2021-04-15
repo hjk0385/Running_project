@@ -31,34 +31,21 @@ public class CourseTestActivity extends NavermapLocationActivity {
 
     @Override
     public void onMapReady() {
-        double startX = 126.7087037;
-        double startY = 37.4716138;
-        double endX = 126.779899;
-        double endY = 37.506515;
-
+        //DB초기화
         MapDAO.initMapDB(this);
-        CameraUpdate cameraUpdate = CameraUpdate.toCameraPosition(new CameraPosition(new LatLng(startY,startX),10));
-        naverMap.moveCamera(cameraUpdate);
 
-        AssetManager assetManager = getAssets();
-        Bitmap bitmap = null;
-        try {
-            InputStream inputStream=assetManager.open("testbitmap1.png");
-            ScopeDotsImage scopeDotsImage=new ScopeDotsImage(BitmapFactory.decodeStream(inputStream));
-
-            ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
-                    37.506515, 126.779899);
-            //course make
-            ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap1.png"));
-            ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
-            ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo,scopeMapInfo.getStartX(),scopeMapInfo.getStartY());
-            //테스트코드 - 나중에 인텐드로 코스번호만 받아서 처리가능
-            AppDatabaseInstance appDatabase =new AppDatabaseInstance(this);
-            CourseMaker courseMaker = new CourseMaker(appDatabase);
-            Long course_id=courseMaker.makeCourse(image,maps,currentLocation);
-            Log.v("temp",course_id.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //테스트코드
+        ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
+                37.506515, 126.779899);
+        //course make
+        ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap1.png"));
+        ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
+        ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo,scopeMapInfo.getStartX(),scopeMapInfo.getStartY());
+        //테스트코드 - 나중에 인텐드로 코스번호만 받아서 처리가능
+        AppDatabaseInstance appDatabase =new AppDatabaseInstance(this);
+        CourseMaker courseMaker = new CourseMaker(appDatabase);
+        Long course_id=courseMaker.makeCourse(image,maps,currentLocation);
+        Log.v("temp",course_id.toString());
+        //
     }
 }

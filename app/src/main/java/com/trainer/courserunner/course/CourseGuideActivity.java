@@ -8,7 +8,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.CameraUpdate;
 import com.trainer.courserunner.managedata.AssetLoader;
+import com.trainer.courserunner.managedata.MapDAO;
 import com.trainer.courserunner.maps.NavermapLocationActivity;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.AppDatabaseInstance;
@@ -29,21 +33,16 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //DB초기화
+        MapDAO.initMapDB(this);
     }
 
     @Override
     public void onMapReady() {
-        ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
-                37.506515, 126.779899);
-        //course make
-        ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap1.png"));
-        ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
-        ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo,scopeMapInfo.getStartX(),scopeMapInfo.getStartY());
-        //테스트코드 - 나중에 인텐드로 코스번호만 받아서 처리가능
-        AppDatabaseInstance appDatabase =new AppDatabaseInstance(this);
-        CourseMaker courseMaker = new CourseMaker(appDatabase);
-        Long course_id=courseMaker.makeCourse(image,maps,currentLocation);
-        Log.v("temp",course_id.toString());
+        CameraUpdate cameraUpdate = CameraUpdate.toCameraPosition(new CameraPosition(new LatLng(this.userLatitude,this.userLongitude),10));
+        naverMap.moveCamera(cameraUpdate);
+
+
     }
 
 

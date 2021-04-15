@@ -54,8 +54,8 @@ public class CourseMaker {
             CoursePath coursePath=new CoursePath();
             coursePath.course_id=course_id;
             coursePath.coursepath_id=i;
-            coursePath.longtitude=coursePathList.get(i).longtitude;
-            coursePath.latitude=coursePathList.get(i).latitude;
+            coursePath.longtitude=course.get(i).getLongitude();
+            coursePath.latitude=course.get(i).getLatitude();
             appDatabase.coursePathDao().insertCoursePath(coursePath);
         }
         return course_id;
