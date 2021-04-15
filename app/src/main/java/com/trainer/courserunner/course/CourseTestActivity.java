@@ -6,18 +6,15 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
+import androidx.room.Room;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.CameraUpdate;
-import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.managedata.MapDAO;
-import com.trainer.courserunner.maps.Geocoding;
-import com.trainer.courserunner.maps.NavermapActivity;
 import com.trainer.courserunner.maps.NavermapLocationActivity;
-import com.trainer.courserunner.maps.ReverseGeocoding;
+import com.trainer.courserunner.rooms.AppDatabase;
+import com.trainer.courserunner.rooms.CoursePath;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
@@ -32,29 +29,8 @@ public class CourseTestActivity extends NavermapLocationActivity {
         super.onCreate(savedInstanceState);
     }
 
-
-    //navermap에서 final로 지정하고 이후부터는 onlinstener로 처리한다.
     @Override
-    public void onMapReady(@NonNull NaverMap naverMap) {
-        super.onMapReady(naverMap);
-        this.naverMap = naverMap;
-        /*
-        ReverseGeocoding reverseGeocoding = new ReverseGeocoding(this, (String s) ->
-                Log.v("Reverse GEOTEST", ReverseGeocoding.convertJsonToAddress(s)));
-        reverseGeocoding.requestReverseGeocoding(37.5538369, 126.9757842);
-        Geocoding geocoding = new Geocoding(this,
-                (String s) -> {
-                    Pair<Double, Double> temp = Geocoding.convertJsonToLatitudeLongtitude(s);
-                    Log.v("GEOTEST", temp.first + "," + temp.second);
-                }
-        );
-        geocoding.requestGeocoding("서울특별시 중구 남대문로5가 827");
-        */
-
-        /*
-        String temp = ReverseGeocoding.getJsonData(37.474235, 126.697562);
-        */
-
+    public void onMapReady() {
         double startX = 126.7087037;
         double startY = 37.4716138;
         double endX = 126.779899;
@@ -63,7 +39,7 @@ public class CourseTestActivity extends NavermapLocationActivity {
         MapDAO.initMapDB(this);
         CameraUpdate cameraUpdate = CameraUpdate.toCameraPosition(new CameraPosition(new LatLng(startY,startX),10));
         naverMap.moveCamera(cameraUpdate);
-        
+
         AssetManager assetManager = getAssets();
         Bitmap bitmap = null;
         try {
@@ -79,5 +55,31 @@ public class CourseTestActivity extends NavermapLocationActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"database21").allowMainThreadQueries().build();
+
+        CoursePath a=new CoursePath();
+        a.course_id=1;
+        a.coordinate_number=1;
+        a.latitude=startY;
+        a.longtitude=startX;
+        //CourseDao
+
+        db.courseDao().insertCourse(a);
+
+
+        CoursePath[] data=db.courseDao().loadAllCourse();
+        Log.v("dataaa", String.valueOf(data[0].course_id));
+
+        /*
+        Course a=new Course();
+        a.course_id=1;
+        a.coordinate_number=1;
+        a.latitude=startY;
+        a.longtitude=startX;
+        //CourseDao
+
+        db.courseDao().insertCourse(a);
+
+         */
     }
 }
