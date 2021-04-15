@@ -55,7 +55,7 @@ public class CourseTestActivity extends NavermapLocationActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"database21").allowMainThreadQueries().build();
+
 
         CoursePath a=new CoursePath();
         a.course_id=1;
