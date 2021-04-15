@@ -6,15 +6,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.room.Room;
-
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.CameraUpdate;
 import com.trainer.courserunner.managedata.MapDAO;
 import com.trainer.courserunner.maps.NavermapLocationActivity;
-import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.rooms.CoursePath;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;

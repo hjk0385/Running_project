@@ -31,6 +31,9 @@ public class CourseGuideActivity extends NavermapLocationActivity {
 
     @Override
     public void onMapReady() {
+        //그대로 가져와서 CourseOverseer에 넘기면 기존 코스를 그려주고 이런저런 처리들을 모두 해준다음에 대기하기만 하면 된다.
+
+
         //test code
         double startx = 126.7687037;
         double starty = 37.4916138;

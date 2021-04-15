@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courseinfo")
 public class CourseInfo {
-    @PrimaryKey
-    public int course_id;
+    @PrimaryKey(autoGenerate = true)
+    public long course_id;
     public double start_latitude;
     public double start_longtitude;
     public double end_latitude;
