@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey;
 public class CoursePath {
     @PrimaryKey
     public int course_id;
-    @ColumnInfo(name="coordinate_number")
+    @ColumnInfo(name = "coordinate_number")
     public int coordinate_number;
-    @ColumnInfo(name="latitude")
+    @ColumnInfo(name = "latitude")
     public double latitude;
-    @ColumnInfo(name="longtitude")
+    @ColumnInfo(name = "longtitude")
     public double longtitude;
 }

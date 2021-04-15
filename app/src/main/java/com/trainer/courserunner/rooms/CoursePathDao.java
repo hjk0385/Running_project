@@ -12,4 +12,10 @@ public interface CoursePathDao {
 
     @Query("SELECT * FROM coursepath")
     public CoursePath[] loadAllCourse();
+
+    @Query("SELECT MAX(course_id) FROM coursepath")
+    public int loadMaxCourseId();
+
+    @Query("SELECT * FROM coursepath WHERE course_id=:course_id ORDER BY coordinate_number ASC")
+    public CoursePath[] loadCourse(int course_id);
 }

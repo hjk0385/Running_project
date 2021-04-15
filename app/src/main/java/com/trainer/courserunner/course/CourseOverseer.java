@@ -13,27 +13,17 @@ import java.util.List;
 import java.util.Map;
 
 public class CourseOverseer {
-
-
-
-
-
-    //Drawer
-    MapDrawer mapDrawer;
-    public CourseOverseer(MapDrawer mapDrawer){
-        this.mapDrawer=mapDrawer;
-        this.currentLocation=null;
-        this.markers=null;
-        this.markersLocationData=null;
-    }
     //User Location
     ScopeDotLocation currentLocation;
     //Map Data
     List<Object> markers;
     List<ScopeDotAddress> markersLocationData;
 
-    public void startOverseer(List<ScopeDotAddress> course, ScopeDotLocation currentLocation){
+    public void startCourse(List<ScopeDotAddress> course, ScopeDotLocation currentLocation){
         this.currentLocation=currentLocation;
+
+
+
         for(ScopeDotAddress address:course){
             markers.add(this.mapDrawer.drawOverlayMarker(address));
             markersLocationData.add(address);
