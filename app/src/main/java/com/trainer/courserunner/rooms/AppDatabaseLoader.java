@@ -3,13 +3,14 @@ package com.trainer.courserunner.rooms;
 import android.content.Context;
 
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
-public class AppDatabaseInstance {
-    private AppDatabase appDatabase=null;
-    public AppDatabaseInstance(Context context){
+public class AppDatabaseLoader {
+    static private AppDatabase appDatabase;
+    static public void initAppdatabase(Context context){
         appDatabase=Room.databaseBuilder(context,AppDatabase.class,"database211").allowMainThreadQueries().build();
     }
-    public AppDatabase getAppDatabase(){
+    static public AppDatabase getAppDatabase(){
         return appDatabase;
     }
 }

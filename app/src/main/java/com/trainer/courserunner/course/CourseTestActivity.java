@@ -1,27 +1,18 @@
 package com.trainer.courserunner.course;
 
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.naver.maps.geometry.LatLng;
-import com.naver.maps.map.CameraPosition;
-import com.naver.maps.map.CameraUpdate;
 import com.trainer.courserunner.managedata.AssetLoader;
 import com.trainer.courserunner.managedata.MapDAO;
 import com.trainer.courserunner.maps.NavermapLocationActivity;
-import com.trainer.courserunner.rooms.AppDatabaseInstance;
-import com.trainer.courserunner.scopetype.ScopeDotAddress;
+import com.trainer.courserunner.rooms.AppDatabase;
+import com.trainer.courserunner.rooms.AppDatabaseLoader;
+import com.trainer.courserunner.rooms.CoursePath;
 import com.trainer.courserunner.scopetype.ScopeDotLocation;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.scopetype.ScopeMapInfo;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 public class CourseTestActivity extends NavermapLocationActivity {
     @Override
@@ -32,8 +23,15 @@ public class CourseTestActivity extends NavermapLocationActivity {
     @Override
     public void onMapReady() {
         //DB초기화
-        MapDAO.initMapDB(this);
+        MapDAO.initMapDB(getApplicationContext());
+        AppDatabaseLoader.initAppdatabase(getApplicationContext());
 
+//        CoursePath[] temp =AppDatabaseLoader.getAppDatabase().coursePathDao().loadCoursePath(3);
+//        Log.v("abcd", String.valueOf(temp.length));
+        CourseOverseer courseOverseer= new CourseOverseer(this);
+        courseOverseer.startOversight(3);
+
+        /*
         //테스트코드
         ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
                 37.506515, 126.779899);
@@ -42,10 +40,14 @@ public class CourseTestActivity extends NavermapLocationActivity {
         ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
         ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo,scopeMapInfo.getStartX(),scopeMapInfo.getStartY());
         //테스트코드 - 나중에 인텐드로 코스번호만 받아서 처리가능
-        AppDatabaseInstance appDatabase =new AppDatabaseInstance(this);
-        CourseMaker courseMaker = new CourseMaker(appDatabase);
+        AppDatabase appDatabase =AppDatabaseLoader.getAppDatabase();
+        CourseMaker courseMaker = new CourseMaker();
         Long course_id=courseMaker.makeCourse(image,maps,currentLocation);
         Log.v("temp",course_id.toString());
         //
+        */
+        //DB에서 불러와서 그리기
+
+
     }
 }

@@ -1,9 +1,7 @@
 package com.trainer.courserunner.course;
 
-import android.content.Context;
-
 import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.rooms.AppDatabaseInstance;
+import com.trainer.courserunner.rooms.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.CourseInfo;
 import com.trainer.courserunner.rooms.CoursePath;
 import com.trainer.courserunner.scopetype.ScopeDot;
@@ -16,11 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseMaker {
-    AppDatabaseInstance appDatabaseInstance;
-    public CourseMaker(AppDatabaseInstance appDatabaseInstance){
-        this.appDatabaseInstance=appDatabaseInstance;
-    }
-
     private List<ScopeDotAddress> makeConnectedPath(List<ScopeDot> flagAddresses,ScopeDotAddress startLocation){
         List<ScopeDotAddress> course=new ArrayList<>();
         course.add((ScopeDotAddress) startLocation);
@@ -37,7 +30,7 @@ public class CourseMaker {
     public long makeCourse(ScopeDotsImage scopeDotsImage,
                                   ScopeDotsMap scopeDotsMap,
                                   ScopeDotAddress startLocation){
-        AppDatabase appDatabase=appDatabaseInstance.getAppDatabase();
+        AppDatabase appDatabase= AppDatabaseLoader.getAppDatabase();
         //코스 정보 저장
         CourseInfo courseInfo =new CourseInfo();
         courseInfo.start_latitude=scopeDotsMap.getScopeMapInfo().getStartLatitude();

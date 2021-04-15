@@ -59,11 +59,19 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         return marker;
     }
 
+    public Object[] drawOverlayMarkers(DrawingPath drawingPath){
+        Object[] markers=new Object[drawingPath.size()];
+        for(int i=0;i<drawingPath.size();i++){
+            markers[i]=this.drawOverlayMarker(drawingPath.get(i));
+        }
+        return markers;
+    }
+
     @Override
     public Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property) {
         //setting
         List<LatLng> lngList = new ArrayList<>();
-        for (DrawingAddress drawingAddress : drawingPath.getPath()) {
+        for (DrawingAddress drawingAddress : drawingPath) {
             double longitude = drawingAddress.getLongitude();
             double latitude = drawingAddress.getLatitude();
             lngList.add(new LatLng(latitude, longitude));
@@ -80,7 +88,7 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     public Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property) {
         //setting
         List<LatLng> lngList = new ArrayList<>();
-        for (DrawingAddress drawingAddress : drawingPath.getPath()) {
+        for (DrawingAddress drawingAddress : drawingPath) {
             double longitude = drawingAddress.getLongitude();
             double latitude = drawingAddress.getLatitude();
             lngList.add(new LatLng(latitude, longitude));
