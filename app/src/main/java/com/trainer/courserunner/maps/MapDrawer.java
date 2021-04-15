@@ -2,6 +2,8 @@ package com.trainer.courserunner.maps;
 
 import androidx.core.util.Consumer;
 
+import com.trainer.courserunner.drawtype.DrawingAddress;
+import com.trainer.courserunner.drawtype.DrawingPath;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
 
 import java.util.List;
@@ -10,16 +12,16 @@ public interface MapDrawer {
     //draw
     Object drawOverlayMarker(ScopeDotAddress address);
 
-    Object drawOverlayPolyline(List<ScopeDotAddress> addressList, Consumer<Object> property);
+    Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property);
 
-    Object drawOverlayPathline(List<ScopeDotAddress> addressList, Consumer<Object> property);
+    Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property);
 
     //map draw function
-    Object drawRemainPath(List<ScopeDotAddress> addressList);
+    Object drawRemainPath(DrawingPath drawingPath);
 
-    Object drawPassedPath(List<ScopeDotAddress> addressList);
+    Object drawPassedPath(DrawingPath drawingPath);
 
-    Object drawCourse(List<ScopeDotAddress> addressList);
+    Object drawCourse(DrawingPath addressList);
     //clear
     void clearDraw(Object drawObject);
 }

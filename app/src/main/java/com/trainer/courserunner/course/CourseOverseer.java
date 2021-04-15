@@ -22,14 +22,6 @@ public class CourseOverseer {
     public void startCourse(List<ScopeDotAddress> course, ScopeDotLocation currentLocation){
         this.currentLocation=currentLocation;
 
-
-
-        for(ScopeDotAddress address:course){
-            markers.add(this.mapDrawer.drawOverlayMarker(address));
-            markersLocationData.add(address);
-        }
-        //draw first course
-        this.mapDrawer.drawCourse(course);
     }
     public void refreshOversight(double latitude, double longtitude){
         this.currentLocation.refreshLocation(latitude,longtitude);
