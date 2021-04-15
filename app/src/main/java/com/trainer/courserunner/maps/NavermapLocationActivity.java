@@ -9,7 +9,7 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.util.FusedLocationSource;
 
-public class NavermapLocationActivity extends NavermapActivity {
+public abstract class NavermapLocationActivity extends NavermapActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     protected FusedLocationSource locationSource;
     protected double userLongitude;
@@ -22,7 +22,7 @@ public class NavermapLocationActivity extends NavermapActivity {
     }
 
     @Override
-    public void onMapReady(@NonNull NaverMap naverMap) {
+    public final void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);

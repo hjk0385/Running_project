@@ -1,8 +1,8 @@
 package com.trainer.courserunner.scopetype;
 
 public abstract class ScopeDot {
-    private final double normalizeX;
-    private final double normalizeY;
+    protected double normalizeX;
+    protected double normalizeY;
 
     public ScopeDot(double normalizeX, double normalizeY) {
         this.normalizeX = Math.abs(normalizeX);

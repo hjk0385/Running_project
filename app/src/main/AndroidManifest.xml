@@ -12,8 +12,6 @@
         android:theme="@style/Theme.CourseRunner">
 
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".maps.NavermapActivity"></activity>
-        <activity android:name=".maps.NavermapLocationActivity"></activity>
         <activity android:name=".course.CourseGuideActivity"></activity>
         <activity android:name=".course.CourseTestActivity">
             <intent-filter>

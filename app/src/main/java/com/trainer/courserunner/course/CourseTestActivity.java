@@ -32,6 +32,8 @@ public class CourseTestActivity extends NavermapLocationActivity {
         super.onCreate(savedInstanceState);
     }
 
+
+    //navermap에서 final로 지정하고 이후부터는 onlinstener로 처리한다.
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);

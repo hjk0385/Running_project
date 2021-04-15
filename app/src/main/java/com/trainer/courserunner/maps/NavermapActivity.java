@@ -21,7 +21,7 @@ import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NavermapActivity extends AppCompatActivity implements OnMapReadyCallback, MapDrawer {
+public abstract class NavermapActivity extends AppCompatActivity implements OnMapReadyCallback, MapDrawer {
     protected NaverMap naverMap;
 
     @Override
