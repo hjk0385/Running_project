@@ -11,4 +11,7 @@ public interface UserLocationPathDao {
 
     @Query("SELECT IFNULL(MAX(userlocation_id),0) FROM userlocationpath WHERE usercourse_id=:usercourse_id")
     public long queryMaxUserLocationId(long usercourse_id);
+
+    @Query("SELECT * FROM userlocationpath WHERE usercourse_id=:usercourse_id ORDER BY userlocation_id")
+    public UserLocationPath[] queryUserLocationPath(long usercourse_id);
 }

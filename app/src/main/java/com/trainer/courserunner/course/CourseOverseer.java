@@ -66,6 +66,7 @@ public class CourseOverseer extends CourseDrawer {
         userLocationPath.latitude=currentLocation.getLatitude();
         userLocationPath.longitude=currentLocation.getLongitude();
         appDatabase.userLocationPathDao().insertUserLocationPath(userLocationPath);
+        drawUserLocationPath(usercourseId);
         //지나간 경로 저장 / 마커제거
         for(int i=0;i<courseFlags.length;i++){
             if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),

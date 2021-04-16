@@ -107,6 +107,11 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
+    public Object drawUserLocationPath(DrawingPath drawingPath) {
+        return drawOverlayPathline(drawingPath, (Object object) -> ((PathOverlay) object).setColor(Color.BLUE));
+    }
+
+    @Override
     public void clearDraw(Object drawObject) {
         if (drawObject instanceof Marker) {
             ((Marker) drawObject).setMap(null);
