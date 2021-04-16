@@ -13,6 +13,7 @@ import com.trainer.courserunner.rooms.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.CoursePath;
 import com.trainer.courserunner.rooms.UserCourseInfo;
 import com.trainer.courserunner.rooms.UserCourseInfoDao;
+import com.trainer.courserunner.rooms.UserCoursePath;
 import com.trainer.courserunner.rooms.UserLocationPath;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class CourseOverseer extends CourseDrawer {
     }
 
     private void oversight(){
-        //코스등록
+        //지나갔던 경로의 저장
         AppDatabase appDatabase=AppDatabaseLoader.getAppDatabase();
         UserLocationPath userLocationPath=new UserLocationPath();
         userLocationPath.usercourse_id=usercourseId;
@@ -65,14 +66,16 @@ public class CourseOverseer extends CourseDrawer {
         userLocationPath.latitude=currentLocation.getLatitude();
         userLocationPath.longitude=currentLocation.getLongitude();
         appDatabase.userLocationPathDao().insertUserLocationPath(userLocationPath);
-        //마커확인
+        //지나간 경로 저장 / 마커제거
         for(int i=0;i<courseFlags.length;i++){
             if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
                     courseFlags[i].latitude,courseFlags[i].longtitude)<=100){
+                UserCoursePath userCoursePath=new UserCoursePath();
+                userCoursePath.usercourse_id=usercourseId;
+                userCoursePath.coursepath_id=i;
+                appDatabase.userCoursePathDao().insertUserCoursePath(userCoursePath);
                 clearMarker(i);
             }
         }
     }
-
-
 }

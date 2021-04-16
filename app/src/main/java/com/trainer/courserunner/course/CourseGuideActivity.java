@@ -55,4 +55,5 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         //테스트코드 종료
         courseOverseer.startOversight(course_id);
     }
+
 }
