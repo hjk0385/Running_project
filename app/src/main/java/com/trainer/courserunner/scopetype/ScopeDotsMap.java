@@ -8,20 +8,23 @@ import java.util.List;
 
 public class ScopeDotsMap extends ScopeDots {
     ScopeMapInfo scopeMapInfo;
+
     public ScopeDotsMap(ScopeMapInfo scopeMapInfo) {
         List<MapDTO> scopeMapAddress = MapDAO.getScopeAddress(scopeMapInfo);
         for (MapDTO address : scopeMapAddress) {
             scopeDotList.add(new ScopeDotAddress(scopeMapInfo, address.getX(), address.getY()));
         }
-        this.scopeMapInfo=scopeMapInfo;
+        this.scopeMapInfo = scopeMapInfo;
     }
+
     private ScopeDotsMap(List<ScopeDot> scopeDotList) {
         this.scopeDotList = scopeDotList;
     }
-    public List<ScopeDotAddress> getFlagAddresses(){
-        List<ScopeDotAddress> scopeDotAddressList=new ArrayList<>();
-        for(ScopeDot scopeDot:this.scopeDotList){
-            scopeDotAddressList.add((ScopeDotAddress)scopeDot);
+
+    public List<ScopeDotAddress> getFlagAddresses() {
+        List<ScopeDotAddress> scopeDotAddressList = new ArrayList<>();
+        for (ScopeDot scopeDot : this.scopeDotList) {
+            scopeDotAddressList.add((ScopeDotAddress) scopeDot);
         }
         return scopeDotAddressList;
     }
@@ -66,7 +69,7 @@ public class ScopeDotsMap extends ScopeDots {
                 }
             }
         }
-        if(extractionDots.size()==0){
+        if (extractionDots.size() == 0) {
             return null;
         }
         return extractionDots.get(0);

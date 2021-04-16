@@ -33,7 +33,7 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         settingNavermap();
     }
 
-    private void settingNavermap(){
+    private void settingNavermap() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.navermap_fragment);
         if (mapFragment == null) {
@@ -45,7 +45,7 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
-        this.naverMap=naverMap;
+        this.naverMap = naverMap;
     }
 
     @Override
@@ -59,10 +59,10 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         return marker;
     }
 
-    public Object[] drawOverlayMarkers(DrawingPath drawingPath){
-        Object[] markers=new Object[drawingPath.size()];
-        for(int i=0;i<drawingPath.size();i++){
-            markers[i]=this.drawOverlayMarker(drawingPath.get(i));
+    public Object[] drawOverlayMarkers(DrawingPath drawingPath) {
+        Object[] markers = new Object[drawingPath.size()];
+        for (int i = 0; i < drawingPath.size(); i++) {
+            markers[i] = this.drawOverlayMarker(drawingPath.get(i));
         }
         return markers;
     }
@@ -103,7 +103,7 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public Object drawCourse(DrawingPath drawingPath) {
-        return drawOverlayPathline(drawingPath,(Object object) -> ((PathOverlay) object).setColor(Color.BLACK));
+        return drawOverlayPathline(drawingPath, (Object object) -> ((PathOverlay) object).setColor(Color.BLACK));
     }
 
     @Override

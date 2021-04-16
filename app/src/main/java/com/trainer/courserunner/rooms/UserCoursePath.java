@@ -16,7 +16,7 @@ import androidx.room.ForeignKey;
                         onDelete = ForeignKey.CASCADE
                 )
         }
-        )
+)
 public class UserCoursePath {
     public long usercourse_id;
     public long coursepath_id;

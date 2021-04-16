@@ -1,5 +1,6 @@
 package com.trainer.courserunner.course;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -19,54 +20,59 @@ import java.util.List;
 import java.util.Map;
 
 //데이터를 작성하는 기능 수행
-public class CourseOverseer extends CourseDrawer{
-    //infos
-    UserCourseInfo currentCourseInfo;
-    UserLocationPath currentLocation;
-    //데이터베이스
-    AppDatabase appDatabase;
-    public CourseOverseer(MapDrawer mapDrawer){
+public class CourseOverseer extends CourseDrawer {
+    long usercourseId;
+    Location currentLocation;
+
+    public CourseOverseer(MapDrawer mapDrawer) {
         super(mapDrawer);
-        this.appDatabase=AppDatabaseLoader.getAppDatabase();
+        this.usercourseId=-1;
     }
 
     //신규시작
     public void startOversight(long courseId){
-        long userCourseId=appDatabase.userCourseInfoDao().queryMaxUserCourseId()+1;
-        //코스정보 등록
-        currentCourseInfo=new UserCourseInfo();
-        currentCourseInfo.course_id=courseId;
-        currentCourseInfo.usercourse_id=userCourseId;
-        appDatabase.userCourseInfoDao().insertUserCourseInfo(currentCourseInfo);
-        //코스경로지정
-        currentLocation=new UserLocationPath();
-        currentLocation.usercourse_id=userCourseId;
-        currentLocation.userlocation_id=-1;
-        //코스그리기
+        //코스 등록
+        UserCourseInfo userCourseInfo=new UserCourseInfo();
+        userCourseInfo.course_id=courseId;
+        this.usercourseId=AppDatabaseLoader.getAppDatabase().userCourseInfoDao().insertUserCourseInfo(userCourseInfo);
+        //코스 그리기
         drawCourse(courseId);
+        //위치정보 초기화
+        currentLocation=null;
     }
 
-
-    private void checkFlags(){
-        for(int i=0;i<courseFlags.length;i++){
-            if(MapFunction.getCost(currentLocation.latitude,currentLocation.longitude,
-                                courseFlags[i].latitude,courseFlags[i].longtitude)<=15){
-                this.clearMarker(i);
+    public void updateOversight(Location location){
+        if(currentLocation==null){
+            currentLocation=location;
+            oversight();
+        }
+        else{
+            //이동거리가 10m이상이면 갱신
+            if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
+                    location.getLatitude(),location.getLongitude())>=10){
+                currentLocation=location;
+                oversight();
             }
         }
     }
 
-    public void updateLocation(double latitude, double longtitude){
-        //15m를 기준으로 기록한다.
-        double cost=MapFunction.getCost(currentLocation.latitude,currentLocation.longitude,latitude,longtitude);
-        if(cost>=15){
-            //갱신
-            currentLocation.userlocation_id+=1;
-            currentLocation.latitude=latitude;
-            currentLocation.longitude=longtitude;
-            AppDatabaseLoader.getAppDatabase().userLocationPathDao().insertUserLocationPath(currentLocation);
-            //체크 및 맵에 쓰기
-            checkFlags();
+    private void oversight(){
+        //코스등록
+        AppDatabase appDatabase=AppDatabaseLoader.getAppDatabase();
+        UserLocationPath userLocationPath=new UserLocationPath();
+        userLocationPath.usercourse_id=usercourseId;
+        userLocationPath.userlocation_id=appDatabase.userLocationPathDao().queryMaxUserLocationId(usercourseId)+1;
+        userLocationPath.latitude=currentLocation.getLatitude();
+        userLocationPath.longitude=currentLocation.getLongitude();
+        appDatabase.userLocationPathDao().insertUserLocationPath(userLocationPath);
+        //마커확인
+        for(int i=0;i<courseFlags.length;i++){
+            if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
+                    courseFlags[i].latitude,courseFlags[i].longtitude)<=100){
+                clearMarker(i);
+            }
         }
     }
+
+
 }

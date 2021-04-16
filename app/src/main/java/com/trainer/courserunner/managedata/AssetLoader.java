@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class AssetLoader {
-    static public Bitmap loadImage(Context context, String assetName){
+    static public Bitmap loadImage(Context context, String assetName) {
         Bitmap bitmap = null;
         try {
             AssetManager assetManager = context.getResources().getAssets();

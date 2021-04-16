@@ -8,7 +8,9 @@ import com.trainer.courserunner.drawtype.DrawingAddress;
 public interface MapDrawer {
     //draw
     Object drawOverlayMarker(DrawingAddress address);
+
     Object[] drawOverlayMarkers(DrawingPath drawingPath);
+
     Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property);
 
     Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property);

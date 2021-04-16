@@ -7,8 +7,8 @@ import com.trainer.courserunner.rooms.CoursePath;
 
 //맵에 그려주는 기능 수행
 public class CourseDrawer {
-    MapDrawer mapDrawer;
     protected CoursePath[] courseFlags;
+    MapDrawer mapDrawer;
     Object[] courseOverlayMarkers;
     Object courseOverlayPath;
 
@@ -17,15 +17,16 @@ public class CourseDrawer {
     }
 
     public void drawCourse(long courseId) {
-        courseFlags=AppDatabaseLoader.getAppDatabase().coursePathDao().loadCoursePath(courseId);
-        DrawingPath drawingPath=new DrawingPath(courseFlags);
-        courseOverlayPath=mapDrawer.drawCourse(drawingPath);
-        courseOverlayMarkers=mapDrawer.drawOverlayMarkers(drawingPath);
+        courseFlags = AppDatabaseLoader.getAppDatabase().coursePathDao().loadCoursePath(courseId);
+        DrawingPath drawingPath = new DrawingPath(courseFlags);
+        courseOverlayPath = mapDrawer.drawCourse(drawingPath);
+        courseOverlayMarkers = mapDrawer.drawOverlayMarkers(drawingPath);
     }
 
     //마커지우기
-    public void clearMarker(int markerid){
-
+    public void clearMarker(int markerid) {
+        mapDrawer.clearDraw(courseOverlayMarkers[markerid]);
+        courseOverlayMarkers[markerid] = null;
     }
 
     //사용자경로 그리기

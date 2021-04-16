@@ -17,6 +17,7 @@ import com.trainer.courserunner.scopetype.ScopeMapInfo;
 
 public class CourseTestActivity extends NavermapLocationActivity {
     CourseOverseer courseOverseer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +34,14 @@ public class CourseTestActivity extends NavermapLocationActivity {
         //course make
         ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap1.png"));
         ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
-        ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo,scopeMapInfo.getStartX(),scopeMapInfo.getStartY());
+        ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo, scopeMapInfo.getStartX(), scopeMapInfo.getStartY());
         //테스트코드 - 나중에 인텐드로 코스번호만 받아서 처리가능
-        AppDatabase appDatabase =AppDatabaseLoader.getAppDatabase();
+        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
         CourseMaker courseMaker = new CourseMaker();
-        Long course_id=courseMaker.makeCourse(image,maps,currentLocation);
-        Log.v("temp",course_id.toString());
+        Long course_id = courseMaker.makeCourse(image, maps, currentLocation);
+        Log.v("temp", course_id.toString());
 
-        courseOverseer= new CourseOverseer(this);
+        courseOverseer = new CourseOverseer(this);
         courseOverseer.startOversight(course_id);
 
     }
@@ -48,6 +49,6 @@ public class CourseTestActivity extends NavermapLocationActivity {
     @Override
     public void onLocationChangeListener(Location location) {
         super.onLocationChangeListener(location);
-        courseOverseer.updateLocation(location.getLatitude(),location.getLongitude());
+        courseOverseer.updateLocation(location.getLatitude(), location.getLongitude());
     }
 }

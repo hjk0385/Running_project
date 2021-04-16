@@ -35,6 +35,7 @@ public abstract class NavermapLocationActivity extends NavermapActivity {
         this.userLatitude = location.getLatitude();
         this.userLongitude = location.getLongitude();
     }
+
     abstract public void onMapReady();
 
     @Override

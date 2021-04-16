@@ -8,8 +8,4 @@ import androidx.room.Query;
 public interface UserCourseInfoDao {
     @Insert
     public long insertUserCourseInfo(UserCourseInfo userCourseInfo);
-
-    @Query("SELECT IFNULL(MAX(usercourse_id),0) FROM usercourseinfo")
-    public long queryMaxUserCourseId();
-
 }

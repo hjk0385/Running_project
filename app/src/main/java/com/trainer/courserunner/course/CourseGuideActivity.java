@@ -22,7 +22,7 @@ public class CourseGuideActivity extends NavermapLocationActivity {
 
     @Override
     public void onMapReady() {
-        CameraUpdate cameraUpdate = CameraUpdate.toCameraPosition(new CameraPosition(new LatLng(this.userLatitude,this.userLongitude),10));
+        CameraUpdate cameraUpdate = CameraUpdate.toCameraPosition(new CameraPosition(new LatLng(this.userLatitude, this.userLongitude), 10));
         naverMap.moveCamera(cameraUpdate);
 
 
