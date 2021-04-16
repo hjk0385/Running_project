@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class CourseOverseer{
     MapDrawer mapDrawer;
+
     public CourseOverseer(MapDrawer mapDrawer){
         this.mapDrawer=mapDrawer;
     }
@@ -23,6 +24,7 @@ public class CourseOverseer{
     Object[] courseOverlayMarkers;
     Object courseOverlayPath;
     long courseId;
+    //신규시작
     public void startOversight(long courseId){
         //코스 설정
         this.courseId=courseId;
@@ -33,8 +35,17 @@ public class CourseOverseer{
         courseOverlayPath=mapDrawer.drawCourse(drawingPath);
         courseOverlayMarkers=mapDrawer.drawOverlayMarkers(drawingPath);
     }
+    //일시정지 시작
+    public void startOversight(long courseId,long usercourse_id){
+        startOversight(courseId);
+        //불러와서 마커들 제거 + 현재까지 걸었던 경로 그리기
 
-    public void refresh(){
+    }
+
+
+    public void updateLocation(double latitude, double longtitude){
+
+
 
     }
 }
