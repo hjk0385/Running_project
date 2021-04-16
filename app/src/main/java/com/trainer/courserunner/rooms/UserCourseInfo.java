@@ -5,9 +5,6 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "usercourseinfo",
-        primaryKeys = {
-                "usercourse_id"
-        },
         foreignKeys = {
                 @ForeignKey(
                         entity = CourseInfo.class,

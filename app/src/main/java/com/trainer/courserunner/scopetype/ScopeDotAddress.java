@@ -22,15 +22,6 @@ public class ScopeDotAddress extends ScopeDot {
         return (y - startY) / height;
     }
 
-    // result = m
-    public double getCost(ScopeDotAddress scopeDotAddress) {
-        //위도 1도 = 111.195km = 111195m
-        //경도 1도 = 88.804km = 88804m
-        double costLatitude=Math.abs(this.latitude-scopeDotAddress.latitude)*111195;
-        double costLongtitude=Math.abs(this.longitude-scopeDotAddress.longitude)*88804;
-        return Math.sqrt(costLatitude*costLatitude+costLongtitude*costLongtitude);
-    }
-
     public double getLongitude() {
         return longitude;
     }
