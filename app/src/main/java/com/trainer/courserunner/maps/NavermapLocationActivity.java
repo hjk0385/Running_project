@@ -22,22 +22,19 @@ public abstract class NavermapLocationActivity extends NavermapActivity {
     }
 
     @Override
-    public final void onMapReady(@NonNull NaverMap naverMap) {
+    public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-        naverMap.addOnLocationChangeListener(this::onLocationChangeListener);
-        onMapReady();
+        //naverMap.addOnLocationChangeListener(this::onLocationChangeListener);
     }
-
+/*
     //위치변동시마다 호출될 메소드
     public void onLocationChangeListener(Location location) {
         this.userLatitude = location.getLatitude();
         this.userLongitude = location.getLongitude();
     }
-
-    abstract public void onMapReady();
-
+*/
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
