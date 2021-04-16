@@ -42,7 +42,6 @@ public class CourseMaker {
         ScopeDotsMap quantizationImage = scopeDotsMap.quantizationToScopeDotsMap(scopeDotsImage,0.1);
         List<ScopeDotAddress> course=makeConnectedPath(quantizationImage.getScopeDotList(),startLocation);
         //코스 경로 저장(나중에 개선)
-        List<CoursePath> coursePathList=new ArrayList<>();
         for(int i=0;i<course.size();i++){
             CoursePath coursePath=new CoursePath();
             coursePath.course_id=course_id;
