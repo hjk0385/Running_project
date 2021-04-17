@@ -17,6 +17,13 @@ public class CourseOverseer extends CourseDrawer {
     Location currentLocation;
     AppDatabase appDatabase;
 
+
+    //거리기준 : 1 = 1m, 10 = 10m
+    //업데이트 거리
+    private final double UPDATE_DISTANCE=10.0;
+    //마커완료 거리
+    private final double FINISHMARKER_DISTANCE=100.0;
+
     public CourseOverseer(MapDrawer mapDrawer) {
         super(mapDrawer);
         this.usercourseId = -1;
@@ -51,7 +58,7 @@ public class CourseOverseer extends CourseDrawer {
         } else {
             //이동거리가 10m이상이면 갱신
             if (MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
-                    location.getLatitude(), location.getLongitude()) >= 10) {
+                    location.getLatitude(), location.getLongitude()) >= UPDATE_DISTANCE) {
                 currentLocation = location;
                 oversight();
             }
@@ -76,7 +83,7 @@ public class CourseOverseer extends CourseDrawer {
 
         for (int i = 0; i < mapFlags.length; i++) {
             if (MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
-                    mapFlags[i].latitude, mapFlags[i].longitude) <= 100) {
+                    mapFlags[i].latitude, mapFlags[i].longitude) <= FINISHMARKER_DISTANCE) {
                 UserMapFlag userMapFlag = new UserMapFlag();
 
                 userMapFlag.usercourse_id = usercourseId;

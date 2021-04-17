@@ -4,9 +4,13 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "userlocationrecord")
+@Entity(tableName = "userlocationrecord",
+        primaryKeys = {
+                "userlocation_order",
+                "usercourse_id"
+        }
+)
 public class UserLocationRecord {
-    @PrimaryKey
     public long userlocation_order;
     public long usercourse_id;
     public double longitude;

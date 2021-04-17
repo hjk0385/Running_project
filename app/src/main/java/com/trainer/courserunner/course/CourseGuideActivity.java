@@ -35,16 +35,10 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
-        MapDAO.initMapDB(getApplicationContext());
-        AppDatabaseLoader.initAppdatabase(getApplicationContext());
-
-        courseOverseer = new CourseOverseer((MapDrawer) this);
-        naverMap.addOnLocationChangeListener((Location location) -> {
-            courseOverseer.updateOversight(location);
-        });
 
         //테스트코드
-        //DB초기화
+        MapDAO.initMapDB(getApplicationContext());
+        AppDatabaseLoader.initAppdatabase(getApplicationContext());
         ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
                 37.506515, 126.779899);
         //course make
@@ -54,6 +48,12 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         CourseMaker courseMaker = new CourseMaker();
         long course_id = courseMaker.makeCourse(image, maps, currentLocation);
         //테스트코드 종료
+
+        //인텐드로 course_id를 받아서 처리될 내용
+        courseOverseer = new CourseOverseer((MapDrawer) this);
+        naverMap.addOnLocationChangeListener((Location location) -> {
+            courseOverseer.updateOversight(location);
+        });
         courseOverseer.startOversight(course_id);
     }
 
