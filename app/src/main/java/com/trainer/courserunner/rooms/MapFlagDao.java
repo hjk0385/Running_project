@@ -4,5 +4,5 @@ import androidx.room.Insert;
 
 public interface MapFlagDao {
     @Insert
-    public long insertMapFlag(MapFlag mapFlag);
+    long insertMapFlag(MapFlag mapFlag);
 }

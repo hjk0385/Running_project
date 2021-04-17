@@ -7,5 +7,5 @@ import androidx.room.Query;
 @Dao
 public interface CourseFlagDao {
     @Insert
-    public void insertCourseFlag(CourseFlag courseFlag);
+    void insertCourseFlag(CourseFlag courseFlag);
 }

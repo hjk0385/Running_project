@@ -7,8 +7,6 @@ import com.trainer.courserunner.maps.MapFunction;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.UserCourseInfo;
-import com.trainer.courserunner.rooms.UserCourseFlag;
-import com.trainer.courserunner.rooms.UserLocationPath;
 
 //데이터를 작성하는 기능 수행
 public class CourseOverseer extends CourseDrawer {
@@ -50,21 +48,21 @@ public class CourseOverseer extends CourseDrawer {
     private void oversight(){
         //지나갔던 경로의 저장
         AppDatabase appDatabase=AppDatabaseLoader.getAppDatabase();
-        UserLocationPath userLocationPath=new UserLocationPath();
-        userLocationPath.usercourse_id=usercourseId;
-        userLocationPath.userlocation_id=appDatabase.userLocationPathDao().queryMaxUserLocationId(usercourseId)+1;
-        userLocationPath.latitude=currentLocation.getLatitude();
-        userLocationPath.longitude=currentLocation.getLongitude();
-        appDatabase.userLocationPathDao().insertUserLocationPath(userLocationPath);
+        UserLocationRecord userLocationRecord =new UserLocationRecord();
+        userLocationRecord.usercourse_id=usercourseId;
+        userLocationRecord.userlocation_id=appDatabase.userLocationPathDao().queryMaxUserLocationId(usercourseId)+1;
+        userLocationRecord.latitude=currentLocation.getLatitude();
+        userLocationRecord.longitude=currentLocation.getLongitude();
+        appDatabase.userLocationPathDao().insertUserLocationPath(userLocationRecord);
         drawUserLocationPath(usercourseId);
         //지나간 경로 저장 / 마커제거
         for(int i=0;i<courseFlags.length;i++){
             if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
                     courseFlags[i].latitude,courseFlags[i].longtitude)<=100){
-                UserCourseFlag userCourseFlag =new UserCourseFlag();
-                userCourseFlag.usercourse_id=usercourseId;
-                userCourseFlag.coursepath_id=i;
-                appDatabase.userCoursePathDao().insertUserCoursePath(userCourseFlag);
+                UserMapFlag userMapFlag =new UserMapFlag();
+                userMapFlag.usercourse_id=usercourseId;
+                userMapFlag.coursepath_id=i;
+                appDatabase.userCoursePathDao().insertUserCoursePath(userMapFlag);
                 clearMarker(i);
             }
         }

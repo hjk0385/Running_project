@@ -1,7 +1,6 @@
 package com.trainer.courserunner.drawtype;
 
 import com.trainer.courserunner.rooms.CourseFlag;
-import com.trainer.courserunner.rooms.UserLocationPath;
 
 import java.util.ArrayList;
 
@@ -13,9 +12,9 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
         }
     }
 
-    public DrawingPath(UserLocationPath[] userLocationPaths) {
+    public DrawingPath(UserLocationRecord[] userLocationRecords) {
         super();
-        for (UserLocationPath coursePath : userLocationPaths) {
+        for (UserLocationRecord coursePath : userLocationRecords) {
             this.add(new DrawingAddress(coursePath.latitude,coursePath.longitude));
         }
     }

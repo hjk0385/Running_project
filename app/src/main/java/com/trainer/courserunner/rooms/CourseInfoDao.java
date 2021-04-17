@@ -6,5 +6,5 @@ import androidx.room.Insert;
 @Dao
 public interface CourseInfoDao {
     @Insert
-    public long insertCourseInfo(CourseInfo courseInfo);
+    long insertCourseInfo(CourseInfo courseInfo);
 }

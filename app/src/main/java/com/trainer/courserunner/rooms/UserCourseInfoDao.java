@@ -7,5 +7,5 @@ import androidx.room.Query;
 @Dao
 public interface UserCourseInfoDao {
     @Insert
-    public long insertUserCourseInfo(UserCourseInfo userCourseInfo);
+    long insertUserCourseInfo(UserCourseInfo userCourseInfo);
 }

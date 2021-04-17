@@ -4,7 +4,6 @@ import com.trainer.courserunner.drawtype.DrawingPath;
 import com.trainer.courserunner.maps.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.CourseFlag;
-import com.trainer.courserunner.rooms.UserLocationPath;
 
 //맵에 그려주는 기능 수행
 public class CourseDrawer {
@@ -41,12 +40,12 @@ public class CourseDrawer {
             mapDrawer.clearDraw(overlayUserLocationPath);
             overlayUserLocationPath=null;
         }
-        UserLocationPath[] userLocationPaths = AppDatabaseLoader.getAppDatabase().
+        UserLocationRecord[] userLocationRecords = AppDatabaseLoader.getAppDatabase().
                 userLocationPathDao().queryUserLocationPath(usercourseId);
-        if(userLocationPaths.length<=2){
+        if(userLocationRecords.length<=2){
             return;
         }
-        DrawingPath drawingPath=new DrawingPath(userLocationPaths);
+        DrawingPath drawingPath=new DrawingPath(userLocationRecords);
         overlayUserLocationPath=mapDrawer.drawUserLocationPath(drawingPath);
     }
 }
