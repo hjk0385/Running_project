@@ -36,6 +36,8 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
         MapDAO.initMapDB(getApplicationContext());
+        AppDatabaseLoader.initAppdatabase(getApplicationContext());
+
         courseOverseer = new CourseOverseer((MapDrawer) this);
         naverMap.addOnLocationChangeListener((Location location) -> {
             courseOverseer.updateOversight(location);
