@@ -11,6 +11,8 @@ import com.trainer.courserunner.scopetype.ScopeDots;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class CourseMaker {
         return appDatabase.courseInfoDao().insertCourseInfo(new CourseInfo());
     }
 
-    private long[] registMapFlags(AppDatabase appDatabase,List<ScopeDotAddress> course){
+    private long[] registMapFlags(AppDatabase appDatabase, List<ScopeDotAddress> course){
         long[] mapFlagIds=new long[course.size()];
         for (int i = 0; i < course.size(); i++) {
             MapFlag mapFlag=new MapFlag();

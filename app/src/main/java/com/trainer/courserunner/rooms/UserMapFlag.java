@@ -10,10 +10,14 @@ import androidx.room.PrimaryKey;
                         entity = MapFlag.class,
                         parentColumns = "mapflag_id",
                         childColumns = "mapflag_id",
+                        onDelete = ForeignKey.CASCADE),
+                @ForeignKey(
+                        entity = UserCourseInfo.class,
+                        parentColumns = "usercourse_id",
+                        childColumns = "usercourse_id",
                         onDelete = ForeignKey.CASCADE)
         })
 public class UserMapFlag {
-    @PrimaryKey(autoGenerate = true)
-    public long usermapflag_id;
+    public long usercourse_id;
     public long mapflag_id;
 }

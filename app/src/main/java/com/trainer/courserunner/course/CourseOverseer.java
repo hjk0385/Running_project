@@ -7,23 +7,32 @@ import com.trainer.courserunner.maps.MapFunction;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.UserCourseInfo;
+import com.trainer.courserunner.rooms.UserLocationRecord;
+import com.trainer.courserunner.rooms.UserMapFlag;
 
 //데이터를 작성하는 기능 수행
 public class CourseOverseer extends CourseDrawer {
     long usercourseId;
     Location currentLocation;
+    AppDatabase appDatabase;
 
     public CourseOverseer(MapDrawer mapDrawer) {
         super(mapDrawer);
         this.usercourseId=-1;
+        appDatabase=AppDatabaseLoader.getAppDatabase();
     }
+
+    private long registUserCourse(long courseId){
+        UserCourseInfo userCourseInfo=new UserCourseInfo();
+        userCourseInfo.course_id=courseId;
+        return appDatabase.userCourseInfoDao().insertUserCourseInfo(userCourseInfo);
+    }
+
 
     //신규시작
     public void startOversight(long courseId){
-        //코스 등록
-        UserCourseInfo userCourseInfo=new UserCourseInfo();
-        userCourseInfo.course_id=courseId;
-        this.usercourseId=AppDatabaseLoader.getAppDatabase().userCourseInfoDao().insertUserCourseInfo(userCourseInfo);
+        //코스등록
+        this.usercourseId=registUserCourse(courseId);
         //코스 그리기
         drawCourse(courseId);
         //위치정보 초기화
@@ -45,25 +54,32 @@ public class CourseOverseer extends CourseDrawer {
         }
     }
 
-    private void oversight(){
-        //지나갔던 경로의 저장
-        AppDatabase appDatabase=AppDatabaseLoader.getAppDatabase();
-        UserLocationRecord userLocationRecord =new UserLocationRecord();
+    private void registUserLocationRecord(double latitude,double longitude){
+        UserLocationRecord userLocationRecord=new UserLocationRecord();
+        userLocationRecord.userlocation_order=appDatabase.userLocationRecordDao().
+                getNextUserLocationOrder(usercourseId);
         userLocationRecord.usercourse_id=usercourseId;
-        userLocationRecord.userlocation_id=appDatabase.userLocationPathDao().queryMaxUserLocationId(usercourseId)+1;
-        userLocationRecord.latitude=currentLocation.getLatitude();
-        userLocationRecord.longitude=currentLocation.getLongitude();
-        appDatabase.userLocationPathDao().insertUserLocationPath(userLocationRecord);
+        userLocationRecord.latitude=latitude;
+        userLocationRecord.longitude=longitude;
+        appDatabase.userLocationRecordDao().insertUserLocationRecord(userLocationRecord);
+    }
+
+
+
+    private void oversight(){
+        //지나가는 경로의 저장
+        registUserLocationRecord(currentLocation.getLatitude(),currentLocation.getLongitude());
         drawUserLocationPath(usercourseId);
-        //지나간 경로 저장 / 마커제거
-        for(int i=0;i<courseFlags.length;i++){
+
+        for(int i=0;i<mapFlags.length;i++){
             if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
-                    courseFlags[i].latitude,courseFlags[i].longtitude)<=100){
+                    mapFlags[i].latitude,mapFlags[i].longitude)<=100){
                 UserMapFlag userMapFlag =new UserMapFlag();
+
                 userMapFlag.usercourse_id=usercourseId;
-                userMapFlag.coursepath_id=i;
-                appDatabase.userCoursePathDao().insertUserCoursePath(userMapFlag);
-                clearMarker(i);
+                userMapFlag.mapflag_id=mapFlags[i].mapflag_id;
+                appDatabase.userMapFlagDao().insertUserMapFlag(userMapFlag);
+                clearFlag(mapFlags[i].mapflag_id);
             }
         }
     }
