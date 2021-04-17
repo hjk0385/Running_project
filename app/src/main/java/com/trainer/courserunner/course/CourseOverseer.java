@@ -1,6 +1,7 @@
 package com.trainer.courserunner.course;
 
 import android.location.Location;
+import android.util.Log;
 
 import com.trainer.courserunner.maps.MapDrawer;
 import com.trainer.courserunner.maps.MapFunction;
@@ -25,6 +26,10 @@ public class CourseOverseer extends CourseDrawer {
     private long registUserCourse(long courseId) {
         UserCourseInfo userCourseInfo = new UserCourseInfo();
         userCourseInfo.course_id = courseId;
+        if(appDatabase==null){
+            Log.v("error11","error null");
+        }
+
         return appDatabase.userCourseInfoDao().insertUserCourseInfo(userCourseInfo);
     }
 

@@ -35,6 +35,7 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
+        MapDAO.initMapDB(getApplicationContext());
         courseOverseer = new CourseOverseer((MapDrawer) this);
         naverMap.addOnLocationChangeListener((Location location) -> {
             courseOverseer.updateOversight(location);
@@ -42,8 +43,6 @@ public class CourseGuideActivity extends NavermapLocationActivity {
 
         //테스트코드
         //DB초기화
-        MapDAO.initMapDB(getApplicationContext());
-        AppDatabaseLoader.initAppdatabase(getApplicationContext());
         ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
                 37.506515, 126.779899);
         //course make
