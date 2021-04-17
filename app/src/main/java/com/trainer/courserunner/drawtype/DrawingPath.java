@@ -13,6 +13,7 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
             this.add(new DrawingAddress(courseFlag.latitude, courseFlag.longitude));
         }
     }
+
     public DrawingPath(UserLocationRecord[] userLocationRecords) {
         super();
         for (UserLocationRecord userLocationRecord : userLocationRecords) {

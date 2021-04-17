@@ -17,7 +17,9 @@ public interface MapDrawer {
 
     //코스
     Object drawCourse(DrawingPath drawingPath);
+
     Object drawUserLocationPath(DrawingPath drawingPath);
+
     //clear
     void clearDraw(Object drawObject);
 }

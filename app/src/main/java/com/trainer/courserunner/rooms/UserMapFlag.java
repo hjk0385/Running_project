@@ -5,6 +5,10 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "usermapflag",
+        primaryKeys = {
+                "usercourse_id",
+                "mapflag_id"
+        },
         foreignKeys = {
                 @ForeignKey(
                         entity = MapFlag.class,

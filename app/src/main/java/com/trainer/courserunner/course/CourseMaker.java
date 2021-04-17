@@ -38,34 +38,34 @@ public class CourseMaker {
         //
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
         //맵저장
-        long[] mapFlagIds= this.registMapFlags(appDatabase,mapFlags);
+        long[] mapFlagIds = this.registMapFlags(appDatabase, mapFlags);
         //코스 등록
-        long courseId=this.registCourseInfo(appDatabase);
-        this.registCourseFlags(appDatabase,mapFlagIds,courseId);
+        long courseId = this.registCourseInfo(appDatabase);
+        this.registCourseFlags(appDatabase, mapFlagIds, courseId);
         return courseId;
     }
 
-    private long registCourseInfo(AppDatabase appDatabase){
+    private long registCourseInfo(AppDatabase appDatabase) {
         return appDatabase.courseInfoDao().insertCourseInfo(new CourseInfo());
     }
 
-    private long[] registMapFlags(AppDatabase appDatabase, List<ScopeDotAddress> course){
-        long[] mapFlagIds=new long[course.size()];
+    private long[] registMapFlags(AppDatabase appDatabase, List<ScopeDotAddress> course) {
+        long[] mapFlagIds = new long[course.size()];
         for (int i = 0; i < course.size(); i++) {
-            MapFlag mapFlag=new MapFlag();
-            mapFlag.latitude=course.get(i).getLatitude();
-            mapFlag.longitude=course.get(i).getLongitude();
+            MapFlag mapFlag = new MapFlag();
+            mapFlag.latitude = course.get(i).getLatitude();
+            mapFlag.longitude = course.get(i).getLongitude();
             mapFlagIds[i] = appDatabase.mapFlagDao().insertMapFlag(mapFlag);
         }
         return mapFlagIds;
     }
 
-    private void registCourseFlags(AppDatabase appDatabase,long[] mapFlagIds,long courseId){
-        for(int i=0;i<mapFlagIds.length;i++){
-            CourseFlag courseFlag=new CourseFlag();
-            courseFlag.course_id=courseId;
-            courseFlag.mapflag_id=mapFlagIds[i];
-            courseFlag.courseflag_order=i;
+    private void registCourseFlags(AppDatabase appDatabase, long[] mapFlagIds, long courseId) {
+        for (int i = 0; i < mapFlagIds.length; i++) {
+            CourseFlag courseFlag = new CourseFlag();
+            courseFlag.course_id = courseId;
+            courseFlag.mapflag_id = mapFlagIds[i];
+            courseFlag.courseflag_order = i;
             appDatabase.courseFlagDao().insertCourseFlag(courseFlag);
         }
     }

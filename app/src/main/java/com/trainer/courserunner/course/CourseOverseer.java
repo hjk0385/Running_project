@@ -18,66 +18,64 @@ public class CourseOverseer extends CourseDrawer {
 
     public CourseOverseer(MapDrawer mapDrawer) {
         super(mapDrawer);
-        this.usercourseId=-1;
-        appDatabase=AppDatabaseLoader.getAppDatabase();
+        this.usercourseId = -1;
+        appDatabase = AppDatabaseLoader.getAppDatabase();
     }
 
-    private long registUserCourse(long courseId){
-        UserCourseInfo userCourseInfo=new UserCourseInfo();
-        userCourseInfo.course_id=courseId;
+    private long registUserCourse(long courseId) {
+        UserCourseInfo userCourseInfo = new UserCourseInfo();
+        userCourseInfo.course_id = courseId;
         return appDatabase.userCourseInfoDao().insertUserCourseInfo(userCourseInfo);
     }
 
 
     //신규시작
-    public void startOversight(long courseId){
+    public void startOversight(long courseId) {
         //코스등록
-        this.usercourseId=registUserCourse(courseId);
+        this.usercourseId = registUserCourse(courseId);
         //코스 그리기
         drawCourse(courseId);
         //위치정보 초기화
-        currentLocation=null;
+        currentLocation = null;
     }
 
-    public void updateOversight(Location location){
-        if(currentLocation==null){
-            currentLocation=location;
+    public void updateOversight(Location location) {
+        if (currentLocation == null) {
+            currentLocation = location;
             oversight();
-        }
-        else{
+        } else {
             //이동거리가 10m이상이면 갱신
-            if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
-                    location.getLatitude(),location.getLongitude())>=10){
-                currentLocation=location;
+            if (MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                    location.getLatitude(), location.getLongitude()) >= 10) {
+                currentLocation = location;
                 oversight();
             }
         }
     }
 
-    private void registUserLocationRecord(double latitude,double longitude){
-        UserLocationRecord userLocationRecord=new UserLocationRecord();
-        userLocationRecord.userlocation_order=appDatabase.userLocationRecordDao().
+    private void registUserLocationRecord(double latitude, double longitude) {
+        UserLocationRecord userLocationRecord = new UserLocationRecord();
+        userLocationRecord.userlocation_order = appDatabase.userLocationRecordDao().
                 getNextUserLocationOrder(usercourseId);
-        userLocationRecord.usercourse_id=usercourseId;
-        userLocationRecord.latitude=latitude;
-        userLocationRecord.longitude=longitude;
+        userLocationRecord.usercourse_id = usercourseId;
+        userLocationRecord.latitude = latitude;
+        userLocationRecord.longitude = longitude;
         appDatabase.userLocationRecordDao().insertUserLocationRecord(userLocationRecord);
     }
 
 
-
-    private void oversight(){
+    private void oversight() {
         //지나가는 경로의 저장
-        registUserLocationRecord(currentLocation.getLatitude(),currentLocation.getLongitude());
+        registUserLocationRecord(currentLocation.getLatitude(), currentLocation.getLongitude());
         drawUserLocationPath(usercourseId);
 
-        for(int i=0;i<mapFlags.length;i++){
-            if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
-                    mapFlags[i].latitude,mapFlags[i].longitude)<=100){
-                UserMapFlag userMapFlag =new UserMapFlag();
+        for (int i = 0; i < mapFlags.length; i++) {
+            if (MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                    mapFlags[i].latitude, mapFlags[i].longitude) <= 100) {
+                UserMapFlag userMapFlag = new UserMapFlag();
 
-                userMapFlag.usercourse_id=usercourseId;
-                userMapFlag.mapflag_id=mapFlags[i].mapflag_id;
+                userMapFlag.usercourse_id = usercourseId;
+                userMapFlag.mapflag_id = mapFlags[i].mapflag_id;
                 appDatabase.userMapFlagDao().insertUserMapFlag(userMapFlag);
                 clearFlag(mapFlags[i].mapflag_id);
             }

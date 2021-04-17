@@ -9,7 +9,7 @@ public class AppDatabaseLoader {
     static private AppDatabase appDatabase;
 
     static public void initAppdatabase(Context context) {
-        appDatabase = Room.databaseBuilder(context, AppDatabase.class, "testdatabase4").allowMainThreadQueries().build();
+        appDatabase = Room.databaseBuilder(context, AppDatabase.class, "testdatabase5").allowMainThreadQueries().build();
     }
 
     static public AppDatabase getAppDatabase() {
