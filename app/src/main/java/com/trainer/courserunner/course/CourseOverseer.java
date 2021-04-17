@@ -1,24 +1,14 @@
 package com.trainer.courserunner.course;
 
 import android.location.Location;
-import android.os.AsyncTask;
-import android.util.Log;
 
-import com.trainer.courserunner.drawtype.DrawingAddress;
-import com.trainer.courserunner.drawtype.DrawingPath;
 import com.trainer.courserunner.maps.MapDrawer;
 import com.trainer.courserunner.maps.MapFunction;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
-import com.trainer.courserunner.rooms.CoursePath;
 import com.trainer.courserunner.rooms.UserCourseInfo;
-import com.trainer.courserunner.rooms.UserCourseInfoDao;
-import com.trainer.courserunner.rooms.UserCoursePath;
+import com.trainer.courserunner.rooms.UserCourseFlag;
 import com.trainer.courserunner.rooms.UserLocationPath;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 //데이터를 작성하는 기능 수행
 public class CourseOverseer extends CourseDrawer {
@@ -71,10 +61,10 @@ public class CourseOverseer extends CourseDrawer {
         for(int i=0;i<courseFlags.length;i++){
             if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
                     courseFlags[i].latitude,courseFlags[i].longtitude)<=100){
-                UserCoursePath userCoursePath=new UserCoursePath();
-                userCoursePath.usercourse_id=usercourseId;
-                userCoursePath.coursepath_id=i;
-                appDatabase.userCoursePathDao().insertUserCoursePath(userCoursePath);
+                UserCourseFlag userCourseFlag =new UserCourseFlag();
+                userCourseFlag.usercourse_id=usercourseId;
+                userCourseFlag.coursepath_id=i;
+                appDatabase.userCoursePathDao().insertUserCoursePath(userCourseFlag);
                 clearMarker(i);
             }
         }

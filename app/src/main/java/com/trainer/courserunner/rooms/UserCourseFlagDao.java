@@ -5,7 +5,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 
 @Dao
-public interface UserCoursePathDao {
+public interface UserCourseFlagDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public long insertUserCoursePath(UserCoursePath userCoursePath);
+    public long insertUserCoursePath(UserCourseFlag userCourseFlag);
 }

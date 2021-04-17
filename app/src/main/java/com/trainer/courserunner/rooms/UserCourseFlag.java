@@ -3,10 +3,10 @@ package com.trainer.courserunner.rooms;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
-@Entity(tableName = "usercoursepath",
+@Entity(tableName = "usercourseflag",
         primaryKeys = {
                 "usercourse_id",
-                "coursepath_id"
+                "courseflag_id"
         },
         foreignKeys = {
                 @ForeignKey(
@@ -14,10 +14,13 @@ import androidx.room.ForeignKey;
                         parentColumns = "usercourse_id",
                         childColumns = "usercourse_id",
                         onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+
                 )
         }
 )
-public class UserCoursePath {
+public class UserCourseFlag {
     public long usercourse_id;
-    public long coursepath_id;
+    public long courseflag_id;
 }

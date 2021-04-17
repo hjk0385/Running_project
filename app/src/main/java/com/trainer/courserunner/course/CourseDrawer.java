@@ -3,12 +3,12 @@ package com.trainer.courserunner.course;
 import com.trainer.courserunner.drawtype.DrawingPath;
 import com.trainer.courserunner.maps.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
-import com.trainer.courserunner.rooms.CoursePath;
+import com.trainer.courserunner.rooms.CourseFlag;
 import com.trainer.courserunner.rooms.UserLocationPath;
 
 //맵에 그려주는 기능 수행
 public class CourseDrawer {
-    protected CoursePath[] courseFlags;
+    protected CourseFlag[] courseFlags;
     MapDrawer mapDrawer;
     Object[] courseOverlayMarkers;
     Object courseOverlayPath;
@@ -22,7 +22,7 @@ public class CourseDrawer {
     }
 
     public void drawCourse(long courseId) {
-        courseFlags = AppDatabaseLoader.getAppDatabase().coursePathDao().loadCoursePath(courseId);
+        courseFlags = AppDatabaseLoader.getAppDatabase().coursePathDao().loadCourseFlag(courseId);
         DrawingPath drawingPath = new DrawingPath(courseFlags);
         courseOverlayPath = mapDrawer.drawCourse(drawingPath);
         courseOverlayMarkers = mapDrawer.drawOverlayMarkers(drawingPath);

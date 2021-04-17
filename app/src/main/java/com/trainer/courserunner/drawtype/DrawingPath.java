@@ -1,16 +1,15 @@
 package com.trainer.courserunner.drawtype;
 
-import com.trainer.courserunner.rooms.CoursePath;
+import com.trainer.courserunner.rooms.CourseFlag;
 import com.trainer.courserunner.rooms.UserLocationPath;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DrawingPath extends ArrayList<DrawingAddress> {
-    public DrawingPath(CoursePath[] coursePaths) {
+    public DrawingPath(CourseFlag[] courseFlags) {
         super();
-        for (CoursePath coursePath : coursePaths) {
-            this.add(new DrawingAddress(coursePath.latitude, coursePath.longtitude));
+        for (CourseFlag courseFlag : courseFlags) {
+            this.add(new DrawingAddress(courseFlag.latitude, courseFlag.longtitude));
         }
     }
 
