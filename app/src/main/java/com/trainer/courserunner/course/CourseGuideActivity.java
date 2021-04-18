@@ -26,6 +26,7 @@ import java.util.Map;
 
 public class CourseGuideActivity extends NavermapLocationActivity {
     CourseOverseer courseOverseer;
+    CourseDrawer courseDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,17 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         //테스트코드 종료
 
         //인텐드로 course_id를 받아서 처리될 내용
-        courseOverseer = new CourseOverseer((MapDrawer) this);
+        courseOverseer = new CourseOverseer();
+        long usercourseId=courseOverseer.startOversight(course_id);
+        courseDrawer=new CourseDrawer(this,course_id,usercourseId);
+        courseDrawer.mapStart();
+
         naverMap.addOnLocationChangeListener((Location location) -> {
-            courseOverseer.updateOversight(location);
+            boolean changed=courseOverseer.updateUserLocation(location);
+            if(changed){
+                courseDrawer.mapRefresh();
+            }
         });
-        courseOverseer.startOversight(course_id);
     }
 
 }

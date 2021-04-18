@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 
 @Database(entities = {CourseInfo.class, CourseFlag.class, MapFlag.class,
         UserCourseInfo.class,
-        UserLocationRecord.class, UserMapFlag.class}, version = 1)
+        UserLocationRecord.class, UserMapFlag.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     //course
     public abstract CourseInfoDao courseInfoDao();

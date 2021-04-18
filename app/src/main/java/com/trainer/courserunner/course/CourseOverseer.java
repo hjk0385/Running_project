@@ -7,90 +7,85 @@ import com.trainer.courserunner.maps.MapDrawer;
 import com.trainer.courserunner.maps.MapFunction;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
+import com.trainer.courserunner.rooms.MapFlag;
 import com.trainer.courserunner.rooms.UserCourseInfo;
 import com.trainer.courserunner.rooms.UserLocationRecord;
 import com.trainer.courserunner.rooms.UserMapFlag;
 
 //데이터를 작성하는 기능 수행
-public class CourseOverseer extends CourseDrawer {
+public class CourseOverseer{
+    long courseId;
     long usercourseId;
-    Location currentLocation;
     AppDatabase appDatabase;
-
-
-    //거리기준 : 1 = 1m, 10 = 10m
-    //업데이트 거리
-    private final double UPDATE_DISTANCE=10.0;
-    //마커완료 거리
-    private final double FINISHMARKER_DISTANCE=100.0;
-
-    public CourseOverseer(MapDrawer mapDrawer) {
-        super(mapDrawer);
+    public CourseOverseer() {
+        this.courseId=-1;
         this.usercourseId = -1;
         appDatabase = AppDatabaseLoader.getAppDatabase();
+    }
+
+    //감시시작
+    Location currentLocation;
+    //신규시작시
+    public long startOversight(long courseId) {
+        //코스등록
+        this.courseId=courseId;
+        this.usercourseId = registUserCourse(courseId);
+        //위치정보 초기화
+        currentLocation = null;
+        return this.usercourseId;
     }
 
     private long registUserCourse(long courseId) {
         UserCourseInfo userCourseInfo = new UserCourseInfo();
         userCourseInfo.course_id = courseId;
-        if(appDatabase==null){
-            Log.v("error11","error null");
-        }
-
         return appDatabase.userCourseInfoDao().insertUserCourseInfo(userCourseInfo);
     }
 
-
-    //신규시작
-    public void startOversight(long courseId) {
-        //코스등록
-        this.usercourseId = registUserCourse(courseId);
-        //코스 그리기
-        drawCourse(courseId);
-        //위치정보 초기화
-        currentLocation = null;
+    //사용자 감시 단계
+    //거리기준 : Double형 변수의 값 1 = 1m, 10 = 10m
+    //업데이트 거리
+    private final double UPDATE_DISTANCE=10.0;
+    //마커완료 거리
+    private final double FINISHMARKER_DISTANCE=100.0;
+    //감시(액티비티에서 호출)
+    public boolean updateUserLocation(Location location){
+        boolean changed=false;
+        if(currentLocation==null){
+            changed=true;
+            updateUserLocationInnerProcess(location);
+        }
+        else if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
+                location.getLatitude(),location.getLongitude())>=UPDATE_DISTANCE){
+            changed=true;
+            updateUserLocationInnerProcess(location);
+        }
+        return changed;
     }
 
-    public void updateOversight(Location location) {
-        if (currentLocation == null) {
-            currentLocation = location;
-            oversight();
-        } else {
-            //이동거리가 10m이상이면 갱신
+    //감시 내부처리 (DB처리)
+    private void updateUserLocationInnerProcess(Location location){
+        currentLocation=location;
+        registUserLocationRecord(location);
+        //마커처리
+        MapFlag[] mapFlags=appDatabase.courseDao().getCourseMapflags(courseId);
+        for (MapFlag mapFlag : mapFlags) {
             if (MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
-                    location.getLatitude(), location.getLongitude()) >= UPDATE_DISTANCE) {
-                currentLocation = location;
-                oversight();
+                    mapFlag.latitude, mapFlag.longitude) <= FINISHMARKER_DISTANCE) {
+                UserMapFlag userMapFlag = new UserMapFlag();
+                userMapFlag.usercourse_id = usercourseId;
+                userMapFlag.mapflag_id = mapFlag.mapflag_id;
+                appDatabase.userMapFlagDao().insertUserMapFlag(userMapFlag);
             }
         }
     }
 
-    private void registUserLocationRecord(double latitude, double longitude) {
+    private void registUserLocationRecord(Location location) {
         UserLocationRecord userLocationRecord = new UserLocationRecord();
         userLocationRecord.userlocation_order = appDatabase.userLocationRecordDao().
                 getNextUserLocationOrder(usercourseId);
         userLocationRecord.usercourse_id = usercourseId;
-        userLocationRecord.latitude = latitude;
-        userLocationRecord.longitude = longitude;
+        userLocationRecord.latitude = location.getLatitude();
+        userLocationRecord.longitude = location.getLongitude();
         appDatabase.userLocationRecordDao().insertUserLocationRecord(userLocationRecord);
-    }
-
-
-    private void oversight() {
-        //지나가는 경로의 저장
-        registUserLocationRecord(currentLocation.getLatitude(), currentLocation.getLongitude());
-        drawUserLocationPath(usercourseId);
-
-        for (int i = 0; i < mapFlags.length; i++) {
-            if (MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
-                    mapFlags[i].latitude, mapFlags[i].longitude) <= FINISHMARKER_DISTANCE) {
-                UserMapFlag userMapFlag = new UserMapFlag();
-
-                userMapFlag.usercourse_id = usercourseId;
-                userMapFlag.mapflag_id = mapFlags[i].mapflag_id;
-                appDatabase.userMapFlagDao().insertUserMapFlag(userMapFlag);
-                clearFlag(mapFlags[i].mapflag_id);
-            }
-        }
     }
 }

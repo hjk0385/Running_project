@@ -5,6 +5,8 @@ import com.trainer.courserunner.rooms.MapFlag;
 import com.trainer.courserunner.rooms.UserLocationRecord;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class DrawingPath extends ArrayList<DrawingAddress> {
     public DrawingPath(MapFlag[] mapFlags) {
@@ -18,6 +20,13 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
         super();
         for (UserLocationRecord userLocationRecord : userLocationRecords) {
             this.add(new DrawingAddress(userLocationRecord.latitude, userLocationRecord.longitude));
+        }
+    }
+
+    public DrawingPath(List<MapFlag> mapFlags) {
+        super();
+        for (MapFlag mapFlag : mapFlags) {
+            this.add(new DrawingAddress(mapFlag.latitude, mapFlag.longitude));
         }
     }
 }
