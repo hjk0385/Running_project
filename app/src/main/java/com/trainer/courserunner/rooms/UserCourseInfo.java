@@ -12,7 +12,8 @@ import androidx.room.PrimaryKey;
                         parentColumns = "course_id",
                         childColumns = "course_id",
                         onDelete = ForeignKey.CASCADE)
-        }
+        },
+        indices={@Index("course_id")}
 )
 public class UserCourseInfo {
     @PrimaryKey(autoGenerate = true)
