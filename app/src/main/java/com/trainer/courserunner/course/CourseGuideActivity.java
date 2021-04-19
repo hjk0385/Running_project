@@ -55,11 +55,12 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         long usercourseId=courseOverseer.startOversight(course_id);
         courseDrawer=new CourseDrawer(this,course_id,usercourseId);
         courseDrawer.mapStart();
+        courseOverseer.setPublishUIDrawer(courseDrawer);
 
         naverMap.addOnLocationChangeListener((Location location) -> {
-            boolean changed=courseOverseer.updateUserLocation(location);
-            if(changed){
-                courseDrawer.mapRefresh();
+            if(courseOverseer.checkDistance(location)) {
+                courseOverseer.execute(location);
+
             }
         });
     }

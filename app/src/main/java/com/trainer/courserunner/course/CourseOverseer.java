@@ -1,6 +1,7 @@
 package com.trainer.courserunner.course;
 
 import android.location.Location;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.trainer.courserunner.maps.MapDrawer;
@@ -13,7 +14,7 @@ import com.trainer.courserunner.rooms.UserLocationRecord;
 import com.trainer.courserunner.rooms.UserMapFlag;
 
 //데이터를 작성하는 기능 수행
-public class CourseOverseer{
+public class CourseOverseer extends AsyncTask<Location,Void,Boolean> {
     long courseId;
     long usercourseId;
     AppDatabase appDatabase;
@@ -21,6 +22,25 @@ public class CourseOverseer{
         this.courseId=-1;
         this.usercourseId = -1;
         appDatabase = AppDatabaseLoader.getAppDatabase();
+    }
+
+    //백그라운드 실행
+    CourseDrawer publishUIDrawer;
+    public void setPublishUIDrawer(CourseDrawer publishUIDrawer){
+        this.publishUIDrawer=publishUIDrawer;
+    }
+
+    @Override
+    protected Boolean doInBackground(Location... locations) {
+        return updateUserLocation(locations[0]);
+    }
+
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        super.onPostExecute(aBoolean);
+        if(aBoolean){
+            publishUIDrawer.mapRefresh();
+        }
     }
 
     //감시시작
@@ -48,18 +68,21 @@ public class CourseOverseer{
     //마커완료 거리
     private final double FINISHMARKER_DISTANCE=100.0;
     //감시(액티비티에서 호출)
-    public boolean updateUserLocation(Location location){
-        boolean changed=false;
+    private boolean updateUserLocation(Location location){
+        if(checkDistance(location)){
+            updateUserLocationInnerProcess(location);
+            return true;
+        }
+        return false;
+    }
+
+    //업데이트 거리확인
+    public boolean checkDistance(Location location){
         if(currentLocation==null){
-            changed=true;
-            updateUserLocationInnerProcess(location);
+            return true;
         }
-        else if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
-                location.getLatitude(),location.getLongitude())>=UPDATE_DISTANCE){
-            changed=true;
-            updateUserLocationInnerProcess(location);
-        }
-        return changed;
+        return MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                location.getLatitude(), location.getLongitude()) >= UPDATE_DISTANCE;
     }
 
     //감시 내부처리 (DB처리)
