@@ -13,7 +13,7 @@ public class AssetLoader {
         Bitmap bitmap = null;
         try {
             AssetManager assetManager = context.getResources().getAssets();
-            InputStream inputStream = assetManager.open("testbitmap1.png");
+            InputStream inputStream = assetManager.open(assetName);
             bitmap = BitmapFactory.decodeStream(inputStream);
             inputStream.close();
         } catch (IOException e) {
