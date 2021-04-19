@@ -49,17 +49,19 @@ public class CourseOverseer{
     private final double FINISHMARKER_DISTANCE=100.0;
     //감시(액티비티에서 호출)
     public boolean updateUserLocation(Location location){
-        boolean changed=false;
-        if(currentLocation==null){
-            changed=true;
+        if(checkDistance(location)){
             updateUserLocationInnerProcess(location);
+            return true;
         }
-        else if(MapFunction.getDistance(currentLocation.getLatitude(),currentLocation.getLongitude(),
-                location.getLatitude(),location.getLongitude())>=UPDATE_DISTANCE){
-            changed=true;
-            updateUserLocationInnerProcess(location);
+        return false;
+    }
+
+    public boolean checkDistance(Location location) {
+        if (currentLocation == null) {
+            return true;
         }
-        return changed;
+        return MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                location.getLatitude(), location.getLongitude()) >= UPDATE_DISTANCE;
     }
 
     //감시 내부처리 (DB처리)
