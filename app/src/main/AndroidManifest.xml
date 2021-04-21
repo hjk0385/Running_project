@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <activity android:name=".RunningActivity"></activity>
+        <activity android:name=".SoundSetActivity"></activity>
+        <activity android:name=".UserSetActivity" />
+        <activity android:name=".ProjectRunningActivity" />
+        <activity android:name=".NormalRunningActivity" />
+        <activity android:name=".MissionActivity" />
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".RunningActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
