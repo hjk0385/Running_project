@@ -21,6 +21,7 @@ import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.scopetype.ScopeMapInfo;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -50,6 +51,7 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         long course_id = courseMaker.makeCourse(image, maps, currentLocation);
         Log.v("testFunction", String.valueOf(course_id));
         //테스트코드 종료
+        
 
         //인텐드로 course_id를 받아서 처리될 내용
         courseOverseer = new CourseOverseer();
