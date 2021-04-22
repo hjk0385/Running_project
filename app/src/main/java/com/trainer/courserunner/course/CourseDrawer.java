@@ -1,5 +1,7 @@
 package com.trainer.courserunner.course;
 
+import android.graphics.Color;
+
 import com.trainer.courserunner.drawtype.DrawingPath;
 import com.trainer.courserunner.maps.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
@@ -51,7 +53,7 @@ public class CourseDrawer {
         }
         MapFlag[] mapFlags = appDatabase.courseDao().getCourseMapflags(courseId);
         DrawingPath drawingPath = new DrawingPath(mapFlags);
-        overlayCoursePath = mapDrawer.drawCourse(drawingPath);
+        overlayCoursePath = mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(Color.BLACK));
     }
 
     private void reDrawMarkers() {
@@ -77,7 +79,7 @@ public class CourseDrawer {
             }
         }
         DrawingPath drawingPath = new DrawingPath(notFinishFlags);
-        overlayCourseMarkers = mapDrawer.drawOverlayMarkers(drawingPath);
+        overlayCourseMarkers = mapDrawer.drawOverlayMarkers(drawingPath,mapDrawer.getBaseProperty());
     }
 
     //사용자경로 그리기
@@ -92,6 +94,6 @@ public class CourseDrawer {
             return;
         }
         DrawingPath drawingPath = new DrawingPath(userLocationRecords);
-        overlayUserLocationPath = mapDrawer.drawUserLocationPath(drawingPath);
+        overlayUserLocationPath = mapDrawer.drawOverlayPathline(drawingPath,mapDrawer.getLineColorProperty(Color.RED));
     }
 }

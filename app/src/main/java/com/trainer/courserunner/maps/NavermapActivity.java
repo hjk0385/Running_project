@@ -48,23 +48,21 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         this.naverMap = naverMap;
     }
 
-    @Override
-    public Object drawOverlayMarker(DrawingAddress address) {
-        double longitude = address.getLongitude();
-        double latitude = address.getLatitude();
-        //draw
-        Marker marker = new Marker();
-        marker.setPosition(new LatLng(latitude, longitude));
-        marker.setMap(this.naverMap);
-        return marker;
-    }
 
-    public Object[] drawOverlayMarkers(DrawingPath drawingPath) {
-        Object[] markers = new Object[drawingPath.size()];
-        for (int i = 0; i < drawingPath.size(); i++) {
-            markers[i] = this.drawOverlayMarker(drawingPath.get(i));
+    @Override
+    public Object[] drawOverlayMarkers(DrawingPath drawingPath, Consumer<Object> property) {
+        Object[] markerObjects=new Object[drawingPath.size()];
+        for(int i=0;i<drawingPath.size();i++){
+            double latitude=drawingPath.get(i).getLatitude();
+            double longitude=drawingPath.get(i).getLongitude();
+            //marker
+            Marker marker=new Marker();
+            marker.setPosition(new LatLng(latitude,longitude));
+            property.accept(marker);
+            marker.setMap(this.naverMap);
+            markerObjects[i]=marker;
         }
-        return markers;
+        return markerObjects;
     }
 
     @Override
@@ -102,16 +100,6 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public Object drawCourse(DrawingPath drawingPath) {
-        return drawOverlayPathline(drawingPath, (Object object) -> ((PathOverlay) object).setColor(Color.BLACK));
-    }
-
-    @Override
-    public Object drawUserLocationPath(DrawingPath drawingPath) {
-        return drawOverlayPathline(drawingPath, (Object object) -> ((PathOverlay) object).setColor(Color.BLUE));
-    }
-
-    @Override
     public void clearDraw(Object drawObject) {
         if (drawObject instanceof Marker) {
             ((Marker) drawObject).setMap(null);
@@ -120,5 +108,16 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         } else if (drawObject instanceof PathOverlay) {
             ((PathOverlay) drawObject).setMap(null);
         }
+    }
+
+    @Override
+    public Consumer<Object> getLineColorProperty(int color){
+        return (Object drawObject)->{
+            if (drawObject instanceof PolylineOverlay) {
+                ((PolylineOverlay) drawObject).setColor(color);
+            } else if (drawObject instanceof PathOverlay) {
+                ((PathOverlay) drawObject).setColor(color);
+            }
+        };
     }
 }
