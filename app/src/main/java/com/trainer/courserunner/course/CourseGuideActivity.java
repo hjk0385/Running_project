@@ -29,6 +29,16 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     CourseOverseer courseOverseer;
     CourseDrawer courseDrawer;
 
+    private void mapStart() {
+        courseDrawer.drawCoursePath();
+        courseDrawer.drawMarkers();
+    }
+
+    private void mapRefresh() {
+        courseDrawer.drawMarkers();
+        courseDrawer.drawUserLocationPath();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +67,13 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         courseOverseer = new CourseOverseer();
         long usercourseId = courseOverseer.startOversight(course_id);
         courseDrawer = new CourseDrawer(this, course_id, usercourseId);
-        courseDrawer.mapStart();
+        this.mapStart();
 
         naverMap.addOnLocationChangeListener((Location location) -> {
             boolean changed = courseOverseer.updateUserLocation(location);
             if (changed) {
-                courseDrawer.mapRefresh();
+                this.mapRefresh();
             }
         });
     }
-
 }

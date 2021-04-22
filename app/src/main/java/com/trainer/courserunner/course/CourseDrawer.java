@@ -2,6 +2,8 @@ package com.trainer.courserunner.course;
 
 import android.graphics.Color;
 
+import androidx.core.util.Pair;
+
 import com.trainer.courserunner.drawtype.DrawingAddress;
 import com.trainer.courserunner.drawtype.DrawingPath;
 import com.trainer.courserunner.maps.MapDrawer;
@@ -26,28 +28,18 @@ public class CourseDrawer {
     //오버레이
     Object overlayCoursePath;
     Object[] overlayCourseMarkers;
-    Object overlayUserLocationPath;
+    Object[] overlayUserLocationPaths;
 
     public CourseDrawer(MapDrawer mapDrawer, long courseId, long userCourseId) {
         this.mapDrawer = mapDrawer;
         this.appDatabase = AppDatabaseLoader.getAppDatabase();
         this.courseId = courseId;
         this.userCourseId = userCourseId;
-        this.overlayUserLocationPath = null;
+        this.overlayUserLocationPaths = null;
         this.overlayCourseMarkers = null;
     }
 
-    public void mapStart() {
-        drawCoursePath();
-        drawMarkers();
-    }
-
-    public void mapRefresh() {
-        drawMarkers();
-        drawUserLocationPath();
-    }
-
-    private void drawCoursePath() {
+    public void drawCoursePath() {
         if (overlayCoursePath != null) {
             mapDrawer.clearDraw(overlayCoursePath);
             overlayCoursePath = null;
@@ -57,7 +49,7 @@ public class CourseDrawer {
         overlayCoursePath = mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(Color.BLACK));
     }
 
-    private void drawMarkers() {
+    public void drawMarkers() {
         if (overlayCourseMarkers != null) {
             for (Object overlayCourseMarker : overlayCourseMarkers) {
                 mapDrawer.clearDraw(overlayCourseMarker);
@@ -84,31 +76,43 @@ public class CourseDrawer {
     }
 
     //사용자경로 그리기
-    private void drawUserLocationPath() {
-        if (overlayUserLocationPath != null) {
-            mapDrawer.clearDraw(overlayUserLocationPath);
-            overlayUserLocationPath = null;
+    public void drawUserLocationPath() {
+        if (overlayUserLocationPaths != null) {
+            for(Object overlayUserLocationPath:overlayUserLocationPaths){
+                mapDrawer.clearDraw(overlayUserLocationPath);
+            }
+            overlayUserLocationPaths = null;
         }
         UserLocationRecord[] userLocationRecords = appDatabase.userCourseDao().
                 getUserLocationRecords(userCourseId);
         if (userLocationRecords.length <= 2) {
             return;
         }
-
-        int currentColor=userLocationRecords[0].color;
-        DrawingPath currentDrawing = new DrawingPath(userLocationRecords);
-        for(int i=0;i<userLocationRecords.length;i++){
-            double latitude=userLocationRecords[i].latitude;
-            double longitude=userLocationRecords[i].longitude;
-            int nextColor=userLocationRecords[i].color;
-            currentDrawing.add(new DrawingAddress(latitude,longitude));
-            if(currentColor!=nextColor){
-
+        //컬러 분석
+        List<Pair<DrawingPath,Integer>> colorDrawing=new ArrayList<>();
+        int i=0;
+        while(i<userLocationRecords.length){
+            int drawingColor=userLocationRecords[i].color;
+            //컬러 경로 생성
+            DrawingPath drawingPath=new DrawingPath();
+            if(i>0){
+                drawingPath.add(new DrawingAddress(userLocationRecords[i-1]));
             }
+            //컬러 경로 만들기
+            int j=i;
+            while(j<userLocationRecords.length&&drawingColor==userLocationRecords[j].color){
+                drawingPath.add(new DrawingAddress(userLocationRecords[j]));
+                j++;
+            }
+            //컬러 경로 저장
+            colorDrawing.add(new Pair<>(drawingPath,drawingColor));
+            i++;
         }
-
-
-        List<DrawingPath> drawingPaths=new ArrayList<>();
-        overlayUserLocationPath = mapDrawer.drawOverlayPathline(drawingPath,mapDrawer.getLineColorProperty(Color.RED));
+        //컬러 그리기
+        for(Pair<DrawingPath,Integer> colorDraw:colorDrawing){
+            DrawingPath drawingPath=colorDraw.first;
+            Integer color=colorDraw.second;
+            mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(color));
+        }
     }
 }
