@@ -13,6 +13,7 @@ import androidx.room.PrimaryKey;
 public class UserLocationRecord {
     public long userlocation_order;
     public long usercourse_id;
+    public int color;
     public double longitude;
     public double latitude;
 }

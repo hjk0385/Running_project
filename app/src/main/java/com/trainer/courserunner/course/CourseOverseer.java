@@ -1,5 +1,6 @@
 package com.trainer.courserunner.course;
 
+import android.graphics.Color;
 import android.location.Location;
 import android.util.Log;
 
@@ -25,6 +26,11 @@ public class CourseOverseer {
     AppDatabase appDatabase;
     //감시시작
     Location currentLocation;
+    //현재속성
+    int currentLineColor= Color.RED;
+    public void setCurrentLineColor(int color){
+        this.currentLineColor=color;
+    }
 
     public CourseOverseer() {
         this.courseId = -1;
@@ -90,7 +96,7 @@ public class CourseOverseer {
         userLocationRecord.latitude = location.getLatitude();
         userLocationRecord.longitude = location.getLongitude();
         //컬러처리
-        
+        userLocationRecord.color=currentLineColor;
         appDatabase.userCourseDao().insertUserLocationRecord(userLocationRecord);
     }
 }

@@ -2,6 +2,7 @@ package com.trainer.courserunner.course;
 
 import android.graphics.Color;
 
+import com.trainer.courserunner.drawtype.DrawingAddress;
 import com.trainer.courserunner.drawtype.DrawingPath;
 import com.trainer.courserunner.maps.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
@@ -38,11 +39,11 @@ public class CourseDrawer {
 
     public void mapStart() {
         drawCoursePath();
-        reDrawMarkers();
+        drawMarkers();
     }
 
     public void mapRefresh() {
-        reDrawMarkers();
+        drawMarkers();
         drawUserLocationPath();
     }
 
@@ -56,7 +57,7 @@ public class CourseDrawer {
         overlayCoursePath = mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(Color.BLACK));
     }
 
-    private void reDrawMarkers() {
+    private void drawMarkers() {
         if (overlayCourseMarkers != null) {
             for (Object overlayCourseMarker : overlayCourseMarkers) {
                 mapDrawer.clearDraw(overlayCourseMarker);
@@ -93,7 +94,21 @@ public class CourseDrawer {
         if (userLocationRecords.length <= 2) {
             return;
         }
-        DrawingPath drawingPath = new DrawingPath(userLocationRecords);
+
+        int currentColor=userLocationRecords[0].color;
+        DrawingPath currentDrawing = new DrawingPath(userLocationRecords);
+        for(int i=0;i<userLocationRecords.length;i++){
+            double latitude=userLocationRecords[i].latitude;
+            double longitude=userLocationRecords[i].longitude;
+            int nextColor=userLocationRecords[i].color;
+            currentDrawing.add(new DrawingAddress(latitude,longitude));
+            if(currentColor!=nextColor){
+
+            }
+        }
+
+
+        List<DrawingPath> drawingPaths=new ArrayList<>();
         overlayUserLocationPath = mapDrawer.drawOverlayPathline(drawingPath,mapDrawer.getLineColorProperty(Color.RED));
     }
 }
