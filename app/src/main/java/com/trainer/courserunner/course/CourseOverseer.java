@@ -89,6 +89,8 @@ public class CourseOverseer {
         userLocationRecord.usercourse_id = usercourseId;
         userLocationRecord.latitude = location.getLatitude();
         userLocationRecord.longitude = location.getLongitude();
+        //컬러처리
+        
         appDatabase.userCourseDao().insertUserLocationRecord(userLocationRecord);
     }
 }
