@@ -13,22 +13,29 @@ import com.trainer.courserunner.rooms.UserLocationRecord;
 import com.trainer.courserunner.rooms.UserMapFlag;
 
 //데이터를 작성하는 기능 수행
-public class CourseOverseer{
+public class CourseOverseer {
+    //사용자 감시 단계
+    //거리기준 : Double형 변수의 값 1 = 1m, 10 = 10m
+    //업데이트 거리
+    private final double UPDATE_DISTANCE = 10.0;
+    //마커완료 거리
+    private final double FINISHMARKER_DISTANCE = 100.0;
     long courseId;
     long usercourseId;
     AppDatabase appDatabase;
+    //감시시작
+    Location currentLocation;
+
     public CourseOverseer() {
-        this.courseId=-1;
+        this.courseId = -1;
         this.usercourseId = -1;
         appDatabase = AppDatabaseLoader.getAppDatabase();
     }
 
-    //감시시작
-    Location currentLocation;
     //신규시작시
     public long startOversight(long courseId) {
         //코스등록
-        this.courseId=courseId;
+        this.courseId = courseId;
         this.usercourseId = registUserCourse(courseId);
         //위치정보 초기화
         currentLocation = null;
@@ -41,15 +48,9 @@ public class CourseOverseer{
         return appDatabase.userCourseDao().insertUserCourseInfo(userCourseInfo);
     }
 
-    //사용자 감시 단계
-    //거리기준 : Double형 변수의 값 1 = 1m, 10 = 10m
-    //업데이트 거리
-    private final double UPDATE_DISTANCE=10.0;
-    //마커완료 거리
-    private final double FINISHMARKER_DISTANCE=100.0;
     //감시(액티비티에서 호출)
-    public boolean updateUserLocation(Location location){
-        if(checkDistance(location)){
+    public boolean updateUserLocation(Location location) {
+        if (checkDistance(location)) {
             updateUserLocationInnerProcess(location);
             return true;
         }
@@ -65,11 +66,11 @@ public class CourseOverseer{
     }
 
     //감시 내부처리 (DB처리)
-    private void updateUserLocationInnerProcess(Location location){
-        currentLocation=location;
+    private void updateUserLocationInnerProcess(Location location) {
+        currentLocation = location;
         registUserLocationRecord(location);
         //마커처리
-        MapFlag[] mapFlags=appDatabase.courseDao().getCourseMapflags(courseId);
+        MapFlag[] mapFlags = appDatabase.courseDao().getCourseMapflags(courseId);
         for (MapFlag mapFlag : mapFlags) {
             if (MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
                     mapFlag.latitude, mapFlag.longitude) <= FINISHMARKER_DISTANCE) {

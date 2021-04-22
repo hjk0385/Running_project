@@ -8,8 +8,10 @@ import androidx.room.Query;
 public interface CourseDao {
     @Insert
     void insertCourseFlag(CourseFlag courseFlag);
+
     @Insert
     long insertCourseInfo(CourseInfo courseInfo);
+
     @Insert
     long insertMapFlag(MapFlag mapFlag);
 

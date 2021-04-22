@@ -8,5 +8,6 @@ import androidx.room.RoomDatabase;
         UserLocationRecord.class, UserMapFlag.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CourseDao courseDao();
+
     public abstract UserCourseDao userCourseDao();
 }

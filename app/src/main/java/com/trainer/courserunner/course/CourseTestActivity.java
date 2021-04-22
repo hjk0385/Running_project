@@ -9,6 +9,8 @@ import com.trainer.courserunner.maps.Geocoding;
 import com.trainer.courserunner.maps.NavermapActivity;
 import com.trainer.courserunner.maps.NavermapLocationActivity;
 
+import java.util.stream.Stream;
+
 public class CourseTestActivity extends NavermapActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +20,5 @@ public class CourseTestActivity extends NavermapActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
-
-
-
     }
 }
