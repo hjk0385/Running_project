@@ -1,8 +1,12 @@
 package com.trainer.courserunner.course;
 
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
@@ -10,6 +14,7 @@ import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.NaverMap;
+import com.trainer.courserunner.R;
 import com.trainer.courserunner.managedata.AssetLoader;
 import com.trainer.courserunner.managedata.MapDAO;
 import com.trainer.courserunner.maps.MapDrawer;
@@ -42,6 +47,32 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+    
+    //옵션 메뉴
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.menu_guidecolor_option,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.guidecolor_black:
+                courseOverseer.setCurrentLineColor(Color.BLACK);
+                return true;
+            case R.id.guidecolor_blue:
+                courseOverseer.setCurrentLineColor(Color.BLUE);
+                return true;
+            case R.id.guidecolor_red:
+                courseOverseer.setCurrentLineColor(Color.RED);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

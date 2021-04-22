@@ -112,6 +112,9 @@ public class CourseDrawer {
         for(Pair<DrawingPath,Integer> colorDraw:colorDrawing){
             DrawingPath drawingPath=colorDraw.first;
             Integer color=colorDraw.second;
+            if(drawingPath.size()<=2){
+                continue;
+            }
             mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(color));
         }
     }
