@@ -85,7 +85,7 @@ public class CourseDrawer {
         }
         UserLocationRecord[] userLocationRecords = appDatabase.userCourseDao().
                 getUserLocationRecords(userCourseId);
-        if (userLocationRecords.length <= 2) {
+        if (userLocationRecords.length < 2) {
             return;
         }
         //컬러 분석
@@ -112,7 +112,7 @@ public class CourseDrawer {
         for(Pair<DrawingPath,Integer> colorDraw:colorDrawing){
             DrawingPath drawingPath=colorDraw.first;
             Integer color=colorDraw.second;
-            if(drawingPath.size()<=2){
+            if(drawingPath.size()<2){
                 continue;
             }
             mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(color));
