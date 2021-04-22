@@ -38,7 +38,7 @@ public class CourseOverseer{
     private long registUserCourse(long courseId) {
         UserCourseInfo userCourseInfo = new UserCourseInfo();
         userCourseInfo.course_id = courseId;
-        return appDatabase.userCourseInfoDao().insertUserCourseInfo(userCourseInfo);
+        return appDatabase.userCourseDao().insertUserCourseInfo(userCourseInfo);
     }
 
     //사용자 감시 단계
@@ -76,18 +76,18 @@ public class CourseOverseer{
                 UserMapFlag userMapFlag = new UserMapFlag();
                 userMapFlag.usercourse_id = usercourseId;
                 userMapFlag.mapflag_id = mapFlag.mapflag_id;
-                appDatabase.userMapFlagDao().insertUserMapFlag(userMapFlag);
+                appDatabase.userCourseDao().insertUserMapFlag(userMapFlag);
             }
         }
     }
 
     private void registUserLocationRecord(Location location) {
         UserLocationRecord userLocationRecord = new UserLocationRecord();
-        userLocationRecord.userlocation_order = appDatabase.userLocationRecordDao().
+        userLocationRecord.userlocation_order = appDatabase.userCourseDao().
                 getNextUserLocationOrder(usercourseId);
         userLocationRecord.usercourse_id = usercourseId;
         userLocationRecord.latitude = location.getLatitude();
         userLocationRecord.longitude = location.getLongitude();
-        appDatabase.userLocationRecordDao().insertUserLocationRecord(userLocationRecord);
+        appDatabase.userCourseDao().insertUserLocationRecord(userLocationRecord);
     }
 }

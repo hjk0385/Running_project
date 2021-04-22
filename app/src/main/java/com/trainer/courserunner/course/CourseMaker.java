@@ -46,7 +46,7 @@ public class CourseMaker {
     }
 
     private long registCourseInfo(AppDatabase appDatabase) {
-        return appDatabase.courseInfoDao().insertCourseInfo(new CourseInfo());
+        return appDatabase.courseDao().insertCourseInfo(new CourseInfo());
     }
 
     private long[] registMapFlags(AppDatabase appDatabase, List<ScopeDotAddress> course) {
@@ -55,7 +55,7 @@ public class CourseMaker {
             MapFlag mapFlag = new MapFlag();
             mapFlag.latitude = course.get(i).getLatitude();
             mapFlag.longitude = course.get(i).getLongitude();
-            mapFlagIds[i] = appDatabase.mapFlagDao().insertMapFlag(mapFlag);
+            mapFlagIds[i] = appDatabase.courseDao().insertMapFlag(mapFlag);
         }
         return mapFlagIds;
     }
@@ -66,7 +66,7 @@ public class CourseMaker {
             courseFlag.course_id = courseId;
             courseFlag.mapflag_id = mapFlagIds[i];
             courseFlag.courseflag_order = i;
-            appDatabase.courseFlagDao().insertCourseFlag(courseFlag);
+            appDatabase.courseDao().insertCourseFlag(courseFlag);
         }
     }
 }

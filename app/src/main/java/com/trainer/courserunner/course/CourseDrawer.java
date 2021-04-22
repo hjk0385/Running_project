@@ -61,7 +61,7 @@ public class CourseDrawer {
             overlayCourseMarkers=null;
         }
         MapFlag[] mapflags=appDatabase.courseDao().getCourseMapflags(courseId);
-        UserMapFlag[] userMapFlags=appDatabase.userMapFlagDao().getUserMapFlags(userCourseId);
+        UserMapFlag[] userMapFlags=appDatabase.userCourseDao().getUserMapFlags(userCourseId);
         List<MapFlag> notFinishFlags= new ArrayList<>();
         for(MapFlag mapFlag:mapflags){
             boolean unfinished=true;
