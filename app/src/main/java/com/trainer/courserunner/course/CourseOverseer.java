@@ -26,7 +26,7 @@ public class CourseOverseer {
     //사용자 감시 단계
     //거리기준 : Double형 변수의 값 1 = 1m, 10 = 10m
     //업데이트 거리
-    private final double UPDATE_DISTANCE = 10.0;
+    private final double UPDATE_DISTANCE = 1.0;
     //마커완료 거리
     private final double FINISHMARKER_DISTANCE = 100.0;
     long courseId;
@@ -69,6 +69,7 @@ public class CourseOverseer {
     private long registUserCourse(long courseId) {
         UserCourseInfo userCourseInfo = new UserCourseInfo();
         userCourseInfo.course_id = courseId;
+        Log.v("LOGAA", String.valueOf(courseId));
         return appDatabase.userCourseDao().insertUserCourseInfo(userCourseInfo);
     }
 

@@ -21,6 +21,7 @@ import com.trainer.courserunner.course.CourseGuideActivity;
 import com.trainer.courserunner.course.CourseMaker;
 import com.trainer.courserunner.managedata.AssetLoader;
 import com.trainer.courserunner.managedata.MapDAO;
+import com.trainer.courserunner.maps.MapFunction;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
 import com.trainer.courserunner.scopetype.ScopeDotLocation;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
@@ -28,16 +29,20 @@ import com.trainer.courserunner.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.scopetype.ScopeMapInfo;
 
 public class NormalRunningActivity extends AppCompatActivity {
-    Location activityLocation;
+    Location currentLocation;
 
-    View.OnClickListener getMeterBtnListener(int kilometer) {
+    View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
-            //코스생성
             //테스트코드
             MapDAO.initMapDB(getApplicationContext());
             AppDatabaseLoader.initAppdatabase(getApplicationContext());
+            /*
             ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
                     37.506515, 126.779899);
+            */
+
+            ScopeMapInfo scopeMapInfo = MapFunction.getScopeMapInfo(currentLocation,kilometer);
+
             //course make
             ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap2.png"));
             ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
@@ -47,9 +52,8 @@ public class NormalRunningActivity extends AppCompatActivity {
             Log.v("testFunction", String.valueOf(course_id));
             //테스트코드 종료
 
-
             Intent intent = new Intent(getBaseContext(), CourseGuideActivity.class);
-            intent.putExtra("distance", kilometer);
+            intent.putExtra("course_id", course_id);
             startActivity(intent);
         };
     }
@@ -88,12 +92,12 @@ public class NormalRunningActivity extends AppCompatActivity {
             @Override
             public void onLocationChanged(Location location) {
                 // 새로운 위치의 발견
+                currentLocation=location;
                 km2_btn.setEnabled(true);
                 km4_btn.setEnabled(true);
                 km6_btn.setEnabled(true);
                 km8_btn.setEnabled(true);
                 km10_btn.setEnabled(true);
-                activityLocation=location;
             }
 
             @Override

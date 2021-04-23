@@ -13,22 +13,21 @@
         <activity android:name=".SoundSetActivity"></activity>
         <activity android:name=".UserSetActivity" />
         <activity android:name=".ProjectRunningActivity" />
-        <activity android:name=".NormalRunningActivity" />
+        <activity android:name=".NormalRunningActivity">
+
+        </activity>
         <activity android:name=".MissionActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".RunningActivity" />
         <activity android:name=".LoginActivity">
-
-        </activity>
-
-
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".course.CourseGuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".course.CourseGuideActivity">
         </activity>
 
         <!-- 네이버 지도 API 키 설정 -->

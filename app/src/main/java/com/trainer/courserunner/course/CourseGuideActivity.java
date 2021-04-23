@@ -1,5 +1,6 @@
 package com.trainer.courserunner.course;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -29,7 +30,10 @@ import com.trainer.courserunner.scopetype.ScopeMapInfo;
 import java.util.List;
 import java.util.Map;
 
-
+/*
+    다른 기능들을 지원하기 위해서 CourseGuideActivity를 추상클래스로 만들고
+    MapDrawer와의 기능을 합친후에 상속받아서 구현하는 형태로 만든다.
+*/
 public class CourseGuideActivity extends NavermapLocationActivity {
     CourseOverseer courseOverseer;
     CourseDrawer courseDrawer;
@@ -80,7 +84,8 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
 
-        //인텐드로 course_id를 받아서 처리될 내용
+        Intent intent=getIntent();
+        long course_id=intent.getExtras().getLong("course_id");
         courseOverseer = new CourseOverseer();
         long usercourseId = courseOverseer.startOversight(course_id);
         courseDrawer = new CourseDrawer(this, course_id, usercourseId);
