@@ -1,15 +1,36 @@
 package com.trainer.courserunner.drawtype;
 
-import com.trainer.courserunner.rooms.CoursePath;
+import com.trainer.courserunner.rooms.CourseFlag;
+import com.trainer.courserunner.rooms.MapFlag;
+import com.trainer.courserunner.rooms.UserLocationRecord;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DrawingPath extends ArrayList<DrawingAddress> {
-    public DrawingPath(CoursePath[] coursePaths) {
+    public DrawingPath(){
+
+    }
+
+    public DrawingPath(MapFlag[] mapFlags) {
         super();
-        for (CoursePath coursePath : coursePaths) {
-            this.add(new DrawingAddress(coursePath.latitude, coursePath.longtitude));
+        for (MapFlag courseFlag : mapFlags) {
+            this.add(new DrawingAddress(courseFlag.latitude, courseFlag.longitude));
+        }
+    }
+
+    public DrawingPath(UserLocationRecord[] userLocationRecords) {
+        super();
+        for (UserLocationRecord userLocationRecord : userLocationRecords) {
+            this.add(new DrawingAddress(userLocationRecord.latitude, userLocationRecord.longitude));
+        }
+    }
+
+    public DrawingPath(List<MapFlag> mapFlags) {
+        super();
+        for (MapFlag mapFlag : mapFlags) {
+            this.add(new DrawingAddress(mapFlag.latitude, mapFlag.longitude));
         }
     }
 }

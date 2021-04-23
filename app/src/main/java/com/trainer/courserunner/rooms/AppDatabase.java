@@ -3,16 +3,11 @@ package com.trainer.courserunner.rooms;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {CourseInfo.class, CoursePath.class,
-        UserCourseInfo.class, UserCoursePath.class, UserLocationPath.class}, version = 1)
+@Database(entities = {CourseInfo.class, CourseFlag.class, MapFlag.class,
+        UserCourseInfo.class,
+        UserLocationRecord.class, UserMapFlag.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
-    public abstract CourseInfoDao courseInfoDao();
+    public abstract CourseDao courseDao();
 
-    public abstract CoursePathDao coursePathDao();
-
-    public abstract UserCourseInfoDao userCourseInfoDao();
-
-    public abstract UserCoursePathDao userCoursePathDao();
-
-    public abstract UserLocationPathDao userLocationPathDao();
+    public abstract UserCourseDao userCourseDao();
 }

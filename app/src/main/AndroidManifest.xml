@@ -12,13 +12,15 @@
         android:theme="@style/Theme.CourseRunner">
 
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".course.CourseGuideActivity"></activity>
-        <activity android:name=".course.CourseTestActivity">
+        <activity android:name=".course.CourseGuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".course.CourseTestActivity">
+
         </activity>
 
         <!-- 네이버 지도 API 키 설정 -->

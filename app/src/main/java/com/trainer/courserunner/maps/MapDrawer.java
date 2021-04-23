@@ -7,16 +7,19 @@ import com.trainer.courserunner.drawtype.DrawingAddress;
 
 public interface MapDrawer {
     //draw
-    Object drawOverlayMarker(DrawingAddress address);
-
-    Object[] drawOverlayMarkers(DrawingPath drawingPath);
+    Object[] drawOverlayMarkers(DrawingPath drawingPath, Consumer<Object> property);
 
     Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property);
 
     Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property);
 
-    //코스
-    Object drawCourse(DrawingPath drawingPath);
+    //consumer
+    default Consumer<Object> getBaseProperty() {
+        return (Object obj) -> {
+        };
+    }
+
+    Consumer<Object> getLineColorProperty(int color);
 
     //clear
     void clearDraw(Object drawObject);
