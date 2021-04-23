@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DrawingPath extends ArrayList<DrawingAddress> {
-    public DrawingPath(){
+    public DrawingPath() {
 
     }
 

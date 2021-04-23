@@ -47,7 +47,7 @@ public class CourseDrawer {
         }
         MapFlag[] mapFlags = appDatabase.courseDao().getCourseMapflags(courseId);
         DrawingPath drawingPath = new DrawingPath(mapFlags);
-        overlayCoursePath = mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(Color.BLACK));
+        overlayCoursePath = mapDrawer.drawOverlayPolyline(drawingPath, mapDrawer.getLineColorProperty(Color.BLACK));
     }
 
     //마커그리기
@@ -74,13 +74,13 @@ public class CourseDrawer {
             }
         }
         DrawingPath drawingPath = new DrawingPath(notFinishFlags);
-        overlayCourseMarkers = mapDrawer.drawOverlayMarkers(drawingPath,mapDrawer.getBaseProperty());
+        overlayCourseMarkers = mapDrawer.drawOverlayMarkers(drawingPath, mapDrawer.getBaseProperty());
     }
 
     //사용자경로 그리기
     public void drawUserLocationPath() {
         if (overlayUserLocationPaths != null) {
-            for(Object overlayUserLocationPath:overlayUserLocationPaths){
+            for (Object overlayUserLocationPath : overlayUserLocationPaths) {
                 mapDrawer.clearDraw(overlayUserLocationPath);
             }
             overlayUserLocationPaths = null;
@@ -91,33 +91,33 @@ public class CourseDrawer {
             return;
         }
         //컬러 분석
-        List<Pair<DrawingPath,Integer>> colorDrawing=new ArrayList<>();
-        int i=0;
-        while(i<userLocationRecords.length){
-            int drawingColor=userLocationRecords[i].color;
+        List<Pair<DrawingPath, Integer>> colorDrawing = new ArrayList<>();
+        int i = 0;
+        while (i < userLocationRecords.length) {
+            int drawingColor = userLocationRecords[i].color;
             //컬러 경로 생성
-            DrawingPath drawingPath=new DrawingPath();
-            if(i>0){
-                drawingPath.add(new DrawingAddress(userLocationRecords[i-1]));
+            DrawingPath drawingPath = new DrawingPath();
+            if (i > 0) {
+                drawingPath.add(new DrawingAddress(userLocationRecords[i - 1]));
             }
             //컬러 경로 만들기
-            int j=i;
-            while(j<userLocationRecords.length&&drawingColor==userLocationRecords[j].color){
+            int j = i;
+            while (j < userLocationRecords.length && drawingColor == userLocationRecords[j].color) {
                 drawingPath.add(new DrawingAddress(userLocationRecords[j]));
                 j++;
             }
             //컬러 경로 저장
-            colorDrawing.add(new Pair<>(drawingPath,drawingColor));
+            colorDrawing.add(new Pair<>(drawingPath, drawingColor));
             i++;
         }
         //컬러 그리기
-        for(Pair<DrawingPath,Integer> colorDraw:colorDrawing){
-            DrawingPath drawingPath=colorDraw.first;
-            Integer color=colorDraw.second;
-            if(drawingPath.size()<2){
+        for (Pair<DrawingPath, Integer> colorDraw : colorDrawing) {
+            DrawingPath drawingPath = colorDraw.first;
+            Integer color = colorDraw.second;
+            if (drawingPath.size() < 2) {
                 continue;
             }
-            mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(color));
+            mapDrawer.drawOverlayPolyline(drawingPath, mapDrawer.getLineColorProperty(color));
         }
     }
 }

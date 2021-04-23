@@ -35,15 +35,16 @@ public class CourseOverseer {
     //감시시작
     Location currentLocation;
     //현재속성
-    int currentLineColor= Color.RED;
-    public void setCurrentLineColor(int color){
-        this.currentLineColor=color;
-    }
+    int currentLineColor = Color.RED;
 
     public CourseOverseer() {
         this.courseId = -1;
         this.usercourseId = -1;
         appDatabase = AppDatabaseLoader.getAppDatabase();
+    }
+
+    public void setCurrentLineColor(int color) {
+        this.currentLineColor = color;
     }
 
     //신규시작시
@@ -70,7 +71,6 @@ public class CourseOverseer {
         userCourseInfo.course_id = courseId;
         return appDatabase.userCourseDao().insertUserCourseInfo(userCourseInfo);
     }
-
 
 
     public boolean checkDistance(Location location) {
@@ -106,7 +106,7 @@ public class CourseOverseer {
         userLocationRecord.latitude = location.getLatitude();
         userLocationRecord.longitude = location.getLongitude();
         //컬러처리
-        userLocationRecord.color=currentLineColor;
+        userLocationRecord.color = currentLineColor;
         appDatabase.userCourseDao().insertUserLocationRecord(userLocationRecord);
     }
 }

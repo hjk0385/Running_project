@@ -16,12 +16,15 @@ public class ScopeDotsMap extends ScopeDots {
         }
         this.scopeMapInfo = scopeMapInfo;
     }
+
     public ScopeDotsMap(List<ScopeDot> scopeDotList) {
         this.scopeDotList = scopeDotList;
     }
-    public ScopeDotsMap quantizationImageToMap(ScopeDotsImage quanzationInput,ScopeDotsMapQuanzationPolicy quanzationPolicy){
-        return new ScopeDotsMap(quanzationPolicy.quantization(quanzationInput.scopeDotList,this.scopeDotList));
+
+    public ScopeDotsMap quantizationImageToMap(ScopeDotsImage quanzationInput, ScopeDotsMapQuanzationPolicy quanzationPolicy) {
+        return new ScopeDotsMap(quanzationPolicy.quantization(quanzationInput.scopeDotList, this.scopeDotList));
     }
+
     public ScopeMapInfo getScopeMapInfo() {
         return scopeMapInfo;
     }

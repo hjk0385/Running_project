@@ -11,10 +11,11 @@ public class DrawingAddress {
         this.longitude = longitude;
     }
 
-    public DrawingAddress(UserLocationRecord userLocationRecord){
-        this.latitude=userLocationRecord.latitude;
-        this.longitude=userLocationRecord.longitude;
+    public DrawingAddress(UserLocationRecord userLocationRecord) {
+        this.latitude = userLocationRecord.latitude;
+        this.longitude = userLocationRecord.longitude;
     }
+
     public double getLatitude() {
         return latitude;
     }

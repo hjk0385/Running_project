@@ -49,18 +49,18 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         super.onCreate(savedInstanceState);
 
     }
-    
+
     //옵션 메뉴
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater=getMenuInflater();
-        menuInflater.inflate(R.menu.menu_guidecolor_option,menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_guidecolor_option, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.guidecolor_black:
                 courseOverseer.setCurrentLineColor(Color.BLACK);
                 return true;

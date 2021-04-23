@@ -3,16 +3,17 @@ package com.trainer.courserunner.scopetype;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScopeDotsMapQuanzationPolicyPrecision extends ScopeDotsMapQuanzationPolicyDefault implements ScopeDotsMapQuanzationPolicy{
+public class ScopeDotsMapQuanzationPolicyPrecision extends ScopeDotsMapQuanzationPolicyDefault implements ScopeDotsMapQuanzationPolicy {
     private double precision;
-    public ScopeDotsMapQuanzationPolicyPrecision(double precision){
-        this.precision=precision;
+
+    public ScopeDotsMapQuanzationPolicyPrecision(double precision) {
+        this.precision = precision;
     }
 
     @Override
     public List<ScopeDot> quantization(List<ScopeDot> scopeDotListInput, List<ScopeDot> scopeDotListOutput) {
         //scope
-        List<ScopeDot> scopeDotList = super.quantization(scopeDotListInput,scopeDotListOutput);
+        List<ScopeDot> scopeDotList = super.quantization(scopeDotListInput, scopeDotListOutput);
         List<ScopeDot> representationScopeDotList = new ArrayList<>();
         //calculate
         int xNumber = (int) (1 / precision);

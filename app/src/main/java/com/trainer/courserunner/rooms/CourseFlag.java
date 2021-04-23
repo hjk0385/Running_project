@@ -21,8 +21,8 @@ import androidx.room.Index;
                         childColumns = "mapflag_id",
                         onDelete = ForeignKey.CASCADE)
         },
-        indices = {@Index("course_id"),@Index("mapflag_id")}
-        )
+        indices = {@Index("course_id"), @Index("mapflag_id")}
+)
 public class CourseFlag {
     public long course_id;
     public long mapflag_id;

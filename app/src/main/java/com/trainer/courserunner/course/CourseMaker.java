@@ -21,12 +21,12 @@ public class CourseMaker {
     //양자화 정책
     //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyDefault();
     //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyPrecision(0.1);
-    ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyInnerRandom(0.25);
+    ScopeDotsMapQuanzationPolicy quanzationPolicy = new ScopeDotsMapQuanzationPolicyInnerRandom(0.25);
 
     private List<ScopeDotAddress> makeConnectedPath(List<ScopeDot> flagAddresses, ScopeDotAddress startLocation) {
         List<ScopeDotAddress> course = new ArrayList<>();
         course.add((ScopeDotAddress) startLocation);
-        ScopeDot currentScopeDot = ScopeDotsMap.getClosestDot(flagAddresses,startLocation);
+        ScopeDot currentScopeDot = ScopeDotsMap.getClosestDot(flagAddresses, startLocation);
         while (flagAddresses.size() != 0) {
             currentScopeDot = ScopeDotsMap.getClosestDot(flagAddresses, currentScopeDot);
             flagAddresses.remove(currentScopeDot);

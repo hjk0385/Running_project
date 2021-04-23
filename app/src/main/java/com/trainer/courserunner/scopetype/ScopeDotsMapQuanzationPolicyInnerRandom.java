@@ -7,18 +7,19 @@ import java.util.List;
 public class ScopeDotsMapQuanzationPolicyInnerRandom extends ScopeDotsMapQuanzationPolicyDefault implements ScopeDotsMapQuanzationPolicy {
     //1 = 전부 , 0 = 없음 , 0.5 = 절반만
     double reminderPercentage;
-    public ScopeDotsMapQuanzationPolicyInnerRandom(double reminderPercentage){
-        this.reminderPercentage=reminderPercentage;
+
+    public ScopeDotsMapQuanzationPolicyInnerRandom(double reminderPercentage) {
+        this.reminderPercentage = reminderPercentage;
     }
 
     @Override
     public List<ScopeDot> quantization(List<ScopeDot> scopeDotListInput, List<ScopeDot> scopeDotListOutput) {
-        List<ScopeDot> quanzationList=super.quantization(scopeDotListInput,scopeDotListOutput);
-        int resultSize=(int)(quanzationList.size()*reminderPercentage);
-        int deleteSize=quanzationList.size()-resultSize;
+        List<ScopeDot> quanzationList = super.quantization(scopeDotListInput, scopeDotListOutput);
+        int resultSize = (int) (quanzationList.size() * reminderPercentage);
+        int deleteSize = quanzationList.size() - resultSize;
 
         Collections.shuffle(quanzationList);
-        for(int i=0;i<deleteSize;i++){
+        for (int i = 0; i < deleteSize; i++) {
             quanzationList.remove(0);
         }
         return quanzationList;
