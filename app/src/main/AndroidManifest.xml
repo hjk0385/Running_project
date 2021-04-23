@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CourseRunner">
+        android:theme="@style/Theme.CourseRunner"
+        android:requestLegacyExternalStorage="true">
         <activity android:name=".SoundSetActivity"></activity>
         <activity android:name=".UserSetActivity" />
         <activity android:name=".ProjectRunningActivity" />
@@ -17,11 +18,7 @@
         <activity android:name=".ResultActivity" />
         <activity android:name=".RunningActivity" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
@@ -41,5 +38,7 @@
         <activity android:name=".SignupActivity" />
 
     </application>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
