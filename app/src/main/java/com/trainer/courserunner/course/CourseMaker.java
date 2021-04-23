@@ -19,8 +19,8 @@ import java.util.List;
 
 public class CourseMaker {
     //양자화 정책
-    //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyPrecision(0.1);
     //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyDefault();
+    //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyPrecision(0.1);
     ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyInnerRandom(0.25);
 
     private List<ScopeDotAddress> makeConnectedPath(List<ScopeDot> flagAddresses, ScopeDotAddress startLocation) {
