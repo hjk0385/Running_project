@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_btn2"
+        android:title="사용자 계정관리"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_btn3"
+        android:title="효과음 설정"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_btn4"
+        android:title="공지사항"
+        app:showAsAction="never" />
+
+</menu>

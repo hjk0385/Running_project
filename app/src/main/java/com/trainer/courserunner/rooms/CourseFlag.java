@@ -2,6 +2,7 @@ package com.trainer.courserunner.rooms;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 
 @Entity(tableName = "courseflag",
         primaryKeys = {
@@ -19,7 +20,9 @@ import androidx.room.ForeignKey;
                         parentColumns = "mapflag_id",
                         childColumns = "mapflag_id",
                         onDelete = ForeignKey.CASCADE)
-        })
+        },
+        indices = {@Index("course_id"),@Index("mapflag_id")}
+        )
 public class CourseFlag {
     public long course_id;
     public long mapflag_id;
