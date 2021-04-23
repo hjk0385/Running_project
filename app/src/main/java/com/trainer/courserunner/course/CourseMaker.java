@@ -7,21 +7,21 @@ import com.trainer.courserunner.rooms.CourseInfo;
 import com.trainer.courserunner.rooms.MapFlag;
 import com.trainer.courserunner.scopetype.ScopeDot;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
-import com.trainer.courserunner.scopetype.ScopeDots;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicy;
+import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicyDefault;
+import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicyInnerRandom;
 import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicyPrecision;
-import com.trainer.courserunner.scopetype.ScopeDotsMapQunazation;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseMaker {
     //양자화 정책
-    ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyPrecision(0.1);
+    //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyPrecision(0.1);
+    //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyDefault();
+    ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyInnerRandom(0.25);
 
     private List<ScopeDotAddress> makeConnectedPath(List<ScopeDot> flagAddresses, ScopeDotAddress startLocation) {
         List<ScopeDotAddress> course = new ArrayList<>();
@@ -39,7 +39,7 @@ public class CourseMaker {
     public long makeCourse(ScopeDotsImage scopeDotsImage,
                            ScopeDotsMap scopeDotsMap,
                            ScopeDotAddress startLocation) {
-        ScopeDotsMap quantizationImage = scopeDotsMap.quantizationImageToMap(scopeDotsImage, new ScopeDotsMapQuanzationPolicyPrecision(0.1));
+        ScopeDotsMap quantizationImage = scopeDotsMap.quantizationImageToMap(scopeDotsImage, quanzationPolicy);
         List<ScopeDotAddress> mapFlags = makeConnectedPath(quantizationImage.getScopeDotList(), startLocation);
         //
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
