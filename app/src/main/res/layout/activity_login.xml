@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginActivity">
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     ​
     <ImageView
         android:id="@+id/imageView"
@@ -17,7 +20,11 @@
         android:layout_marginTop="100dp"
         android:layout_marginBottom="80dp"
         app:srcCompat="@drawable/logo" />
+<<<<<<< Updated upstream
 
+=======
+    ​
+>>>>>>> Stashed changes
     <EditText
         android:id="@+id/edittext_email"
         android:layout_width="wrap_content"
