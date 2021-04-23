@@ -10,6 +10,9 @@ import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.scopetype.ScopeDots;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
+import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicy;
+import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicyPrecision;
+import com.trainer.courserunner.scopetype.ScopeDotsMapQunazation;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,12 +20,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseMaker {
+    //양자화 정책
+    ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyPrecision(0.1);
+
     private List<ScopeDotAddress> makeConnectedPath(List<ScopeDot> flagAddresses, ScopeDotAddress startLocation) {
         List<ScopeDotAddress> course = new ArrayList<>();
         course.add((ScopeDotAddress) startLocation);
-        ScopeDot currentScopeDot = ScopeDots.getClosestDot(flagAddresses, startLocation);
+        ScopeDot currentScopeDot = ScopeDotsMap.getClosestDot(flagAddresses,startLocation);
         while (flagAddresses.size() != 0) {
-            currentScopeDot = ScopeDots.getClosestDot(flagAddresses, currentScopeDot);
+            currentScopeDot = ScopeDotsMap.getClosestDot(flagAddresses, currentScopeDot);
             flagAddresses.remove(currentScopeDot);
             course.add((ScopeDotAddress) currentScopeDot);
         }
@@ -33,7 +39,7 @@ public class CourseMaker {
     public long makeCourse(ScopeDotsImage scopeDotsImage,
                            ScopeDotsMap scopeDotsMap,
                            ScopeDotAddress startLocation) {
-        ScopeDotsMap quantizationImage = scopeDotsMap.quantizationToScopeDotsMap(scopeDotsImage, 0.1);
+        ScopeDotsMap quantizationImage = scopeDotsMap.quantizationImageToMap(scopeDotsImage, new ScopeDotsMapQuanzationPolicyPrecision(0.1));
         List<ScopeDotAddress> mapFlags = makeConnectedPath(quantizationImage.getScopeDotList(), startLocation);
         //
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();

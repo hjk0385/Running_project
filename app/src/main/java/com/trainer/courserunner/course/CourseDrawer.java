@@ -39,6 +39,7 @@ public class CourseDrawer {
         this.overlayCourseMarkers = null;
     }
 
+    //코스그리기
     public void drawCoursePath() {
         if (overlayCoursePath != null) {
             mapDrawer.clearDraw(overlayCoursePath);
@@ -49,6 +50,7 @@ public class CourseDrawer {
         overlayCoursePath = mapDrawer.drawOverlayPolyline(drawingPath,mapDrawer.getLineColorProperty(Color.BLACK));
     }
 
+    //마커그리기
     public void drawMarkers() {
         if (overlayCourseMarkers != null) {
             for (Object overlayCourseMarker : overlayCourseMarkers) {
