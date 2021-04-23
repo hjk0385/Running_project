@@ -13,6 +13,13 @@ import com.trainer.courserunner.rooms.UserCourseInfo;
 import com.trainer.courserunner.rooms.UserLocationRecord;
 import com.trainer.courserunner.rooms.UserMapFlag;
 
+/*
+    중간발표 이후에 개선할 내용
+    1. AsyncTask를 활용하여 추가적인 쓰레드를 생성하여 처리하여 메인쓰레드가 다른 일을 처리할 수 있도록 만든다.
+    2. 작동방식은 무한루프로 진행되지만 실행후에 쓰레드를 멈추고
+    사용자의 위치 이벤트가 발생하면 쓰레드를 다시 깨워서 처리하는 형태로 제작한다.
+*/
+
 //데이터를 작성하는 기능 수행
 public class CourseOverseer {
     //사용자 감시 단계
@@ -48,12 +55,6 @@ public class CourseOverseer {
         return this.usercourseId;
     }
 
-    private long registUserCourse(long courseId) {
-        UserCourseInfo userCourseInfo = new UserCourseInfo();
-        userCourseInfo.course_id = courseId;
-        return appDatabase.userCourseDao().insertUserCourseInfo(userCourseInfo);
-    }
-
     //감시(액티비티에서 호출)
     public boolean updateUserLocation(Location location) {
         if (checkDistance(location)) {
@@ -62,6 +63,14 @@ public class CourseOverseer {
         }
         return false;
     }
+
+    private long registUserCourse(long courseId) {
+        UserCourseInfo userCourseInfo = new UserCourseInfo();
+        userCourseInfo.course_id = courseId;
+        return appDatabase.userCourseDao().insertUserCourseInfo(userCourseInfo);
+    }
+
+
 
     public boolean checkDistance(Location location) {
         if (currentLocation == null) {
