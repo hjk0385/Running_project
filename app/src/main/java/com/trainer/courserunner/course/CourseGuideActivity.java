@@ -93,7 +93,6 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         Log.v("testFunction", String.valueOf(course_id));
         //테스트코드 종료
 
-
         //인텐드로 course_id를 받아서 처리될 내용
         courseOverseer = new CourseOverseer();
         long usercourseId = courseOverseer.startOversight(course_id);
