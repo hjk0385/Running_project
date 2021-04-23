@@ -75,23 +75,10 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         }
     }
 
+    boolean first;
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
-
-        //테스트코드
-        MapDAO.initMapDB(getApplicationContext());
-        AppDatabaseLoader.initAppdatabase(getApplicationContext());
-        ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
-                37.506515, 126.779899);
-        //course make
-        ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap2.png"));
-        ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
-        ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo, scopeMapInfo.getStartX(), scopeMapInfo.getStartY());
-        CourseMaker courseMaker = new CourseMaker();
-        long course_id = courseMaker.makeCourse(image, maps, currentLocation);
-        Log.v("testFunction", String.valueOf(course_id));
-        //테스트코드 종료
 
         //인텐드로 course_id를 받아서 처리될 내용
         courseOverseer = new CourseOverseer();
