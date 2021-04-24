@@ -41,7 +41,7 @@ public class NormalRunningActivity extends AppCompatActivity {
                     37.506515, 126.779899);
             */
 
-            ScopeMapInfo scopeMapInfo = MapFunction.getScopeMapInfo(currentLocation,kilometer);
+            ScopeMapInfo scopeMapInfo = MapFunction.getScopeMapInfo(currentLocation,kilometer/4);
 
             //course make
             ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap2.png"));

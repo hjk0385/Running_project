@@ -8,6 +8,8 @@ import android.graphics.Rect;
 import java.io.InputStream;
 import java.util.List;
 
+//병목현상 발생-> 멀티쓰레드로 최적화
+
 public class ScopeDotsImage extends ScopeDots {
     private static final int defaultPrecision = 100;//100x100
 

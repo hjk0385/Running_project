@@ -39,25 +39,33 @@ public class CourseDrawer {
         this.overlayCourseMarkers = null;
     }
 
-    //코스그리기
-    public void drawCoursePath() {
+    public void clearCoursePath(){
         if (overlayCoursePath != null) {
             mapDrawer.clearDraw(overlayCoursePath);
             overlayCoursePath = null;
         }
+    }
+
+    //코스그리기
+    public void drawCoursePath() {
+        clearCoursePath();
         MapFlag[] mapFlags = appDatabase.courseDao().getCourseMapflags(courseId);
         DrawingPath drawingPath = new DrawingPath(mapFlags);
         overlayCoursePath = mapDrawer.drawOverlayPolyline(drawingPath, mapDrawer.getLineColorProperty(Color.BLACK));
     }
 
-    //마커그리기
-    public void drawMarkers() {
+    public void clearMarkers(){
         if (overlayCourseMarkers != null) {
             for (Object overlayCourseMarker : overlayCourseMarkers) {
                 mapDrawer.clearDraw(overlayCourseMarker);
             }
             overlayCourseMarkers = null;
         }
+    }
+
+    //마커그리기
+    public void drawMarkers() {
+        clearMarkers();
         MapFlag[] mapflags = appDatabase.courseDao().getCourseMapflags(courseId);
         UserMapFlag[] userMapFlags = appDatabase.userCourseDao().getUserMapFlags(userCourseId);
         List<MapFlag> notFinishFlags = new ArrayList<>();
@@ -77,14 +85,18 @@ public class CourseDrawer {
         overlayCourseMarkers = mapDrawer.drawOverlayMarkers(drawingPath, mapDrawer.getBaseProperty());
     }
 
-    //사용자경로 그리기
-    public void drawUserLocationPath() {
+    public void clearUserLocationPath(){
         if (overlayUserLocationPaths != null) {
             for (Object overlayUserLocationPath : overlayUserLocationPaths) {
                 mapDrawer.clearDraw(overlayUserLocationPath);
             }
             overlayUserLocationPaths = null;
         }
+    }
+
+    //사용자경로 그리기
+    public void drawUserLocationPath() {
+        clearUserLocationPath();
         UserLocationRecord[] userLocationRecords = appDatabase.userCourseDao().
                 getUserLocationRecords(userCourseId);
         if (userLocationRecords.length < 2) {

@@ -19,8 +19,8 @@ public class ScopeDotsMapQuanzationPolicyInnerRandom extends ScopeDotsMapQuanzat
         int deleteSize = quanzationList.size() - resultSize;
 
         Collections.shuffle(quanzationList);
-        for (int i = 0; i < deleteSize; i++) {
-            quanzationList.remove(0);
+        if (deleteSize > 0) {
+            quanzationList.subList(0, deleteSize).clear();
         }
         return quanzationList;
     }

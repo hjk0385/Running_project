@@ -9,4 +9,7 @@
     <item
         android:id="@+id/guidecolor_blue"
         android:title="Blue" />
+    <item
+        android:id="@+id/nomarker_option"
+        android:title="nomarker_test" />
 </menu>

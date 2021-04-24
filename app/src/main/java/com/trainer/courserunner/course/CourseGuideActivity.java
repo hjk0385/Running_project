@@ -38,20 +38,25 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     CourseOverseer courseOverseer;
     CourseDrawer courseDrawer;
 
+    boolean tempOptionMarker=true;
+
     private void mapStart() {
         courseDrawer.drawCoursePath();
-        courseDrawer.drawMarkers();
+        if(tempOptionMarker){
+            courseDrawer.drawMarkers();
+        }
     }
 
     private void mapRefresh() {
-        courseDrawer.drawMarkers();
         courseDrawer.drawUserLocationPath();
+        if(tempOptionMarker){
+            courseDrawer.drawMarkers();
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     //옵션 메뉴
@@ -73,6 +78,12 @@ public class CourseGuideActivity extends NavermapLocationActivity {
                 return true;
             case R.id.guidecolor_red:
                 courseOverseer.setCurrentLineColor(Color.RED);
+                return true;
+            case R.id.nomarker_option:
+                //임시옵션
+                courseDrawer.clearMarkers();
+                tempOptionMarker=!tempOptionMarker;
+                mapRefresh();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
