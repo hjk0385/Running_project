@@ -39,12 +39,11 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     CourseDrawer courseDrawer;
 
     boolean tempOptionMarker=true;
+    boolean tempOptionCourse=true;
 
     private void mapStart() {
         courseDrawer.drawCoursePath();
-        if(tempOptionMarker){
-            courseDrawer.drawMarkers();
-        }
+        courseDrawer.drawMarkers();
     }
 
     private void mapRefresh() {
@@ -81,9 +80,23 @@ public class CourseGuideActivity extends NavermapLocationActivity {
                 return true;
             case R.id.nomarker_option:
                 //임시옵션
-                courseDrawer.clearMarkers();
                 tempOptionMarker=!tempOptionMarker;
-                mapRefresh();
+                if(tempOptionMarker){
+                    courseDrawer.drawMarkers();
+                }
+                else{
+                    courseDrawer.clearMarkers();
+                }
+                return true;
+            case R.id.nocourse_option:
+                //임시옵션
+                tempOptionCourse=!tempOptionCourse;
+                if(tempOptionCourse){
+                    courseDrawer.drawCoursePath();
+                }
+                else{
+                    courseDrawer.clearCoursePath();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

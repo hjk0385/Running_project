@@ -12,4 +12,7 @@
     <item
         android:id="@+id/nomarker_option"
         android:title="nomarker_test" />
+    <item
+        android:id="@+id/nocourse_option"
+        android:title="nocourse_test" />
 </menu>

@@ -36,12 +36,9 @@ public class NormalRunningActivity extends AppCompatActivity {
             //테스트코드
             MapDAO.initMapDB(getApplicationContext());
             AppDatabaseLoader.initAppdatabase(getApplicationContext());
-            /*
-            ScopeMapInfo scopeMapInfo = new ScopeMapInfo(37.4916138, 126.7687037,
-                    37.506515, 126.779899);
-            */
 
             ScopeMapInfo scopeMapInfo = MapFunction.getScopeMapInfo(currentLocation,kilometer/4);
+            Log.v("TESTMETER", String.valueOf(kilometer));
 
             //course make
             ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap2.png"));
@@ -68,16 +65,16 @@ public class NormalRunningActivity extends AppCompatActivity {
         km2_btn.setOnClickListener(getMeterBtnListener(2));
 
         Button km4_btn = (Button) findViewById(R.id.km4_btn);
-        km2_btn.setOnClickListener(getMeterBtnListener(4));
+        km4_btn.setOnClickListener(getMeterBtnListener(4));
 
         Button km6_btn = (Button) findViewById(R.id.km6_btn);
-        km2_btn.setOnClickListener(getMeterBtnListener(6));
+        km6_btn.setOnClickListener(getMeterBtnListener(6));
 
         Button km8_btn = (Button) findViewById(R.id.km8_btn);
-        km2_btn.setOnClickListener(getMeterBtnListener(8));
+        km8_btn.setOnClickListener(getMeterBtnListener(8));
 
         Button km10_btn = (Button) findViewById(R.id.km10_btn);
-        km2_btn.setOnClickListener(getMeterBtnListener(10));
+        km10_btn.setOnClickListener(getMeterBtnListener(10));
 
         //위치를 가져오기 전까지 비활성화
         km2_btn.setEnabled(false);
