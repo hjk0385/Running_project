@@ -33,11 +33,11 @@ public class MapFunction {
     }
 
     static public ScopeMapInfo getScopeMapInfo(Location location, double kilometer){
-        double distLatitude=convertKiloMeterToLatitude(kilometer)/2;
-        double distLongitude=convertKiloMeterToLongitude(kilometer)/2;
+        double distLatitude=convertKiloMeterToLatitude(kilometer);
+        double distLongitude=convertKiloMeterToLongitude(kilometer);
 
-        double startLongitude=location.getLongitude()-distLongitude;
-        double startLatitude=location.getLatitude()-distLatitude;
+        double startLongitude=location.getLongitude();
+        double startLatitude=location.getLatitude();
         double endLongitude=location.getLongitude()+distLongitude;
         double endLatitude=location.getLatitude()+distLatitude;
         return new ScopeMapInfo(startLatitude,startLongitude,endLatitude,endLongitude);
