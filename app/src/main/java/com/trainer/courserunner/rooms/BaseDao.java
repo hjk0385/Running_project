@@ -3,6 +3,8 @@ package com.trainer.courserunner.rooms;
 import androidx.room.Dao;
 import androidx.room.Insert;
 
-public interface CourseDao extends BaseDao<Course>{
-
+@Dao
+public interface BaseDao <T>{
+    @Insert
+    void insertDto(T dto);
 }
