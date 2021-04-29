@@ -28,7 +28,7 @@ public class CourseOverseer {
     //업데이트 거리
     private final double UPDATE_DISTANCE = 1.0;
     //마커완료 거리
-    private final double FINISHMARKER_DISTANCE = 150.0;
+    private final double FINISHMARKER_DISTANCE = 50.0;
     long courseId;
     long usercourseId;
     AppDatabase appDatabase;

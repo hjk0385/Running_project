@@ -4,7 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 
 @Dao
-public interface CourseDao {
+public interface CourseFlagDao {
     @Insert
-    public long insertCourse(Course course);
+    void insertCourseFlag(CourseFlag courseFlag);
 }

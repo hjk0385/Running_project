@@ -3,16 +3,14 @@ package com.trainer.courserunner.course;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.CourseFlag;
-import com.trainer.courserunner.rooms.CourseInfo;
+import com.trainer.courserunner.rooms.Course;
 import com.trainer.courserunner.rooms.MapFlag;
 import com.trainer.courserunner.scopetype.ScopeDot;
 import com.trainer.courserunner.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicy;
-import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicyDefault;
 import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicyInnerRandom;
-import com.trainer.courserunner.scopetype.ScopeDotsMapQuanzationPolicyPrecision;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +50,7 @@ public class CourseMaker {
     }
 
     private long registCourseInfo(AppDatabase appDatabase) {
-        return appDatabase.courseDao().insertCourseInfo(new CourseInfo());
+        return appDatabase.courseDao().insertCourseInfo(new Course());
     }
 
     private long[] registMapFlags(AppDatabase appDatabase, List<ScopeDotAddress> course) {

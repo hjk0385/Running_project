@@ -1,30 +1,30 @@
 package com.trainer.courserunner.rooms;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
-@Entity(tableName = "courseflag",
+@Entity(tableName = "course_flag",
         primaryKeys = {
                 "course_id",
-                "mapflag_id"
+                "course_flag_Id"
         },
         foreignKeys = {
                 @ForeignKey(
-                        entity = CourseInfo.class,
+                        entity = Course.class,
                         parentColumns = "course_id",
                         childColumns = "course_id",
-                        onDelete = ForeignKey.CASCADE),
-                @ForeignKey(
-                        entity = MapFlag.class,
-                        parentColumns = "mapflag_id",
-                        childColumns = "mapflag_id",
                         onDelete = ForeignKey.CASCADE)
-        },
-        indices = {@Index("course_id"), @Index("mapflag_id")}
-)
+        }
+        )
 public class CourseFlag {
-    public long course_id;
-    public long mapflag_id;
-    public long courseflag_order;
+    @ColumnInfo(name = "course_id")
+    public long courseId;
+    @ColumnInfo(name = "course_flag_Id")
+    public long courseFlagId;
+    @ColumnInfo(name = "course_flag_latitude")
+    public double courseFlagLatitude;
+    @ColumnInfo(name = "course_flag_longitude")
+    public double courseFlagLongitude;
 }

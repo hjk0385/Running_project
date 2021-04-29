@@ -4,7 +4,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 
 @Dao
-public interface CourseDao {
+public interface CourseModeDao {
     @Insert
-    public long insertCourse(Course course);
+    void insertMode(UserCourseMode userCourseMode);
+
 }
