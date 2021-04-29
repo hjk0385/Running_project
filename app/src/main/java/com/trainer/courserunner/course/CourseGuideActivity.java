@@ -38,8 +38,9 @@ public class CourseGuideActivity extends NavermapLocationActivity {
     CourseOverseer courseOverseer;
     CourseDrawer courseDrawer;
 
-    boolean tempOptionMarker=true;
-    boolean tempOptionCourse=true;
+    boolean tempOptionMarker = true;
+    boolean tempOptionCourse = true;
+    boolean first;
 
     private void mapStart() {
         courseDrawer.drawCoursePath();
@@ -48,7 +49,7 @@ public class CourseGuideActivity extends NavermapLocationActivity {
 
     private void mapRefresh() {
         courseDrawer.drawUserLocationPath();
-        if(tempOptionMarker){
+        if (tempOptionMarker) {
             courseDrawer.drawMarkers();
         }
     }
@@ -80,21 +81,19 @@ public class CourseGuideActivity extends NavermapLocationActivity {
                 return true;
             case R.id.nomarker_option:
                 //임시옵션
-                tempOptionMarker=!tempOptionMarker;
-                if(tempOptionMarker){
+                tempOptionMarker = !tempOptionMarker;
+                if (tempOptionMarker) {
                     courseDrawer.drawMarkers();
-                }
-                else{
+                } else {
                     courseDrawer.clearMarkers();
                 }
                 return true;
             case R.id.nocourse_option:
                 //임시옵션
-                tempOptionCourse=!tempOptionCourse;
-                if(tempOptionCourse){
+                tempOptionCourse = !tempOptionCourse;
+                if (tempOptionCourse) {
                     courseDrawer.drawCoursePath();
-                }
-                else{
+                } else {
                     courseDrawer.clearCoursePath();
                 }
                 return true;
@@ -103,13 +102,12 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         }
     }
 
-    boolean first;
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
 
-        Intent intent=getIntent();
-        long course_id=intent.getExtras().getLong("course_id");
+        Intent intent = getIntent();
+        long course_id = intent.getExtras().getLong("course_id");
         courseOverseer = new CourseOverseer();
         long usercourseId = courseOverseer.startOversight(course_id);
         courseDrawer = new CourseDrawer(this, course_id, usercourseId);

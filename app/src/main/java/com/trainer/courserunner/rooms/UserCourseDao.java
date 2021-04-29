@@ -1,4 +1,4 @@
 package com.trainer.courserunner.rooms;
 
-public interface UserCourseDao extends BaseDao<UserCourse>{
+public interface UserCourseDao extends BaseDao<UserCourse> {
 }

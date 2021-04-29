@@ -39,7 +39,7 @@ public class CourseDrawer {
         this.overlayCourseMarkers = null;
     }
 
-    public void clearCoursePath(){
+    public void clearCoursePath() {
         if (overlayCoursePath != null) {
             mapDrawer.clearDraw(overlayCoursePath);
             overlayCoursePath = null;
@@ -54,7 +54,7 @@ public class CourseDrawer {
         overlayCoursePath = mapDrawer.drawOverlayPolyline(drawingPath, mapDrawer.getLineColorProperty(Color.BLACK));
     }
 
-    public void clearMarkers(){
+    public void clearMarkers() {
         if (overlayCourseMarkers != null) {
             for (Object overlayCourseMarker : overlayCourseMarkers) {
                 mapDrawer.clearDraw(overlayCourseMarker);
@@ -85,7 +85,7 @@ public class CourseDrawer {
         overlayCourseMarkers = mapDrawer.drawOverlayMarkers(drawingPath, mapDrawer.getBaseProperty());
     }
 
-    public void clearUserLocationPath(){
+    public void clearUserLocationPath() {
         if (overlayUserLocationPaths != null) {
             for (Object overlayUserLocationPath : overlayUserLocationPaths) {
                 mapDrawer.clearDraw(overlayUserLocationPath);

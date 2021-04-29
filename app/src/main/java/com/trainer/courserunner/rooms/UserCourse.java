@@ -22,9 +22,9 @@ import androidx.room.ForeignKey;
         }
 )
 public class UserCourse {
-    @ColumnInfo(name="user_course_id")
+    @ColumnInfo(name = "user_course_id")
     public long userCourseId;
-    @ColumnInfo(name="user_course_name")
+    @ColumnInfo(name = "user_course_name")
     public long userCourseName;
     @ColumnInfo(name = "course_mode_id")
     public long courseModeId;

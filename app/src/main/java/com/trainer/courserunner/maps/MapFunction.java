@@ -16,31 +16,31 @@ public class MapFunction {
         return Math.sqrt(costLatitude * costLatitude + costLongtitude * costLongtitude);
     }
 
-    static public double convertMeterToLatitude(double meter){
-        return (double)meter/111195;
+    static public double convertMeterToLatitude(double meter) {
+        return (double) meter / 111195;
     }
 
-    static public double convertMeterToLongitude(double meter){
-        return (double)meter/88804;
+    static public double convertMeterToLongitude(double meter) {
+        return (double) meter / 88804;
     }
 
-    static public double convertKiloMeterToLatitude(double kilometer){
-        return convertMeterToLatitude(kilometer*1000);
+    static public double convertKiloMeterToLatitude(double kilometer) {
+        return convertMeterToLatitude(kilometer * 1000);
     }
 
-    static public double convertKiloMeterToLongitude(double kilometer){
-        return convertMeterToLongitude(kilometer*1000);
+    static public double convertKiloMeterToLongitude(double kilometer) {
+        return convertMeterToLongitude(kilometer * 1000);
     }
 
-    static public ScopeMapInfo getScopeMapInfo(Location location, double kilometer){
-        double distLatitude=convertKiloMeterToLatitude(kilometer);
-        double distLongitude=convertKiloMeterToLongitude(kilometer);
+    static public ScopeMapInfo getScopeMapInfo(Location location, double kilometer) {
+        double distLatitude = convertKiloMeterToLatitude(kilometer);
+        double distLongitude = convertKiloMeterToLongitude(kilometer);
 
-        double startLongitude=location.getLongitude();
-        double startLatitude=location.getLatitude();
-        double endLongitude=location.getLongitude()+distLongitude;
-        double endLatitude=location.getLatitude()+distLatitude;
-        return new ScopeMapInfo(startLatitude,startLongitude,endLatitude,endLongitude);
+        double startLongitude = location.getLongitude();
+        double startLatitude = location.getLatitude();
+        double endLongitude = location.getLongitude() + distLongitude;
+        double endLatitude = location.getLatitude() + distLatitude;
+        return new ScopeMapInfo(startLatitude, startLongitude, endLatitude, endLongitude);
     }
 
 }

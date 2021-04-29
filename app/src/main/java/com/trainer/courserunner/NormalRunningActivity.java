@@ -37,7 +37,7 @@ public class NormalRunningActivity extends AppCompatActivity {
             MapDAO.initMapDB(getApplicationContext());
             AppDatabaseLoader.initAppdatabase(getApplicationContext());
 
-            ScopeMapInfo scopeMapInfo = MapFunction.getScopeMapInfo(currentLocation,kilometer/4);
+            ScopeMapInfo scopeMapInfo = MapFunction.getScopeMapInfo(currentLocation, kilometer / 4);
             Log.v("TESTMETER", String.valueOf(kilometer));
 
             //course make
@@ -89,7 +89,7 @@ public class NormalRunningActivity extends AppCompatActivity {
             @Override
             public void onLocationChanged(Location location) {
                 // 새로운 위치의 발견
-                currentLocation=location;
+                currentLocation = location;
                 km2_btn.setEnabled(true);
                 km4_btn.setEnabled(true);
                 km6_btn.setEnabled(true);

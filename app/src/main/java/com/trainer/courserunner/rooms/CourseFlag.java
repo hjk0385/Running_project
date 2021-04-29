@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey;
                         childColumns = "course_id",
                         onDelete = ForeignKey.CASCADE)
         }
-        )
+)
 public class CourseFlag {
     @ColumnInfo(name = "course_id")
     public long courseId;
