@@ -7,8 +7,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -17,16 +15,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.trainer.courserunner.course.CourseGuideActivity;
-import com.trainer.courserunner.course.CourseMaker;
-import com.trainer.courserunner.managedata.AssetLoader;
-import com.trainer.courserunner.managedata.MapDAO;
-import com.trainer.courserunner.maps.MapFunction;
+import com.trainer.courserunner.course.maker.CourseMaker;
+import com.trainer.courserunner.maps.maploader.AssetLoader;
+import com.trainer.courserunner.maps.maploader.MapDAO;
+import com.trainer.courserunner.maps.geofunction.MapFunction;
 import com.trainer.courserunner.rooms.AppDatabaseLoader;
-import com.trainer.courserunner.scopetype.ScopeDotLocation;
-import com.trainer.courserunner.scopetype.ScopeDotsImage;
-import com.trainer.courserunner.scopetype.ScopeDotsMap;
-import com.trainer.courserunner.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.course.maker.scopetype.ScopeDotLocation;
+import com.trainer.courserunner.course.maker.scopetype.ScopeDotsImage;
+import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
+import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 
 public class NormalRunningActivity extends AppCompatActivity {
     Location currentLocation;
