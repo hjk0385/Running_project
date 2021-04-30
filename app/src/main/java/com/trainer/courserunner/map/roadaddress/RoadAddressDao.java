@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.trainer.courserunner.Application.RoadAddressDatabaseLoader;
 import com.trainer.courserunner.loader.ObbLoader;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoadAddressDao {
-
     public static List<RoadAddress> getScopeAddress(ScopeMapInfo scopeMapInfo) {
         String sql = "SELECT longitude, latitude FROM addresstable " +
                 "WHERE longitude > ? AND latitude > ? AND longitude < ? AND latitude< ?";
@@ -22,7 +22,7 @@ public class RoadAddressDao {
                 String.valueOf(scopeMapInfo.getEndX()),
                 String.valueOf(scopeMapInfo.getEndY())
         };
-        Cursor cursor = mapDB.rawQuery(sql, whereArgs);
+        Cursor cursor = RoadAddressDatabaseLoader.getRoadAddressDatabase().rawQuery(sql, whereArgs);
         ArrayList<RoadAddress> Address = new ArrayList<>();
         while (cursor.moveToNext()) {
             Address.add(new RoadAddress(cursor.getDouble(cursor.getColumnIndex("longitude")),

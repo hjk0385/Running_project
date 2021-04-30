@@ -1,76 +1,85 @@
 package com.trainer.courserunner.course.maker;
 
-import com.trainer.courserunner.rooms.AppDatabase;
+import android.graphics.Bitmap;
+
 import com.trainer.courserunner.Application.AppDatabaseLoader;
-import com.trainer.courserunner.rooms.CourseFlag;
-import com.trainer.courserunner.rooms.Course;
-import com.trainer.courserunner.rooms.MapFlag;
-import com.trainer.courserunner.course.maker.scopetype.ScopeDot;
+import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicy;
+import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationPolicy;
 import com.trainer.courserunner.course.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.maker.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
-import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMapQuanzationPolicy;
-import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMapQuanzationPolicyInnerRandom;
+import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.rooms.AppDatabase;
+import com.trainer.courserunner.rooms.Course;
+import com.trainer.courserunner.rooms.CourseDao;
+import com.trainer.courserunner.rooms.CourseFlag;
+import com.trainer.courserunner.rooms.CourseFlagDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CourseMaker {
-    //양자화 정책
-    //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyDefault();
-    //ScopeDotsMapQuanzationPolicy quanzationPolicy=new ScopeDotsMapQuanzationPolicyPrecision(0.1);
-    ScopeDotsMapQuanzationPolicy quanzationPolicy = new ScopeDotsMapQuanzationPolicyInnerRandom(0.25);
+    private Bitmap image;
+    private ScopeMapInfo scopeMapInfo;
+    private QuanzationPolicy quanzationPolicy;
+    private LineConnectPolicy lineConnectPolicy;
 
-    private List<ScopeDotAddress> makeConnectedPath(List<ScopeDot> flagAddresses, ScopeDotAddress startLocation) {
-        List<ScopeDotAddress> course = new ArrayList<>();
-        course.add((ScopeDotAddress) startLocation);
-        ScopeDot currentScopeDot = ScopeDotsMap.getClosestDot(flagAddresses, startLocation);
-        while (flagAddresses.size() != 0) {
-            currentScopeDot = ScopeDotsMap.getClosestDot(flagAddresses, currentScopeDot);
-            flagAddresses.remove(currentScopeDot);
-            course.add((ScopeDotAddress) currentScopeDot);
+    public static class CourseMakerBuilder{
+        private Bitmap image;
+        private ScopeMapInfo scopeMapInfo;
+        private QuanzationPolicy quanzationPolicy;
+        private LineConnectPolicy lineConnectPolicy;
+        public CourseMakerBuilder(Bitmap image,ScopeMapInfo scopeMapInfo){
+            this.image=image;
+            this.scopeMapInfo=scopeMapInfo;
         }
-        course.add(startLocation);
-        return course;
+        public CourseMakerBuilder setLineConnectPolicy(LineConnectPolicy lineConnectPolicy) {
+            this.lineConnectPolicy = lineConnectPolicy;
+            return this;
+        }
+
+        public CourseMakerBuilder setQuanzationPolicy(QuanzationPolicy quanzationPolicy) {
+            this.quanzationPolicy = quanzationPolicy;
+            return this;
+        }
+
+        public CourseMaker build(){
+            if(quanzationPolicy==null){
+                return null;
+            }
+            else if(lineConnectPolicy==null){
+                return null;
+            }
+            CourseMaker courseMaker=new CourseMaker();
+            courseMaker.image=this.image;
+            courseMaker.scopeMapInfo=this.scopeMapInfo;
+            courseMaker.lineConnectPolicy=this.lineConnectPolicy;
+            courseMaker.quanzationPolicy=this.quanzationPolicy;
+            return courseMaker;
+        }
     }
 
-    public long makeCourse(ScopeDotsImage scopeDotsImage,
-                           ScopeDotsMap scopeDotsMap,
-                           ScopeDotAddress startLocation) {
-        ScopeDotsMap quantizationImage = scopeDotsMap.quantizationImageToMap(scopeDotsImage, quanzationPolicy);
-        List<ScopeDotAddress> mapFlags = makeConnectedPath(quantizationImage.getScopeDotList(), startLocation);
-        //
+    public long makeCourse() {
+        //준비
+        ScopeDotsMap scopeDotsMap = new ScopeDotsMap(scopeMapInfo);
+        ScopeDotsImage scopeDotsImage = new ScopeDotsImage(image);
+        //시작
+        ScopeDotsMap imageRoad = quanzationPolicy.quantization(scopeDotsImage, scopeDotsMap);
+        List<ScopeDotAddress> courseRoad = lineConnectPolicy.apply(imageRoad);
+        //코스등록
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
-        //맵저장
-        long[] mapFlagIds = this.registMapFlags(appDatabase, mapFlags);
-        //코스 등록
-        long courseId = this.registCourseInfo(appDatabase);
-        this.registCourseFlags(appDatabase, mapFlagIds, courseId);
-        return courseId;
-    }
-
-    private long registCourseInfo(AppDatabase appDatabase) {
-        return appDatabase.courseDao().insertCourseInfo(new Course());
-    }
-
-    private long[] registMapFlags(AppDatabase appDatabase, List<ScopeDotAddress> course) {
-        long[] mapFlagIds = new long[course.size()];
-        for (int i = 0; i < course.size(); i++) {
-            MapFlag mapFlag = new MapFlag();
-            mapFlag.latitude = course.get(i).getLatitude();
-            mapFlag.longitude = course.get(i).getLongitude();
-            mapFlagIds[i] = appDatabase.courseDao().insertMapFlag(mapFlag);
-        }
-        return mapFlagIds;
-    }
-
-    private void registCourseFlags(AppDatabase appDatabase, long[] mapFlagIds, long courseId) {
-        for (int i = 0; i < mapFlagIds.length; i++) {
+        //코스 정보등록
+        CourseDao courseDao = appDatabase.courseDao();
+        long courseId = courseDao.insertDto(new Course());
+        //코스 깃발등록
+        CourseFlagDao courseFlagDao = AppDatabaseLoader.getAppDatabase().courseFlagDao();
+        for (int i = 0; i < courseRoad.size(); i++) {
             CourseFlag courseFlag = new CourseFlag();
-            courseFlag.course_id = courseId;
-            courseFlag.mapflag_id = mapFlagIds[i];
-            courseFlag.courseflag_order = i;
-            appDatabase.courseDao().insertCourseFlag(courseFlag);
+            courseFlag.courseId = courseId;
+            courseFlag.courseFlagId = i;
+            courseFlag.courseFlagLatitude = courseRoad.get(i).getLatitude();
+            courseFlag.courseFlagLongitude = courseRoad.get(i).getLongitude();
+            courseFlagDao.insertDto(courseFlag);
         }
+        return courseId;
     }
 }

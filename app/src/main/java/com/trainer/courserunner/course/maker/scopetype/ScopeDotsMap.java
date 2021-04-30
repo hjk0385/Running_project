@@ -1,30 +1,41 @@
 package com.trainer.courserunner.course.maker.scopetype;
 
+import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationPolicy;
 import com.trainer.courserunner.map.roadaddress.RoadAddressDao;
 import com.trainer.courserunner.map.roadaddress.RoadAddress;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ScopeDotsMap extends ScopeDots {
-    ScopeMapInfo scopeMapInfo;
-
     public ScopeDotsMap(ScopeMapInfo scopeMapInfo) {
         List<RoadAddress> scopeMapAddress = RoadAddressDao.getScopeAddress(scopeMapInfo);
         for (RoadAddress address : scopeMapAddress) {
             scopeDotList.add(new ScopeDotAddress(scopeMapInfo, address.getX(), address.getY()));
         }
-        this.scopeMapInfo = scopeMapInfo;
+    }
+    public ScopeDotsMap(HashSet<ScopeDotAddress> quantizationDots){
+        scopeDotList=new ArrayList<>(quantizationDots);
     }
 
-    public ScopeDotsMap(List<ScopeDot> scopeDotList) {
-        this.scopeDotList = scopeDotList;
+    public List<ScopeDotAddress> getScopeDotAddressList() {
+        List<ScopeDotAddress> scopeDotAddressList=new ArrayList<>();
+        for(ScopeDot scopeDot:this.getScopeDotList()){
+            scopeDotAddressList.add((ScopeDotAddress) scopeDot);
+        }
+        return scopeDotAddressList;
     }
 
-    public ScopeDotsMap quantizationImageToMap(ScopeDotsImage quanzationInput, ScopeDotsMapQuanzationPolicy quanzationPolicy) {
-        return new ScopeDotsMap(quanzationPolicy.quantization(quanzationInput.scopeDotList, this.scopeDotList));
-    }
-
-    public ScopeMapInfo getScopeMapInfo() {
-        return scopeMapInfo;
+    static public ScopeDotAddress getClosestDot(List<ScopeDotAddress> scopeDotList,ScopeDotAddress scopeDot) {
+        ScopeDotAddress closestScopeDot = scopeDotList.get(0);
+        for (int i = 1; i < scopeDotList.size(); i++) {
+            if (closestScopeDot.getCost(scopeDot) >
+                    scopeDotList.get(i).getCost(scopeDot)) {
+                closestScopeDot = scopeDotList.get(i);
+            }
+        }
+        return closestScopeDot;
     }
 }

@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.trainer.courserunner.course.maker.CourseMaker;
+import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyMinimumCost;
+import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationPolicyRandom;
 import com.trainer.courserunner.loader.AssetLoader;
 import com.trainer.courserunner.map.roadaddress.RoadAddressDao;
 import com.trainer.courserunner.map.geo.DistanceConverter;
@@ -31,23 +33,21 @@ public class NormalRunningActivity extends AppCompatActivity {
     View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
             //테스트코드
-            RoadAddressDao.initMapDB(getApplicationContext());
-            AppDatabaseLoader.initAppdatabase(getApplicationContext());
-
             ScopeMapInfo scopeMapInfo = DistanceConverter.getScopeMapInfo(currentLocation, kilometer / 4);
-            Log.v("TESTMETER", String.valueOf(kilometer));
 
             //course make
-            ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap2.png"));
             ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
-            ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo, scopeMapInfo.getStartX(), scopeMapInfo.getStartY());
-            CourseMaker courseMaker = new CourseMaker();
-            long course_id = courseMaker.makeCourse(image, maps, currentLocation);
-            Log.v("testFunction", String.valueOf(course_id));
+            CourseMaker.CourseMakerBuilder courseMakerBuilder=new CourseMaker.CourseMakerBuilder(
+                    AssetLoader.loadImage(this, "testbitmap2.png"),scopeMapInfo);
+            courseMakerBuilder.setLineConnectPolicy(new LineConnectPolicyMinimumCost());
+            courseMakerBuilder.setQuanzationPolicy(new QuanzationPolicyRandom(0.25));
+            CourseMaker courseMaker=courseMakerBuilder.build();
+            long courseId=courseMaker.makeCourse();
+
             //테스트코드 종료
 
             Intent intent = new Intent(getBaseContext(), CourseGuideActivity.class);
-            intent.putExtra("course_id", course_id);
+            intent.putExtra("course_id", courseId);
             startActivity(intent);
         };
     }
