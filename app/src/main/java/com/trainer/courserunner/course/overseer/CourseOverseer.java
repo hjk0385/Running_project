@@ -15,9 +15,9 @@ import java.util.Observer;
 
 //기본모드(사용자의 위치만 감시)
 public class CourseOverseer extends AsyncTask<Location,Void,Void> implements Observer {
-    Location currentLocation;
-    long usercourseId;
-    int currentLineColor;
+    protected Location currentLocation;
+    protected long usercourseId;
+    private int currentLineColor;
     public CourseOverseer(long usercourseId){
         this.usercourseId=usercourseId;
         this.currentLocation=null;

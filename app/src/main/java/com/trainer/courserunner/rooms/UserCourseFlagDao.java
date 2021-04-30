@@ -1,4 +1,5 @@
 package com.trainer.courserunner.rooms;
 
-public interface UserCourseFlagDao extends BaseDao<UserCourseFlag> {
-}
+import androidx.room.Query;
+
+public interface UserCourseFlagDao extends BaseDao<UserCourseFlag> {}
