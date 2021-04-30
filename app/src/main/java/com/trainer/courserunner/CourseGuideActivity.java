@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.course.drawer.CourseDrawer;
 import com.trainer.courserunner.course.overseer.CourseOverseer;
-import com.trainer.courserunner.maps.mapdrawer.NavermapLocationActivity;
+import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 
 /*
     다른 기능들을 지원하기 위해서 CourseGuideActivity를 추상클래스로 만들고

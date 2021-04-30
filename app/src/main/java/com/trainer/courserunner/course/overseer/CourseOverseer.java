@@ -4,9 +4,9 @@ import android.graphics.Color;
 import android.location.Location;
 import android.util.Log;
 
-import com.trainer.courserunner.maps.geofunction.MapFunction;
+import com.trainer.courserunner.map.geo.DistanceConverter;
 import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.rooms.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.MapFlag;
 import com.trainer.courserunner.rooms.UserCourseInfo;
 import com.trainer.courserunner.rooms.UserLocationRecord;
@@ -77,7 +77,7 @@ public class CourseOverseer {
         if (currentLocation == null) {
             return true;
         }
-        return MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+        return DistanceConverter.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
                 location.getLatitude(), location.getLongitude()) >= UPDATE_DISTANCE;
     }
 
@@ -88,7 +88,7 @@ public class CourseOverseer {
         //마커처리
         MapFlag[] mapFlags = appDatabase.courseDao().getCourseMapflags(courseId);
         for (MapFlag mapFlag : mapFlags) {
-            if (MapFunction.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+            if (DistanceConverter.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
                     mapFlag.latitude, mapFlag.longitude) <= FINISHMARKER_DISTANCE) {
                 UserMapFlag userMapFlag = new UserMapFlag();
                 userMapFlag.usercourse_id = usercourseId;

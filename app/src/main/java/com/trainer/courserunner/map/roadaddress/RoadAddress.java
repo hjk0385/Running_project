@@ -1,15 +1,15 @@
-package com.trainer.courserunner.maps.maploader;
+package com.trainer.courserunner.map.roadaddress;
 
-public class MapDTO {
+public class RoadAddress {
     private double longitude;//x
     private double latitude;//y
 
-    public MapDTO() {
+    public RoadAddress() {
         this.longitude = -1;
         this.latitude = -1;
     }
 
-    public MapDTO(double longitude, double latitude) {
+    public RoadAddress(double longitude, double latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }

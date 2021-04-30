@@ -16,10 +16,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.trainer.courserunner.course.maker.CourseMaker;
-import com.trainer.courserunner.maps.maploader.AssetLoader;
-import com.trainer.courserunner.maps.maploader.MapDAO;
-import com.trainer.courserunner.maps.geofunction.MapFunction;
-import com.trainer.courserunner.rooms.AppDatabaseLoader;
+import com.trainer.courserunner.loader.AssetLoader;
+import com.trainer.courserunner.map.roadaddress.RoadAddressDao;
+import com.trainer.courserunner.map.geo.DistanceConverter;
+import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.maker.scopetype.ScopeDotLocation;
 import com.trainer.courserunner.course.maker.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
@@ -31,10 +31,10 @@ public class NormalRunningActivity extends AppCompatActivity {
     View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
             //테스트코드
-            MapDAO.initMapDB(getApplicationContext());
+            RoadAddressDao.initMapDB(getApplicationContext());
             AppDatabaseLoader.initAppdatabase(getApplicationContext());
 
-            ScopeMapInfo scopeMapInfo = MapFunction.getScopeMapInfo(currentLocation, kilometer / 4);
+            ScopeMapInfo scopeMapInfo = DistanceConverter.getScopeMapInfo(currentLocation, kilometer / 4);
             Log.v("TESTMETER", String.valueOf(kilometer));
 
             //course make

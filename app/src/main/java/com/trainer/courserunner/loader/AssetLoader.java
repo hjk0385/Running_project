@@ -1,4 +1,4 @@
-package com.trainer.courserunner.maps.maploader;
+package com.trainer.courserunner.loader;
 
 import android.content.Context;
 import android.content.res.AssetManager;

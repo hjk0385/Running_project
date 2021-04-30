@@ -1,4 +1,4 @@
-package com.trainer.courserunner.maps.geofunction;
+package com.trainer.courserunner.map.geo;
 
 import android.content.Context;
 import android.util.Log;

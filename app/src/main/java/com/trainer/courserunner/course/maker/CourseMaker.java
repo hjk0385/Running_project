@@ -1,7 +1,7 @@
 package com.trainer.courserunner.course.maker;
 
 import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.rooms.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.CourseFlag;
 import com.trainer.courserunner.rooms.Course;
 import com.trainer.courserunner.rooms.MapFlag;

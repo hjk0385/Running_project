@@ -1,7 +1,7 @@
 package com.trainer.courserunner.course.maker.scopetype;
 
-import com.trainer.courserunner.maps.maploader.MapDAO;
-import com.trainer.courserunner.maps.maploader.MapDTO;
+import com.trainer.courserunner.map.roadaddress.RoadAddressDao;
+import com.trainer.courserunner.map.roadaddress.RoadAddress;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ public class ScopeDotsMap extends ScopeDots {
     ScopeMapInfo scopeMapInfo;
 
     public ScopeDotsMap(ScopeMapInfo scopeMapInfo) {
-        List<MapDTO> scopeMapAddress = MapDAO.getScopeAddress(scopeMapInfo);
-        for (MapDTO address : scopeMapAddress) {
+        List<RoadAddress> scopeMapAddress = RoadAddressDao.getScopeAddress(scopeMapInfo);
+        for (RoadAddress address : scopeMapAddress) {
             scopeDotList.add(new ScopeDotAddress(scopeMapInfo, address.getX(), address.getY()));
         }
         this.scopeMapInfo = scopeMapInfo;

@@ -6,9 +6,9 @@ import androidx.core.util.Pair;
 
 import com.trainer.courserunner.course.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
-import com.trainer.courserunner.maps.mapdrawer.MapDrawer;
+import com.trainer.courserunner.map.drawer.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.rooms.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.MapFlag;
 import com.trainer.courserunner.rooms.UserLocationRecord;
 import com.trainer.courserunner.rooms.UserMapFlag;

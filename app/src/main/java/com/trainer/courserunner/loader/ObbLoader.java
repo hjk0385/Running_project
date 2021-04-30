@@ -1,4 +1,4 @@
-package com.trainer.courserunner.maps.maploader;
+package com.trainer.courserunner.loader;
 
 import android.content.Context;
 import android.os.Environment;
@@ -10,7 +10,7 @@ public class ObbLoader {
     // The shared path to all app expansion files
     private final static String EXP_PATH = "/Android/obb/";
 
-    static String[] getAPKExpansionFiles(Context ctx, int mainVersion,
+    public static String[] getAPKExpansionFiles(Context ctx, int mainVersion,
                                          int patchVersion) {
         String packageName = ctx.getPackageName();
         Vector<String> ret = new Vector<String>();
