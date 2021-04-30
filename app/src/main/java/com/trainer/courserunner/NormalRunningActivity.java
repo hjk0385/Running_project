@@ -1,8 +1,5 @@
 package com.trainer.courserunner;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -11,21 +8,19 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.course.maker.CourseMaker;
 import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyMinimumCost;
 import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationPolicyRandom;
-import com.trainer.courserunner.loader.AssetLoader;
-import com.trainer.courserunner.map.roadaddress.RoadAddressDao;
-import com.trainer.courserunner.map.geo.DistanceConverter;
-import com.trainer.courserunner.Application.AppDatabaseLoader;
-import com.trainer.courserunner.course.maker.scopetype.ScopeDotLocation;
-import com.trainer.courserunner.course.maker.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.loader.AssetLoader;
+import com.trainer.courserunner.map.geo.DistanceConverter;
 
 public class NormalRunningActivity extends AppCompatActivity {
     Location currentLocation;
@@ -35,21 +30,22 @@ public class NormalRunningActivity extends AppCompatActivity {
             //테스트코드
             ScopeMapInfo scopeMapInfo = DistanceConverter.getScopeMapInfo(currentLocation, kilometer / 4);
 
-            //course make
-            ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
-            CourseMaker.CourseMakerBuilder courseMakerBuilder=new CourseMaker.CourseMakerBuilder(
-                    AssetLoader.loadImage(this, "testbitmap2.png"),scopeMapInfo);
-            courseMakerBuilder.setLineConnectPolicy(new LineConnectPolicyMinimumCost());
-            courseMakerBuilder.setQuanzationPolicy(new QuanzationPolicyRandom(0.25));
-            CourseMaker courseMaker=courseMakerBuilder.build();
-            long courseId=courseMaker.makeCourse();
+            CourseMaker.CourseMakerBuilder courseMakerBuilder = new CourseMaker.CourseMakerBuilder(
+                    AssetLoader.loadImage(this, "testbitmap2.png"), scopeMapInfo);
 
-            //테스트코드 종료
+            courseMakerBuilder.setLineConnectPolicy(new LineConnectPolicyMinimumCost())
+                    .setQuanzationPolicy(new QuanzationPolicyRandom(0.25))
+                    .setCourseIdConsumer(this::registDB);
 
-            Intent intent = new Intent(getBaseContext(), CourseGuideActivity.class);
-            intent.putExtra("course_id", courseId);
-            startActivity(intent);
+            CourseMaker courseMaker = courseMakerBuilder.build();
+            courseMaker.execute();
         };
+    }
+
+    private void registDB(Long courseId) {
+        Intent intent = new Intent(getBaseContext(), CourseGuideActivity.class);
+        intent.putExtra("course_id", courseId);
+        startActivity(intent);
     }
 
     @Override

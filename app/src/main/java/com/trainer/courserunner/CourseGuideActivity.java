@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.course.drawer.CourseDrawer;
-import com.trainer.courserunner.course.overseer.CourseOverseer;
+import com.trainer.courserunner.legacy.CourseOverseer;
 import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 
 /*

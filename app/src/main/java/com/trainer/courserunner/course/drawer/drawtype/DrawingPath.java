@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrawingPath extends ArrayList<DrawingAddress> {
+    //빌더
+    //색상 및 두께 생성
+
     public DrawingPath() {
 
     }

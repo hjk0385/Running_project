@@ -1,6 +1,9 @@
 package com.trainer.courserunner.course.maker;
 
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
+
+import androidx.core.util.Consumer;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicy;
@@ -17,48 +20,16 @@ import com.trainer.courserunner.rooms.CourseFlagDao;
 
 import java.util.List;
 
-public class CourseMaker {
+//마지막에 result를 처리하는 consumer을 Integer을 받아서 구성된다.
+public class CourseMaker extends AsyncTask<Void,Void,Long> {
     private Bitmap image;
     private ScopeMapInfo scopeMapInfo;
     private QuanzationPolicy quanzationPolicy;
     private LineConnectPolicy lineConnectPolicy;
+    private Consumer<Long> courseIdConsumer;
 
-    public static class CourseMakerBuilder{
-        private Bitmap image;
-        private ScopeMapInfo scopeMapInfo;
-        private QuanzationPolicy quanzationPolicy;
-        private LineConnectPolicy lineConnectPolicy;
-        public CourseMakerBuilder(Bitmap image,ScopeMapInfo scopeMapInfo){
-            this.image=image;
-            this.scopeMapInfo=scopeMapInfo;
-        }
-        public CourseMakerBuilder setLineConnectPolicy(LineConnectPolicy lineConnectPolicy) {
-            this.lineConnectPolicy = lineConnectPolicy;
-            return this;
-        }
-
-        public CourseMakerBuilder setQuanzationPolicy(QuanzationPolicy quanzationPolicy) {
-            this.quanzationPolicy = quanzationPolicy;
-            return this;
-        }
-
-        public CourseMaker build(){
-            if(quanzationPolicy==null){
-                return null;
-            }
-            else if(lineConnectPolicy==null){
-                return null;
-            }
-            CourseMaker courseMaker=new CourseMaker();
-            courseMaker.image=this.image;
-            courseMaker.scopeMapInfo=this.scopeMapInfo;
-            courseMaker.lineConnectPolicy=this.lineConnectPolicy;
-            courseMaker.quanzationPolicy=this.quanzationPolicy;
-            return courseMaker;
-        }
-    }
-
-    public long makeCourse() {
+    @Override
+    protected Long doInBackground(Void... voids) {
         //준비
         ScopeDotsMap scopeDotsMap = new ScopeDotsMap(scopeMapInfo);
         ScopeDotsImage scopeDotsImage = new ScopeDotsImage(image);
@@ -81,5 +52,58 @@ public class CourseMaker {
             courseFlagDao.insertDto(courseFlag);
         }
         return courseId;
+    }
+
+    @Override
+    protected void onPostExecute(Long aLong) {
+        super.onPostExecute(aLong);
+        courseIdConsumer.accept(aLong);
+    }
+
+    public static class CourseMakerBuilder{
+        private Bitmap image;
+        private ScopeMapInfo scopeMapInfo;
+        private QuanzationPolicy quanzationPolicy;
+        private LineConnectPolicy lineConnectPolicy;
+        private Consumer<Long> courseIdConsumer;
+        public CourseMakerBuilder(Bitmap image,ScopeMapInfo scopeMapInfo){
+            this.image=image;
+            this.scopeMapInfo=scopeMapInfo;
+            quanzationPolicy=null;
+            lineConnectPolicy=null;
+            courseIdConsumer=null;
+        }
+        public CourseMakerBuilder setLineConnectPolicy(LineConnectPolicy lineConnectPolicy) {
+            this.lineConnectPolicy = lineConnectPolicy;
+            return this;
+        }
+
+        public CourseMakerBuilder setQuanzationPolicy(QuanzationPolicy quanzationPolicy) {
+            this.quanzationPolicy = quanzationPolicy;
+            return this;
+        }
+
+        public CourseMakerBuilder setCourseIdConsumer(Consumer<Long> courseIdConsumer) {
+            this.courseIdConsumer = courseIdConsumer;
+            return this;
+        }
+
+        public CourseMaker build(){
+            if(quanzationPolicy==null){
+                return null;
+            }
+            else if(lineConnectPolicy==null){
+                return null;
+            }
+            else if(courseIdConsumer==null){
+                return null;
+            }
+            CourseMaker courseMaker=new CourseMaker();
+            courseMaker.image=this.image;
+            courseMaker.scopeMapInfo=this.scopeMapInfo;
+            courseMaker.lineConnectPolicy=this.lineConnectPolicy;
+            courseMaker.quanzationPolicy=this.quanzationPolicy;
+            return courseMaker;
+        }
     }
 }
