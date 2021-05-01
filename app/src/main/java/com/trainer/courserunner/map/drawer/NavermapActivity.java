@@ -64,8 +64,8 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         //setting
         List<LatLng> lngList = new ArrayList<>();
         for (DrawingAddress drawingAddress : drawingPath) {
-            double longitude = drawingAddress.getLongitude();
-            double latitude = drawingAddress.getLatitude();
+            Double longitude = drawingAddress.getLongitude();
+            Double latitude = drawingAddress.getLatitude();
             lngList.add(new LatLng(latitude, longitude));
         }
         //draw
@@ -82,8 +82,8 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         //setting
         List<LatLng> lngList = new ArrayList<>();
         for (DrawingAddress drawingAddress : drawingPath) {
-            double longitude = drawingAddress.getLongitude();
-            double latitude = drawingAddress.getLatitude();
+            Double longitude = drawingAddress.getLongitude();
+            Double latitude = drawingAddress.getLatitude();
             lngList.add(new LatLng(latitude, longitude));
         }
         //draw

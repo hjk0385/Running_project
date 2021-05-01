@@ -5,11 +5,11 @@ public class ScopeDotPixel extends ScopeDot {
         super(normalizeX(imageWidth, x), normalizeY(imageHeight, y));
     }
 
-    private static double normalizeX(Integer imageWidth, Integer x) {
+    private static Double normalizeX(Integer imageWidth, Integer x) {
         return (double) x / imageWidth;
     }
 
-    private static double normalizeY(Integer imageHeight, Integer y) {
+    private static Double normalizeY(Integer imageHeight, Integer y) {
         return 1 - ((double) y / imageHeight);
     }
 }

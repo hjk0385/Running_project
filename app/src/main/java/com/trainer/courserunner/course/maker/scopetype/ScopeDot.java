@@ -1,25 +1,25 @@
 package com.trainer.courserunner.course.maker.scopetype;
 
 public abstract class ScopeDot {
-    protected double normalizeX;
-    protected double normalizeY;
+    protected Double normalizeX;
+    protected Double normalizeY;
 
-    public ScopeDot(double normalizeX, double normalizeY) {
+    public ScopeDot(Double normalizeX, Double normalizeY) {
         this.normalizeX = Math.abs(normalizeX);
         this.normalizeY = Math.abs(normalizeY);
     }
 
-    public double getCost(ScopeDot scopeDot) {
-        double xCost = this.normalizeX - scopeDot.normalizeX;
-        double yCost = this.normalizeY - scopeDot.normalizeY;
+    public Double getCost(ScopeDot scopeDot) {
+        Double xCost = this.normalizeX - scopeDot.normalizeX;
+        Double yCost = this.normalizeY - scopeDot.normalizeY;
         return Math.sqrt(xCost * xCost + yCost * yCost);
     }
 
-    public double getNormalizeX() {
+    public Double getNormalizeX() {
         return normalizeX;
     }
 
-    public double getNormalizeY() {
+    public Double getNormalizeY() {
         return normalizeY;
     }
 }

@@ -1,50 +1,50 @@
 package com.trainer.courserunner.course.maker.scopetype;
 
 public class ScopeMapInfo {
-    private final double startLatitude;
-    private final double startLongtitude;
-    private final double endLatitude;
-    private final double endLongtitude;
+    private final Double startLatitude;
+    private final Double startLongtitude;
+    private final Double endLatitude;
+    private final Double endLongtitude;
 
-    public ScopeMapInfo(double startLatitude,
-                        double startLongtitude,
-                        double endLatitude,
-                        double endLongtitude) {
+    public ScopeMapInfo(Double startLatitude,
+                        Double startLongtitude,
+                        Double endLatitude,
+                        Double endLongtitude) {
         this.startLatitude = startLatitude;
         this.startLongtitude = startLongtitude;
         this.endLatitude = endLatitude;
         this.endLongtitude = endLongtitude;
     }
 
-    public double getEndLatitude() {
+    public Double getEndLatitude() {
         return endLatitude;
     }
 
-    public double getEndLongtitude() {
+    public Double getEndLongtitude() {
         return endLongtitude;
     }
 
-    public double getStartLatitude() {
+    public Double getStartLatitude() {
         return startLatitude;
     }
 
-    public double getStartLongtitude() {
+    public Double getStartLongtitude() {
         return startLongtitude;
     }
 
-    public double getStartX() {
+    public Double getStartX() {
         return startLongtitude;
     }
 
-    public double getStartY() {
+    public Double getStartY() {
         return startLatitude;
     }
 
-    public double getEndX() {
+    public Double getEndX() {
         return endLongtitude;
     }
 
-    public double getEndY() {
+    public Double getEndY() {
         return endLatitude;
     }
 

@@ -23,7 +23,7 @@ import com.trainer.courserunner.map.geo.DistanceConverter;
 public class NormalRunningActivity extends AppCompatActivity {
     Location currentLocation;
 
-    View.OnClickListener getMeterBtnListener(double kilometer) {
+    View.OnClickListener getMeterBtnListener(Double kilometer) {
         return (View view) -> {
             //테스트코드
             ScopeMapInfo scopeMapInfo = DistanceConverter.getScopeMapInfo(currentLocation, kilometer / 4);

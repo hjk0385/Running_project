@@ -23,7 +23,7 @@ public class CourseFlag {
     @ColumnInfo(name = "course_flag_Id")
     public long courseFlagId;
     @ColumnInfo(name = "course_flag_latitude")
-    public double courseFlagLatitude;
+    public Double courseFlagLatitude;
     @ColumnInfo(name = "course_flag_longitude")
-    public double courseFlagLongitude;
+    public Double courseFlagLongitude;
 }

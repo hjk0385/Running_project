@@ -18,7 +18,7 @@ public abstract class CourseOverseer extends AsyncTask<Location, Void, Void> imp
     }
 
     protected boolean checkUpdateDistance(Location location) {
-        final double UPDATE_DISTANCE = 100.0;
+        final Double UPDATE_DISTANCE = 100.0;
         return DistanceConverter.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
                 location.getLatitude(), location.getLongitude()) >= UPDATE_DISTANCE;
     }

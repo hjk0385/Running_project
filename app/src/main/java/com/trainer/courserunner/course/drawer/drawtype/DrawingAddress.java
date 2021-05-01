@@ -5,8 +5,8 @@ import android.location.Location;
 import com.trainer.courserunner.rooms.UserCourseRecord;
 
 public class DrawingAddress {
-    double latitude;
-    double longitude;
+    Double latitude;
+    Double longitude;
 
     public DrawingAddress(Location location) {
         this.latitude = location.getLatitude();
@@ -18,11 +18,11 @@ public class DrawingAddress {
         this.longitude = userCourseRecord.userCourseRecordLongitude;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 }

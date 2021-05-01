@@ -22,8 +22,8 @@ public class CourseOverseerUserFlag extends CourseOverseer {
         return null;
     }
 
-    private boolean checkMarkerDistance(double markerLatitude, double markerLongitude) {
-        final double MARKER_DISTANCE = 100.0;
+    private boolean checkMarkerDistance(Double markerLatitude, Double markerLongitude) {
+        final Double MARKER_DISTANCE = 100.0;
         return DistanceConverter.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
                 markerLatitude, markerLongitude) < MARKER_DISTANCE;
     }

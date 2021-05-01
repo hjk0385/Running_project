@@ -10,9 +10,9 @@ import java.util.List;
 //랜덤으로 추출
 public class QuanzationPolicyRandom extends QuanzationPolicyDefault implements QuanzationPolicy {
     //1 = 전부 , 0 = 없음 , 0.5 = 절반만
-    double reminderPercentage;
+    Double reminderPercentage;
 
-    public QuanzationPolicyRandom(double reminderPercentage) {
+    public QuanzationPolicyRandom(Double reminderPercentage) {
         this.reminderPercentage = reminderPercentage;
     }
 

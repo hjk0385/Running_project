@@ -1,32 +1,32 @@
 package com.trainer.courserunner.course.maker.scopetype;
 
 public class ScopeDotAddress extends ScopeDot {
-    protected double longitude; //경도(x)
-    protected double latitude; //위도(y)
+    protected Double longitude; //경도(x)
+    protected Double latitude; //위도(y)
 
     public ScopeDotAddress(ScopeMapInfo scopeMapInfo,
-                           double x, double y) {
+                           Double x, Double y) {
         super(normalizeX(scopeMapInfo.getStartX(), scopeMapInfo.getEndX(), x),
                 normalizeY(scopeMapInfo.getStartY(), scopeMapInfo.getEndY(), y));
         this.longitude = x;
         this.latitude = y;
     }
 
-    protected static double normalizeX(double startX, double endX, double x) {
-        double width = endX - startX;
+    protected static Double normalizeX(Double startX, Double endX, Double x) {
+        Double width = endX - startX;
         return (x - startX) / width;
     }
 
-    protected static double normalizeY(double startY, double endY, double y) {
-        double height = endY - startY;
+    protected static Double normalizeY(Double startY, Double endY, Double y) {
+        Double height = endY - startY;
         return (y - startY) / height;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 

@@ -1,40 +1,40 @@
 package com.trainer.courserunner.map.roadaddress;
 
 public class RoadAddress {
-    private double longitude;//x
-    private double latitude;//y
+    private Double longitude;//x
+    private Double latitude;//y
 
     public RoadAddress() {
-        this.longitude = -1;
-        this.latitude = -1;
+        this.longitude = null;
+        this.latitude = null;
     }
 
-    public RoadAddress(double longitude, double latitude) {
+    public RoadAddress(Double longitude, Double latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
-    public double getX() {
+    public Double getX() {
         return longitude;
     }
 
-    public double getY() {
+    public Double getY() {
         return latitude;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 }
