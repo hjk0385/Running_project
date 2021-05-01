@@ -4,7 +4,6 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.trainer.courserunner.course.maker.CourseMaker;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseMode;
 
@@ -23,11 +22,11 @@ public class AppDatabaseLoader extends Application {
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
                 "testdatabase114").build();
         */
-        appDatabase=Room.inMemoryDatabaseBuilder(getApplicationContext(),AppDatabase.class).build();
+        appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build();
 
         CourseMode courseMode = new CourseMode();
-        courseMode.courseModeId=1;
-        courseMode.courseModeName="sketchbook";
+        courseMode.courseModeId = 1;
+        courseMode.courseModeName = "sketchbook";
         appDatabase.courseModeDao().insertDto(courseMode);
     }
 }

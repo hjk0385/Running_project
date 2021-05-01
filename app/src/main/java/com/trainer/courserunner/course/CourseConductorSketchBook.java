@@ -6,7 +6,6 @@ import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseMode;
 import com.trainer.courserunner.rooms.UserCourse;
 import com.trainer.courserunner.rooms.UserCourseDao;
-import com.trainer.courserunner.rooms.UserCourseRecord;
 import com.trainer.courserunner.rooms.UserCourseRecordDao;
 
 public class CourseConductorSketchBook extends CourseConductor {
@@ -17,18 +16,18 @@ public class CourseConductorSketchBook extends CourseConductor {
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
 
         //코스모드 불러오기
-        CourseMode courseMode=appDatabase.courseModeDao().getCourseMode("sketchbook");
-        String courseModeName=courseMode.courseModeName;
-        long courseModeId=courseMode.courseModeId;
+        CourseMode courseMode = appDatabase.courseModeDao().getCourseMode("sketchbook");
+        String courseModeName = courseMode.courseModeName;
+        long courseModeId = courseMode.courseModeId;
 
         //유저코스 등록
-        UserCourseDao userCourseDao=appDatabase.userCourseDao();
+        UserCourseDao userCourseDao = appDatabase.userCourseDao();
         UserCourse userCourse = new UserCourse();
 
         userCourseDao.insertDto(userCourse);
 
 
-        UserCourseRecordDao userCourseRecordDao=appDatabase.userCourseRecordDao();
+        UserCourseRecordDao userCourseRecordDao = appDatabase.userCourseRecordDao();
 
 
     }
