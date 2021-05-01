@@ -6,5 +6,5 @@ import androidx.room.Insert;
 @Dao
 public interface BaseDao<T> {
     @Insert
-    Long insertDto(T dto);
+    long insertDto(T dto);
 }

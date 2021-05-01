@@ -24,7 +24,7 @@ import androidx.room.ForeignKey;
 )
 public class UserCourseFlag {
     @ColumnInfo(name = "user_course_id")
-    public Long userCourseId;
+    public long userCourseId;
     @ColumnInfo(name = "course_flag_Id")
-    public Long courseFlagId;
+    public long courseFlagId;
 }

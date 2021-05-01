@@ -11,7 +11,7 @@ import androidx.room.Entity;
 )
 public class CourseMode {
     @ColumnInfo(name = "course_mode_id")
-    public Long courseModeId;
+    public long courseModeId;
     @ColumnInfo(name = "course_mode_name")
     public String courseModeName;
 }
