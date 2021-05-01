@@ -35,11 +35,22 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
         }
 
         public Builder setColor(Integer color) {
-            property.andThen((Object obj) -> {
+            property=property.andThen((Object obj) -> {
                 if (obj instanceof PathOverlay) {
                     ((PathOverlay) obj).setColor(color);
                 } else if (obj instanceof PolylineOverlay) {
                     ((PolylineOverlay) obj).setColor(color);
+                }
+            });
+            return this;
+        }
+
+        public Builder setWidth(Integer width) {
+            property=property.andThen((Object obj) -> {
+                if (obj instanceof PathOverlay) {
+                    ((PathOverlay) obj).setWidth(width);
+                } else if (obj instanceof PolylineOverlay) {
+                    ((PolylineOverlay) obj).setWidth(width);
                 }
             });
             return this;

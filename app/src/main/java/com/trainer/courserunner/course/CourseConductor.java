@@ -8,7 +8,7 @@ import java.util.Observer;
 
 public abstract class CourseConductor implements Observer {
     protected boolean checkUpdateDistance(Location location1,Location location2) {
-        final Double UPDATE_DISTANCE = 100.0;
+        final Double UPDATE_DISTANCE = 10.0;
         return DistanceConverter.getDistance(location1.getLatitude(), location1.getLongitude(),
                 location2.getLatitude(), location2.getLongitude()) >= UPDATE_DISTANCE;
     }

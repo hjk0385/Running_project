@@ -44,6 +44,7 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
             //빌더
             DrawingPath.Builder drawingPathBuilder = new DrawingPath.Builder();
             drawingPathBuilder.setColor(currentDrawingColor);
+            drawingPathBuilder.setWidth(10);
 
             if (i > 0) {
                 drawingPathBuilder.accept(new DrawingAddress(userLocationRecords[i - 1]));

@@ -1,6 +1,8 @@
 package com.trainer.courserunner.course;
 
+import android.graphics.Color;
 import android.location.Location;
+import android.util.Log;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.drawer.CourseDrawerUserCourse;
@@ -35,16 +37,23 @@ public class CourseConductorSketchBook extends CourseConductor {
     }
 
     Location currentlocation=null;
+    Integer currentColor=Color.RED;
     @Override
     public void update(Observable observable, Object o) {
         Location location = (Location) o;
         if(currentlocation==null||checkUpdateDistance(currentlocation,location)){
+            currentlocation=location;
             CourseOverseerUserRecord courseOverseerUserRecord= new CourseOverseerUserRecord(userCourseId);
+            courseOverseerUserRecord.setCurrentLineColor(currentColor);
             CourseDrawerUserCourse courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
             //연계
             courseOverseerUserRecord.sellSubscription(courseDrawerUserCourse);
             courseOverseerUserRecord.update(null, location);
         }
+    }
+
+    public void setCurrentColor(Integer currentColor) {
+        this.currentColor = currentColor;
     }
 }
 
