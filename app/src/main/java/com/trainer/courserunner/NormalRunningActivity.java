@@ -42,9 +42,11 @@ public class NormalRunningActivity extends AppCompatActivity {
     }
 
     private void registDB(Long courseId) {
+        /*
         Intent intent = new Intent(getBaseContext(), CourseGuideActivity.class);
         intent.putExtra("course_id", courseId);
         startActivity(intent);
+        */
     }
 
     @Override

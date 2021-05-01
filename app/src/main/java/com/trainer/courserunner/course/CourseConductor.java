@@ -1,4 +1,6 @@
 package com.trainer.courserunner.course;
 
-public class CourseConductor {
+public abstract class CourseConductor {
+    abstract void oversight();
+    abstract void refreshScreen();
 }

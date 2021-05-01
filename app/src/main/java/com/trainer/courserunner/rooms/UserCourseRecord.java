@@ -25,7 +25,7 @@ public class UserCourseRecord {
     @ColumnInfo(name = "user_course_record_id")
     public long userCourseRecordId;
     @ColumnInfo(name = "user_course_record_color")
-    public long userCourseRecordColor;
+    public int userCourseRecordColor;
     @ColumnInfo(name = "user_course_record_latitude")
     public double userCourseRecordLatitude;
     @ColumnInfo(name = "user_course_record_longitude")

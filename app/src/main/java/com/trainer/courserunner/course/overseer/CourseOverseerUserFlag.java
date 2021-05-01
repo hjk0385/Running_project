@@ -8,17 +8,17 @@ import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseFlag;
 import com.trainer.courserunner.rooms.UserCourseFlag;
 
-public class CourseOverseerFlag extends CourseOverseer {
-    protected long courseId;
+import java.util.Observable;
 
-    public CourseOverseerFlag(long courseId, long usercourseId) {
+public class CourseOverseerUserFlag extends CourseOverseer {
+    protected long courseId;
+    public CourseOverseerUserFlag(long courseId, long usercourseId) {
         super(usercourseId);
         this.courseId = courseId;
     }
 
     @Override
     protected Void doInBackground(Location... locations) {
-        super.doInBackground(locations);
         registUserCourseFlag();
         return null;
     }
@@ -41,4 +41,6 @@ public class CourseOverseerFlag extends CourseOverseer {
             }
         }
     }
+
+
 }

@@ -1,11 +1,12 @@
 package com.trainer.courserunner.course.drawer.drawtype;
 
-import android.location.Location;
-
-import androidx.core.util.Consumer;
+import com.naver.maps.map.overlay.PathOverlay;
+import com.naver.maps.map.overlay.PolylineOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+
 
 public class DrawingPath extends ArrayList<DrawingAddress> {
     Consumer<Object> property;
@@ -16,18 +17,38 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
 
     public static class Builder {
         List<DrawingAddress> drawingAddressList;
-        Builder() {
+        Consumer<Object> property;
+        
+        public Builder() {
             drawingAddressList=new ArrayList<>();
+            property=(o)->{};
         }
 
-        Builder addLocation(Location location) {
-            drawingAddressList.add(new DrawingAddress(location));
+        public void accept(DrawingAddress drawingAddress){
+            drawingAddressList.add(drawingAddress);
+        }
+
+        public Builder add(DrawingAddress drawingAddress) {
+            drawingAddressList.add(drawingAddress);
             return this;
         }
 
-        Builder setColor(int color){
-
+        public Builder setColor(int color){
+            property.andThen((Object obj)->{
+                if(obj instanceof PathOverlay){
+                    ((PathOverlay) obj).setColor(color);
+                }
+                else if(obj instanceof PolylineOverlay){
+                    ((PolylineOverlay) obj).setColor(color);
+                }
+            });
             return this;
+        }
+        public DrawingPath build(){
+            DrawingPath drawingPath = new DrawingPath();
+            drawingPath.addAll(drawingAddressList);
+            drawingPath.property=property;
+            return drawingPath;
         }
     }
 }

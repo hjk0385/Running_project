@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Consumer;
 import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
@@ -20,6 +19,7 @@ import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class NavermapActivity extends AppCompatActivity implements OnMapReadyCallback, MapDrawer {
     protected NaverMap naverMap;
