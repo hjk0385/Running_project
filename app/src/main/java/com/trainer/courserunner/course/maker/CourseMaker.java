@@ -43,7 +43,7 @@ public class CourseMaker extends AsyncTask<Void, Void, Long> {
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
         //코스 정보등록
         CourseDao courseDao = appDatabase.courseDao();
-        long courseId = courseDao.insertDto(new Course());
+        Long courseId = courseDao.insertDto(new Course());
         //코스 깃발등록
         CourseFlagDao courseFlagDao = AppDatabaseLoader.getAppDatabase().courseFlagDao();
         for (Integer i = 0; i < courseRoad.size(); i++) {

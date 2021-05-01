@@ -10,9 +10,9 @@ import java.util.Observer;
 
 public abstract class CourseOverseer extends AsyncTask<Location, Void, Void> implements Observer {
     protected Location currentLocation;
-    protected long usercourseId;
+    protected Long usercourseId;
 
-    public CourseOverseer(long usercourseId) {
+    public CourseOverseer(Long usercourseId) {
         this.usercourseId = usercourseId;
         this.currentLocation = null;
     }

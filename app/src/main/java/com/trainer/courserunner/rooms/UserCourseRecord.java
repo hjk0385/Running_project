@@ -21,9 +21,9 @@ import java.util.Date;
 )
 public class UserCourseRecord {
     @ColumnInfo(name = "user_course_id")
-    public long userCourseId;
+    public Long userCourseId;
     @ColumnInfo(name = "user_course_record_id")
-    public long userCourseRecordId;
+    public Long userCourseRecordId;
     @ColumnInfo(name = "user_course_record_color")
     public Integer userCourseRecordColor;
     @ColumnInfo(name = "user_course_record_latitude")

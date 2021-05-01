@@ -12,7 +12,7 @@ import java.util.Date;
 public class CourseOverseerUserRecord extends CourseOverseer {
     private Integer currentLineColor;
 
-    public CourseOverseerUserRecord(long usercourseId) {
+    public CourseOverseerUserRecord(Long usercourseId) {
         super(usercourseId);
         this.currentLineColor = Color.RED;
     }

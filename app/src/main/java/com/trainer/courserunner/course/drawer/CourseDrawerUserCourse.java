@@ -17,10 +17,10 @@ import java.util.Observer;
 //맵에 그려주는 기능 수행
 public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPath>> implements Observer {
     MapDrawer mapDrawer;
-    long userCourseId;
+    Long userCourseId;
     List<Object> overlayUserLocationPaths;
 
-    public CourseDrawerUserCourse(MapDrawer mapDrawer, long userCourseId) {
+    public CourseDrawerUserCourse(MapDrawer mapDrawer, Long userCourseId) {
         this.mapDrawer = mapDrawer;
         this.userCourseId = userCourseId;
         this.overlayUserLocationPaths = new ArrayList<>();

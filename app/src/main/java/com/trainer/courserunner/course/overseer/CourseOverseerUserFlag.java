@@ -9,9 +9,9 @@ import com.trainer.courserunner.rooms.CourseFlag;
 import com.trainer.courserunner.rooms.UserCourseFlag;
 
 public class CourseOverseerUserFlag extends CourseOverseer {
-    protected long courseId;
+    protected Long courseId;
 
-    public CourseOverseerUserFlag(long courseId, long usercourseId) {
+    public CourseOverseerUserFlag(Long courseId, Long usercourseId) {
         super(usercourseId);
         this.courseId = courseId;
     }

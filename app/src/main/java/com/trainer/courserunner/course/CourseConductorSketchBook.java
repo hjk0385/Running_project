@@ -18,7 +18,7 @@ public class CourseConductorSketchBook extends CourseConductor {
         //코스모드 불러오기
         CourseMode courseMode = appDatabase.courseModeDao().getCourseMode("sketchbook");
         String courseModeName = courseMode.courseModeName;
-        long courseModeId = courseMode.courseModeId;
+        Long courseModeId = courseMode.courseModeId;
 
         //유저코스 등록
         UserCourseDao userCourseDao = appDatabase.userCourseDao();
