@@ -21,15 +21,15 @@ import java.util.Date;
 )
 public class UserCourseRecord {
     @ColumnInfo(name = "user_course_id")
-    public Long userCourseId;
+    public long userCourseId;
     @ColumnInfo(name = "user_course_record_id")
-    public Long userCourseRecordId;
+    public long userCourseRecordId;
     @ColumnInfo(name = "user_course_record_color")
-    public Integer userCourseRecordColor;
+    public int userCourseRecordColor;
     @ColumnInfo(name = "user_course_record_latitude")
-    public Double userCourseRecordLatitude;
+    public double userCourseRecordLatitude;
     @ColumnInfo(name = "user_course_record_longitude")
-    public Double userCourseRecordLongitude;
+    public double userCourseRecordLongitude;
     @ColumnInfo(name = "user_course_record_date")
     public Date userCourseRecordDate;
 }
