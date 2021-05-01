@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trainer.courserunner">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".Application.AppDatabaseLoader"
@@ -11,11 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
+        <!-- 네이버지도 -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="hzqct6qd8n" />
+        <!-- 네이버지도 -->
+
+        <!-- 엑티비티 -->
         <activity android:name=".SoundSetActivity"></activity>
         <activity android:name=".UserSetActivity" />
         <activity android:name=".ProjectRunningActivity" />
         <activity android:name=".NormalRunningActivity">
-
         </activity>
         <activity android:name=".MissionActivity" />
         <activity android:name=".ResultActivity" />
@@ -28,17 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-
-
-        <!-- 네이버 지도 API 키 설정 -->
-        <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="hzqct6qd8n" />
         <activity android:name=".SignupActivity" />
+        <!-- 엑티비티 -->
 
     </application>
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
