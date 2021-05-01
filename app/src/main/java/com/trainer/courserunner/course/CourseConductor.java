@@ -1,7 +1,5 @@
 package com.trainer.courserunner.course;
 
-public abstract class CourseConductor {
-    abstract void oversight();
+import java.util.Observer;
 
-    abstract void refreshScreen();
-}
+public abstract class CourseConductor implements Observer{}

@@ -49,7 +49,7 @@ public class CourseMaker extends AsyncTask<Void, Void, Long> {
         for (Integer i = 0; i < courseRoad.size(); i++) {
             CourseFlag courseFlag = new CourseFlag();
             courseFlag.courseId = courseId;
-            courseFlag.courseFlagId = i;
+            courseFlag.courseFlagId = Long.valueOf(i);
             courseFlag.courseFlagLatitude = courseRoad.get(i).getLatitude();
             courseFlag.courseFlagLongitude = courseRoad.get(i).getLongitude();
             courseFlagDao.insertDto(courseFlag);
