@@ -4,14 +4,12 @@ import android.graphics.Color;
 import android.location.Location;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
-import com.trainer.courserunner.map.geo.DistanceConverter;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.UserCourseRecord;
 
 import java.util.Date;
-import java.util.Observable;
 
-public class CourseOverseerUserRecord extends CourseOverseer{
+public class CourseOverseerUserRecord extends CourseOverseer {
     private int currentLineColor;
 
     public CourseOverseerUserRecord(long usercourseId) {

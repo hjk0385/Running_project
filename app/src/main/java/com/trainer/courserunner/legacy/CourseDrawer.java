@@ -33,10 +33,12 @@ public class CourseDrawer extends AsyncTask<Void, DrawingPath, Void> implements 
     Object overlayCoursePath;
     Object[] overlayCourseMarkers;
     Object[] overlayUserLocationPaths;
+
     public CourseDrawer(MapDrawer mapDrawer, long userCourseId) {
         this.mapDrawer = mapDrawer;
         this.userCourseId = userCourseId;
     }
+
     public CourseDrawer(MapDrawer mapDrawer, long courseId, long userCourseId) {
         this.mapDrawer = mapDrawer;
         this.appDatabase = AppDatabaseLoader.getAppDatabase();

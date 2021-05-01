@@ -13,9 +13,9 @@ public class DrawingAddress {
         this.longitude = location.getLongitude();
     }
 
-    public DrawingAddress(UserCourseRecord userCourseRecord){
-        this.latitude=userCourseRecord.userCourseRecordLatitude;
-        this.longitude=userCourseRecord.userCourseRecordLongitude;
+    public DrawingAddress(UserCourseRecord userCourseRecord) {
+        this.latitude = userCourseRecord.userCourseRecordLatitude;
+        this.longitude = userCourseRecord.userCourseRecordLongitude;
     }
 
     public double getLatitude() {

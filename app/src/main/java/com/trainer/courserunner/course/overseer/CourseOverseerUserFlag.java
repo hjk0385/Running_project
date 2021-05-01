@@ -8,10 +8,9 @@ import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseFlag;
 import com.trainer.courserunner.rooms.UserCourseFlag;
 
-import java.util.Observable;
-
 public class CourseOverseerUserFlag extends CourseOverseer {
     protected long courseId;
+
     public CourseOverseerUserFlag(long courseId, long usercourseId) {
         super(usercourseId);
         this.courseId = courseId;

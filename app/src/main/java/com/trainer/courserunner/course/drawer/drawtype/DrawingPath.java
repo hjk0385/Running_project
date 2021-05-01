@@ -18,13 +18,14 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
     public static class Builder {
         List<DrawingAddress> drawingAddressList;
         Consumer<Object> property;
-        
+
         public Builder() {
-            drawingAddressList=new ArrayList<>();
-            property=(o)->{};
+            drawingAddressList = new ArrayList<>();
+            property = (o) -> {
+            };
         }
 
-        public void accept(DrawingAddress drawingAddress){
+        public void accept(DrawingAddress drawingAddress) {
             drawingAddressList.add(drawingAddress);
         }
 
@@ -33,21 +34,21 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
             return this;
         }
 
-        public Builder setColor(int color){
-            property.andThen((Object obj)->{
-                if(obj instanceof PathOverlay){
+        public Builder setColor(int color) {
+            property.andThen((Object obj) -> {
+                if (obj instanceof PathOverlay) {
                     ((PathOverlay) obj).setColor(color);
-                }
-                else if(obj instanceof PolylineOverlay){
+                } else if (obj instanceof PolylineOverlay) {
                     ((PolylineOverlay) obj).setColor(color);
                 }
             });
             return this;
         }
-        public DrawingPath build(){
+
+        public DrawingPath build() {
             DrawingPath drawingPath = new DrawingPath();
             drawingPath.addAll(drawingAddressList);
-            drawingPath.property=property;
+            drawingPath.property = property;
             return drawingPath;
         }
     }

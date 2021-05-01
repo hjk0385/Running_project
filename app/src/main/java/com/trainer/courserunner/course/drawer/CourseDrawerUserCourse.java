@@ -23,7 +23,7 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
     public CourseDrawerUserCourse(MapDrawer mapDrawer, long userCourseId) {
         this.mapDrawer = mapDrawer;
         this.userCourseId = userCourseId;
-        this.overlayUserLocationPaths=new ArrayList<>();
+        this.overlayUserLocationPaths = new ArrayList<>();
     }
 
     @Override
@@ -34,15 +34,15 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
     @Override
     protected List<DrawingPath> doInBackground(Void... voids) {
         //불러오기
-        AppDatabase appDatabase= AppDatabaseLoader.getAppDatabase();
+        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
         UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCourseId);
         //생성
-        List<DrawingPath> drawingPathList=new ArrayList<>();
+        List<DrawingPath> drawingPathList = new ArrayList<>();
         int i = 0;
         while (i < userLocationRecords.length) {
             int currentDrawingColor = userLocationRecords[i].userCourseRecordColor;
             //빌더
-            DrawingPath.Builder drawingPathBuilder=new DrawingPath.Builder();
+            DrawingPath.Builder drawingPathBuilder = new DrawingPath.Builder();
             drawingPathBuilder.setColor(currentDrawingColor);
 
             if (i > 0) {
@@ -75,8 +75,9 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
             overlayUserLocationPaths.clear();
         }
     }
-    public void drawUserLocationPath(List<DrawingPath> drawingPaths){
-        for(DrawingPath drawingPath:drawingPaths){
+
+    public void drawUserLocationPath(List<DrawingPath> drawingPaths) {
+        for (DrawingPath drawingPath : drawingPaths) {
             overlayUserLocationPaths.add(mapDrawer.drawOverlayPolyline(drawingPath));
         }
     }
