@@ -20,13 +20,16 @@ import com.trainer.courserunner.rooms.CourseFlagDao;
 
 import java.util.List;
 
-//마지막에 result를 처리하는 consumer을 Integer을 받아서 구성된다.
-public class CourseMaker extends AsyncTask<Void,Void,Long> {
+public class CourseMaker extends AsyncTask<Void, Void, Long> {
     private Bitmap image;
     private ScopeMapInfo scopeMapInfo;
     private QuanzationPolicy quanzationPolicy;
     private LineConnectPolicy lineConnectPolicy;
     private Consumer<Long> courseIdConsumer;
+
+    //직접 생성 금지
+    private CourseMaker() {
+    }
 
     @Override
     protected Long doInBackground(Void... voids) {
@@ -60,19 +63,21 @@ public class CourseMaker extends AsyncTask<Void,Void,Long> {
         courseIdConsumer.accept(aLong);
     }
 
-    public static class CourseMakerBuilder{
+    public static class CourseMakerBuilder {
         private Bitmap image;
         private ScopeMapInfo scopeMapInfo;
         private QuanzationPolicy quanzationPolicy;
         private LineConnectPolicy lineConnectPolicy;
         private Consumer<Long> courseIdConsumer;
-        public CourseMakerBuilder(Bitmap image,ScopeMapInfo scopeMapInfo){
-            this.image=image;
-            this.scopeMapInfo=scopeMapInfo;
-            quanzationPolicy=null;
-            lineConnectPolicy=null;
-            courseIdConsumer=null;
+
+        public CourseMakerBuilder(Bitmap image, ScopeMapInfo scopeMapInfo) {
+            this.image = image;
+            this.scopeMapInfo = scopeMapInfo;
+            quanzationPolicy = null;
+            lineConnectPolicy = null;
+            courseIdConsumer = null;
         }
+
         public CourseMakerBuilder setLineConnectPolicy(LineConnectPolicy lineConnectPolicy) {
             this.lineConnectPolicy = lineConnectPolicy;
             return this;
@@ -88,21 +93,19 @@ public class CourseMaker extends AsyncTask<Void,Void,Long> {
             return this;
         }
 
-        public CourseMaker build(){
-            if(quanzationPolicy==null){
+        public CourseMaker build() {
+            if (quanzationPolicy == null) {
+                return null;
+            } else if (lineConnectPolicy == null) {
+                return null;
+            } else if (courseIdConsumer == null) {
                 return null;
             }
-            else if(lineConnectPolicy==null){
-                return null;
-            }
-            else if(courseIdConsumer==null){
-                return null;
-            }
-            CourseMaker courseMaker=new CourseMaker();
-            courseMaker.image=this.image;
-            courseMaker.scopeMapInfo=this.scopeMapInfo;
-            courseMaker.lineConnectPolicy=this.lineConnectPolicy;
-            courseMaker.quanzationPolicy=this.quanzationPolicy;
+            CourseMaker courseMaker = new CourseMaker();
+            courseMaker.image = this.image;
+            courseMaker.scopeMapInfo = this.scopeMapInfo;
+            courseMaker.lineConnectPolicy = this.lineConnectPolicy;
+            courseMaker.quanzationPolicy = this.quanzationPolicy;
             return courseMaker;
         }
     }

@@ -1,24 +1,16 @@
 package com.trainer.courserunner.map.drawer;
 
-import androidx.core.util.Consumer;
-
 import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
+
+import java.util.List;
 
 public interface MapDrawer {
     //draw
-    Object[] drawOverlayMarkers(DrawingPath drawingPath, Consumer<Object> property);
+    List<Object> drawOverlayMarkers(DrawingPath drawingPath);
 
-    Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property);
+    Object drawOverlayPolyline(DrawingPath drawingPath);
 
-    Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property);
-
-    //consumer
-    default Consumer<Object> getBaseProperty() {
-        return (Object obj) -> {
-        };
-    }
-
-    Consumer<Object> getLineColorProperty(int color);
+    Object drawOverlayPathline(DrawingPath drawingPath);
 
     //clear
     void clearDraw(Object drawObject);

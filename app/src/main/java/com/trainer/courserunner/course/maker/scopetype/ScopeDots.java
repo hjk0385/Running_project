@@ -5,9 +5,6 @@ import java.util.List;
 
 public abstract class ScopeDots {
     protected List<ScopeDot> scopeDotList = new ArrayList<>();
-    public List<ScopeDot> getScopeDotList() {
-        return scopeDotList;
-    }
 
     static public ScopeDot getClosestDot(List<ScopeDot> scopeDotList, ScopeDot scopeDot) {
         ScopeDot closestScopeDot = scopeDotList.get(0);
@@ -18,5 +15,9 @@ public abstract class ScopeDots {
             }
         }
         return closestScopeDot;
+    }
+
+    public List<ScopeDot> getScopeDotList() {
+        return scopeDotList;
     }
 }

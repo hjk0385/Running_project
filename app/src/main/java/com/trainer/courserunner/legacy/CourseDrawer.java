@@ -1,23 +1,28 @@
-package com.trainer.courserunner.course.drawer;
+package com.trainer.courserunner.legacy;
 
 import android.graphics.Color;
+import android.os.AsyncTask;
 
 import androidx.core.util.Pair;
 
+import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.rooms.MapFlag;
 import com.trainer.courserunner.rooms.UserLocationRecord;
 import com.trainer.courserunner.rooms.UserMapFlag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 //맵에 그려주는 기능 수행
-public class CourseDrawer {
+public class CourseDrawer extends AsyncTask<Void, DrawingPath, Void> implements Observer {
+    MapDrawer mapDrawer;
+    long userCourseId;
     //객체
     AppDatabase appDatabase;
     MapDrawer mapDrawer;
@@ -28,7 +33,10 @@ public class CourseDrawer {
     Object overlayCoursePath;
     Object[] overlayCourseMarkers;
     Object[] overlayUserLocationPaths;
-
+    public CourseDrawer(MapDrawer mapDrawer, long userCourseId) {
+        this.mapDrawer = mapDrawer;
+        this.userCourseId = userCourseId;
+    }
     public CourseDrawer(MapDrawer mapDrawer, long courseId, long userCourseId) {
         this.mapDrawer = mapDrawer;
         this.appDatabase = AppDatabaseLoader.getAppDatabase();
@@ -36,6 +44,11 @@ public class CourseDrawer {
         this.userCourseId = userCourseId;
         this.overlayUserLocationPaths = null;
         this.overlayCourseMarkers = null;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+
     }
 
     public void clearCoursePath() {
@@ -130,5 +143,11 @@ public class CourseDrawer {
             }
             mapDrawer.drawOverlayPolyline(drawingPath, mapDrawer.getLineColorProperty(color));
         }
+    }
+
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        return null;
     }
 }

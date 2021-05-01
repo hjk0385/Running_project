@@ -46,25 +46,21 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         this.naverMap = naverMap;
     }
 
-
     @Override
-    public Object[] drawOverlayMarkers(DrawingPath drawingPath, Consumer<Object> property) {
-        Object[] markerObjects = new Object[drawingPath.size()];
-        for (int i = 0; i < drawingPath.size(); i++) {
-            double latitude = drawingPath.get(i).getLatitude();
-            double longitude = drawingPath.get(i).getLongitude();
-            //marker
+    public List<Object> drawOverlayMarkers(DrawingPath drawingPath) {
+        List<Object> markerObjects = new ArrayList<>();
+        for (DrawingAddress drawingAddress : drawingPath) {
             Marker marker = new Marker();
-            marker.setPosition(new LatLng(latitude, longitude));
-            property.accept(marker);
+            marker.setPosition(new LatLng(drawingAddress.getLatitude(), drawingAddress.getLongitude()));
             marker.setMap(this.naverMap);
-            markerObjects[i] = marker;
+            markerObjects.add(marker);
         }
         return markerObjects;
     }
 
     @Override
-    public Object drawOverlayPolyline(DrawingPath drawingPath, Consumer<Object> property) {
+    public Object drawOverlayPolyline(DrawingPath drawingPath) {
+        Consumer<Object> property = drawingPath.getProperty();
         //setting
         List<LatLng> lngList = new ArrayList<>();
         for (DrawingAddress drawingAddress : drawingPath) {
@@ -81,7 +77,8 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public Object drawOverlayPathline(DrawingPath drawingPath, Consumer<Object> property) {
+    public Object drawOverlayPathline(DrawingPath drawingPath) {
+        Consumer<Object> property = drawingPath.getProperty();
         //setting
         List<LatLng> lngList = new ArrayList<>();
         for (DrawingAddress drawingAddress : drawingPath) {
@@ -108,14 +105,5 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
         }
     }
 
-    @Override
-    public Consumer<Object> getLineColorProperty(int color) {
-        return (Object drawObject) -> {
-            if (drawObject instanceof PolylineOverlay) {
-                ((PolylineOverlay) drawObject).setColor(color);
-            } else if (drawObject instanceof PathOverlay) {
-                ((PathOverlay) drawObject).setColor(color);
-            }
-        };
-    }
+
 }

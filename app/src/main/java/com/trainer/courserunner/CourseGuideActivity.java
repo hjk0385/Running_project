@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.naver.maps.map.NaverMap;
-import com.trainer.courserunner.course.drawer.CourseDrawer;
+import com.trainer.courserunner.course.drawer.CourseDrawerUserCourse;
 import com.trainer.courserunner.legacy.CourseOverseer;
 import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 
@@ -21,21 +21,21 @@ import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 */
 public class CourseGuideActivity extends NavermapLocationActivity {
     CourseOverseer courseOverseer;
-    CourseDrawer courseDrawer;
+    CourseDrawerUserCourse courseDrawerUserCourse;
 
     boolean tempOptionMarker = true;
     boolean tempOptionCourse = true;
     boolean first;
 
     private void mapStart() {
-        courseDrawer.drawCoursePath();
-        courseDrawer.drawMarkers();
+        courseDrawerUserCourse.drawCoursePath();
+        courseDrawerUserCourse.drawMarkers();
     }
 
     private void mapRefresh() {
-        courseDrawer.drawUserLocationPath();
+        courseDrawerUserCourse.drawUserLocationPath();
         if (tempOptionMarker) {
-            courseDrawer.drawMarkers();
+            courseDrawerUserCourse.drawMarkers();
         }
     }
 
@@ -68,18 +68,18 @@ public class CourseGuideActivity extends NavermapLocationActivity {
                 //임시옵션
                 tempOptionMarker = !tempOptionMarker;
                 if (tempOptionMarker) {
-                    courseDrawer.drawMarkers();
+                    courseDrawerUserCourse.drawMarkers();
                 } else {
-                    courseDrawer.clearMarkers();
+                    courseDrawerUserCourse.clearMarkers();
                 }
                 return true;
             case R.id.nocourse_option:
                 //임시옵션
                 tempOptionCourse = !tempOptionCourse;
                 if (tempOptionCourse) {
-                    courseDrawer.drawCoursePath();
+                    courseDrawerUserCourse.drawCoursePath();
                 } else {
-                    courseDrawer.clearCoursePath();
+                    courseDrawerUserCourse.clearCoursePath();
                 }
                 return true;
             default:
@@ -95,7 +95,7 @@ public class CourseGuideActivity extends NavermapLocationActivity {
         long course_id = intent.getExtras().getLong("course_id");
         courseOverseer = new CourseOverseer();
         long usercourseId = courseOverseer.startOversight(course_id);
-        courseDrawer = new CourseDrawer(this, course_id, usercourseId);
+        courseDrawerUserCourse = new CourseDrawerUserCourse(this, course_id, usercourseId);
         this.mapStart();
 
         naverMap.addOnLocationChangeListener((Location location) -> {

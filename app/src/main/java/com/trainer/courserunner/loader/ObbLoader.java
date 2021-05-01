@@ -11,7 +11,7 @@ public class ObbLoader {
     private final static String EXP_PATH = "/Android/obb/";
 
     public static String[] getAPKExpansionFiles(Context ctx, int mainVersion,
-                                         int patchVersion) {
+                                                int patchVersion) {
         String packageName = ctx.getPackageName();
         Vector<String> ret = new Vector<String>();
         if (Environment.getExternalStorageState()

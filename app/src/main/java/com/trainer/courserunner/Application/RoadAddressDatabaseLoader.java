@@ -1,23 +1,13 @@
 package com.trainer.courserunner.Application;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import androidx.room.Room;
 
 import com.trainer.courserunner.loader.ObbLoader;
-import com.trainer.courserunner.map.roadaddress.RoadAddressDao;
-import com.trainer.courserunner.rooms.AppDatabase;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 public class RoadAddressDatabaseLoader extends Application {
     static private SQLiteDatabase roadAddressDatabase = null;
+
     static public SQLiteDatabase getRoadAddressDatabase() {
         return roadAddressDatabase;
     }

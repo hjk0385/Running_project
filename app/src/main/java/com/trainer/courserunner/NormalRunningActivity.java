@@ -17,7 +17,6 @@ import androidx.core.app.ActivityCompat;
 import com.trainer.courserunner.course.maker.CourseMaker;
 import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyMinimumCost;
 import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationPolicyRandom;
-import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.loader.AssetLoader;
 import com.trainer.courserunner.map.geo.DistanceConverter;

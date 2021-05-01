@@ -2,7 +2,6 @@ package com.trainer.courserunner.rooms;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 
 @Entity(tableName = "course_mode",
         primaryKeys = {

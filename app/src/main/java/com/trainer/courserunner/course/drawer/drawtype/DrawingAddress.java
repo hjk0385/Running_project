@@ -1,26 +1,19 @@
 package com.trainer.courserunner.course.drawer.drawtype;
 
-import com.trainer.courserunner.rooms.UserLocationRecord;
+import android.location.Location;
 
 public class DrawingAddress {
-    double latitude;
-    double longitude;
+    Location location;
 
-    public DrawingAddress(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public DrawingAddress(UserLocationRecord userLocationRecord) {
-        this.latitude = userLocationRecord.latitude;
-        this.longitude = userLocationRecord.longitude;
+    public DrawingAddress(Location location) {
+        this.location = location;
     }
 
     public double getLatitude() {
-        return latitude;
+        return location.getLatitude();
     }
 
     public double getLongitude() {
-        return longitude;
+        return location.getLongitude();
     }
 }

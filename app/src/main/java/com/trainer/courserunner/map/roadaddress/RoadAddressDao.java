@@ -1,12 +1,8 @@
 package com.trainer.courserunner.map.roadaddress;
 
-import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.trainer.courserunner.Application.RoadAddressDatabaseLoader;
-import com.trainer.courserunner.loader.ObbLoader;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 
 import java.util.ArrayList;

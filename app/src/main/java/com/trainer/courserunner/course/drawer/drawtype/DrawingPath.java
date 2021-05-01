@@ -1,37 +1,33 @@
 package com.trainer.courserunner.course.drawer.drawtype;
 
-import com.trainer.courserunner.rooms.MapFlag;
-import com.trainer.courserunner.rooms.UserLocationRecord;
+import android.location.Location;
+
+import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DrawingPath extends ArrayList<DrawingAddress> {
-    //빌더
-    //색상 및 두께 생성
+    Consumer<Object> property;
 
-    public DrawingPath() {
-
+    public Consumer<Object> getProperty() {
+        return property;
     }
 
-    public DrawingPath(MapFlag[] mapFlags) {
-        super();
-        for (MapFlag courseFlag : mapFlags) {
-            this.add(new DrawingAddress(courseFlag.latitude, courseFlag.longitude));
+    public static class Builder {
+        List<DrawingAddress> drawingAddressList;
+        Builder() {
+            drawingAddressList=new ArrayList<>();
         }
-    }
 
-    public DrawingPath(UserLocationRecord[] userLocationRecords) {
-        super();
-        for (UserLocationRecord userLocationRecord : userLocationRecords) {
-            this.add(new DrawingAddress(userLocationRecord.latitude, userLocationRecord.longitude));
+        Builder addLocation(Location location) {
+            drawingAddressList.add(new DrawingAddress(location));
+            return this;
         }
-    }
 
-    public DrawingPath(List<MapFlag> mapFlags) {
-        super();
-        for (MapFlag mapFlag : mapFlags) {
-            this.add(new DrawingAddress(mapFlag.latitude, mapFlag.longitude));
+        Builder setColor(int color){
+
+            return this;
         }
     }
 }
