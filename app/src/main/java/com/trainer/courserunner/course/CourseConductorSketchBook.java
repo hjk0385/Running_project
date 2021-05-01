@@ -10,12 +10,10 @@ import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseMode;
 import com.trainer.courserunner.rooms.UserCourse;
 import com.trainer.courserunner.rooms.UserCourseDao;
-import com.trainer.courserunner.rooms.UserCourseRecordDao;
 
 import java.util.Observable;
-import java.util.Observer;
 
-public class CourseConductorSketchBook extends CourseConductor{
+public class CourseConductorSketchBook extends CourseConductor {
     Long userCourseId;
     CourseOverseerUserRecord courseOverseerUserRecord;
     CourseDrawerUserCourse courseDrawerUserCourse;
@@ -28,21 +26,30 @@ public class CourseConductorSketchBook extends CourseConductor{
         //유저코스 등록
         UserCourseDao userCourseDao = appDatabase.userCourseDao();
         UserCourse userCourse = new UserCourse();
-        userCourse.courseId=null;
-        userCourse.userCourseId=null;
-        userCourse.courseModeId=courseMode.courseModeId;
-        userCourse.userCourseName=null;
+        userCourse.courseId = null;
+        userCourse.userCourseId = null;
+        userCourse.courseModeId = courseMode.courseModeId;
+        userCourse.userCourseName = null;
+        //초기화
+        courseOverseerUserRecord=null;
+
+
+
+
         //시작
-        this.userCourseId=userCourseDao.insertDto(userCourse);
-        this.courseOverseerUserRecord=new CourseOverseerUserRecord(this.userCourseId);
-        this.courseDrawerUserCourse=new CourseDrawerUserCourse(mapDrawer,userCourseId);
+        this.userCourseId = userCourseDao.insertDto(userCourse);
+        this.courseOverseerUserRecord = new CourseOverseerUserRecord(this.userCourseId);
+        this.courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
         //연계
         courseOverseerUserRecord.sellSubscription(courseDrawerUserCourse);
     }
 
     @Override
     public void update(Observable observable, Object o) {
-        Location location=(Location)o;
-        courseOverseerUserRecord.update(null,location);
+        Location location = (Location) o;
+
+
+
+        courseOverseerUserRecord.update(null, location);
     }
 }

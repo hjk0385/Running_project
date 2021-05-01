@@ -14,9 +14,9 @@ public class SketchBookActivity extends NavermapLocationActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
-        courseConductorSketchBook=new CourseConductorSketchBook(this);
-        naverMap.addOnLocationChangeListener((Location location)->{
-            courseConductorSketchBook.update(null,location);
+        courseConductorSketchBook = new CourseConductorSketchBook(this);
+        naverMap.addOnLocationChangeListener((Location location) -> {
+            courseConductorSketchBook.update(null, location);
         });
     }
 }

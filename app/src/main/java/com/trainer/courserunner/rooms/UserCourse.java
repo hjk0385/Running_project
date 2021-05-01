@@ -3,10 +3,11 @@ package com.trainer.courserunner.rooms;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 
 @Entity(tableName = "user_course",
         primaryKeys = {
-                "course_mode_id"
+                "user_course_id"
         },
         foreignKeys = {
                 @ForeignKey(
@@ -19,7 +20,8 @@ import androidx.room.ForeignKey;
                         parentColumns = "course_mode_id",
                         childColumns = "course_mode_id",
                         onDelete = ForeignKey.CASCADE)
-        }
+        },
+        indices = {@Index(value={"user_course_id"}, unique = true)}
 )
 public class UserCourse {
     @ColumnInfo(name = "user_course_id")

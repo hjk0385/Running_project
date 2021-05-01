@@ -1,8 +1,10 @@
 package com.trainer.courserunner.rooms;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 
 import java.util.Date;
 
@@ -17,11 +19,14 @@ import java.util.Date;
                         parentColumns = "user_course_id",
                         childColumns = "user_course_id",
                         onDelete = ForeignKey.CASCADE)
-        }
+        },
+        indices = {@Index(value={"user_course_id"}, unique = true)}
 )
 public class UserCourseRecord {
+    @NonNull
     @ColumnInfo(name = "user_course_id")
     public Long userCourseId;
+    @NonNull
     @ColumnInfo(name = "user_course_record_id")
     public Long userCourseRecordId;
     @ColumnInfo(name = "user_course_record_color")

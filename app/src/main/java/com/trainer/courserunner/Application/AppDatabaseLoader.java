@@ -22,10 +22,10 @@ public class AppDatabaseLoader extends Application {
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
                 "testdatabase114").build();
         */
-        appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build();
+        appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build();
 
         CourseMode courseMode = new CourseMode();
-        courseMode.courseModeId = 1;
+        courseMode.courseModeId = Long.valueOf(1);
         courseMode.courseModeName = "sketchbook";
         appDatabase.courseModeDao().insertDto(courseMode);
     }

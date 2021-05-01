@@ -2,6 +2,7 @@ package com.trainer.courserunner.course.overseer;
 
 import android.location.Location;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.trainer.courserunner.map.geo.DistanceConverter;
 
@@ -14,13 +15,14 @@ public abstract class CourseOverseer extends AsyncTask<Location, Void, Void> imp
     protected Location currentLocation;
     protected Long usercourseId;
 
-    private List<Observer> subscribeList=new ArrayList<>();
+    private List<Observer> subscribeList = new ArrayList<>();
+
     public CourseOverseer(Long usercourseId) {
         this.usercourseId = usercourseId;
         this.currentLocation = null;
     }
 
-    public void sellSubscription(Observer observer){
+    public void sellSubscription(Observer observer) {
         subscribeList.add(observer);
     }
 
@@ -33,10 +35,14 @@ public abstract class CourseOverseer extends AsyncTask<Location, Void, Void> imp
     @Override
     final public void update(Observable observable, Object o) {
         Location location = (Location) o;
+
+
         if (currentLocation == null || checkUpdateDistance(location)) {
             currentLocation = location;
             this.execute(location);
-            subscribeList.stream().forEach((Observer observer)->{observer.update(null,null);});
+            subscribeList.stream().forEach((Observer observer) -> {
+                observer.update(null, null);
+            });
         }
     }
 }

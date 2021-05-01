@@ -1,7 +1,9 @@
 package com.trainer.courserunner.rooms;
 
+import androidx.room.Dao;
 import androidx.room.Query;
 
+@Dao
 public interface UserCourseRecordDao extends BaseDao<UserCourseRecord> {
     @Query("SELECT IFNULL(MAX(user_course_record_id),0)+1 FROM user_course_record WHERE user_course_id=:user_course_id")
     Long getNextUserLocationOrder(Long user_course_id);

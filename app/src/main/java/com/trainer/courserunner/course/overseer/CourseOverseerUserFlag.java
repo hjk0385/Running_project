@@ -35,6 +35,7 @@ public class CourseOverseerUserFlag extends CourseOverseer {
             if (checkMarkerDistance(courseFlag.courseFlagLatitude, courseFlag.courseFlagLongitude)) {
                 UserCourseFlag userCourseFlag = new UserCourseFlag();
                 userCourseFlag.courseFlagId = courseFlag.courseFlagId;
+                userCourseFlag.courseId=courseId;
                 userCourseFlag.userCourseId = this.usercourseId;
                 appDatabase.userCourseFlagDao().insertDto(userCourseFlag);
             }
