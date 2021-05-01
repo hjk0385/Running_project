@@ -19,8 +19,7 @@ import java.util.Date;
                         parentColumns = "user_course_id",
                         childColumns = "user_course_id",
                         onDelete = ForeignKey.CASCADE)
-        },
-        indices = {@Index(value={"user_course_id"}, unique = true)}
+        }
 )
 public class UserCourseRecord {
     @NonNull

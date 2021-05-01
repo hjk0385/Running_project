@@ -11,12 +11,12 @@ import com.trainer.courserunner.rooms.CourseMode;
 import com.trainer.courserunner.rooms.UserCourse;
 import com.trainer.courserunner.rooms.UserCourseDao;
 
+import java.util.Map;
 import java.util.Observable;
 
 public class CourseConductorSketchBook extends CourseConductor {
     Long userCourseId;
-    CourseOverseerUserRecord courseOverseerUserRecord;
-    CourseDrawerUserCourse courseDrawerUserCourse;
+    MapDrawer mapDrawer;
 
     public CourseConductorSketchBook(MapDrawer mapDrawer) {
         //데이터베이스
@@ -30,26 +30,24 @@ public class CourseConductorSketchBook extends CourseConductor {
         userCourse.userCourseId = null;
         userCourse.courseModeId = courseMode.courseModeId;
         userCourse.userCourseName = null;
-        //초기화
-        courseOverseerUserRecord=null;
-
-
-
-
-        //시작
         this.userCourseId = userCourseDao.insertDto(userCourse);
-        this.courseOverseerUserRecord = new CourseOverseerUserRecord(this.userCourseId);
-        this.courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
-        //연계
-        courseOverseerUserRecord.sellSubscription(courseDrawerUserCourse);
+        this.mapDrawer=mapDrawer;
     }
 
+    Location currentlocation=null;
     @Override
     public void update(Observable observable, Object o) {
         Location location = (Location) o;
-
-
-
-        courseOverseerUserRecord.update(null, location);
+        if(currentlocation==null||checkUpdateDistance(currentlocation,location)){
+            CourseOverseerUserRecord courseOverseerUserRecord= new CourseOverseerUserRecord(userCourseId);
+            CourseDrawerUserCourse courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
+            //연계
+            courseOverseerUserRecord.sellSubscription(courseDrawerUserCourse);
+            courseOverseerUserRecord.update(null, location);
+        }
     }
 }
+
+
+
+

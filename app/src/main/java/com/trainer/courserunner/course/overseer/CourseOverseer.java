@@ -26,23 +26,16 @@ public abstract class CourseOverseer extends AsyncTask<Location, Void, Void> imp
         subscribeList.add(observer);
     }
 
-    protected boolean checkUpdateDistance(Location location) {
-        final Double UPDATE_DISTANCE = 100.0;
-        return DistanceConverter.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
-                location.getLatitude(), location.getLongitude()) >= UPDATE_DISTANCE;
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        subscribeList.stream().forEach((Observer observer) ->observer.update(null, null));
     }
 
     @Override
     final public void update(Observable observable, Object o) {
         Location location = (Location) o;
-
-
-        if (currentLocation == null || checkUpdateDistance(location)) {
-            currentLocation = location;
-            this.execute(location);
-            subscribeList.stream().forEach((Observer observer) -> {
-                observer.update(null, null);
-            });
-        }
+        currentLocation = location;
+        this.execute(location);
     }
 }
