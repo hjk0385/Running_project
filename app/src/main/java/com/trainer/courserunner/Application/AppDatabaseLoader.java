@@ -24,9 +24,22 @@ public class AppDatabaseLoader extends Application {
         */
         appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build();
 
-        CourseMode courseMode = new CourseMode();
+        //나중에 미리채우기로 변경
+        CourseMode courseMode;
+
+        courseMode = new CourseMode();
         courseMode.courseModeId = Long.valueOf(1);
-        courseMode.courseModeName = "sketchbook";
+        courseMode.courseModeName = "SketchBook";
+        appDatabase.courseModeDao().insertDto(courseMode);
+
+        courseMode = new CourseMode();
+        courseMode.courseModeId = Long.valueOf(2);
+        courseMode.courseModeName = "GuideRunner";
+        appDatabase.courseModeDao().insertDto(courseMode);
+
+        courseMode = new CourseMode();
+        courseMode.courseModeId = Long.valueOf(3);
+        courseMode.courseModeName = "";
         appDatabase.courseModeDao().insertDto(courseMode);
     }
 }

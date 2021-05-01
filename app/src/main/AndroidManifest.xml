@@ -25,7 +25,13 @@
         <activity android:name=".SoundSetActivity"></activity>
         <activity android:name=".UserSetActivity" />
         <activity android:name=".ProjectRunningActivity" />
-        <activity android:name=".NormalRunningActivity"></activity>
+        <activity android:name=".NormalRunningActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MissionActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".RunningActivity" />
@@ -33,14 +39,11 @@
 
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SketchBookActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".SignupActivity" />
+        <activity android:name=".SketchBookActivity">
+
+        </activity>
+        <activity android:name=".GuideRunActivity" />
         <!-- 엑티비티 -->
 
     </application>

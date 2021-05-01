@@ -2,9 +2,6 @@ package com.trainer.courserunner.course.overseer;
 
 import android.location.Location;
 import android.os.AsyncTask;
-import android.util.Log;
-
-import com.trainer.courserunner.map.geo.DistanceConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +26,7 @@ public abstract class CourseOverseer extends AsyncTask<Location, Void, Void> imp
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        subscribeList.stream().forEach((Observer observer) ->observer.update(null, null));
+        subscribeList.stream().forEach((Observer observer) -> observer.update(null, currentLocation));
     }
 
     @Override

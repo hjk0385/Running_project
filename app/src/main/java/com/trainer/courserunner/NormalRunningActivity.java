@@ -2,6 +2,7 @@ package com.trainer.courserunner;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -41,12 +42,10 @@ public class NormalRunningActivity extends AppCompatActivity {
     }
 
     private void registDB(Long courseId) {
-/*
-        Intent intent = new Intent(getBaseContext(), CourseGuideActivity.class);
-        intent.putExtra("course_id", courseId);
-        startActivity(intent);
-        */
 
+        Intent intent = new Intent(getBaseContext(), GuideRunActivity.class);
+        intent.putExtra("courseId", courseId);
+        startActivity(intent);
     }
 
     @Override

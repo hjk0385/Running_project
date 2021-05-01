@@ -104,6 +104,4 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
             ((PathOverlay) drawObject).setMap(null);
         }
     }
-
-
 }

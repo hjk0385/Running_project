@@ -21,7 +21,7 @@ import androidx.room.Index;
                         childColumns = "course_mode_id",
                         onDelete = ForeignKey.CASCADE)
         },
-        indices = {@Index(value={"user_course_id"}, unique = true)}
+        indices = {@Index(value = {"user_course_id"}, unique = true)}
 )
 public class UserCourse {
     @ColumnInfo(name = "user_course_id")

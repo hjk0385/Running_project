@@ -79,7 +79,7 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
 
     public void drawUserLocationPath(List<DrawingPath> drawingPaths) {
         for (DrawingPath drawingPath : drawingPaths) {
-            if(drawingPath.size()>=2) {
+            if (drawingPath.size() >= 2) {
                 overlayUserLocationPaths.add(mapDrawer.drawOverlayPolyline(drawingPath));
             }
         }

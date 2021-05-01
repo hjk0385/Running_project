@@ -19,7 +19,7 @@ import androidx.room.Index;
                         onDelete = ForeignKey.CASCADE)
         },
         indices = {
-                @Index(value={"course_flag_Id"}, unique = true)
+                @Index(value = {"course_flag_Id"}, unique = true)
         }
 )
 public class CourseFlag {
