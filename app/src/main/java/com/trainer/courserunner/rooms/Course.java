@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey;
 public class Course {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "course_id")
-    public long courseId;
+    public Long courseId;
 }

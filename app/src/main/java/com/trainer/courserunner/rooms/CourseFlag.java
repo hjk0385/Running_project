@@ -19,11 +19,11 @@ import androidx.room.ForeignKey;
 )
 public class CourseFlag {
     @ColumnInfo(name = "course_id")
-    public long courseId;
+    public Long courseId;
     @ColumnInfo(name = "course_flag_Id")
-    public long courseFlagId;
+    public Long courseFlagId;
     @ColumnInfo(name = "course_flag_latitude")
-    public double courseFlagLatitude;
+    public Double courseFlagLatitude;
     @ColumnInfo(name = "course_flag_longitude")
-    public double courseFlagLongitude;
+    public Double courseFlagLongitude;
 }
