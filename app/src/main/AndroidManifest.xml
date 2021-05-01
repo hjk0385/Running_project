@@ -30,13 +30,14 @@
         <activity android:name=".ResultActivity" />
         <activity android:name=".RunningActivity" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".SketchBookActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".SignupActivity" />
         <!-- 엑티비티 -->
 
