@@ -10,14 +10,14 @@ import com.trainer.courserunner.rooms.UserCourseRecord;
 import java.util.Date;
 
 public class CourseOverseerUserRecord extends CourseOverseer {
-    private int currentLineColor;
+    private Integer currentLineColor;
 
     public CourseOverseerUserRecord(long usercourseId) {
         super(usercourseId);
         this.currentLineColor = Color.RED;
     }
 
-    public void setCurrentLineColor(int currentLineColor) {
+    public void setCurrentLineColor(Integer currentLineColor) {
         this.currentLineColor = currentLineColor;
     }
 

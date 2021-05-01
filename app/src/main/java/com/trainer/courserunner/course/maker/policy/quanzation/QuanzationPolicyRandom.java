@@ -21,8 +21,8 @@ public class QuanzationPolicyRandom extends QuanzationPolicyDefault implements Q
         ScopeDotsMap courseMap = super.quantization(scopeDotsImage, scopeDotsMap);
         //변경
         List<ScopeDot> quanzationList = courseMap.getScopeDotList();
-        int resultSize = (int) (quanzationList.size() * reminderPercentage);
-        int deleteSize = quanzationList.size() - resultSize;
+        Integer resultSize = (int) (quanzationList.size() * reminderPercentage);
+        Integer deleteSize = quanzationList.size() - resultSize;
         Collections.shuffle(quanzationList);
         if (deleteSize > 0) {
             quanzationList.subList(0, deleteSize).clear();

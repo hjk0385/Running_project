@@ -38,9 +38,9 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
         UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCourseId);
         //생성
         List<DrawingPath> drawingPathList = new ArrayList<>();
-        int i = 0;
+        Integer i = 0;
         while (i < userLocationRecords.length) {
-            int currentDrawingColor = userLocationRecords[i].userCourseRecordColor;
+            Integer currentDrawingColor = userLocationRecords[i].userCourseRecordColor;
             //빌더
             DrawingPath.Builder drawingPathBuilder = new DrawingPath.Builder();
             drawingPathBuilder.setColor(currentDrawingColor);
@@ -49,7 +49,7 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
                 drawingPathBuilder.accept(new DrawingAddress(userLocationRecords[i - 1]));
             }
             //컬러 경로 만들기
-            int j = i;
+            Integer j = i;
             while (j < userLocationRecords.length && currentDrawingColor == userLocationRecords[j].userCourseRecordColor) {
                 drawingPathBuilder.accept(new DrawingAddress(userLocationRecords[j]));
                 j++;

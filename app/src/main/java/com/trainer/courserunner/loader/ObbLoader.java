@@ -10,8 +10,8 @@ public class ObbLoader {
     // The shared path to all app expansion files
     private final static String EXP_PATH = "/Android/obb/";
 
-    public static String[] getAPKExpansionFiles(Context ctx, int mainVersion,
-                                                int patchVersion) {
+    public static String[] getAPKExpansionFiles(Context ctx, Integer mainVersion,
+                                                Integer patchVersion) {
         String packageName = ctx.getPackageName();
         Vector<String> ret = new Vector<String>();
         if (Environment.getExternalStorageState()

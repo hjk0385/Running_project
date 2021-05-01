@@ -9,7 +9,7 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public abstract class NavermapLocationActivity extends NavermapActivity {
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
+    private static final Integer LOCATION_PERMISSION_REQUEST_CODE = 1000;
     protected FusedLocationSource locationSource;
     protected double userLongitude;
     protected double userLatitude;
@@ -29,7 +29,7 @@ public abstract class NavermapLocationActivity extends NavermapActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
+    public void onRequestPermissionsResult(Integer requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (locationSource.onRequestPermissionsResult(

@@ -8,7 +8,7 @@ public abstract class ScopeDots {
 
     static public ScopeDot getClosestDot(List<ScopeDot> scopeDotList, ScopeDot scopeDot) {
         ScopeDot closestScopeDot = scopeDotList.get(0);
-        for (int i = 1; i < scopeDotList.size(); i++) {
+        for (Integer i = 1; i < scopeDotList.size(); i++) {
             if (closestScopeDot.getCost(scopeDot) >
                     scopeDotList.get(i).getCost(scopeDot)) {
                 closestScopeDot = scopeDotList.get(i);

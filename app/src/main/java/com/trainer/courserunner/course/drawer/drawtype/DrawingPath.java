@@ -34,7 +34,7 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
             return this;
         }
 
-        public Builder setColor(int color) {
+        public Builder setColor(Integer color) {
             property.andThen((Object obj) -> {
                 if (obj instanceof PathOverlay) {
                     ((PathOverlay) obj).setColor(color);

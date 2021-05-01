@@ -21,7 +21,7 @@ public class ScopeDotsMap extends ScopeDots {
 
     static public ScopeDotAddress getClosestDot(List<ScopeDotAddress> scopeDotList, ScopeDotAddress scopeDot) {
         ScopeDotAddress closestScopeDot = scopeDotList.get(0);
-        for (int i = 1; i < scopeDotList.size(); i++) {
+        for (Integer i = 1; i < scopeDotList.size(); i++) {
             if (closestScopeDot.getCost(scopeDot) >
                     scopeDotList.get(i).getCost(scopeDot)) {
                 closestScopeDot = scopeDotList.get(i);

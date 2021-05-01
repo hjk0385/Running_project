@@ -46,7 +46,7 @@ public class CourseMaker extends AsyncTask<Void, Void, Long> {
         long courseId = courseDao.insertDto(new Course());
         //코스 깃발등록
         CourseFlagDao courseFlagDao = AppDatabaseLoader.getAppDatabase().courseFlagDao();
-        for (int i = 0; i < courseRoad.size(); i++) {
+        for (Integer i = 0; i < courseRoad.size(); i++) {
             CourseFlag courseFlag = new CourseFlag();
             courseFlag.courseId = courseId;
             courseFlag.courseFlagId = i;
