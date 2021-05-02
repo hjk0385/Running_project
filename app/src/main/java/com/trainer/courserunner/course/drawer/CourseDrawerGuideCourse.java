@@ -31,13 +31,19 @@ public class CourseDrawerGuideCourse extends CourseDrawer{
         List<DrawingPath> drawingPathList = new ArrayList<>();
         int i = 0;
         while (i < courseFlags.length) {
+            Integer currentDrawingColor = Color.BLUE;
             //빌더
             DrawingPath.Builder drawingPathBuilder = new DrawingPath.Builder();
-            drawingPathBuilder.setColor(Color.BLACK);
+            drawingPathBuilder.setColor(currentDrawingColor);
             drawingPathBuilder.setWidth(10);
+
+            if (i > 0) {
+                drawingPathBuilder.accept(new DrawingAddress(courseFlags[i - 1]));
+            }
+            //컬러 경로 만들기
             int j = i;
-            while (j < courseFlags.length ) {
-                drawingPathBuilder.accept(new DrawingAddress(courseFlags[i]));
+            while (j < courseFlags.length) {
+                drawingPathBuilder.accept(new DrawingAddress(courseFlags[j]));
                 j++;
             }
             drawingPathList.add(drawingPathBuilder.build());
