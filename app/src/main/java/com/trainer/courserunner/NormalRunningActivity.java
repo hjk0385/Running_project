@@ -1,32 +1,25 @@
 package com.trainer.courserunner;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.trainer.courserunner.course.CourseGuideActivity;
-import com.trainer.courserunner.course.CourseMaker;
-import com.trainer.courserunner.managedata.AssetLoader;
-import com.trainer.courserunner.managedata.MapDAO;
-import com.trainer.courserunner.maps.MapFunction;
-import com.trainer.courserunner.rooms.AppDatabaseLoader;
-import com.trainer.courserunner.scopetype.ScopeDotLocation;
-import com.trainer.courserunner.scopetype.ScopeDotsImage;
-import com.trainer.courserunner.scopetype.ScopeDotsMap;
-import com.trainer.courserunner.scopetype.ScopeMapInfo;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.trainer.courserunner.course.maker.CourseMaker;
+import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyMinimumCost;
+import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationPolicyRandom;
+import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.loader.AssetLoader;
+import com.trainer.courserunner.map.geo.DistanceConverter;
 
 public class NormalRunningActivity extends AppCompatActivity {
     Location currentLocation;
@@ -34,25 +27,24 @@ public class NormalRunningActivity extends AppCompatActivity {
     View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
             //테스트코드
-            MapDAO.initMapDB(getApplicationContext());
-            AppDatabaseLoader.initAppdatabase(getApplicationContext());
+            ScopeMapInfo scopeMapInfo = DistanceConverter.getScopeMapInfo(currentLocation, kilometer / 4);
 
-            ScopeMapInfo scopeMapInfo = MapFunction.getScopeMapInfo(currentLocation,kilometer/4);
-            Log.v("TESTMETER", String.valueOf(kilometer));
+            CourseMaker.CourseMakerBuilder courseMakerBuilder = new CourseMaker.CourseMakerBuilder(
+                    AssetLoader.loadImage(this, "testbitmap2.png"), scopeMapInfo);
 
-            //course make
-            ScopeDotsImage image = new ScopeDotsImage(AssetLoader.loadImage(this, "testbitmap2.png"));
-            ScopeDotsMap maps = new ScopeDotsMap(scopeMapInfo);
-            ScopeDotLocation currentLocation = new ScopeDotLocation(scopeMapInfo, scopeMapInfo.getStartX(), scopeMapInfo.getStartY());
-            CourseMaker courseMaker = new CourseMaker();
-            long course_id = courseMaker.makeCourse(image, maps, currentLocation);
-            Log.v("testFunction", String.valueOf(course_id));
-            //테스트코드 종료
+            courseMakerBuilder.setLineConnectPolicy(new LineConnectPolicyMinimumCost())
+                    .setQuanzationPolicy(new QuanzationPolicyRandom(0.25))
+                    .setCourseIdConsumer(this::registDB);
 
-            Intent intent = new Intent(getBaseContext(), CourseGuideActivity.class);
-            intent.putExtra("course_id", course_id);
-            startActivity(intent);
+            CourseMaker courseMaker = courseMakerBuilder.build();
+            courseMaker.execute();
         };
+    }
+
+    private void registDB(Long courseId) {
+        Intent intent = new Intent(getBaseContext(), GuideRunActivity.class);
+        intent.putExtra("courseId", courseId);
+        startActivity(intent);
     }
 
     @Override
@@ -89,7 +81,7 @@ public class NormalRunningActivity extends AppCompatActivity {
             @Override
             public void onLocationChanged(Location location) {
                 // 새로운 위치의 발견
-                currentLocation=location;
+                currentLocation = location;
                 km2_btn.setEnabled(true);
                 km4_btn.setEnabled(true);
                 km6_btn.setEnabled(true);
