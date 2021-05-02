@@ -11,28 +11,23 @@ import com.trainer.courserunner.rooms.UserCourseRecord;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
 //맵에 그려주는 기능 수행
-public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPath>> implements Observer {
-    MapDrawer mapDrawer;
+public class CourseDrawerUserCourse extends CourseDrawer {
     Long userCourseId;
     List<Object> overlayUserLocationPaths;
 
     public CourseDrawerUserCourse(MapDrawer mapDrawer, Long userCourseId) {
-        this.mapDrawer = mapDrawer;
+        super(mapDrawer);
         this.userCourseId = userCourseId;
         this.overlayUserLocationPaths = new ArrayList<>();
     }
 
     @Override
-    public void update(Observable observable, Object o) {
-        execute();
-    }
-
-    @Override
-    protected List<DrawingPath> doInBackground(Void... voids) {
+    protected List<DrawingPath> makeDrawing() {
         //불러오기
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
         UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCourseId);
@@ -51,7 +46,7 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
             }
             //컬러 경로 만들기
             int j = i;
-            while (j < userLocationRecords.length && currentDrawingColor == userLocationRecords[j].userCourseRecordColor) {
+            while (j < userLocationRecords.length && Objects.equals(currentDrawingColor, userLocationRecords[j].userCourseRecordColor)) {
                 drawingPathBuilder.accept(new DrawingAddress(userLocationRecords[j]));
                 j++;
             }
@@ -62,26 +57,21 @@ public class CourseDrawerUserCourse extends AsyncTask<Void, Void, List<DrawingPa
     }
 
     @Override
-    protected void onPostExecute(List<DrawingPath> drawingPathList) {
-        super.onPostExecute(drawingPathList);
-        clearUserLocationPath();
-        drawUserLocationPath(drawingPathList);
+    protected void drawOverlay(List<DrawingPath> drawing) {
+        for (DrawingPath drawingPath : drawing) {
+            if (drawingPath.size() >= 2) {
+                overlayUserLocationPaths.add(mapDrawer.drawOverlayPolyline(drawingPath));
+            }
+        }
     }
 
-    public void clearUserLocationPath() {
+    @Override
+    protected void clearOverlay() {
         if (overlayUserLocationPaths != null) {
             for (Object overlayUserLocationPath : overlayUserLocationPaths) {
                 mapDrawer.clearDraw(overlayUserLocationPath);
             }
             overlayUserLocationPaths.clear();
-        }
-    }
-
-    public void drawUserLocationPath(List<DrawingPath> drawingPaths) {
-        for (DrawingPath drawingPath : drawingPaths) {
-            if (drawingPath.size() >= 2) {
-                overlayUserLocationPaths.add(mapDrawer.drawOverlayPolyline(drawingPath));
-            }
         }
     }
 }
