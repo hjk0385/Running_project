@@ -38,7 +38,7 @@ public class CourseConductorGuideRunner extends CourseConductor {
         CourseOverseerUserFlag courseOverseerUserFlag = new CourseOverseerUserFlag(courseId, userCourseId);
         CourseOverseerUserRecord courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
         CourseDrawerUserCourse courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
-        CourseDrawerGuideCourse courseDrawerGuideCourse = new CourseDrawerGuideCourse(mapDrawer,courseId);
+        CourseDrawerGuideCourse courseDrawerGuideCourse = new CourseDrawerGuideCourse(mapDrawer, courseId);
         //설정
         courseOverseerUserRecord.setCurrentLineColor(currentColor);
         //실행순서 (Flag -> 유저위치 -> 유저코스그리기 + 코스그리기)

@@ -1,7 +1,6 @@
 package com.trainer.courserunner.course.maker.road;
 
 import android.database.Cursor;
-import android.util.Log;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;

@@ -7,7 +7,6 @@ import android.util.Log;
 
 import androidx.room.Room;
 
-import com.trainer.courserunner.course.maker.road.RoadAddress;
 import com.trainer.courserunner.loader.ObbLoader;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseMode;
@@ -20,6 +19,7 @@ public class AppDatabaseLoader extends Application {
     static public AppDatabase getAppDatabase() {
         return appDatabase;
     }
+
     static public SQLiteDatabase getRoadAddressDatabase() {
         return roadAddressDatabase;
     }
@@ -53,7 +53,7 @@ public class AppDatabaseLoader extends Application {
         //
 
         //debug
-        Cursor cursor =roadAddressDatabase.rawQuery("SELECT * FROM addresstable limit 10",null);
+        Cursor cursor = roadAddressDatabase.rawQuery("SELECT * FROM addresstable limit 10", null);
         while (cursor.moveToNext()) {
             Log.v("DBCheck", "success");
             Log.v("DBCheck", String.valueOf(cursor.getColumnCount()));

@@ -1,7 +1,5 @@
 package com.trainer.courserunner.course.drawer;
 
-import android.os.AsyncTask;
-
 import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
@@ -12,12 +10,11 @@ import com.trainer.courserunner.rooms.UserCourseRecord;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Observable;
-import java.util.Observer;
 
 //맵에 그려주는 기능 수행
 public class CourseDrawerUserCourse extends CourseDrawer {
     Long userCourseId;
+
     public CourseDrawerUserCourse(MapDrawer mapDrawer, Long userCourseId) {
         super(mapDrawer);
         this.userCourseId = userCourseId;

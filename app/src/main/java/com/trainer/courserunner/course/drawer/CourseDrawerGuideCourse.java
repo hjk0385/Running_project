@@ -1,7 +1,6 @@
 package com.trainer.courserunner.course.drawer;
 
 import android.graphics.Color;
-import android.util.Log;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.drawer.drawtype.DrawingAddress;
@@ -9,17 +8,16 @@ import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseFlag;
-import com.trainer.courserunner.rooms.UserCourseRecord;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class CourseDrawerGuideCourse extends CourseDrawer{
+public class CourseDrawerGuideCourse extends CourseDrawer {
     Long courseId;
+
     public CourseDrawerGuideCourse(MapDrawer mapDrawer, Long courseId) {
         super(mapDrawer);
-        this.courseId=courseId;
+        this.courseId = courseId;
     }
 
     @Override

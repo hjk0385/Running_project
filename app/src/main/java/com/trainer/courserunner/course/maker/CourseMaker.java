@@ -110,7 +110,7 @@ public class CourseMaker extends AsyncTask<Void, Void, Long> {
             courseMaker.scopeMapInfo = this.scopeMapInfo;
             courseMaker.lineConnectPolicy = this.lineConnectPolicy;
             courseMaker.quanzationPolicy = this.quanzationPolicy;
-            courseMaker.courseIdConsumer=this.courseIdConsumer;
+            courseMaker.courseIdConsumer = this.courseIdConsumer;
             return courseMaker;
         }
     }

@@ -13,9 +13,10 @@ import java.util.Observer;
 public abstract class CourseDrawer extends AsyncTask<Void, Void, List<DrawingPath>> implements Observer {
     protected MapDrawer mapDrawer;
     protected List<Object> overlayObjs;
-    public CourseDrawer(MapDrawer mapDrawer){
-        this.mapDrawer=mapDrawer;
-        this.overlayObjs=new ArrayList<>();
+
+    public CourseDrawer(MapDrawer mapDrawer) {
+        this.mapDrawer = mapDrawer;
+        this.overlayObjs = new ArrayList<>();
     }
 
     @Override
@@ -37,7 +38,7 @@ public abstract class CourseDrawer extends AsyncTask<Void, Void, List<DrawingPat
 
     abstract protected List<DrawingPath> makeDrawing();
 
-    final protected void drawOverlay(List<DrawingPath> drawing){
+    final protected void drawOverlay(List<DrawingPath> drawing) {
         for (DrawingPath drawingPath : drawing) {
             if (drawingPath.size() >= 2) {
                 overlayObjs.add(mapDrawer.drawOverlayPolyline(drawingPath));
@@ -45,7 +46,7 @@ public abstract class CourseDrawer extends AsyncTask<Void, Void, List<DrawingPat
         }
     }
 
-    final protected void clearOverlay(){
+    final protected void clearOverlay() {
         if (overlayObjs != null) {
             for (Object overlayObj : overlayObjs) {
                 mapDrawer.clearDraw(overlayObj);

@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.naver.maps.map.NaverMap;
-import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.CourseConductor;
 import com.trainer.courserunner.map.drawer.NaverMapOptionActivity;
 
