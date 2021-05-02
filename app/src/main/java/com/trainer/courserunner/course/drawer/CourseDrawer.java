@@ -38,7 +38,7 @@ public abstract class CourseDrawer extends AsyncTask<Void, Void, List<DrawingPat
 
     abstract protected List<DrawingPath> makeDrawing();
 
-    final protected void drawOverlay(List<DrawingPath> drawing) {
+    protected void drawOverlay(List<DrawingPath> drawing) {
         for (DrawingPath drawingPath : drawing) {
             if (drawingPath.size() >= 2) {
                 overlayObjs.add(mapDrawer.drawOverlayPolyline(drawingPath));
