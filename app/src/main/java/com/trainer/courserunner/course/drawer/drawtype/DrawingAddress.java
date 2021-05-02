@@ -2,6 +2,7 @@ package com.trainer.courserunner.course.drawer.drawtype;
 
 import android.location.Location;
 
+import com.trainer.courserunner.rooms.CourseFlag;
 import com.trainer.courserunner.rooms.UserCourseRecord;
 
 public class DrawingAddress {
@@ -16,6 +17,11 @@ public class DrawingAddress {
     public DrawingAddress(UserCourseRecord userCourseRecord) {
         this.latitude = userCourseRecord.userCourseRecordLatitude;
         this.longitude = userCourseRecord.userCourseRecordLongitude;
+    }
+
+    public DrawingAddress(CourseFlag courseFlag) {
+        this.latitude = courseFlag.courseFlagLatitude;
+        this.longitude = courseFlag.courseFlagLongitude;
     }
 
     public Double getLatitude() {

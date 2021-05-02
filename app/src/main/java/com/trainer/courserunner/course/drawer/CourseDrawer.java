@@ -5,14 +5,17 @@ import android.os.AsyncTask;
 import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 public abstract class CourseDrawer extends AsyncTask<Void, Void, List<DrawingPath>> implements Observer {
     protected MapDrawer mapDrawer;
+    protected List<Object> overlayObjs;
     public CourseDrawer(MapDrawer mapDrawer){
         this.mapDrawer=mapDrawer;
+        this.overlayObjs=new ArrayList<>();
     }
 
     @Override
@@ -33,6 +36,21 @@ public abstract class CourseDrawer extends AsyncTask<Void, Void, List<DrawingPat
     }
 
     abstract protected List<DrawingPath> makeDrawing();
-    abstract protected void drawOverlay(List<DrawingPath> drawing);
-    abstract protected void clearOverlay();
+
+    final protected void drawOverlay(List<DrawingPath> drawing){
+        for (DrawingPath drawingPath : drawing) {
+            if (drawingPath.size() >= 2) {
+                overlayObjs.add(mapDrawer.drawOverlayPolyline(drawingPath));
+            }
+        }
+    }
+
+    final protected void clearOverlay(){
+        if (overlayObjs != null) {
+            for (Object overlayObj : overlayObjs) {
+                mapDrawer.clearDraw(overlayObj);
+            }
+            overlayObjs.clear();
+        }
+    }
 }

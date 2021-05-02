@@ -1,4 +1,4 @@
-package com.trainer.courserunner.rooms;
+package com.trainer.courserunner;
 
 import android.graphics.Color;
 import android.location.Location;

@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.trainer.courserunner.course.CourseConductor;
 import com.trainer.courserunner.course.CourseConductorGuideRunner;
-import com.trainer.courserunner.rooms.RunningMapActivity;
 
 public class GuideRunActivity extends RunningMapActivity {
     Long courseId;

@@ -18,12 +18,9 @@ import java.util.Observer;
 //맵에 그려주는 기능 수행
 public class CourseDrawerUserCourse extends CourseDrawer {
     Long userCourseId;
-    List<Object> overlayUserLocationPaths;
-
     public CourseDrawerUserCourse(MapDrawer mapDrawer, Long userCourseId) {
         super(mapDrawer);
         this.userCourseId = userCourseId;
-        this.overlayUserLocationPaths = new ArrayList<>();
     }
 
     @Override
@@ -54,24 +51,5 @@ public class CourseDrawerUserCourse extends CourseDrawer {
             i++;
         }
         return drawingPathList;
-    }
-
-    @Override
-    protected void drawOverlay(List<DrawingPath> drawing) {
-        for (DrawingPath drawingPath : drawing) {
-            if (drawingPath.size() >= 2) {
-                overlayUserLocationPaths.add(mapDrawer.drawOverlayPolyline(drawingPath));
-            }
-        }
-    }
-
-    @Override
-    protected void clearOverlay() {
-        if (overlayUserLocationPaths != null) {
-            for (Object overlayUserLocationPath : overlayUserLocationPaths) {
-                mapDrawer.clearDraw(overlayUserLocationPath);
-            }
-            overlayUserLocationPaths.clear();
-        }
     }
 }
