@@ -2,6 +2,7 @@ package com.trainer.courserunner.course.maker;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.core.util.Consumer;
 
@@ -36,6 +37,9 @@ public class CourseMaker extends AsyncTask<Void, Void, Long> {
         //준비
         ScopeDotsMap scopeDotsMap = new ScopeDotsMap(scopeMapInfo);
         ScopeDotsImage scopeDotsImage = new ScopeDotsImage(image);
+
+        Log.v("temp", String.valueOf(scopeDotsImage.getScopeDotList().size()));
+
         //시작
         ScopeDotsMap imageRoad = quanzationPolicy.quantization(scopeDotsImage, scopeDotsMap);
         List<ScopeDotAddress> courseRoad = lineConnectPolicy.apply(imageRoad);
@@ -106,6 +110,7 @@ public class CourseMaker extends AsyncTask<Void, Void, Long> {
             courseMaker.scopeMapInfo = this.scopeMapInfo;
             courseMaker.lineConnectPolicy = this.lineConnectPolicy;
             courseMaker.quanzationPolicy = this.quanzationPolicy;
+            courseMaker.courseIdConsumer=this.courseIdConsumer;
             return courseMaker;
         }
     }

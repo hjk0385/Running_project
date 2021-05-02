@@ -1,7 +1,7 @@
 package com.trainer.courserunner.course.maker.scopetype;
 
-import com.trainer.courserunner.map.roadaddress.RoadAddress;
-import com.trainer.courserunner.map.roadaddress.RoadAddressDao;
+import com.trainer.courserunner.course.maker.road.RoadAddress;
+import com.trainer.courserunner.course.maker.road.RoadAddressDao;
 
 import java.util.ArrayList;
 import java.util.HashSet;
