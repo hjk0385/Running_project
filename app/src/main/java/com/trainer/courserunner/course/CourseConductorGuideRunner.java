@@ -16,7 +16,12 @@ import com.trainer.courserunner.rooms.UserCourse;
 
 public class CourseConductorGuideRunner extends CourseConductor {
     Long courseId;
-
+    CourseOverseerUserFlag courseOverseerUserFlag;
+    CourseOverseerUserRecord courseOverseerUserRecord;
+    CourseDrawerUserCourse courseDrawerUserCourse;
+    CourseDrawerGuideCourse courseDrawerGuideCourse;
+    CourseDrawerMarkerGuideCourse courseDrawerMarkerGuideCourse;
+    
     public CourseConductorGuideRunner(MapDrawer mapDrawer, @NotNull Long courseId) {
         super(mapDrawer);
         //데이터베이스
@@ -32,23 +37,23 @@ public class CourseConductorGuideRunner extends CourseConductor {
         appDatabase.userCourseDao().updateDto(userCourse);
         //
         this.courseId = courseId;
-    }
-
-    @Override
-    protected void changedLocation(Location location) {
-        CourseOverseerUserFlag courseOverseerUserFlag = new CourseOverseerUserFlag(courseId, userCourseId);
-        CourseOverseerUserRecord courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
-        CourseDrawerUserCourse courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
-        CourseDrawerGuideCourse courseDrawerGuideCourse = new CourseDrawerGuideCourse(mapDrawer, courseId);
-        CourseDrawerMarkerGuideCourse courseDrawerMarkerGuideCourse = new CourseDrawerMarkerGuideCourse(mapDrawer,courseId,userCourseId);
+        //생성
+        courseOverseerUserFlag = new CourseOverseerUserFlag(courseId, userCourseId);
+        courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
+        courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
+        courseDrawerGuideCourse = new CourseDrawerGuideCourse(mapDrawer, courseId);
+        courseDrawerMarkerGuideCourse = new CourseDrawerMarkerGuideCourse(mapDrawer,courseId,userCourseId);
         //설정
         courseOverseerUserRecord.setCurrentLineColor(currentColor);
-        //실행순서 (Flag -> 유저위치 -> 유저코스그리기 + 코스그리기)
+        //이벤트 연계 설정(Flag -> 유저위치 -> 유저코스그리기 + 코스그리기 + 마커그리기)
         courseOverseerUserFlag.sellSubscription(courseOverseerUserRecord);
         courseOverseerUserRecord.sellSubscription(courseDrawerUserCourse);
         courseOverseerUserRecord.sellSubscription(courseDrawerGuideCourse);
         courseOverseerUserRecord.sellSubscription(courseDrawerMarkerGuideCourse);
-        //실행
+    }
+
+    @Override
+    protected void changedLocation(Location location) {
         courseOverseerUserFlag.update(null, location);
     }
 }

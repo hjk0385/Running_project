@@ -22,9 +22,8 @@ public class CourseOverseerUserRecord extends CourseOverseer {
     }
 
     @Override
-    protected Void doInBackground(Location... locations) {
-        registUserLocationRecord(locations[0]);
-        return null;
+    public void oversight(Location location) {
+        registUserLocationRecord(location);
     }
 
     private void registUserLocationRecord(Location location) {

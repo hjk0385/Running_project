@@ -8,31 +8,40 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public abstract class CourseOverseer extends AsyncTask<Location, Void, Void> implements Observer {
-    protected Location currentLocation;
+/*
+currentlocation 제거
+*/
+public abstract class CourseOverseer implements Observer {
     protected Long usercourseId;
 
     private List<Observer> subscribeList = new ArrayList<>();
 
     public CourseOverseer(Long usercourseId) {
         this.usercourseId = usercourseId;
-        this.currentLocation = null;
     }
 
     public void sellSubscription(Observer observer) {
         subscribeList.add(observer);
     }
 
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
-        subscribeList.stream().forEach((Observer observer) -> observer.update(null, currentLocation));
-    }
+    abstract public void oversight(Location location);
 
     @Override
     final public void update(Observable observable, Object o) {
-        Location location = (Location) o;
-        currentLocation = location;
-        this.execute(location);
+        new CourseOverseerAsyncTask().execute((Location) o);
+    }
+    class CourseOverseerAsyncTask extends AsyncTask<Location, Void, Location>{
+        @Override
+        protected Location doInBackground(Location... locations) {
+            Location location=locations[0];
+            oversight(location);
+            return location;
+        }
+
+        @Override
+        protected void onPostExecute(Location location) {
+            super.onPostExecute(location);
+            subscribeList.stream().forEach((Observer observer) -> observer.update(null, location));
+        }
     }
 }

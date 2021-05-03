@@ -17,22 +17,22 @@ public class CourseOverseerUserFlag extends CourseOverseer {
     }
 
     @Override
-    protected Void doInBackground(Location... locations) {
-        registUserCourseFlag();
-        return null;
+    public void oversight(Location location) {
+        registUserCourseFlag(location);
     }
 
-    private boolean checkMarkerDistance(Double markerLatitude, Double markerLongitude) {
+    private boolean checkMarkerDistance(Double currentLatitude,Double currentLongitude,Double markerLatitude, Double markerLongitude) {
         final Double MARKER_DISTANCE = 100.0;
-        return DistanceConverter.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+        return DistanceConverter.getDistance(currentLatitude, currentLongitude,
                 markerLatitude, markerLongitude) < MARKER_DISTANCE;
     }
 
-    private void registUserCourseFlag() {
+    private void registUserCourseFlag(Location location) {
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
         CourseFlag[] courseFlags = appDatabase.courseFlagDao().getNotVisitedCourseFlags(courseId, usercourseId);
         for (CourseFlag courseFlag : courseFlags) {
-            if (checkMarkerDistance(courseFlag.courseFlagLatitude, courseFlag.courseFlagLongitude)) {
+            if (checkMarkerDistance(location.getLatitude(),location.getLongitude(),
+                    courseFlag.courseFlagLatitude, courseFlag.courseFlagLongitude)) {
                 UserCourseFlag userCourseFlag = new UserCourseFlag();
                 userCourseFlag.courseFlagId = courseFlag.courseFlagId;
                 userCourseFlag.courseId = courseId;
@@ -41,6 +41,4 @@ public class CourseOverseerUserFlag extends CourseOverseer {
             }
         }
     }
-
-
 }
