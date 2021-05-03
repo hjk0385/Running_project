@@ -29,8 +29,9 @@ public class CourseConductorSketchBook extends CourseConductor {
     @Override
     protected void changedLocation(Location location) {
         CourseOverseerUserRecord courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
-        courseOverseerUserRecord.setCurrentLineColor(currentColor);
         CourseDrawerUserCourse courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
+        //설정
+        courseOverseerUserRecord.setCurrentLineColor(currentColor);
         //연계
         courseOverseerUserRecord.sellSubscription(courseDrawerUserCourse);
         courseOverseerUserRecord.update(null, location);

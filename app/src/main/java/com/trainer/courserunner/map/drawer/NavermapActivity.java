@@ -39,6 +39,7 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
             fragmentManager.beginTransaction().add(R.id.navermap_fragment, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
+        
     }
 
     @Override
