@@ -25,7 +25,7 @@ public class CourseDrawerMarkerGuideCourse extends CourseDrawerMarker{
     protected List<DrawingPath> makeDrawing() {
         //불러오기
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
-        CourseFlag[] courseFlags = appDatabase.courseFlagDao().getNotVisitedCourseFlags(courseId,userCourseId);
+        CourseFlag[] courseFlags = appDatabase.courseFlagDao().getCourseFlags(courseId);
         //생성
         List<DrawingPath> drawingPathList = new ArrayList<>();
         int i = 0;

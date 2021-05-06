@@ -17,9 +17,6 @@ import androidx.room.Index;
                         parentColumns = "course_id",
                         childColumns = "course_id",
                         onDelete = ForeignKey.CASCADE)
-        },
-        indices = {
-                @Index(value = {"course_flag_Id"}, unique = true)
         }
 )
 public class CourseFlag {

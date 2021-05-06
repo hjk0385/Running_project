@@ -7,9 +7,9 @@ import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
 
 import java.util.HashSet;
 
-public class QuanzationPolicyDefault implements QuanzationPolicy {
+public class QuanzationImageToMapProximate implements QuanzationImageToMap{
     @Override
-    public ScopeDotsMap quantization(ScopeDotsImage scopeDotsImage, ScopeDotsMap scopeDotsMap) {
+    public ScopeDotsMap apply(ScopeDotsImage scopeDotsImage, ScopeDotsMap scopeDotsMap) {
         HashSet<ScopeDotAddress> quantizationDots = new HashSet<>();
         for (ScopeDot scopeDot : scopeDotsImage.getScopeDotList()) {
             quantizationDots.add((ScopeDotAddress) ScopeDotsMap.getClosestDot(scopeDotsMap.getScopeDotList(), scopeDot));

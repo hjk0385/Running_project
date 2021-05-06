@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,7 +17,8 @@ import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.course.maker.CourseMaker;
 import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyMinimumCost;
-import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationPolicyRandom;
+import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionRandom;
+import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationImageToMapProximate;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.loader.AssetLoader;
 import com.trainer.courserunner.map.geo.DistanceConverter;
@@ -28,20 +30,18 @@ public class NormalRunningActivity extends AppCompatActivity {
         return (View view) -> {
             //테스트코드
             ScopeMapInfo scopeMapInfo = DistanceConverter.getScopeMapInfo(currentLocation, kilometer / 4);
+            Bitmap image = AssetLoader.loadImage(this, "testbitmap2.png");
 
-            CourseMaker.CourseMakerBuilder courseMakerBuilder = new CourseMaker.CourseMakerBuilder(
-                    AssetLoader.loadImage(this, "testbitmap2.png"), scopeMapInfo);
-
-            courseMakerBuilder.setLineConnectPolicy(new LineConnectPolicyMinimumCost())
-                    .setQuanzationPolicy(new QuanzationPolicyRandom(0.25))
-                    .setCourseIdConsumer(this::registDB);
-
-            CourseMaker courseMaker = courseMakerBuilder.build();
-            courseMaker.execute();
+            CourseMaker courseMaker=new CourseMaker(image,scopeMapInfo);
+            courseMaker.setQuanzationImageToMap(new QuanzationImageToMapProximate());
+            courseMaker.setMarkerSelection(new MarkerSelectionRandom(0.25));
+            courseMaker.setLineConnectPolicy(new LineConnectPolicyMinimumCost());
+            courseMaker.setCourseIdConsumer(this::startNextActivity);
+            courseMaker.run();
         };
     }
 
-    private void registDB(Long courseId) {
+    private void startNextActivity(Long courseId) {
         Intent intent = new Intent(getBaseContext(), GuideRunActivity.class);
         intent.putExtra("courseId", courseId);
         startActivity(intent);

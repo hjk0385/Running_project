@@ -7,7 +7,6 @@ import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.drawer.CourseDrawerGuideCourse;
 import com.trainer.courserunner.course.drawer.CourseDrawerMarkerGuideCourse;
 import com.trainer.courserunner.course.drawer.CourseDrawerUserCourse;
-import com.trainer.courserunner.course.overseer.CourseOverseerUserFlag;
 import com.trainer.courserunner.course.overseer.CourseOverseerUserRecord;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
@@ -16,7 +15,6 @@ import com.trainer.courserunner.rooms.UserCourse;
 
 public class CourseConductorGuideRunner extends CourseConductor {
     Long courseId;
-    CourseOverseerUserFlag courseOverseerUserFlag;
     CourseOverseerUserRecord courseOverseerUserRecord;
     CourseDrawerUserCourse courseDrawerUserCourse;
     CourseDrawerGuideCourse courseDrawerGuideCourse;
@@ -38,7 +36,6 @@ public class CourseConductorGuideRunner extends CourseConductor {
         //
         this.courseId = courseId;
         //생성
-        courseOverseerUserFlag = new CourseOverseerUserFlag(courseId, userCourseId);
         courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
         courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
         courseDrawerGuideCourse = new CourseDrawerGuideCourse(mapDrawer, courseId);
@@ -46,7 +43,6 @@ public class CourseConductorGuideRunner extends CourseConductor {
         //설정
         courseOverseerUserRecord.setCurrentLineColor(currentColor);
         //이벤트 연계 설정(Flag -> 유저위치 -> 유저코스그리기 + 코스그리기 + 마커그리기)
-        courseOverseerUserFlag.sellSubscription(courseOverseerUserRecord);
         courseOverseerUserRecord.sellSubscription(courseDrawerUserCourse);
         courseOverseerUserRecord.sellSubscription(courseDrawerGuideCourse);
         courseOverseerUserRecord.sellSubscription(courseDrawerMarkerGuideCourse);
@@ -54,6 +50,6 @@ public class CourseConductorGuideRunner extends CourseConductor {
 
     @Override
     protected void changedLocation(Location location) {
-        courseOverseerUserFlag.update(null, location);
+        courseOverseerUserRecord.update(null, location);
     }
 }
