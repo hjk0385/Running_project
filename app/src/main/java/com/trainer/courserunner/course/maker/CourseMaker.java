@@ -37,7 +37,6 @@ public class CourseMaker extends AsyncTask<Void, Void, Long> {
         //준비
         ScopeDotsMap scopeDotsMap = new ScopeDotsMap(scopeMapInfo);
         ScopeDotsImage scopeDotsImage = new ScopeDotsImage(image);
-
         //시작
         ScopeDotsMap imageRoad = quanzationPolicy.quantization(scopeDotsImage, scopeDotsMap);
         List<ScopeDotAddress> courseRoad = lineConnectPolicy.apply(imageRoad);

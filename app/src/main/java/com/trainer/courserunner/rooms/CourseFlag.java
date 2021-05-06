@@ -29,6 +29,9 @@ public class CourseFlag {
     @NonNull
     @ColumnInfo(name = "course_flag_Id")
     public Long courseFlagId;
+    @NonNull
+    @ColumnInfo(name = "marker_flag")
+    public Boolean markerFlag;
     @ColumnInfo(name = "course_flag_latitude")
     public Double courseFlagLatitude;
     @ColumnInfo(name = "course_flag_longitude")
