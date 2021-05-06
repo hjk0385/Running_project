@@ -33,7 +33,7 @@ public class CourseDrawerUserCourse extends CourseDrawer {
             //빌더
             DrawingPath.Builder drawingPathBuilder = new DrawingPath.Builder();
             drawingPathBuilder.setColor(currentDrawingColor);
-            drawingPathBuilder.setWidth(10);
+            drawingPathBuilder.setWidth(15);
 
             if (i > 0) {
                 drawingPathBuilder.accept(new DrawingAddress(userLocationRecords[i - 1]));

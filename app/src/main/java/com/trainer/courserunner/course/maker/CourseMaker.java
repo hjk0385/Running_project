@@ -38,8 +38,6 @@ public class CourseMaker extends AsyncTask<Void, Void, Long> {
         ScopeDotsMap scopeDotsMap = new ScopeDotsMap(scopeMapInfo);
         ScopeDotsImage scopeDotsImage = new ScopeDotsImage(image);
 
-        Log.v("temp", String.valueOf(scopeDotsImage.getScopeDotList().size()));
-
         //시작
         ScopeDotsMap imageRoad = quanzationPolicy.quantization(scopeDotsImage, scopeDotsMap);
         List<ScopeDotAddress> courseRoad = lineConnectPolicy.apply(imageRoad);
