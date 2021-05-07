@@ -37,6 +37,8 @@ public class CourseConductorBuilder {
                 return new CourseConductorSketchBook(mapDrawer,userCourseId);
             case "GuideRunner":
                 return new CourseConductorGuideRunner(mapDrawer,courseId,userCourseId);
+            case "ProjectRunner":
+                return new CourseConductorProjectRunner(mapDrawer,courseId,userCourseId);
             default:
                 return null;
         }
