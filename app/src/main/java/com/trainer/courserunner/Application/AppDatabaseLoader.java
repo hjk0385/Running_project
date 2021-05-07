@@ -48,7 +48,7 @@ public class AppDatabaseLoader extends Application {
 
         courseMode = new CourseMode();
         courseMode.courseModeId = Long.valueOf(3);
-        courseMode.courseModeName = "";
+        courseMode.courseModeName = "ProjectRunner";
         appDatabase.courseModeDao().insertDto(courseMode);
         //
 

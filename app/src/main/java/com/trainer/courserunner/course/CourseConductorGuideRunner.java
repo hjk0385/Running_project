@@ -22,44 +22,28 @@ public class CourseConductorGuideRunner extends CourseConductor {
     CourseDrawer courseDrawerGuideLine;
     CourseDrawer courseDrawerGuideMarker;
     
-    public CourseConductorGuideRunner(MapDrawer mapDrawer, @NotNull Long courseId) {
-        super(mapDrawer);
-        //데이터베이스
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
-        //코스모드 불러오기
-        CourseMode courseMode = appDatabase.courseModeDao().getCourseMode("GuideRunner");
-        //유저코스 변경
-        UserCourse userCourse = new UserCourse();
-        userCourse.courseId = courseId;
-        userCourse.userCourseId = userCourseId;
-        userCourse.courseModeId = courseMode.courseModeId;
-        userCourse.userCourseName = null;
-        appDatabase.userCourseDao().updateDto(userCourse);
-        //
-        this.courseId = courseId;
+    public CourseConductorGuideRunner(MapDrawer mapDrawer, @NotNull Long courseId, Long userCourseId) {
+        super(mapDrawer,userCourseId);
+        this.courseId=courseId;
         //생성
         courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
         courseDrawerGuideLine=new CourseDrawerGuideLine(mapDrawer,courseId);
         courseDrawerGuideMarker=new CourseDrawerGuideMarker(mapDrawer,courseId,userCourseId);
         courseDrawerUserRecord=new CourseDrawerUserRecord(mapDrawer,userCourseId);
-        //설정
-        courseOverseerUserRecord.setCurrentLineColor(currentColor);
         //이벤트 연계 설정(Flag -> 유저위치 -> 유저코스그리기 + 코스그리기 + 마커그리기)
         courseOverseerUserRecord.sellSubscription(courseDrawerGuideLine);
         courseOverseerUserRecord.sellSubscription(courseDrawerUserRecord);
         courseOverseerUserRecord.sellSubscription(courseDrawerGuideMarker);
     }
 
-    private void caseRestart(){
-
-    }
-
-    private void caseNewStart(){
-
-    }
-
     @Override
     protected void changedLocation(Location location) {
         courseOverseerUserRecord.update(null, location);
+    }
+
+    @Override
+    public void setCurrentColor(Integer currentColor) {
+        super.setCurrentColor(currentColor);
+        courseOverseerUserRecord.setCurrentLineColor(currentColor);
     }
 }

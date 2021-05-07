@@ -46,6 +46,7 @@ public class NormalRunningActivity extends AppCompatActivity {
     private void startNextActivity(Long courseId) {
         Intent intent = new Intent(getBaseContext(), CourseConductorGuideRunnerActivity.class);
         intent.putExtra("courseId", courseId);
+        intent.putExtra("CreateType","New");
         startActivity(intent);
     }
 

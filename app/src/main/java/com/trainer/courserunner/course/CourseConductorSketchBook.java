@@ -14,23 +14,11 @@ import com.trainer.courserunner.rooms.UserCourse;
 public class CourseConductorSketchBook extends CourseConductor {
     CourseOverseerUserRecord courseOverseerUserRecord;
     CourseDrawer courseDrawerUserCourse;
-    public CourseConductorSketchBook(MapDrawer mapDrawer) {
-        super(mapDrawer);
-        //데이터베이스
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
-        //코스모드 불러오기
-        CourseMode courseMode = appDatabase.courseModeDao().getCourseMode("SketchBook");
-        //유저코스 변경
-        UserCourse userCourse = new UserCourse();
-        userCourse.courseId = null;
-        userCourse.userCourseId = userCourseId;
-        userCourse.courseModeId = courseMode.courseModeId;
-        userCourse.userCourseName = null;
-        appDatabase.userCourseDao().updateDto(userCourse);
-        //
+    public CourseConductorSketchBook(MapDrawer mapDrawer,Long userCourseId) {
+        super(mapDrawer,userCourseId);
         courseDrawerUserCourse = new CourseDrawerUserRecord(mapDrawer, userCourseId);
         courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
-        //설정
+        //
         courseOverseerUserRecord.setCurrentLineColor(currentColor);
         //연계
         courseOverseerUserRecord.sellSubscription(courseDrawerUserCourse);
@@ -39,5 +27,11 @@ public class CourseConductorSketchBook extends CourseConductor {
     @Override
     protected void changedLocation(Location location) {
         courseOverseerUserRecord.update(null, location);
+    }
+
+    @Override
+    public void setCurrentColor(Integer currentColor) {
+        super.setCurrentColor(currentColor);
+        courseOverseerUserRecord.setCurrentLineColor(currentColor);
     }
 }

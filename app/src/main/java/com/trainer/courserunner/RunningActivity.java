@@ -30,6 +30,7 @@ public class RunningActivity extends AppCompatActivity {
         Button imageButton2 = (Button) findViewById((R.id.Sketchbook_running_btn));
         imageButton2.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), CourseConductorSketchBookActivity.class);
+            intent.putExtra("CreateType","New");
             startActivity(intent);
         });
     }
