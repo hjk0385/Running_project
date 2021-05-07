@@ -3,7 +3,8 @@ package com.trainer.courserunner.course;
 import android.location.Location;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
-import com.trainer.courserunner.course.drawer.CourseDrawerUserCourse;
+import com.trainer.courserunner.course.drawer.CourseDrawer;
+import com.trainer.courserunner.course.drawer.CourseDrawerUserRecord;
 import com.trainer.courserunner.course.overseer.CourseOverseerUserRecord;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
@@ -12,7 +13,7 @@ import com.trainer.courserunner.rooms.UserCourse;
 
 public class CourseConductorSketchBook extends CourseConductor {
     CourseOverseerUserRecord courseOverseerUserRecord;
-    CourseDrawerUserCourse courseDrawerUserCourse;
+    CourseDrawer courseDrawerUserCourse;
     public CourseConductorSketchBook(MapDrawer mapDrawer) {
         super(mapDrawer);
         //데이터베이스
@@ -27,7 +28,7 @@ public class CourseConductorSketchBook extends CourseConductor {
         userCourse.userCourseName = null;
         appDatabase.userCourseDao().updateDto(userCourse);
         //
-        courseDrawerUserCourse = new CourseDrawerUserCourse(mapDrawer, userCourseId);
+        courseDrawerUserCourse = new CourseDrawerUserRecord(mapDrawer, userCourseId);
         courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
         //설정
         courseOverseerUserRecord.setCurrentLineColor(currentColor);
@@ -40,7 +41,3 @@ public class CourseConductorSketchBook extends CourseConductor {
         courseOverseerUserRecord.update(null, location);
     }
 }
-
-
-
-

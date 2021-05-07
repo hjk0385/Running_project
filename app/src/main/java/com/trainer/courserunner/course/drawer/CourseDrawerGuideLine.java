@@ -12,13 +12,12 @@ import com.trainer.courserunner.rooms.CourseFlag;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDrawerMarkerGuideCourse extends CourseDrawerMarker{
+public class CourseDrawerGuideLine extends CourseDrawerPolyline{
     Long courseId;
-    Long userCourseId;
-    public CourseDrawerMarkerGuideCourse(MapDrawer mapDrawer, Long courseId, Long userCourseId) {
+
+    public CourseDrawerGuideLine(MapDrawer mapDrawer, Long courseId) {
         super(mapDrawer);
-        this.courseId=courseId;
-        this.userCourseId=userCourseId;
+        this.courseId = courseId;
     }
 
     @Override
@@ -50,4 +49,5 @@ public class CourseDrawerMarkerGuideCourse extends CourseDrawerMarker{
         }
         return drawingPathList;
     }
+
 }

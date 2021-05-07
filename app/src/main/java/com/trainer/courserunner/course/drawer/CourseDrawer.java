@@ -40,14 +40,7 @@ public abstract class CourseDrawer  implements Observer {
     }
 
     abstract protected List<DrawingPath> makeDrawing();
-
-    protected void drawOverlay(List<DrawingPath> drawing) {
-        for (DrawingPath drawingPath : drawing) {
-            if (drawingPath.size() >= 2) {
-                overlayObjs.add(mapDrawer.drawOverlayPolyline(drawingPath));
-            }
-        }
-    }
+    abstract protected void drawOverlay(List<DrawingPath> drawing);
 
     final protected void clearOverlay() {
         if (overlayObjs != null) {

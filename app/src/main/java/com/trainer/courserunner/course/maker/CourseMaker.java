@@ -1,6 +1,7 @@
 package com.trainer.courserunner.course.maker;
 
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -31,6 +32,8 @@ public class CourseMaker implements Runnable{
     private MarkerSelection markerSelection;
     private Consumer<Long> courseIdConsumer;
 
+    private Location currentLocation;
+
     public CourseMaker(Bitmap image, ScopeMapInfo scopeMapInfo) {
         this.image=image;
         this.scopeMapInfo=scopeMapInfo;
@@ -52,12 +55,19 @@ public class CourseMaker implements Runnable{
         this.courseIdConsumer = courseIdConsumer;
     }
 
+    public void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
     private List<ScopeDotAddress> makeCourse(){
         ScopeDotsMap scopeDotsMap = new ScopeDotsMap(scopeMapInfo);
         ScopeDotsImage scopeDotsImage = new ScopeDotsImage(image);
-        //
         ScopeDotsMap imageAddresses=quanzationImageToMap.apply(scopeDotsImage,scopeDotsMap);
-        return lineConnectPolicy.apply(imageAddresses);
+
+        List<ScopeDotAddress>scopeDotAddressList=imageAddresses.getScopeDotAddressList();
+        return lineConnectPolicy.apply(scopeDotAddressList,
+                new ScopeDotAddress(
+                        scopeMapInfo,currentLocation.getLongitude(),currentLocation.getLatitude()));
     }
 
     private Long registDB(List<ScopeDotAddress> courseRoad){

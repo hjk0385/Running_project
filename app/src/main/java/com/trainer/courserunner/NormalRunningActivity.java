@@ -29,7 +29,8 @@ public class NormalRunningActivity extends AppCompatActivity {
     View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
             //테스트코드
-            ScopeMapInfo scopeMapInfo = DistanceConverter.getScopeMapInfo(currentLocation, kilometer / 4);
+            ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
+                    currentLocation.getLatitude(),currentLocation.getLongitude(),kilometer*1000);
             Bitmap image = AssetLoader.loadImage(this, "testbitmap2.png");
 
             CourseMaker courseMaker=new CourseMaker(image,scopeMapInfo);
@@ -37,6 +38,7 @@ public class NormalRunningActivity extends AppCompatActivity {
             courseMaker.setMarkerSelection(new MarkerSelectionRandom(0.25));
             courseMaker.setLineConnectPolicy(new LineConnectPolicyMinimumCost());
             courseMaker.setCourseIdConsumer(this::startNextActivity);
+            courseMaker.setCurrentLocation(currentLocation);
             courseMaker.run();
         };
     }
