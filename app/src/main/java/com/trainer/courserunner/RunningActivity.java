@@ -6,6 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.trainer.courserunner.course.activity.CourseConductorSketchBookActivity;
+
 public class RunningActivity extends AppCompatActivity {
 
     @Override
@@ -27,7 +29,7 @@ public class RunningActivity extends AppCompatActivity {
 
         Button imageButton2 = (Button) findViewById((R.id.Sketchbook_running_btn));
         imageButton2.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), SketchBookActivity.class);
+            Intent intent = new Intent(getApplicationContext(), CourseConductorSketchBookActivity.class);
             startActivity(intent);
         });
     }

@@ -46,8 +46,16 @@ public class CourseConductorGuideRunner extends CourseConductor {
         courseOverseerUserRecord.setCurrentLineColor(currentColor);
         //이벤트 연계 설정(Flag -> 유저위치 -> 유저코스그리기 + 코스그리기 + 마커그리기)
         courseOverseerUserRecord.sellSubscription(courseDrawerGuideLine);
-        courseOverseerUserRecord.sellSubscription(courseDrawerGuideMarker);
         courseOverseerUserRecord.sellSubscription(courseDrawerUserRecord);
+        courseOverseerUserRecord.sellSubscription(courseDrawerGuideMarker);
+    }
+
+    private void caseRestart(){
+
+    }
+
+    private void caseNewStart(){
+
     }
 
     @Override

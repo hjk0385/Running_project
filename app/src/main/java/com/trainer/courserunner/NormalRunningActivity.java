@@ -21,7 +21,7 @@ import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionRandom
 import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationImageToMapProximate;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.loader.AssetLoader;
-import com.trainer.courserunner.map.geo.DistanceConverter;
+import com.trainer.courserunner.course.activity.CourseConductorGuideRunnerActivity;
 
 public class NormalRunningActivity extends AppCompatActivity {
     Location currentLocation;
@@ -44,7 +44,7 @@ public class NormalRunningActivity extends AppCompatActivity {
     }
 
     private void startNextActivity(Long courseId) {
-        Intent intent = new Intent(getBaseContext(), GuideRunActivity.class);
+        Intent intent = new Intent(getBaseContext(), CourseConductorGuideRunnerActivity.class);
         intent.putExtra("courseId", courseId);
         startActivity(intent);
     }

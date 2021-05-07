@@ -1,6 +1,7 @@
 package com.trainer.courserunner.map.drawer;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -103,6 +104,9 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
             ((PolylineOverlay) drawObject).setMap(null);
         } else if (drawObject instanceof PathOverlay) {
             ((PathOverlay) drawObject).setMap(null);
+        }
+        else{
+            throw new IllegalArgumentException();
         }
     }
 }

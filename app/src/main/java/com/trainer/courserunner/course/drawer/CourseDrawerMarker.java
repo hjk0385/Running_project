@@ -13,7 +13,10 @@ public abstract class CourseDrawerMarker extends CourseDrawer{
     protected void drawOverlay(List<DrawingPath> drawing) {
         for (DrawingPath drawingPath : drawing) {
             if (drawingPath.size() >= 2) {
-                overlayObjs.add(mapDrawer.drawOverlayMarkers(drawingPath));
+                List<Object> markers=mapDrawer.drawOverlayMarkers(drawingPath);
+                for(Object marker:markers){
+                    overlayObjs.add(marker);
+                }
             }
         }
     }

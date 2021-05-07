@@ -42,10 +42,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity" />
-        <activity android:name=".SketchBookActivity">
+        <activity android:name=".course.activity.CourseConductorSketchBookActivity">
 
         </activity>
-        <activity android:name=".GuideRunActivity" />
+        <activity android:name=".course.activity.CourseConductorGuideRunnerActivity" />
         <!-- 엑티비티 -->
 
     </application>

@@ -1,19 +1,21 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.course.activity;
 
 import android.graphics.Color;
 import android.location.Location;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
 import com.naver.maps.map.NaverMap;
+import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.CourseConductor;
-import com.trainer.courserunner.map.drawer.NaverMapOptionActivity;
+import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 
-//팩토리 패턴 활용
-public abstract class RunningMapActivity extends NaverMapOptionActivity {
+//이 엑티비티를 사용해서 만든다.
+public abstract class CourseConductorActivity extends NavermapLocationActivity {
     CourseConductor courseConductor;
-
     protected abstract CourseConductor createCourseConductor();
 
     @Override
@@ -23,6 +25,13 @@ public abstract class RunningMapActivity extends NaverMapOptionActivity {
         naverMap.addOnLocationChangeListener((Location location) -> {
             courseConductor.update(null, location);
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_guidecolor_option, menu);
+        return true;
     }
 
     @Override
@@ -41,5 +50,4 @@ public abstract class RunningMapActivity extends NaverMapOptionActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

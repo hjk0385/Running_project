@@ -1,6 +1,7 @@
 package com.trainer.courserunner.course.drawer;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.drawer.drawtype.DrawingAddress;
@@ -8,8 +9,11 @@ import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseFlag;
+import com.trainer.courserunner.rooms.UserCourseFlagDerived;
+import com.trainer.courserunner.rooms.UserCourseRecord;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CourseDrawerGuideMarker extends CourseDrawerMarker{
@@ -23,9 +27,8 @@ public class CourseDrawerGuideMarker extends CourseDrawerMarker{
 
     @Override
     protected List<DrawingPath> makeDrawing() {
-        //불러오기
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
-        CourseFlag[] courseFlags = appDatabase.courseFlagDao().getCourseMarkerFlags(courseId);
+        CourseFlag[] courseFlags = UserCourseFlagDerived.getUnvistedUserCourseFlags(courseId,userCourseId);
+        Log.v("CourseFlags", String.valueOf(courseFlags.length));
         //생성
         List<DrawingPath> drawingPathList = new ArrayList<>();
         int i = 0;
