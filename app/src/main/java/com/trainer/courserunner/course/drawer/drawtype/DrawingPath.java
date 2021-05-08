@@ -62,8 +62,7 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
         public DrawingPath build() {
             DrawingPath drawingPath = new DrawingPath();
             drawingPath.addAll(drawingAddressList);
-            drawingPath.property = property.andThen(propertyColor);
-            drawingPath.property = property.andThen(propertyWidth);
+            drawingPath.property = property.andThen(propertyColor).andThen(propertyWidth);
             return drawingPath;
         }
     }
