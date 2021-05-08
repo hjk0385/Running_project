@@ -7,60 +7,66 @@ import com.trainer.courserunner.rooms.CourseMode;
 import com.trainer.courserunner.rooms.UserCourse;
 
 public class CourseConductorBuilder {
+    String modeType;
+    String startType;
+    boolean usedBuilder;
     private Long courseId;
     private Long userCourseId;
     private MapDrawer mapDrawer;
-    boolean usedBuilder;
 
-    public CourseConductorBuilder(MapDrawer mapDrawer){
-        this.mapDrawer=mapDrawer;
-        this.usedBuilder=false;
+    public CourseConductorBuilder(MapDrawer mapDrawer) {
+        this.mapDrawer = mapDrawer;
+        this.usedBuilder = false;
     }
+
     public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
+
     public void setUserCourseId(Long userCourseId) {
         this.userCourseId = userCourseId;
     }
 
     //객체 재사용 금지
-    private void banRecycle(){
-        if(usedBuilder){
-            throw new IllegalArgumentException();
+    private void banRecycle() {
+        if (usedBuilder) {
+            throw new IllegalStateException();
         }
-        usedBuilder=true;
+        usedBuilder = true;
     }
 
-    private CourseConductor build(String courseModeName){
-        switch (courseModeName){
+    public void setModeType(String modeType) {
+        this.modeType = modeType;
+    }
+
+    public void setStartType(String startType) {
+        this.startType = startType;
+    }
+
+    public CourseConductor build() {
+        banRecycle();
+        if (startType.equals("New")) {
+            AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
+            CourseMode courseMode = appDatabase.courseModeDao().getCourseMode(modeType);
+            //
+            UserCourse userCourse = new UserCourse();
+            userCourse.courseId = null;
+            userCourse.userCourseId = null;
+            userCourse.courseModeId = courseMode.courseModeId;
+            userCourse.userCourseName = null;
+            userCourseId = appDatabase.userCourseDao().insertDto(userCourse);
+            //
+        }
+        switch (modeType) {
             case "SketchBook":
-                return new CourseConductorSketchBook(mapDrawer,userCourseId);
+                return new CourseConductorSketchBook(mapDrawer, userCourseId);
             case "GuideRunner":
-                return new CourseConductorGuideRunner(mapDrawer,courseId,userCourseId);
+                return new CourseConductorGuideRunner(mapDrawer, courseId, userCourseId);
             case "ProjectRunner":
-                return new CourseConductorProjectRunner(mapDrawer,courseId,userCourseId);
+                return new CourseConductorProjectRunner(mapDrawer, courseId, userCourseId);
             default:
-                return null;
+                throw new IllegalStateException();
         }
     }
 
-    public CourseConductor buildNew(String courseModeName){
-        banRecycle();
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
-        CourseMode courseMode = appDatabase.courseModeDao().getCourseMode(courseModeName);
-        //
-        UserCourse userCourse = new UserCourse();
-        userCourse.courseId = null;
-        userCourse.userCourseId = null;
-        userCourse.courseModeId = courseMode.courseModeId;
-        userCourse.userCourseName = null;
-        userCourseId=appDatabase.userCourseDao().insertDto(userCourse);
-        //
-        return build(courseModeName);
-    }
-
-    public CourseConductor buildResume(String courseModeName){
-        banRecycle();
-        return build(courseModeName);
-    }
 }

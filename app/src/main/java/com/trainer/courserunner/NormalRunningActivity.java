@@ -15,13 +15,13 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.trainer.courserunner.course.activity.CourseConductorGuideRunnerActivity;
 import com.trainer.courserunner.course.maker.CourseMaker;
 import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyMinimumCost;
 import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionRandom;
 import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationImageToMapProximate;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.loader.AssetLoader;
-import com.trainer.courserunner.course.activity.CourseConductorGuideRunnerActivity;
 
 public class NormalRunningActivity extends AppCompatActivity {
     Location currentLocation;
@@ -30,10 +30,10 @@ public class NormalRunningActivity extends AppCompatActivity {
         return (View view) -> {
             //테스트코드
             ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
-                    currentLocation.getLatitude(),currentLocation.getLongitude(),kilometer*1000);
+                    currentLocation.getLatitude(), currentLocation.getLongitude(), kilometer * 1000);
             Bitmap image = AssetLoader.loadImage(this, "testbitmap2.png");
 
-            CourseMaker courseMaker=new CourseMaker(image,scopeMapInfo);
+            CourseMaker courseMaker = new CourseMaker(image, scopeMapInfo);
             courseMaker.setQuanzationImageToMap(new QuanzationImageToMapProximate());
             courseMaker.setMarkerSelection(new MarkerSelectionRandom(0.25));
             courseMaker.setLineConnectPolicy(new LineConnectPolicyMinimumCost());
@@ -46,7 +46,7 @@ public class NormalRunningActivity extends AppCompatActivity {
     private void startNextActivity(Long courseId) {
         Intent intent = new Intent(getBaseContext(), CourseConductorGuideRunnerActivity.class);
         intent.putExtra("courseId", courseId);
-        intent.putExtra("CreateType","New");
+        intent.putExtra("startType", "New");
         startActivity(intent);
     }
 

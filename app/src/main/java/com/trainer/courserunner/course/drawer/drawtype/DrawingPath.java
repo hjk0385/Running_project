@@ -23,9 +23,12 @@ public class DrawingPath extends ArrayList<DrawingAddress> {
 
         public Builder() {
             drawingAddressList = new ArrayList<>();
-            property = (o) -> {};
-            propertyColor=(o)->{};
-            propertyWidth=(o)->{};
+            property = (o) -> {
+            };
+            propertyColor = (o) -> {
+            };
+            propertyWidth = (o) -> {
+            };
         }
 
         public void accept(DrawingAddress drawingAddress) {

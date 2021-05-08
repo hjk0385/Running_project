@@ -3,7 +3,6 @@ package com.trainer.courserunner.course.maker;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.core.util.Consumer;
 
@@ -17,13 +16,11 @@ import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.Course;
-import com.trainer.courserunner.rooms.CourseDao;
 import com.trainer.courserunner.rooms.CourseFlag;
-import com.trainer.courserunner.rooms.CourseFlagDao;
 
 import java.util.List;
 
-public class CourseMaker implements Runnable{
+public class CourseMaker implements Runnable {
     private Bitmap image;
     private ScopeMapInfo scopeMapInfo;
 
@@ -35,8 +32,8 @@ public class CourseMaker implements Runnable{
     private Location currentLocation;
 
     public CourseMaker(Bitmap image, ScopeMapInfo scopeMapInfo) {
-        this.image=image;
-        this.scopeMapInfo=scopeMapInfo;
+        this.image = image;
+        this.scopeMapInfo = scopeMapInfo;
     }
 
     public void setQuanzationImageToMap(QuanzationImageToMap quanzationImageToMap) {
@@ -59,18 +56,18 @@ public class CourseMaker implements Runnable{
         this.currentLocation = currentLocation;
     }
 
-    private List<ScopeDotAddress> makeCourse(){
+    private List<ScopeDotAddress> makeCourse() {
         ScopeDotsMap scopeDotsMap = new ScopeDotsMap(scopeMapInfo);
         ScopeDotsImage scopeDotsImage = new ScopeDotsImage(image);
-        ScopeDotsMap imageAddresses=quanzationImageToMap.apply(scopeDotsImage,scopeDotsMap);
+        ScopeDotsMap imageAddresses = quanzationImageToMap.apply(scopeDotsImage, scopeDotsMap);
 
-        List<ScopeDotAddress>scopeDotAddressList=imageAddresses.getScopeDotAddressList();
+        List<ScopeDotAddress> scopeDotAddressList = imageAddresses.getScopeDotAddressList();
         return lineConnectPolicy.apply(scopeDotAddressList,
                 new ScopeDotAddress(
-                        scopeMapInfo,currentLocation.getLongitude(),currentLocation.getLatitude()));
+                        scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
     }
 
-    private Long registDB(List<ScopeDotAddress> courseRoad){
+    private Long registDB(List<ScopeDotAddress> courseRoad) {
         AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
         Long courseId = appDatabase.courseDao().insertDto(new Course());
         for (int i = 0; i < courseRoad.size(); i++) {
@@ -79,7 +76,7 @@ public class CourseMaker implements Runnable{
             courseFlag.courseFlagId = (long) i;
             courseFlag.courseFlagLatitude = courseRoad.get(i).getLatitude();
             courseFlag.courseFlagLongitude = courseRoad.get(i).getLongitude();
-            courseFlag.markerFlag=markerSelection.get();
+            courseFlag.markerFlag = markerSelection.get();
             appDatabase.courseFlagDao().insertDto(courseFlag);
         }
         return courseId;
@@ -87,11 +84,11 @@ public class CourseMaker implements Runnable{
 
 
     @Override
-    public void run(){
+    public void run() {
         new CourseMakerAsyncTask().execute();
     }
 
-    public class CourseMakerAsyncTask extends AsyncTask<Void, Void, Long>{
+    public class CourseMakerAsyncTask extends AsyncTask<Void, Void, Long> {
         @Override
         protected Long doInBackground(Void... voids) {
             return registDB(makeCourse());

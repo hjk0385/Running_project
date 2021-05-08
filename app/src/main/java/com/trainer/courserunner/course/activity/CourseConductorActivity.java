@@ -23,6 +23,7 @@ import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 //이 엑티비티를 사용해서 만든다.
 public abstract class CourseConductorActivity extends NavermapLocationActivity {
     CourseConductor courseConductor;
+
     protected abstract CourseConductor createCourseConductor();
 
     @Override

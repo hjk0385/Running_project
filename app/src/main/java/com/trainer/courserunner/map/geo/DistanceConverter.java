@@ -1,9 +1,5 @@
 package com.trainer.courserunner.map.geo;
 
-import android.location.Location;
-
-import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
-
 public class DistanceConverter {
     // result = m
     static public Double getDistance(Double latitude1, Double longitude1,

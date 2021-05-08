@@ -12,7 +12,7 @@ import com.trainer.courserunner.rooms.CourseFlag;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDrawerGuideLine extends CourseDrawerPolyline{
+public class CourseDrawerGuideLine extends CourseDrawerPolyline {
     Long courseId;
 
     public CourseDrawerGuideLine(MapDrawer mapDrawer, Long courseId) {

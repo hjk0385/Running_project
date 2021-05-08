@@ -9,13 +9,22 @@ public class ScopeMapInfo {
     private final Double endLongtitude;
 
     private ScopeMapInfo(Double startLatitude,
-                        Double startLongtitude,
-                        Double endLatitude,
-                        Double endLongtitude) {
+                         Double startLongtitude,
+                         Double endLatitude,
+                         Double endLongtitude) {
         this.startLatitude = startLatitude;
         this.startLongtitude = startLongtitude;
         this.endLatitude = endLatitude;
         this.endLongtitude = endLongtitude;
+    }
+
+    //m단위
+    static public ScopeMapInfo makeScopeMapInfoOriginLeftDown(double latitude, double longitude, double distance) {
+        double startLatitude = latitude;
+        double startLongitude = longitude;
+        double endLatitude = latitude + DistanceConverter.convertMeterToLatitude(distance);
+        double endLongitude = longitude + DistanceConverter.convertMeterToLongitude(distance);
+        return new ScopeMapInfo(startLatitude, startLongitude, endLatitude, endLongitude);
     }
 
     public Double getEndLatitude() {
@@ -48,14 +57,5 @@ public class ScopeMapInfo {
 
     public Double getEndY() {
         return endLatitude;
-    }
-
-    //m단위
-    static public ScopeMapInfo makeScopeMapInfoOriginLeftDown(double latitude, double longitude, double distance){
-        double startLatitude=latitude;
-        double startLongitude=longitude;
-        double endLatitude=latitude+ DistanceConverter.convertMeterToLatitude(distance);
-        double endLongitude=longitude+DistanceConverter.convertMeterToLongitude(distance);
-        return new ScopeMapInfo(startLatitude,startLongitude,endLatitude,endLongitude);
     }
 }

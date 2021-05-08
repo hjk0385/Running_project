@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CourseDrawerUserRecord extends CourseDrawerPolyline{
+public class CourseDrawerUserRecord extends CourseDrawerPolyline {
     Long userCourseId;
+
     public CourseDrawerUserRecord(MapDrawer mapDrawer, Long userCourseId) {
         super(mapDrawer);
         this.userCourseId = userCourseId;

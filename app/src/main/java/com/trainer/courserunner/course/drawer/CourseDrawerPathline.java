@@ -5,7 +5,7 @@ import com.trainer.courserunner.map.drawer.MapDrawer;
 
 import java.util.List;
 
-public abstract class CourseDrawerPathline extends CourseDrawer{
+public abstract class CourseDrawerPathline extends CourseDrawer {
     public CourseDrawerPathline(MapDrawer mapDrawer) {
         super(mapDrawer);
     }

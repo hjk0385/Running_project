@@ -10,4 +10,7 @@ public interface CourseFlagDao extends BaseDao<CourseFlag> {
 
     @Query("SELECT * FROM course_flag WHERE course_id=:course_id AND marker_flag==1")
     CourseFlag[] getCourseMarkerFlags(Long course_id);
+
+    @Query("SELECT COUNT(*) FROM course_flag WHERE course_id=:course_id AND marker_flag==1")
+    int getCountCourseMarkerFlags(Long course_id);
 }

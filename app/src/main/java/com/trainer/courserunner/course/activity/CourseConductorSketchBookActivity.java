@@ -4,22 +4,23 @@ import android.content.Intent;
 
 import com.trainer.courserunner.course.CourseConductor;
 import com.trainer.courserunner.course.CourseConductorBuilder;
-import com.trainer.courserunner.course.CourseConductorSketchBook;
 
 public class CourseConductorSketchBookActivity extends CourseConductorActivity {
     @Override
     protected CourseConductor createCourseConductor() {
-        CourseConductorBuilder courseConductorBuilder=new CourseConductorBuilder(this);
-        Intent intent =getIntent();
-        String createType=intent.getStringExtra("CreateType");
-        if(createType.equals("New")){
-            return courseConductorBuilder.buildNew("SketchBook");
+        CourseConductorBuilder courseConductorBuilder = new CourseConductorBuilder(this);
+        courseConductorBuilder.setModeType("SketchBook");
+
+        Intent intent = getIntent();
+        String startType = intent.getStringExtra("startType");
+        if (startType.equals("New")) {
+            courseConductorBuilder.setStartType("New");
+        } else if (startType.equals("Resume")) {
+            courseConductorBuilder.setUserCourseId(intent.getLongExtra("userCourseId", -1));
+            courseConductorBuilder.setStartType("Resume");
+        } else {
+            throw new IllegalArgumentException();
         }
-        else if(createType.equals("Resume")){
-            Long userCourseId=intent.getLongExtra("userCourseId",-1);
-            courseConductorBuilder.setUserCourseId(userCourseId);
-            return courseConductorBuilder.buildResume("SketchBook");
-        }
-        return null;
+        return courseConductorBuilder.build();
     }
 }

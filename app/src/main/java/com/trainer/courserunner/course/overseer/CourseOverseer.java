@@ -30,10 +30,11 @@ public abstract class CourseOverseer implements Observer {
     final public void update(Observable observable, Object o) {
         new CourseOverseerAsyncTask().execute((Location) o);
     }
-    class CourseOverseerAsyncTask extends AsyncTask<Location, Void, Location>{
+
+    class CourseOverseerAsyncTask extends AsyncTask<Location, Void, Location> {
         @Override
         protected Location doInBackground(Location... locations) {
-            Location location=locations[0];
+            Location location = locations[0];
             oversight(location);
             return location;
         }

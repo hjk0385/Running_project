@@ -5,9 +5,6 @@ import android.os.Bundle;
 
 import com.trainer.courserunner.course.CourseConductor;
 import com.trainer.courserunner.course.CourseConductorBuilder;
-import com.trainer.courserunner.course.CourseConductorGuideRunner;
-
-import java.util.Objects;
 
 public class CourseConductorGuideRunnerActivity extends CourseConductorActivity {
     Long courseId;
@@ -20,18 +17,20 @@ public class CourseConductorGuideRunnerActivity extends CourseConductorActivity 
 
     @Override
     protected CourseConductor createCourseConductor() {
-        CourseConductorBuilder courseConductorBuilder=new CourseConductorBuilder(this);
+        Intent intent = getIntent();
+
+        CourseConductorBuilder courseConductorBuilder = new CourseConductorBuilder(this);
+        courseConductorBuilder.setModeType("GuideRunner");
         courseConductorBuilder.setCourseId(courseId);
-        Intent intent =getIntent();
-        String createType=intent.getStringExtra("CreateType");
-        if(createType.equals("New")){
-            return courseConductorBuilder.buildNew("GuideRunner");
+        String startType = intent.getStringExtra("startType");
+        if (startType.equals("New")) {
+            courseConductorBuilder.setStartType("New");
+        } else if (startType.equals("Resume")) {
+            courseConductorBuilder.setUserCourseId(intent.getLongExtra("userCourseId", -1));
+            courseConductorBuilder.setStartType("Resume");
+        } else {
+            throw new IllegalArgumentException();
         }
-        else if(createType.equals("Resume")){
-            Long userCourseId=intent.getLongExtra("userCourseId",-1);
-            courseConductorBuilder.setUserCourseId(userCourseId);
-            return courseConductorBuilder.buildResume("GuideRunner");
-        }
-        return null;
+        return courseConductorBuilder.build();
     }
 }

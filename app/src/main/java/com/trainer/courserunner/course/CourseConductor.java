@@ -3,11 +3,8 @@ package com.trainer.courserunner.course;
 import android.graphics.Color;
 import android.location.Location;
 
-import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 import com.trainer.courserunner.map.geo.DistanceConverter;
-import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.rooms.UserCourse;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -18,9 +15,9 @@ public abstract class CourseConductor implements Observer {
     Location currentlocation = null;
     Integer currentColor = Color.RED;
 
-    public CourseConductor(MapDrawer mapDrawer,Long userCourseId) {
+    public CourseConductor(MapDrawer mapDrawer, Long userCourseId) {
         this.mapDrawer = mapDrawer;
-        this.userCourseId=userCourseId;
+        this.userCourseId = userCourseId;
     }
 
     private boolean checkUpdateDistance(Location location1, Location location2) {

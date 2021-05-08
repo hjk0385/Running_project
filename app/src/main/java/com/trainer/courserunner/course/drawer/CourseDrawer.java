@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public abstract class CourseDrawer  implements Observer {
+public abstract class CourseDrawer implements Observer {
     protected MapDrawer mapDrawer;
     protected List<Object> overlayObjs;
 
@@ -19,27 +19,13 @@ public abstract class CourseDrawer  implements Observer {
         this.overlayObjs = new ArrayList<>();
     }
 
-    public class CourseDrawerAsyncTask extends AsyncTask<Void, Void, List<DrawingPath>>
-    {
-        @Override
-        protected List<DrawingPath> doInBackground(Void... voids) {
-            return makeDrawing();
-        }
-        @Override
-        protected void onPostExecute(List<DrawingPath> drawingPathList) {
-            super.onPostExecute(drawingPathList);
-            clearOverlay();
-            drawOverlay(drawingPathList);
-        }
-
-    }
-
     @Override
     final public void update(Observable observable, Object o) {
         new CourseDrawerAsyncTask().execute();
     }
 
     abstract protected List<DrawingPath> makeDrawing();
+
     abstract protected void drawOverlay(List<DrawingPath> drawing);
 
     final protected void clearOverlay() {
@@ -49,5 +35,20 @@ public abstract class CourseDrawer  implements Observer {
             }
             overlayObjs.clear();
         }
+    }
+
+    public class CourseDrawerAsyncTask extends AsyncTask<Void, Void, List<DrawingPath>> {
+        @Override
+        protected List<DrawingPath> doInBackground(Void... voids) {
+            return makeDrawing();
+        }
+
+        @Override
+        protected void onPostExecute(List<DrawingPath> drawingPathList) {
+            super.onPostExecute(drawingPathList);
+            clearOverlay();
+            drawOverlay(drawingPathList);
+        }
+
     }
 }

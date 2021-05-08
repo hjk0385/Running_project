@@ -7,7 +7,7 @@ import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
 
 import java.util.HashSet;
 
-public class QuanzationImageToMapProximate implements QuanzationImageToMap{
+public class QuanzationImageToMapProximate implements QuanzationImageToMap {
     @Override
     public ScopeDotsMap apply(ScopeDotsImage scopeDotsImage, ScopeDotsMap scopeDotsMap) {
         HashSet<ScopeDotAddress> quantizationDots = new HashSet<>();
