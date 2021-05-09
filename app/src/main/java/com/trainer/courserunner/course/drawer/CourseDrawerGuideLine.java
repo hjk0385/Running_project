@@ -49,5 +49,4 @@ public class CourseDrawerGuideLine extends CourseDrawerPolyline {
         }
         return drawingPathList;
     }
-
 }
