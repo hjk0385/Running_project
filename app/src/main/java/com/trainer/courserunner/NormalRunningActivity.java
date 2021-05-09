@@ -15,6 +15,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.trainer.courserunner.Application.StartType;
 import com.trainer.courserunner.course.activity.CourseConductorGuideRunnerActivity;
 import com.trainer.courserunner.course.maker.CourseMaker;
 import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyMinimumCost;
@@ -32,7 +33,7 @@ public class NormalRunningActivity extends AppCompatActivity {
             ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
                     currentLocation.getLatitude(), currentLocation.getLongitude(), kilometer * 1000);
             Bitmap image = AssetLoader.loadImage(this, "testbitmap2.png");
-
+            //
             CourseMaker courseMaker = new CourseMaker(image, scopeMapInfo);
             courseMaker.setQuanzationImageToMap(new QuanzationImageToMapProximate());
             courseMaker.setMarkerSelection(new MarkerSelectionRandom(0.25));
@@ -45,8 +46,8 @@ public class NormalRunningActivity extends AppCompatActivity {
 
     private void startNextActivity(Long courseId) {
         Intent intent = new Intent(getBaseContext(), CourseConductorGuideRunnerActivity.class);
-        intent.putExtra("courseId", courseId);
-        intent.putExtra("startType", "New");
+        intent.putExtra("courseId",courseId);
+        intent.putExtra("startType", StartType.NEW);
         startActivity(intent);
     }
 

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.view.Display;
 
 import androidx.room.Room;
 
@@ -35,20 +36,17 @@ public class AppDatabaseLoader extends Application {
 
         //앱DB미리채우기(디버그용)
         CourseMode courseMode;
-
         courseMode = new CourseMode();
-        courseMode.courseModeId = Long.valueOf(1);
-        courseMode.courseModeName = "SketchBook";
+        courseMode.courseModeId = Long.valueOf(ModeType.GUIDERUNNER.ordinal());
+        courseMode.courseModeName = ModeType.GUIDERUNNER.name();
         appDatabase.courseModeDao().insertDto(courseMode);
 
-        courseMode = new CourseMode();
-        courseMode.courseModeId = Long.valueOf(2);
-        courseMode.courseModeName = "GuideRunner";
+        courseMode.courseModeId = Long.valueOf(ModeType.PROJECTRUNNER.ordinal());
+        courseMode.courseModeName = ModeType.PROJECTRUNNER.name();
         appDatabase.courseModeDao().insertDto(courseMode);
 
-        courseMode = new CourseMode();
-        courseMode.courseModeId = Long.valueOf(3);
-        courseMode.courseModeName = "ProjectRunner";
+        courseMode.courseModeId = Long.valueOf(ModeType.SKETCHBOOK.ordinal());
+        courseMode.courseModeName = ModeType.SKETCHBOOK.name();
         appDatabase.courseModeDao().insertDto(courseMode);
         //
 
