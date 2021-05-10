@@ -1,6 +1,6 @@
 package com.trainer.courserunner.course.maker.scopetype;
 
-public abstract class ScopeDot {
+public class ScopeDot {
     protected Double normalizeX;
     protected Double normalizeY;
 

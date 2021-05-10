@@ -6,7 +6,7 @@ import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineConnectPolicyMinimumCost implements LineConnectPolicy {
+public class LineConnectPolicyDfs implements LineConnectPolicy {
     @Override
     public List<ScopeDotAddress> apply(List<ScopeDotAddress> scopeDotAddressList, ScopeDotAddress currentScopeDotAddress) {
         //불러오기
