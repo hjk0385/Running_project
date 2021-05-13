@@ -15,25 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <!-- 네이버지도 -->
+        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".NewProjectActivity" /> <!-- 네이버지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="hzqct6qd8n" />
-        <!-- 네이버지도 -->
-
+            android:value="hzqct6qd8n" /> <!-- 네이버지도 -->
         <!-- 엑티비티 -->
-        <activity android:name=".SoundSetActivity"></activity>
         <activity android:name=".UserSetActivity" />
         <activity android:name=".ProjectRunningActivity" />
-        <activity android:name=".NormalRunningActivity">
-
-        </activity>
+        <activity android:name=".NormalRunningActivity" />
         <activity android:name=".MissionActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".RunningActivity" />
-        <activity android:name=".LoginActivity">
-
-        </activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,11 +36,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity" />
-        <activity android:name=".SketchBookActivity">
-
-        </activity>
+        <activity android:name=".SketchBookActivity" />
         <activity android:name=".GuideRunActivity" />
-        <!-- 엑티비티 -->
-
     </application>
+
 </manifest>
