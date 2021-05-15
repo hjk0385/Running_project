@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.AsyncTask;
 
-import androidx.core.util.Consumer;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.component.CourseComponent;
@@ -21,6 +20,8 @@ import com.trainer.courserunner.rooms.Course;
 import com.trainer.courserunner.rooms.CourseFlag;
 
 import java.util.List;
+import java.util.function.Consumer;
+
 //출력 : Long , CourseId;
 public class CourseMaker extends CourseComponent {
     private ScopeDotsImage scopeDotsImage;
@@ -39,7 +40,7 @@ public class CourseMaker extends CourseComponent {
         private QuanzationLayer quanzationLayer;
         private LineConnectLayer lineConnectLayer;
         private CourseRegistLayer courseRegistLayer;
-
+        private Consumer<Object> finishEvent;
 
         public void setScopeDotsImage(Bitmap bitmap) {
             this.scopeDotsImage = new ScopeDotsImage(bitmap);
@@ -65,6 +66,9 @@ public class CourseMaker extends CourseComponent {
             this.startLocation = startLocation;
         }
 
+        public void setFinishEvent(Consumer<Object> finishEvent) {
+            this.finishEvent = finishEvent;
+        }
 
         public CourseMaker build(){
             CourseMaker courseMaker = new CourseMaker();
@@ -74,7 +78,7 @@ public class CourseMaker extends CourseComponent {
             courseMaker.quanzationLayer=quanzationLayer;
             courseMaker.lineConnectLayer=lineConnectLayer;
             courseMaker.courseRegistLayer=courseRegistLayer;
-
+            courseMaker.setFinishEventConsumer(finishEvent);
             return courseMaker;
         }
     }

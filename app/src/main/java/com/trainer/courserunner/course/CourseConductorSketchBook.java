@@ -9,19 +9,13 @@ import com.trainer.courserunner.course.component.drawer.CourseDrawerUserRecord;
 import com.trainer.courserunner.course.component.overseer.CourseOverseerUserRecord;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 
-public class CourseConductorSketchBook{
-    //정보
-    MapDrawer mapDrawer;
-    Long userCourseId;
-    Integer currentColor;
+public class CourseConductorSketchBook extends CourseConductor{
     //컴포넌트
     protected CourseOverseerUserRecord overseerUserRecord;
     CourseDrawerUserRecord drawerUserRecord;
 
     public CourseConductorSketchBook(MapDrawer mapDrawer, Long userCourseId) {
-        this.mapDrawer=mapDrawer;
-        this.userCourseId=userCourseId;
-        currentColor=Color.RED;
+        super(mapDrawer,userCourseId);
         //생성
         overseerUserRecord = new CourseOverseerUserRecord(userCourseId);
         drawerUserRecord = new CourseDrawerUserRecord(mapDrawer, userCourseId);
@@ -34,11 +28,13 @@ public class CourseConductorSketchBook{
     }
     //위치이벤트 -> 감시이벤트 -> 그리기 이벤트
 
+    @Override
     public void setCurrentColor(Integer currentColor) {
         this.currentColor = currentColor;
         overseerUserRecord.setCurrentLineColor(currentColor);
     }
 
+    @Override
     public void refreshLocation(Location location){
         overseerUserRecord.refreshLocation(location);
     }

@@ -60,7 +60,7 @@ public abstract class CourseConductorActivity extends NavermapLocationActivity {
                         .setPositiveButton("ok", new ColorPickerClickListener() {
                             @Override
                             public void onClick(DialogInterface d, int lastSelectedColor, Integer[] allColors) {
-                                courseConductor.setCurrentColor(lastSelectedColor);
+                                courseConductor(lastSelectedColor);
                             }
                         })
                         .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
