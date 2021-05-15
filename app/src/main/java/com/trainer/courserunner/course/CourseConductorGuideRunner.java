@@ -10,35 +10,22 @@ import com.trainer.courserunner.course.component.drawer.CourseDrawerUserRecord;
 import com.trainer.courserunner.course.component.overseer.CourseOverseerUserRecord;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 
-public class CourseConductorGuideRunner extends CourseConductor {
+public class CourseConductorGuideRunner extends CourseConductorSketchBook {
     Long courseId;
-    CourseOverseerUserRecord courseOverseerUserRecord;
-    CourseDrawer courseDrawerUserRecord;
-    CourseDrawer courseDrawerGuideLine;
-    CourseDrawer courseDrawerGuideMarker;
+    CourseDrawer drawerGuideLine;
+    CourseDrawer drawerGuideMarker;
 
     public CourseConductorGuideRunner(MapDrawer mapDrawer, @NotNull Long courseId, Long userCourseId) {
         super(mapDrawer, userCourseId);
         this.courseId = courseId;
-        //생성
-        courseOverseerUserRecord = new CourseOverseerUserRecord(userCourseId);
-        courseDrawerGuideLine = new CourseDrawerGuideLine(mapDrawer, courseId);
-        courseDrawerGuideMarker = new CourseDrawerGuideMarker(mapDrawer, courseId, userCourseId);
-        courseDrawerUserRecord = new CourseDrawerUserRecord(mapDrawer, userCourseId);
-        //이벤트 연계 설정(Flag -> 유저위치 -> 유저코스그리기 + 코스그리기 + 마커그리기)
-        courseOverseerUserRecord.sellSubscription(courseDrawerGuideLine);
-        courseOverseerUserRecord.sellSubscription(courseDrawerUserRecord);
-        courseOverseerUserRecord.sellSubscription(courseDrawerGuideMarker);
-    }
 
-    @Override
-    protected void changedLocation(Location location) {
-        courseOverseerUserRecord.update(null, location);
-    }
+        drawerGuideLine = new CourseDrawerGuideLine(mapDrawer,courseId);
+        drawerGuideMarker = new CourseDrawerGuideMarker(mapDrawer, courseId, userCourseId);
 
-    @Override
-    public void setCurrentColor(Integer currentColor) {
-        super.setCurrentColor(currentColor);
-        courseOverseerUserRecord.setCurrentLineColor(currentColor);
+        overseerUserRecord.setFinishEventConsumer((Object o)->{
+            drawerUserRecord.runComponent();
+            drawerGuideLine.runComponent();
+            drawerGuideMarker.runComponent();
+        });
     }
 }

@@ -13,42 +13,21 @@ import java.util.Date;
 
 //결과값 : Boolean 변경되었을시 : true, 변경되지 않은 경우 : false
 public class CourseOverseerUserRecord extends CourseComponent {
-    private Long usercourseId;
+    private final Long usercourseId;
     private Integer currentLineColor;
 
     public CourseOverseerUserRecord(Long userCourseId){
         this.usercourseId=userCourseId;
         this.currentLineColor=Color.RED;
-        this.changed=false;
     }
 
     public void setCurrentLineColor(Integer currentLineColor) {
         this.currentLineColor = currentLineColor;
     }
 
-    private boolean checkUpdateDistance(Location location1, Location location2) {
-        final double UPDATE_DISTANCE = 10.0;
-        return DistanceConverter.getDistance(location1.getLatitude(), location1.getLongitude(),
-                location2.getLatitude(), location2.getLongitude()) >= UPDATE_DISTANCE;
-    }
-
-    Location currentLocation;
-    Boolean changed;
-
-    public synchronized void refreshLocation(Location location){
-        if (currentLocation == null || checkUpdateDistance(currentLocation, location)) {
-            currentLocation = location;
-            changed=true;
-        }
-    }
-
-    public synchronized Boolean getChanged() {
-        return changed;
-    }
-
     @Override
     protected Object runInWorkThread() {
-        if(changed) {
+
             AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
 
             UserCourseRecord userCourseRecord = new UserCourseRecord();
@@ -60,10 +39,22 @@ public class CourseOverseerUserRecord extends CourseComponent {
             userCourseRecord.userCourseRecordDate = new Date();
 
             appDatabase.userCourseRecordDao().insertDto(userCourseRecord);
-            return true;
+            return null;
+
+    }
+
+    Location currentLocation;
+    public void refreshLocation(Location location){
+        if (currentLocation == null || checkUpdateDistance(currentLocation, location)) {
+            currentLocation = location;
+            runComponent();
         }
-        else{
-            return false;
-        }
+    }
+
+
+    private boolean checkUpdateDistance(Location location1, Location location2) {
+        final double UPDATE_DISTANCE = 10.0;
+        return DistanceConverter.getDistance(location1.getLatitude(), location1.getLongitude(),
+                location2.getLatitude(), location2.getLongitude()) >= UPDATE_DISTANCE;
     }
 }
