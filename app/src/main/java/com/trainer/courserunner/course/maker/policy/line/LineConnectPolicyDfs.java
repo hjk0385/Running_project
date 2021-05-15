@@ -6,22 +6,21 @@ import com.trainer.courserunner.course.maker.scopetype.ScopeDotsMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineConnectPolicyMinimumCost implements LineConnectPolicy {
+public class LineConnectPolicyDfs implements LineConnectPolicy {
     @Override
-    public List<ScopeDotAddress> apply(ScopeDotsMap scopeDotsMap) {
+    public List<ScopeDotAddress> apply(List<ScopeDotAddress> scopeDotAddressList, ScopeDotAddress currentScopeDotAddress) {
         //불러오기
         List<ScopeDotAddress> course = new ArrayList<>();
-        List<ScopeDotAddress> addresses = scopeDotsMap.getScopeDotAddressList();
         //연산
-        ScopeDotAddress currentAddress = addresses.get(0);
-        addresses.remove(currentAddress);
+        ScopeDotAddress currentAddress = currentScopeDotAddress;
         course.add(currentAddress);
         //반복
-        while (addresses.size() != 0) {
-            currentAddress = ScopeDotsMap.getClosestDot(addresses, currentAddress);
-            addresses.remove(currentAddress);
+        while (scopeDotAddressList.size() != 0) {
+            currentAddress = ScopeDotsMap.getClosestDot(scopeDotAddressList, currentAddress);
+            scopeDotAddressList.remove(currentAddress);
             course.add(currentAddress);
         }
+        course.add(currentScopeDotAddress);
         return course;
     }
 }

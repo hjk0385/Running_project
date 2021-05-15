@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,12 +15,16 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.trainer.courserunner.Application.StartType;
+import com.trainer.courserunner.course.activity.CourseConductorGuideRunnerActivity;
 import com.trainer.courserunner.course.maker.CourseMaker;
-import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyMinimumCost;
-import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationPolicyRandom;
+import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyDfs;
+import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyDfsCustom;
+import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionAll;
+import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionRandom;
+import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationImageToMapProximate;
 import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.loader.AssetLoader;
-import com.trainer.courserunner.map.geo.DistanceConverter;
 
 public class NormalRunningActivity extends AppCompatActivity {
     Location currentLocation;
@@ -27,23 +32,27 @@ public class NormalRunningActivity extends AppCompatActivity {
     View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
             //테스트코드
-            ScopeMapInfo scopeMapInfo = DistanceConverter.getScopeMapInfo(currentLocation, kilometer / 4);
+            ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
+                    currentLocation.getLatitude(), currentLocation.getLongitude(), kilometer * 1000);
+            Bitmap image = AssetLoader.loadImage(this, "testbitmap2.png");
+            //
+            CourseMaker courseMaker = new CourseMaker(image, scopeMapInfo);
+            courseMaker.setQuanzationImageToMap(new QuanzationImageToMapProximate());
+            //courseMaker.setQuanzationImageToMap(new QuanzationImageToMapPrecision(0.25));
 
-            CourseMaker.CourseMakerBuilder courseMakerBuilder = new CourseMaker.CourseMakerBuilder(
-                    AssetLoader.loadImage(this, "testbitmap2.png"), scopeMapInfo);
-
-            courseMakerBuilder.setLineConnectPolicy(new LineConnectPolicyMinimumCost())
-                    .setQuanzationPolicy(new QuanzationPolicyRandom(0.25))
-                    .setCourseIdConsumer(this::registDB);
-
-            CourseMaker courseMaker = courseMakerBuilder.build();
-            courseMaker.execute();
+            //courseMaker.setMarkerSelection(new MarkerSelectionRandom(0.25));
+            courseMaker.setMarkerSelection(new MarkerSelectionAll());
+            courseMaker.setLineConnectPolicy(new LineConnectPolicyDfsCustom(0.1));
+            courseMaker.setCourseIdConsumer(this::startNextActivity);
+            courseMaker.setCurrentLocation(currentLocation);
+            courseMaker.run();
         };
     }
 
-    private void registDB(Long courseId) {
-        Intent intent = new Intent(getBaseContext(), GuideRunActivity.class);
-        intent.putExtra("courseId", courseId);
+    private void startNextActivity(Long courseId) {
+        Intent intent = new Intent(getBaseContext(), CourseConductorGuideRunnerActivity.class);
+        intent.putExtra("courseId",courseId);
+        intent.putExtra("startType", StartType.NEW);
         startActivity(intent);
     }
 

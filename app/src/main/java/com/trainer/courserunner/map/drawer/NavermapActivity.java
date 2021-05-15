@@ -39,7 +39,7 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
             fragmentManager.beginTransaction().add(R.id.navermap_fragment, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
-        
+
     }
 
     @Override
@@ -103,6 +103,8 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
             ((PolylineOverlay) drawObject).setMap(null);
         } else if (drawObject instanceof PathOverlay) {
             ((PathOverlay) drawObject).setMap(null);
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 }

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
 
 @Entity(tableName = "course_flag",
         primaryKeys = {
@@ -17,9 +16,6 @@ import androidx.room.Index;
                         parentColumns = "course_id",
                         childColumns = "course_id",
                         onDelete = ForeignKey.CASCADE)
-        },
-        indices = {
-                @Index(value = {"course_flag_Id"}, unique = true)
         }
 )
 public class CourseFlag {
@@ -29,6 +25,9 @@ public class CourseFlag {
     @NonNull
     @ColumnInfo(name = "course_flag_Id")
     public Long courseFlagId;
+    @NonNull
+    @ColumnInfo(name = "marker_flag")
+    public Boolean markerFlag;
     @ColumnInfo(name = "course_flag_latitude")
     public Double courseFlagLatitude;
     @ColumnInfo(name = "course_flag_longitude")

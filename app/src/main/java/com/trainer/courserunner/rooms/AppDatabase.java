@@ -5,7 +5,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 @Database(entities = {Course.class, CourseFlag.class, CourseMode.class,
-        UserCourse.class, UserCourseRecord.class, UserCourseFlag.class},
+        UserCourse.class, UserCourseRecord.class},
+        views = {},
         version = 1, exportSchema = false)
 @TypeConverters({DateConverters.class})
 public abstract class AppDatabase extends RoomDatabase {
@@ -19,5 +20,4 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserCourseRecordDao userCourseRecordDao();
 
-    public abstract UserCourseFlagDao userCourseFlagDao();
 }

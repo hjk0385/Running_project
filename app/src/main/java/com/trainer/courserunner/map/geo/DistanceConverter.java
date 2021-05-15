@@ -1,9 +1,5 @@
 package com.trainer.courserunner.map.geo;
 
-import android.location.Location;
-
-import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
-
 public class DistanceConverter {
     // result = m
     static public Double getDistance(Double latitude1, Double longitude1,
@@ -30,16 +26,4 @@ public class DistanceConverter {
     static public Double convertKiloMeterToLongitude(Double kilometer) {
         return convertMeterToLongitude(kilometer * 1000);
     }
-
-    static public ScopeMapInfo getScopeMapInfo(Location location, Double kilometer) {
-        Double distLatitude = convertKiloMeterToLatitude(kilometer);
-        Double distLongitude = convertKiloMeterToLongitude(kilometer);
-
-        Double startLongitude = location.getLongitude();
-        Double startLatitude = location.getLatitude();
-        Double endLongitude = location.getLongitude() + distLongitude;
-        Double endLatitude = location.getLatitude() + distLatitude;
-        return new ScopeMapInfo(startLatitude, startLongitude, endLatitude, endLongitude);
-    }
-
 }
