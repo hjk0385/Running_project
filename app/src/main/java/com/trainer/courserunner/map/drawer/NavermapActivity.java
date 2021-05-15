@@ -14,8 +14,8 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
 import com.trainer.courserunner.R;
-import com.trainer.courserunner.course.drawer.drawtype.DrawingAddress;
-import com.trainer.courserunner.course.drawer.drawtype.DrawingPath;
+import com.trainer.courserunner.course.component.drawer.drawtype.DrawingAddress;
+import com.trainer.courserunner.course.component.drawer.drawtype.DrawingPath;
 
 import java.util.ArrayList;
 import java.util.List;

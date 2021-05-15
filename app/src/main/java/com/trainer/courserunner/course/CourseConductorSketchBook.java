@@ -2,9 +2,9 @@ package com.trainer.courserunner.course;
 
 import android.location.Location;
 
-import com.trainer.courserunner.course.drawer.CourseDrawer;
-import com.trainer.courserunner.course.drawer.CourseDrawerUserRecord;
-import com.trainer.courserunner.course.overseer.CourseOverseerUserRecord;
+import com.trainer.courserunner.course.component.drawer.CourseDrawer;
+import com.trainer.courserunner.course.component.drawer.CourseDrawerUserRecord;
+import com.trainer.courserunner.course.component.overseer.CourseOverseerUserRecord;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 
 public class CourseConductorSketchBook extends CourseConductor {

@@ -17,13 +17,10 @@ import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.Application.StartType;
 import com.trainer.courserunner.course.activity.CourseConductorGuideRunnerActivity;
-import com.trainer.courserunner.course.maker.CourseMaker;
-import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyDfs;
-import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyDfsCustom;
-import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionAll;
-import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionRandom;
-import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationImageToMapProximate;
-import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.course.component.maker.CourseMaker;
+import com.trainer.courserunner.course.component.maker.layer.line.LineConnectPolicyDfsCustom;
+import com.trainer.courserunner.course.component.maker.layer.marker.MarkerSelectionLayerAll;
+import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.loader.AssetLoader;
 
 public class NormalRunningActivity extends AppCompatActivity {
@@ -41,7 +38,7 @@ public class NormalRunningActivity extends AppCompatActivity {
             //courseMaker.setQuanzationImageToMap(new QuanzationImageToMapPrecision(0.25));
 
             //courseMaker.setMarkerSelection(new MarkerSelectionRandom(0.25));
-            courseMaker.setMarkerSelection(new MarkerSelectionAll());
+            courseMaker.setMarkerSelection(new MarkerSelectionLayerAll());
             courseMaker.setLineConnectPolicy(new LineConnectPolicyDfsCustom(0.1));
             courseMaker.setCourseIdConsumer(this::startNextActivity);
             courseMaker.setCurrentLocation(currentLocation);
