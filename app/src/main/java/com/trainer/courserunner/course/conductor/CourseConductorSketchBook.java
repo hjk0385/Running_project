@@ -1,10 +1,7 @@
-package com.trainer.courserunner.course;
+package com.trainer.courserunner.course.conductor;
 
-import android.graphics.Color;
 import android.location.Location;
 
-import com.trainer.courserunner.course.component.CourseComponent;
-import com.trainer.courserunner.course.component.drawer.CourseDrawer;
 import com.trainer.courserunner.course.component.drawer.CourseDrawerUserRecord;
 import com.trainer.courserunner.course.component.overseer.CourseOverseerUserRecord;
 import com.trainer.courserunner.map.drawer.MapDrawer;

@@ -37,10 +37,10 @@
         </activity>
         <activity android:name=".SignupActivity" />
 
-        <activity android:name=".course.activity.CourseConductorSketchBookActivity">
+        <activity android:name=".course.conductor.activity.CourseConductorSketchBookActivity">
 
         </activity>
-        <activity android:name=".course.activity.CourseConductorGuideRunnerActivity" />
+        <activity android:name=".course.conductor.activity.CourseConductorGuideRunnerActivity" />
 
     </application>
 

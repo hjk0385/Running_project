@@ -1,10 +1,10 @@
 package com.trainer.courserunner.course.component.sounder;
 
-public class SoundCommandCourseGuide implements SoundCommand {
+public class SoundCommandCourseFlag implements SoundCommand {
     int flagCount;
     int passFlagCount;
 
-    public SoundCommandCourseGuide(int flagCount, int passFlagCount) {
+    public SoundCommandCourseFlag(int flagCount, int passFlagCount) {
         this.flagCount = flagCount;
         this.passFlagCount = passFlagCount;
     }

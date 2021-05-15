@@ -1,4 +1,4 @@
-package com.trainer.courserunner.course.activity;
+package com.trainer.courserunner.course.conductor.activity;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -16,7 +16,7 @@ import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.R;
-import com.trainer.courserunner.course.CourseConductor;
+import com.trainer.courserunner.course.conductor.CourseConductor;
 import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 
 

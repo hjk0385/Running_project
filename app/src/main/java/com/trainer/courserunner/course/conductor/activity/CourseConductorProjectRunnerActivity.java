@@ -1,17 +1,15 @@
-package com.trainer.courserunner.course.activity;
-
-import android.content.Intent;
+package com.trainer.courserunner.course.conductor.activity;
 
 import com.trainer.courserunner.Application.ModeType;
 import com.trainer.courserunner.Application.StartType;
-import com.trainer.courserunner.course.CourseConductor;
-import com.trainer.courserunner.course.CourseConductorBuilder;
+import com.trainer.courserunner.course.conductor.CourseConductor;
+import com.trainer.courserunner.course.conductor.CourseConductorBuilder;
 
-public class CourseConductorSketchBookActivity extends CourseConductorActivity {
+public class CourseConductorProjectRunnerActivity extends CourseConductorActivity {
     @Override
     protected CourseConductor createCourseConductor() {
         StartType startType = (StartType) getIntent().getSerializableExtra("startType");
-        ModeType modeType = ModeType.SKETCHBOOK;
+        ModeType modeType = ModeType.PROJECTRUNNER;
 
         CourseConductorBuilder courseConductorBuilder = new CourseConductorBuilder();
         courseConductorBuilder.setMapDrawer(this);

@@ -1,13 +1,9 @@
-package com.trainer.courserunner.course;
-
-import android.location.Location;
+package com.trainer.courserunner.course.conductor;
 
 import com.google.firebase.database.annotations.NotNull;
 import com.trainer.courserunner.course.component.drawer.CourseDrawer;
 import com.trainer.courserunner.course.component.drawer.CourseDrawerGuideLine;
 import com.trainer.courserunner.course.component.drawer.CourseDrawerGuideMarker;
-import com.trainer.courserunner.course.component.drawer.CourseDrawerUserRecord;
-import com.trainer.courserunner.course.component.overseer.CourseOverseerUserRecord;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 
 public class CourseConductorGuideRunner extends CourseConductorSketchBook {

@@ -1,4 +1,4 @@
-package com.trainer.courserunner.course;
+package com.trainer.courserunner.course.conductor;
 
 import android.graphics.Color;
 import android.location.Location;

@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.Application.StartType;
-import com.trainer.courserunner.course.activity.CourseConductorGuideRunnerActivity;
+import com.trainer.courserunner.course.conductor.activity.CourseConductorGuideRunnerActivity;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectPolicyDfsCustom;
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationLayerProximate;
