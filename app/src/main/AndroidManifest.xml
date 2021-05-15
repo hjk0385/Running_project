@@ -41,9 +41,7 @@
 
         </activity>
         <activity android:name=".course.activity.CourseConductorGuideRunnerActivity" />
-        <!-- 엑티비티 -->
-        <activity android:name=".SketchBookActivity" />
-        <activity android:name=".GuideRunActivity" />
+
     </application>
 
 </manifest>

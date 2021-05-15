@@ -2,8 +2,7 @@
 <resources>
     <string-array name="array_voice">
         <item>아이 목소리</item>
-        <itet>여성 목소리</itet>
+        <item>여성 목소리</item>
         <item>남성 목소리</item>
     </string-array>
-
 </resources>
