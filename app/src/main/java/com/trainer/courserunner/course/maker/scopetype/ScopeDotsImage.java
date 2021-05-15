@@ -17,12 +17,6 @@ public class ScopeDotsImage extends ScopeDots {
                 scopeDotPixel.getGreen() <= colorLimit;
     }
 
-    private void banRecycle() {
-        if (this.size() != 0) {
-            throw new IllegalStateException();
-        }
-    }
-
     public void loadAllPixel(Bitmap bitmap) {
         banRecycle();
         List<Pair<Integer, Integer>> pixelLocations = new ArrayList<>();
