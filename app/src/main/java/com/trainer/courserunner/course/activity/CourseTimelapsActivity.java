@@ -7,6 +7,7 @@ import com.trainer.courserunner.course.CourseTimelaps;
 import com.trainer.courserunner.map.drawer.NavermapActivity;
 
 public class CourseTimelapsActivity extends NavermapActivity {
+    /*
     CourseTimelaps courseTimelaps;
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
@@ -26,4 +27,6 @@ public class CourseTimelapsActivity extends NavermapActivity {
         super.onDestroy();
         courseTimelaps.stop();
     }
+
+     */
 }

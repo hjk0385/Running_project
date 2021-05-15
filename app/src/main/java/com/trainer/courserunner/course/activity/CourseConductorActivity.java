@@ -31,7 +31,7 @@ public abstract class CourseConductorActivity extends NavermapLocationActivity {
         super.onMapReady(naverMap);
         courseConductor = createCourseConductor();
         naverMap.addOnLocationChangeListener((Location location) -> {
-            courseConductor.update(null, location);
+            courseConductor.refreshLocation(location);
         });
     }
 
@@ -60,7 +60,7 @@ public abstract class CourseConductorActivity extends NavermapLocationActivity {
                         .setPositiveButton("ok", new ColorPickerClickListener() {
                             @Override
                             public void onClick(DialogInterface d, int lastSelectedColor, Integer[] allColors) {
-                                courseConductor(lastSelectedColor);
+                                courseConductor.setCurrentColor(lastSelectedColor);
                             }
                         })
                         .setNegativeButton("cancel", new DialogInterface.OnClickListener() {

@@ -6,6 +6,8 @@ import com.trainer.courserunner.course.component.drawer.CourseDrawerTimeLaps;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 
 public class CourseTimelaps {
+
+    /*
     CourseDrawerTimeLaps courseDrawerTimeLaps;
     CourseTimelapsAsyncTask courseTimelapsAsyncTask;
     public CourseTimelaps(MapDrawer mapDrawer,Long userCourseId){
@@ -44,4 +46,6 @@ public class CourseTimelaps {
             return null;
         }
     }
+
+     */
 }

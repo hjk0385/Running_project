@@ -1,38 +1,34 @@
 package com.trainer.courserunner.course.component.maker.layer.line;
 
+import com.trainer.courserunner.course.component.maker.scopetype.ScopeDot;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsMap;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LineConnectPolicyDfsCustom extends LineConnectLayerDfs{
-    double precision;
-    public LineConnectPolicyDfsCustom(double precision){
-        this.precision=precision;
+    double costLimit;
+    public LineConnectPolicyDfsCustom(double costLimit){
+        this.costLimit=costLimit;
     }
 
     @Override
     public List<ScopeDotAddress> apply(ScopeDotsMap scopeDots, ScopeDotAddress startAddress) {
-        final double costLimit=0.1;
+        List<ScopeDotAddress> preprocessCourse=super.apply(scopeDots,startAddress);
+        List<ScopeDotAddress> course=new Vector<>();
 
-        List<ScopeDotAddress> prevRoundResult=super.apply(scopeDots,startAddress);
-        Iterator<ScopeDotAddress> prevRoundResultIter = prevRoundResult.iterator();
-        while(prevRoundResultIter.hasNext()){
-            ScopeDotAddress dotAddress=prevRoundResultIter.next();
-            List<ScopeDotAddress> removeScopeDotAddressList=
-                    prevRoundResult.stream().filter((ScopeDotAddress scopeDotAddress)->{
-                        if(dotAddress==scopeDotAddress||scopeDotAddress.getCost(dotAddress)>costLimit){
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }).collect(Collectors.toList());
-            prevRoundResult.removeAll(removeScopeDotAddressList);
+        while(preprocessCourse.size()>0){
+            ScopeDotAddress chosenOne=preprocessCourse.get(0);
+            course.add(chosenOne);
+            preprocessCourse=preprocessCourse.parallelStream()
+                    .filter(scopeDotAddress -> scopeDotAddress.getCost(chosenOne)>costLimit)
+                    .collect(Collectors.toList());
         }
-        return prevRoundResult;
+        return course;
     }
 }
