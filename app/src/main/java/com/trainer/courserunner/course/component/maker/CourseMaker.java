@@ -8,10 +8,8 @@ import androidx.core.util.Consumer;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.component.CourseComponent;
-import com.trainer.courserunner.course.component.maker.layer.flag.ConvertCourseFlagLayer;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayer;
-import com.trainer.courserunner.course.component.maker.layer.line.LineConnectPolicy;
-import com.trainer.courserunner.course.component.maker.layer.marker.MarkerSelectionLayer;
+
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationLayer;
 import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegistLayer;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
@@ -32,6 +30,7 @@ public class CourseMaker extends CourseComponent {
     private QuanzationLayer quanzationLayer;
     private LineConnectLayer lineConnectLayer;
     private CourseRegistLayer courseRegistLayer;
+    private Consumer<Long> finishEventConsumer;
 
     public static class Builder{
         private ScopeDotsImage scopeDotsImage;
@@ -41,6 +40,12 @@ public class CourseMaker extends CourseComponent {
         private QuanzationLayer quanzationLayer;
         private LineConnectLayer lineConnectLayer;
         private CourseRegistLayer courseRegistLayer;
+
+        private Consumer<Long> finishEventConsumer;
+
+        public Builder(){
+            finishEventConsumer=(o)->{};
+        }
 
         public void setScopeDotsImage(Bitmap bitmap) {
             this.scopeDotsImage = new ScopeDotsImage(bitmap);
@@ -66,6 +71,10 @@ public class CourseMaker extends CourseComponent {
             this.startLocation = startLocation;
         }
 
+        public void setFinishEventConsumer(Consumer<Long> finishEventConsumer) {
+            this.finishEventConsumer = finishEventConsumer;
+        }
+
         public CourseMaker build(){
             CourseMaker courseMaker = new CourseMaker();
             courseMaker.scopeDotsImage=scopeDotsImage;
@@ -74,6 +83,7 @@ public class CourseMaker extends CourseComponent {
             courseMaker.quanzationLayer=quanzationLayer;
             courseMaker.lineConnectLayer=lineConnectLayer;
             courseMaker.courseRegistLayer=courseRegistLayer;
+            courseMaker.finishEventConsumer=finishEventConsumer;
             return courseMaker;
         }
 
@@ -89,6 +99,7 @@ public class CourseMaker extends CourseComponent {
 
     @Override
     protected void runInUiThread(Object object) {
-
+        Long courseId=(Long)object;
+        finishEventConsumer.accept(courseId);
     }
 }
