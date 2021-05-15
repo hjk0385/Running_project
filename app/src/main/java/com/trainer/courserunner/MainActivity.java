@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_btn2: //사용자 계정 관리 이동
+            case R.id.action_btn2: //BMI
                 Intent homeIntent = new Intent(this, UserSetActivity.class);
                 startActivity(homeIntent);
                 return true;
-            case R.id.action_btn3: //효과음 설정 이동
-                Intent homeIntent2 = new Intent(this, SoundSetActivity.class);
+            case R.id.action_btn3: //설정 이동
+                Intent homeIntent2 = new Intent(this, SettingActivity.class);
                 startActivity(homeIntent2);
                 return true;
             case R.id.action_btn4: //공지사항 및 QnA 카페 이동

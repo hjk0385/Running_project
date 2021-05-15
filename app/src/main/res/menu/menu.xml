@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_btn2"
-        android:title="사용자 계정관리"
+        android:id="@+id/action_btn3"
+        android:title="설정"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_btn3"
-        android:title="효과음 설정"
+        android:id="@+id/action_btn2"
+        android:title="BMI 계산"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_btn4"
