@@ -1,17 +1,19 @@
 package com.trainer.courserunner.course.maker.scopetype;
 
+import androidx.annotation.RestrictTo;
+
 import com.trainer.courserunner.map.geo.DistanceConverter;
 
-public class ScopeMapInfo {
-    private final Double startLatitude;
-    private final Double startLongtitude;
-    private final Double endLatitude;
-    private final Double endLongtitude;
+public class ScopeMapInfo implements ScopeInfo {
+    private final double startLatitude;
+    private final double startLongtitude;
+    private final double endLatitude;
+    private final double endLongtitude;
 
-    private ScopeMapInfo(Double startLatitude,
-                         Double startLongtitude,
-                         Double endLatitude,
-                         Double endLongtitude) {
+    private ScopeMapInfo(double startLatitude,
+                         double startLongtitude,
+                         double endLatitude,
+                         double endLongtitude) {
         this.startLatitude = startLatitude;
         this.startLongtitude = startLongtitude;
         this.endLatitude = endLatitude;
@@ -20,42 +22,54 @@ public class ScopeMapInfo {
 
     //m단위
     static public ScopeMapInfo makeScopeMapInfoOriginLeftDown(double latitude, double longitude, double distance) {
-        double startLatitude = latitude;
-        double startLongitude = longitude;
         double endLatitude = latitude + DistanceConverter.convertMeterToLatitude(distance);
         double endLongitude = longitude + DistanceConverter.convertMeterToLongitude(distance);
-        return new ScopeMapInfo(startLatitude, startLongitude, endLatitude, endLongitude);
+        return new ScopeMapInfo(latitude, longitude, endLatitude, endLongitude);
     }
 
-    public Double getEndLatitude() {
+    public double getEndLatitude() {
         return endLatitude;
     }
 
-    public Double getEndLongtitude() {
+    public double getEndLongtitude() {
         return endLongtitude;
     }
 
-    public Double getStartLatitude() {
+    public double getStartLatitude() {
         return startLatitude;
     }
 
-    public Double getStartLongtitude() {
+    public double getStartLongtitude() {
         return startLongtitude;
     }
 
-    public Double getStartX() {
+    @Override
+    public double getStartX() {
         return startLongtitude;
     }
 
-    public Double getStartY() {
+    @Override
+    public double getStartY() {
         return startLatitude;
     }
 
-    public Double getEndX() {
+    @Override
+    public double getEndX() {
         return endLongtitude;
     }
 
-    public Double getEndY() {
+    @Override
+    public double getEndY() {
         return endLatitude;
+    }
+
+    @Override
+    public double getWidth(){
+        return getEndX()-getStartX();
+    }
+
+    @Override
+    public double getHeight(){
+        return getEndY()-getStartY();
     }
 }
