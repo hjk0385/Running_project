@@ -1,4 +1,4 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.Application;
 
 import android.content.Context;
 import android.media.AudioManager;
