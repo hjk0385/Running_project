@@ -2,6 +2,7 @@ package com.trainer.courserunner.course.component.drawer;
 
 import android.os.AsyncTask;
 
+import com.trainer.courserunner.course.component.CourseComponent;
 import com.trainer.courserunner.course.component.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 
@@ -10,7 +11,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public abstract class CourseDrawer implements Observer {
+//결과물 없음, 이벤트가 들어오면 다시 그리기만 진행
+//consumer의 정의때 changed문을 참조해서 그릴지 그리지 않을지를 판단한다.
+public abstract class CourseDrawer extends CourseComponent {
     protected MapDrawer mapDrawer;
     protected List<Object> overlayObjs;
 
@@ -20,8 +23,15 @@ public abstract class CourseDrawer implements Observer {
     }
 
     @Override
-    final public void update(Observable observable, Object o) {
-        new CourseDrawerAsyncTask().execute();
+    protected Object runInWorkThread() {
+        return makeDrawing();
+    }
+
+    @Override
+    protected void runInUiThread(Object object) {
+        super.runInUiThread(object);
+        clearOverlay();
+        drawOverlay((List<DrawingPath>)object);
     }
 
     abstract protected List<DrawingPath> makeDrawing();
@@ -35,20 +45,5 @@ public abstract class CourseDrawer implements Observer {
             }
             overlayObjs.clear();
         }
-    }
-
-    public class CourseDrawerAsyncTask extends AsyncTask<Void, Void, List<DrawingPath>> {
-        @Override
-        protected List<DrawingPath> doInBackground(Void... voids) {
-            return makeDrawing();
-        }
-
-        @Override
-        protected void onPostExecute(List<DrawingPath> drawingPathList) {
-            super.onPostExecute(drawingPathList);
-            clearOverlay();
-            drawOverlay(drawingPathList);
-        }
-
     }
 }

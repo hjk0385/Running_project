@@ -35,11 +35,15 @@ public class CourseOverseerUserRecord extends CourseComponent {
     Location currentLocation;
     Boolean changed;
 
-    public void refreshLocation(Location location){
+    public synchronized void refreshLocation(Location location){
         if (currentLocation == null || checkUpdateDistance(currentLocation, location)) {
             currentLocation = location;
             changed=true;
         }
+    }
+
+    public synchronized Boolean getChanged() {
+        return changed;
     }
 
     @Override
