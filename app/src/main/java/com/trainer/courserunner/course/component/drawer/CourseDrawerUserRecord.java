@@ -1,6 +1,6 @@
 package com.trainer.courserunner.course.component.drawer;
 
-import com.trainer.courserunner.Application.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppFunctionLoader;
 import com.trainer.courserunner.course.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.course.component.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.map.drawer.MapDrawer;
@@ -22,7 +22,7 @@ public class CourseDrawerUserRecord extends CourseDrawerPolyline {
     @Override
     protected List<DrawingPath> makeDrawing() {
         //불러오기
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
+        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
         UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCourseId);
         //생성
         List<DrawingPath> drawingPathList = new ArrayList<>();

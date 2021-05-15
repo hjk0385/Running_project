@@ -13,7 +13,7 @@ import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseMode;
 
 
-public class AppDatabaseLoader extends Application {
+public class AppFunctionLoader extends Application {
     static private AppDatabase appDatabase = null;
     static private SQLiteDatabase roadAddressDatabase = null;
 
@@ -59,5 +59,9 @@ public class AppDatabaseLoader extends Application {
             Log.v("DBCheck", String.valueOf(cursor.getDouble(cursor.getColumnIndex("longitude"))));
             Log.v("DBCheck", String.valueOf(cursor.getColumnCount()));
         }
+
+        //사운드 매니저 초기화
+        SoundManagerGuide.initSoundManager(this);
+        SoundManagerGuide.getSoundManager().playSound(GuideSound.FINISHWOMAN.ordinal());
     }
 }

@@ -1,6 +1,6 @@
 package com.trainer.courserunner.course.component.drawer;
 
-import com.trainer.courserunner.Application.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppFunctionLoader;
 import com.trainer.courserunner.course.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.course.component.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.map.drawer.MapDrawer;
@@ -17,7 +17,7 @@ public class CourseDrawerTimeLaps extends CourseDrawerUserRecord {
 
     public CourseDrawerTimeLaps(MapDrawer mapDrawer, Long userCourseId) {
         super(mapDrawer, userCourseId);
-        maxRecordCount=AppDatabaseLoader.getAppDatabase().userCourseRecordDao().getUserLocationRecordCount(userCourseId);
+        maxRecordCount= AppFunctionLoader.getAppDatabase().userCourseRecordDao().getUserLocationRecordCount(userCourseId);
         currentRecordCount= Long.valueOf(0);
     }
 
@@ -26,7 +26,7 @@ public class CourseDrawerTimeLaps extends CourseDrawerUserRecord {
         currentRecordCount=(currentRecordCount+1)%maxRecordCount;
 
         //불러오기
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
+        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
         UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCourseId);
         //생성
         List<DrawingPath> drawingPathList = new ArrayList<>();

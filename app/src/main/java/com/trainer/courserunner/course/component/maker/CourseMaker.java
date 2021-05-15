@@ -1,11 +1,8 @@
 package com.trainer.courserunner.course.component.maker;
 
 import android.graphics.Bitmap;
-import android.location.Location;
-import android.os.AsyncTask;
 
 
-import com.trainer.courserunner.Application.AppDatabaseLoader;
 import com.trainer.courserunner.course.component.CourseComponent;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayer;
 
@@ -15,9 +12,6 @@ import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsMap;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
-import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.rooms.Course;
-import com.trainer.courserunner.rooms.CourseFlag;
 
 import java.util.List;
 import java.util.function.Consumer;

@@ -1,6 +1,6 @@
 package com.trainer.courserunner.course.conductor;
 
-import com.trainer.courserunner.Application.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppFunctionLoader;
 import com.trainer.courserunner.Application.ModeType;
 import com.trainer.courserunner.Application.StartType;
 import com.trainer.courserunner.map.drawer.MapDrawer;
@@ -58,7 +58,7 @@ public class CourseConductorBuilder {
         }
 
         if(startType==StartType.NEW) {
-            AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
+            AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
             UserCourse userCourse = new UserCourse();
             userCourse.courseId = null;
             userCourse.userCourseId = null;

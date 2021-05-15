@@ -1,14 +1,9 @@
 package com.trainer.courserunner.course.component.sounder;
 
-import android.os.AsyncTask;
-
-import com.trainer.courserunner.Application.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppFunctionLoader;
 import com.trainer.courserunner.course.component.CourseComponent;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.UserCourseFlagDerived;
-
-import java.util.Observable;
-import java.util.Observer;
 
 public class CourseSounder extends CourseComponent {
     Long courseId;
@@ -21,7 +16,7 @@ public class CourseSounder extends CourseComponent {
 
     @Override
     protected Object runInWorkThread() {
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
+        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
 
         int flagCount=appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
         int passedFlagCount=UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId,userCoursedId);

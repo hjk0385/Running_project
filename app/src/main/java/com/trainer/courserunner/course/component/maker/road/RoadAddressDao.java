@@ -2,7 +2,7 @@ package com.trainer.courserunner.course.component.maker.road;
 
 import android.database.Cursor;
 
-import com.trainer.courserunner.Application.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppFunctionLoader;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class RoadAddressDao {
                 String.valueOf(scopeMapInfo.getEndX()),
                 String.valueOf(scopeMapInfo.getEndY())
         };
-        Cursor cursor = AppDatabaseLoader.getRoadAddressDatabase().rawQuery(sql, whereArgs);
+        Cursor cursor = AppFunctionLoader.getRoadAddressDatabase().rawQuery(sql, whereArgs);
         ArrayList<RoadAddress> addresseses = new ArrayList<>();
         while (cursor.moveToNext()) {
             addresseses.add(new RoadAddress(cursor.getDouble(cursor.getColumnIndex("longitude")),
