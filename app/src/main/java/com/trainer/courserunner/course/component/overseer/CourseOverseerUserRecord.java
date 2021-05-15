@@ -4,39 +4,62 @@ import android.graphics.Color;
 import android.location.Location;
 
 import com.trainer.courserunner.Application.AppDatabaseLoader;
+import com.trainer.courserunner.course.component.CourseComponent;
+import com.trainer.courserunner.map.geo.DistanceConverter;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.UserCourseRecord;
 
 import java.util.Date;
 
-public class CourseOverseerUserRecord extends CourseOverseer {
+//결과값 : Boolean 변경되었을시 : true, 변경되지 않은 경우 : false
+public class CourseOverseerUserRecord extends CourseComponent {
+    private Long usercourseId;
     private Integer currentLineColor;
 
-    public CourseOverseerUserRecord(Long usercourseId) {
-        super(usercourseId);
-        this.currentLineColor = Color.RED;
+    public CourseOverseerUserRecord(Long userCourseId){
+        this.usercourseId=userCourseId;
+        this.currentLineColor=Color.RED;
+        this.changed=false;
     }
 
     public void setCurrentLineColor(Integer currentLineColor) {
         this.currentLineColor = currentLineColor;
     }
 
-    @Override
-    public void oversight(Location location) {
-        registUserLocationRecord(location);
+    private boolean checkUpdateDistance(Location location1, Location location2) {
+        final double UPDATE_DISTANCE = 10.0;
+        return DistanceConverter.getDistance(location1.getLatitude(), location1.getLongitude(),
+                location2.getLatitude(), location2.getLongitude()) >= UPDATE_DISTANCE;
     }
 
-    private void registUserLocationRecord(Location location) {
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
+    Location currentLocation;
+    Boolean changed;
 
-        UserCourseRecord userCourseRecord = new UserCourseRecord();
-        userCourseRecord.userCourseId = usercourseId;
-        userCourseRecord.userCourseRecordId = appDatabase.userCourseRecordDao().getNextUserLocationOrder(usercourseId);
-        userCourseRecord.userCourseRecordLatitude = location.getLatitude();
-        userCourseRecord.userCourseRecordLongitude = location.getLongitude();
-        userCourseRecord.userCourseRecordColor = currentLineColor;
-        userCourseRecord.userCourseRecordDate = new Date();
+    public void refreshLocation(Location location){
+        if (currentLocation == null || checkUpdateDistance(currentLocation, location)) {
+            currentLocation = location;
+            changed=true;
+        }
+    }
 
-        appDatabase.userCourseRecordDao().insertDto(userCourseRecord);
+    @Override
+    protected Object runInWorkThread() {
+        if(changed) {
+            AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
+
+            UserCourseRecord userCourseRecord = new UserCourseRecord();
+            userCourseRecord.userCourseId = usercourseId;
+            userCourseRecord.userCourseRecordId = appDatabase.userCourseRecordDao().getNextUserLocationOrder(usercourseId);
+            userCourseRecord.userCourseRecordLatitude = currentLocation.getLatitude();
+            userCourseRecord.userCourseRecordLongitude = currentLocation.getLongitude();
+            userCourseRecord.userCourseRecordColor = currentLineColor;
+            userCourseRecord.userCourseRecordDate = new Date();
+
+            appDatabase.userCourseRecordDao().insertDto(userCourseRecord);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

@@ -21,7 +21,7 @@ import com.trainer.courserunner.rooms.Course;
 import com.trainer.courserunner.rooms.CourseFlag;
 
 import java.util.List;
-
+//출력 : Long , CourseId;
 public class CourseMaker extends CourseComponent {
     private ScopeDotsImage scopeDotsImage;
     private ScopeDotsMap scopeDotsMap;
@@ -30,7 +30,6 @@ public class CourseMaker extends CourseComponent {
     private QuanzationLayer quanzationLayer;
     private LineConnectLayer lineConnectLayer;
     private CourseRegistLayer courseRegistLayer;
-    private Consumer<Long> finishEventConsumer;
 
     public static class Builder{
         private ScopeDotsImage scopeDotsImage;
@@ -41,11 +40,6 @@ public class CourseMaker extends CourseComponent {
         private LineConnectLayer lineConnectLayer;
         private CourseRegistLayer courseRegistLayer;
 
-        private Consumer<Long> finishEventConsumer;
-
-        public Builder(){
-            finishEventConsumer=(o)->{};
-        }
 
         public void setScopeDotsImage(Bitmap bitmap) {
             this.scopeDotsImage = new ScopeDotsImage(bitmap);
@@ -71,9 +65,6 @@ public class CourseMaker extends CourseComponent {
             this.startLocation = startLocation;
         }
 
-        public void setFinishEventConsumer(Consumer<Long> finishEventConsumer) {
-            this.finishEventConsumer = finishEventConsumer;
-        }
 
         public CourseMaker build(){
             CourseMaker courseMaker = new CourseMaker();
@@ -83,10 +74,9 @@ public class CourseMaker extends CourseComponent {
             courseMaker.quanzationLayer=quanzationLayer;
             courseMaker.lineConnectLayer=lineConnectLayer;
             courseMaker.courseRegistLayer=courseRegistLayer;
-            courseMaker.finishEventConsumer=finishEventConsumer;
+
             return courseMaker;
         }
-
     }
 
     @Override
@@ -95,11 +85,5 @@ public class CourseMaker extends CourseComponent {
         List<ScopeDotAddress> course = lineConnectLayer.apply(scopeDotsImageMap,startLocation);
         Long courseId = courseRegistLayer.apply(course);
         return courseId;
-    }
-
-    @Override
-    protected void runInUiThread(Object object) {
-        Long courseId=(Long)object;
-        finishEventConsumer.accept(courseId);
     }
 }
