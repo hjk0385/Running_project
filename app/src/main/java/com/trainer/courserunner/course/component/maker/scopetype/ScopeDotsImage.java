@@ -26,7 +26,7 @@ public class ScopeDotsImage extends ScopeDots {
         }
 
         final ScopeImageInfo scopeImageInfo = new ScopeImageInfo(bitmap.getHeight(), bitmap.getWidth());
-        List<ScopeDot> scopeDotList = pixelLocations.stream().map((coordinate) -> {
+        List<ScopeDot> scopeDotList = pixelLocations.parallelStream().map((coordinate) -> {
             int x = coordinate.first;
             int y = coordinate.second;
             int rgb = bitmap.getPixel(x, y);

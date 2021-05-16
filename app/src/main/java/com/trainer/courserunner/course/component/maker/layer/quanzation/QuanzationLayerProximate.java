@@ -13,10 +13,10 @@ public class QuanzationLayerProximate implements QuanzationLayer{
     @Override
     public ScopeDotsMap apply(ScopeDotsImage scopeDotsImage, ScopeDotsMap scopeDotsMap) {
         HashSet<ScopeDot> quantizationDots = new HashSet<>();
-        scopeDotsImage.stream().forEach((ScopeDot scopeDot)->{
+        scopeDotsImage.parallelStream().forEach((ScopeDot scopeDot)->{
             quantizationDots.add(scopeDotsMap.getClosestDot(scopeDot));
         });
-        List<ScopeDotAddress> scopeDotAddressList=quantizationDots.stream().map(
+        List<ScopeDotAddress> scopeDotAddressList=quantizationDots.parallelStream().map(
                 (ScopeDot scopeDot)->(ScopeDotAddress)scopeDot)
                 .collect(Collectors.toList());
         return new ScopeDotsMap(scopeDotAddressList);
