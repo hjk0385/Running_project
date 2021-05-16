@@ -1,4 +1,4 @@
-package com.trainer.courserunner.course.component.maker.road;
+package com.trainer.courserunner.Application.road;
 
 public class RoadAddress {
     private Double longitude;//x

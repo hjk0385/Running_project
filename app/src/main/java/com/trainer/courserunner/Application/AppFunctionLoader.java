@@ -1,13 +1,12 @@
 package com.trainer.courserunner.Application;
 
 import android.app.Application;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.view.Display;
 
 import androidx.room.Room;
 
+import com.trainer.courserunner.Application.enumtype.ModeType;
+import com.trainer.courserunner.Application.sound.SoundManagerGuide;
 import com.trainer.courserunner.loader.ObbLoader;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseMode;

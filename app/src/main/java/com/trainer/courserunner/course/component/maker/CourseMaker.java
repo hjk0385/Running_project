@@ -18,8 +18,8 @@ import java.util.function.Consumer;
 
 //출력 : Long , CourseId;
 public class CourseMaker extends CourseComponent {
-    private ScopeDotsImage scopeDotsImage;
-    private ScopeDotsMap scopeDotsMap;
+    private Bitmap bitmap;
+    private ScopeMapInfo scopeMapInfo;
     private ScopeDotAddress startLocation;
 
     private QuanzationLayer quanzationLayer;
@@ -27,8 +27,8 @@ public class CourseMaker extends CourseComponent {
     private CourseRegistLayer courseRegistLayer;
 
     public static class Builder{
-        private ScopeDotsImage scopeDotsImage;
-        private ScopeDotsMap scopeDotsMap;
+        private Bitmap bitmap;
+        private ScopeMapInfo scopeMapInfo;
         private ScopeDotAddress startLocation;
 
         private QuanzationLayer quanzationLayer;
@@ -36,12 +36,12 @@ public class CourseMaker extends CourseComponent {
         private CourseRegistLayer courseRegistLayer;
         private Consumer<Object> finishEvent;
 
-        public void setScopeDotsImage(Bitmap bitmap) {
-            this.scopeDotsImage = new ScopeDotsImage(bitmap);
+        public void setBitmap(Bitmap bitmap) {
+            this.bitmap = bitmap;
         }
 
-        public void setScopeDotsMap(ScopeMapInfo scopeMapInfo) {
-            this.scopeDotsMap = new ScopeDotsMap(scopeMapInfo);
+        public void setScopeMapInfo(ScopeMapInfo scopeMapInfo) {
+            this.scopeMapInfo = scopeMapInfo;
         }
 
         public void setLineConnectLayer(LineConnectLayer lineConnectLayer) {
@@ -66,8 +66,8 @@ public class CourseMaker extends CourseComponent {
 
         public CourseMaker build(){
             CourseMaker courseMaker = new CourseMaker();
-            courseMaker.scopeDotsImage=scopeDotsImage;
-            courseMaker.scopeDotsMap=scopeDotsMap;
+            courseMaker.bitmap=bitmap;
+            courseMaker.scopeMapInfo=scopeMapInfo;
             courseMaker.startLocation=startLocation;
             courseMaker.quanzationLayer=quanzationLayer;
             courseMaker.lineConnectLayer=lineConnectLayer;
@@ -79,7 +79,7 @@ public class CourseMaker extends CourseComponent {
 
     @Override
     protected Object runInWorkThread() {
-        ScopeDotsMap scopeDotsImageMap = quanzationLayer.apply(scopeDotsImage,scopeDotsMap);
+        ScopeDotsMap scopeDotsImageMap = quanzationLayer.apply(new ScopeDotsImage(bitmap),new ScopeDotsMap(scopeMapInfo));
         List<ScopeDotAddress> course = lineConnectLayer.apply(scopeDotsImageMap,startLocation);
         Long courseId = courseRegistLayer.apply(course);
         return courseId;

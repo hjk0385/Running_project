@@ -1,9 +1,7 @@
 package com.trainer.courserunner.course.component.maker.scopetype;
 
-import androidx.annotation.NonNull;
-
-import com.trainer.courserunner.course.component.maker.road.RoadAddress;
-import com.trainer.courserunner.course.component.maker.road.RoadAddressDao;
+import com.trainer.courserunner.Application.road.RoadAddress;
+import com.trainer.courserunner.Application.road.RoadAddressDao;
 
 import java.util.List;
 import java.util.stream.Collectors;

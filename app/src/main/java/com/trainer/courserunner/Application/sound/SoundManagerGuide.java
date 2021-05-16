@@ -1,11 +1,10 @@
-package com.trainer.courserunner.Application;
+package com.trainer.courserunner.Application.sound;
 
 import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
-import android.os.Build;
-import android.provider.MediaStore;
 
+import com.trainer.courserunner.Application.enumtype.GuideSound;
 import com.trainer.courserunner.R;
 
 

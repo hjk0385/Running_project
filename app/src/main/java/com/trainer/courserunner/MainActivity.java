@@ -10,10 +10,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.trainer.courserunner.Application.GuideSound;
-import com.trainer.courserunner.Application.SoundManager;
-import com.trainer.courserunner.Application.SoundManagerGuide;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

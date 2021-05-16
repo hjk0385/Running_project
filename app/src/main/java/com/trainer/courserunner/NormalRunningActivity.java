@@ -15,7 +15,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.trainer.courserunner.Application.StartType;
+import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.course.conductor.activity.CourseConductorGuideRunnerActivity;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectPolicyDfsCustom;
@@ -39,8 +39,8 @@ public class NormalRunningActivity extends AppCompatActivity {
             builder.setCourseRegistLayer(new CourseRegistLayerAll());
             builder.setLineConnectLayer(new LineConnectPolicyDfsCustom(0.1));
             builder.setQuanzationLayer(new QuanzationLayerProximate());
-            builder.setScopeDotsImage(bitmap);
-            builder.setScopeDotsMap(scopeMapInfo);
+            builder.setBitmap(bitmap);
+            builder.setScopeMapInfo(scopeMapInfo);
             builder.setStartLocation(new ScopeDotAddress(scopeMapInfo,currentLocation.getLongitude(),currentLocation.getLatitude()));
             builder.setFinishEvent(o -> startNextActivity((Long)o));
 

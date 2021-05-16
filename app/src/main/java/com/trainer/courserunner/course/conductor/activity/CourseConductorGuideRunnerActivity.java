@@ -1,7 +1,7 @@
 package com.trainer.courserunner.course.conductor.activity;
 
-import com.trainer.courserunner.Application.ModeType;
-import com.trainer.courserunner.Application.StartType;
+import com.trainer.courserunner.Application.enumtype.ModeType;
+import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.course.conductor.CourseConductor;
 import com.trainer.courserunner.course.conductor.CourseConductorBuilder;
 

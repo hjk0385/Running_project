@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.trainer.courserunner.Application.StartType;
+import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.course.conductor.activity.CourseConductorSketchBookActivity;
 
 public class RunningActivity extends AppCompatActivity {

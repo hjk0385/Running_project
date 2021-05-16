@@ -1,8 +1,8 @@
 package com.trainer.courserunner.course.conductor;
 
 import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.Application.ModeType;
-import com.trainer.courserunner.Application.StartType;
+import com.trainer.courserunner.Application.enumtype.ModeType;
+import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.map.drawer.MapDrawer;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.UserCourse;
