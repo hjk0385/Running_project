@@ -19,12 +19,7 @@ public class CourseRegistLayerAll implements CourseRegistLayer{
             courseFlag.courseFlagId = (long) i;
             courseFlag.courseFlagLatitude = course.get(i).getLatitude();
             courseFlag.courseFlagLongitude = course.get(i).getLongitude();
-            if(Math.random()<=0.75){
-                courseFlag.markerFlag = true;
-            }
-            else{
-                courseFlag.markerFlag = false;
-            }
+            courseFlag.markerFlag=false;
             appDatabase.courseFlagDao().insertDto(courseFlag);
         }
         return courseId;

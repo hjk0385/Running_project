@@ -8,6 +8,7 @@ import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLay
 
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationLayer;
 import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegistLayer;
+import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayer;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsImage;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsMap;
@@ -25,6 +26,7 @@ public class CourseMaker extends CourseComponent {
     private QuanzationLayer quanzationLayer;
     private LineConnectLayer lineConnectLayer;
     private CourseRegistLayer courseRegistLayer;
+    private MarkerSelectionLayer markerSelectionLayer;
 
     public static class Builder{
         private Bitmap bitmap;
@@ -35,6 +37,7 @@ public class CourseMaker extends CourseComponent {
         private LineConnectLayer lineConnectLayer;
         private CourseRegistLayer courseRegistLayer;
         private Consumer<Object> finishEvent;
+        private MarkerSelectionLayer markerSelectionLayer;
 
         public void setBitmap(Bitmap bitmap) {
             this.bitmap = bitmap;
@@ -60,6 +63,10 @@ public class CourseMaker extends CourseComponent {
             this.startLocation = startLocation;
         }
 
+        public void setMarkerSelectionLayer(MarkerSelectionLayer markerSelectionLayer) {
+            this.markerSelectionLayer = markerSelectionLayer;
+        }
+
         public void setFinishEvent(Consumer<Object> finishEvent) {
             this.finishEvent = finishEvent;
         }
@@ -72,6 +79,7 @@ public class CourseMaker extends CourseComponent {
             courseMaker.quanzationLayer=quanzationLayer;
             courseMaker.lineConnectLayer=lineConnectLayer;
             courseMaker.courseRegistLayer=courseRegistLayer;
+            courseMaker.markerSelectionLayer=markerSelectionLayer;
             courseMaker.setFinishEventConsumer(finishEvent);
             return courseMaker;
         }
@@ -82,6 +90,7 @@ public class CourseMaker extends CourseComponent {
         ScopeDotsMap scopeDotsImageMap = quanzationLayer.apply(new ScopeDotsImage(bitmap),new ScopeDotsMap(scopeMapInfo));
         List<ScopeDotAddress> course = lineConnectLayer.apply(scopeDotsImageMap,startLocation);
         Long courseId = courseRegistLayer.apply(course);
+        markerSelectionLayer.apply(courseId);
         return courseId;
     }
 }
