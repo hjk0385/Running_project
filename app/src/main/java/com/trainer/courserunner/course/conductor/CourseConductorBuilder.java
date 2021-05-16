@@ -1,5 +1,7 @@
 package com.trainer.courserunner.course.conductor;
 
+import android.content.Context;
+
 import com.trainer.courserunner.Application.AppFunctionLoader;
 import com.trainer.courserunner.Application.enumtype.ModeType;
 import com.trainer.courserunner.Application.enumtype.StartType;
@@ -21,6 +23,7 @@ public class CourseConductorBuilder {
     private Long userCourseId;
     private ModeType modeType;
     private StartType startType;
+    private Context context;
 
     public CourseConductorBuilder(){
         this.usedBuilder=false;
@@ -51,9 +54,13 @@ public class CourseConductorBuilder {
         this.startType = startType;
     }
 
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     public CourseConductor build(){
         banRecycle();
-        if(mapDrawer==null||modeType==null||startType==null){
+        if(mapDrawer==null||modeType==null||startType==null||context==null){
             throw new IllegalArgumentException();
         }
 
@@ -69,11 +76,11 @@ public class CourseConductorBuilder {
 
         switch (modeType){
             case SKETCHBOOK:
-                return new CourseConductorSketchBook(mapDrawer, userCourseId);
+                return new CourseConductorSketchBook(mapDrawer, userCourseId,context);
             case GUIDERUNNER:
-                return new CourseConductorGuideRunner(mapDrawer,courseId,userCourseId);
+                return new CourseConductorGuideRunner(mapDrawer,courseId,userCourseId,context);
             case PROJECTRUNNER:
-                return new CourseConductorProjectRunner(mapDrawer, courseId, userCourseId);
+                return new CourseConductorProjectRunner(mapDrawer, courseId, userCourseId,context);
             default:
                 throw new IllegalStateException("Unexpected value: " + modeType);
         }

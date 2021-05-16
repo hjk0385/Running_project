@@ -14,6 +14,7 @@ public class CourseConductorProjectRunnerActivity extends CourseConductorActivit
         CourseConductorBuilder courseConductorBuilder = new CourseConductorBuilder();
         courseConductorBuilder.setMapDrawer(this);
         courseConductorBuilder.setStartType(startType);
+        courseConductorBuilder.setContext(this);
         courseConductorBuilder.setModeType(modeType);
         if(startType==StartType.RESUME){
             Long userCourseId=getIntent().getLongExtra("userCourseId",-1);

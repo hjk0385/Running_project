@@ -1,5 +1,6 @@
 package com.trainer.courserunner.course.conductor;
 
+import android.content.Context;
 import android.location.Location;
 
 import com.trainer.courserunner.course.component.drawer.CourseDrawerUserRecord;
@@ -11,8 +12,8 @@ public class CourseConductorSketchBook extends CourseConductor{
     protected CourseOverseerUserRecord overseerUserRecord;
     CourseDrawerUserRecord drawerUserRecord;
 
-    public CourseConductorSketchBook(MapDrawer mapDrawer, Long userCourseId) {
-        super(mapDrawer,userCourseId);
+    public CourseConductorSketchBook(MapDrawer mapDrawer, Long userCourseId, Context context) {
+        super(mapDrawer,userCourseId,context);
         //생성
         overseerUserRecord = new CourseOverseerUserRecord(userCourseId);
         drawerUserRecord = new CourseDrawerUserRecord(mapDrawer, userCourseId);

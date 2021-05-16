@@ -1,5 +1,6 @@
 package com.trainer.courserunner.course.conductor;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 
@@ -9,12 +10,15 @@ public abstract class CourseConductor {
     //정보
     final protected MapDrawer mapDrawer;
     final protected Long userCourseId;
+    final protected Context context;
     protected Integer currentColor;
 
-    public CourseConductor(MapDrawer mapDrawer,Long userCourseId){
+
+    public CourseConductor(MapDrawer mapDrawer,Long userCourseId, Context context){
         this.mapDrawer=mapDrawer;
         this.userCourseId=userCourseId;
         this.currentColor=Color.RED;
+        this.context=context;
     }
 
     public void setCurrentColor(Integer currentColor) {

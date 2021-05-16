@@ -38,6 +38,7 @@ public class SettingPreferenceFragment extends PreferenceFragment {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if(key.equals("sound_list")){
                 soundPreference.setSummary(prefs.getString("sound_list", "여성 목소리"));
+                
             }
         }
     };
