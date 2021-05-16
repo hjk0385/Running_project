@@ -11,6 +11,9 @@ public interface UserCourseRecordDao extends BaseDao<UserCourseRecord> {
     @Query("SELECT * FROM user_course_record WHERE user_course_id=:user_course_id")
     UserCourseRecord[] getUserLocationRecords(Long user_course_id);
 
+    @Query("SELECT * FROM user_course_record WHERE user_course_id=:user_course_id limit :limit")
+    UserCourseRecord[] getUserLocationRecordsLimit(Long user_course_id,Long limit);
+
     @Query("SELECT COUNT(*) FROM user_course_record WHERE user_course_id=:user_course_id")
     Long getUserLocationRecordCount(Long user_course_id);
 }

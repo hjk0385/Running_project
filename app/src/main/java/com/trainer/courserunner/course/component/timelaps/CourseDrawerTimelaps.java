@@ -1,6 +1,7 @@
-package com.trainer.courserunner.course.component.drawer;
+package com.trainer.courserunner.course.component.timelaps;
 
 import com.trainer.courserunner.Application.AppFunctionLoader;
+import com.trainer.courserunner.course.component.drawer.CourseDrawerUserRecord;
 import com.trainer.courserunner.course.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.course.component.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.map.drawer.MapDrawer;
@@ -11,27 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CourseDrawerTimeLaps extends CourseDrawerUserRecord {
-    Long maxRecordCount;
-    Long currentRecordCount;
+public class CourseDrawerTimelaps extends CourseDrawerUserRecord {
+    long lastSize;
+    long currentSize;
 
-    public CourseDrawerTimeLaps(MapDrawer mapDrawer, Long userCourseId) {
+    public CourseDrawerTimelaps(MapDrawer mapDrawer, Long userCourseId) {
         super(mapDrawer, userCourseId);
-        maxRecordCount = AppFunctionLoader.getAppDatabase().userCourseRecordDao().getUserLocationRecordCount(userCourseId);
-        currentRecordCount = Long.valueOf(0);
+        currentSize=0;
     }
 
     @Override
     protected List<DrawingPath> makeDrawing() {
-        currentRecordCount = (currentRecordCount + 1) % maxRecordCount;
-
         //불러오기
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
-        UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCourseId);
+        //임시구현
+        lastSize=appDatabase.userCourseRecordDao().getUserLocationRecordCount(userCourseId)-1;
+        currentSize=(currentSize+1)%lastSize;
+        //
+        UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecordsLimit(userCourseId,currentSize);
         //생성
         List<DrawingPath> drawingPathList = new ArrayList<>();
         int i = 0;
-        while (i < currentRecordCount) {
+        while (i < userLocationRecords.length) {
             Integer currentDrawingColor = userLocationRecords[i].userCourseRecordColor;
             //빌더
             DrawingPath.Builder drawingPathBuilder = new DrawingPath.Builder();
@@ -43,7 +45,7 @@ public class CourseDrawerTimeLaps extends CourseDrawerUserRecord {
             }
             //컬러 경로 만들기
             int j = i;
-            while (j < currentRecordCount && Objects.equals(currentDrawingColor, userLocationRecords[j].userCourseRecordColor)) {
+            while (j < userLocationRecords.length && Objects.equals(currentDrawingColor, userLocationRecords[j].userCourseRecordColor)) {
                 drawingPathBuilder.accept(new DrawingAddress(userLocationRecords[j]));
                 j++;
             }
