@@ -22,8 +22,8 @@ import androidx.room.Index;
                         onDelete = ForeignKey.CASCADE)
         },
         indices = {
-            @Index("course_id"),
-            @Index("course_mode_id")
+                @Index("course_id"),
+                @Index("course_mode_id")
         }
 )
 public class UserCourse {

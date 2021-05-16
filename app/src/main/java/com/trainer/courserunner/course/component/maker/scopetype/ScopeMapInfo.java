@@ -62,12 +62,12 @@ public class ScopeMapInfo implements ScopeInfo {
     }
 
     @Override
-    public double getWidth(){
-        return getEndX()-getStartX();
+    public double getWidth() {
+        return getEndX() - getStartX();
     }
 
     @Override
-    public double getHeight(){
-        return getEndY()-getStartY();
+    public double getHeight() {
+        return getEndY() - getStartY();
     }
 }

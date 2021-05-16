@@ -10,7 +10,7 @@ public class ScopeDot {
     }
 
     public double getCost(ScopeDot scopeDot) {
-        double xCost =this.normalizeX - scopeDot.normalizeX;
+        double xCost = this.normalizeX - scopeDot.normalizeX;
         double yCost = this.normalizeY - scopeDot.normalizeY;
         return Math.sqrt(xCost * xCost + yCost * yCost);
     }

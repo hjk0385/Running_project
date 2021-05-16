@@ -7,24 +7,25 @@ public class ScopeDotAddress extends ScopeDot {
 
     public ScopeDotAddress(ScopeMapInfo scopeMapInfo,
                            double x, double y) {
-        super(normalizeX(scopeMapInfo,x),
+        super(normalizeX(scopeMapInfo, x),
                 normalizeY(scopeMapInfo, y));
         this.longitude = x;
         this.latitude = y;
-        this.scopeImageInfo=scopeMapInfo;
+        this.scopeImageInfo = scopeMapInfo;
     }
 
-    private static double normalizeX(ScopeMapInfo scopeMapInfo, double x){
+    private static double normalizeX(ScopeMapInfo scopeMapInfo, double x) {
         return (x - scopeMapInfo.getStartX()) / scopeMapInfo.getWidth();
     }
 
-    private static double normalizeY(ScopeMapInfo scopeMapInfo, double y){
+    private static double normalizeY(ScopeMapInfo scopeMapInfo, double y) {
         return (y - scopeMapInfo.getStartY()) / scopeMapInfo.getHeight();
     }
 
     public double getLongitude() {
         return longitude;
     }
+
     public double getLatitude() {
         return latitude;
     }

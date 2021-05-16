@@ -16,8 +16,8 @@ public class CourseConductorProjectRunnerActivity extends CourseConductorActivit
         courseConductorBuilder.setStartType(startType);
         courseConductorBuilder.setContext(this);
         courseConductorBuilder.setModeType(modeType);
-        if(startType==StartType.RESUME){
-            Long userCourseId=getIntent().getLongExtra("userCourseId",-1);
+        if (startType == StartType.RESUME) {
+            Long userCourseId = getIntent().getLongExtra("userCourseId", -1);
             courseConductorBuilder.setUserCourseId(userCourseId);
         }
         return courseConductorBuilder.build();

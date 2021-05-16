@@ -1,21 +1,22 @@
 package com.trainer.courserunner.course.component.maker.scopetype;
 
-public class ScopeImageInfo implements ScopeInfo{
+public class ScopeImageInfo implements ScopeInfo {
     int height;
     int width;
-    public ScopeImageInfo(int height,int width){
-        this.height=height;
-        this.width=width;
+
+    public ScopeImageInfo(int height, int width) {
+        this.height = height;
+        this.width = width;
     }
 
     @Override
     public double getWidth() {
-        return (double)width;
+        return (double) width;
     }
 
     @Override
     public double getHeight() {
-        return (double)height;
+        return (double) height;
     }
 
     @Override
@@ -30,11 +31,11 @@ public class ScopeImageInfo implements ScopeInfo{
 
     @Override
     public double getEndX() {
-        return (double)width;
+        return (double) width;
     }
 
     @Override
     public double getEndY() {
-        return (double)height;
+        return (double) height;
     }
 }

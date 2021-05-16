@@ -16,16 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.Application.enumtype.StartType;
-import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerAll;
-import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerPrecision;
-import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionOneTwo;
-import com.trainer.courserunner.course.conductor.activity.CourseConductorGuideRunnerActivity;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectPolicyDfsCustom;
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationLayerProximate;
 import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegistLayerAll;
+import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerPrecision;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.course.conductor.activity.CourseConductorGuideRunnerActivity;
 import com.trainer.courserunner.loader.AssetLoader;
 
 public class NormalRunningActivity extends AppCompatActivity {
@@ -44,8 +42,8 @@ public class NormalRunningActivity extends AppCompatActivity {
             builder.setQuanzationLayer(new QuanzationLayerProximate());
             builder.setBitmap(bitmap);
             builder.setScopeMapInfo(scopeMapInfo);
-            builder.setStartLocation(new ScopeDotAddress(scopeMapInfo,currentLocation.getLongitude(),currentLocation.getLatitude()));
-            builder.setFinishEvent(o -> startNextActivity((Long)o));
+            builder.setStartLocation(new ScopeDotAddress(scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
+            builder.setFinishEvent(o -> startNextActivity((Long) o));
             //builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
             builder.setMarkerSelectionLayer(new MarkerSelectionLayerPrecision(0.1));
 
@@ -56,7 +54,7 @@ public class NormalRunningActivity extends AppCompatActivity {
 
     private void startNextActivity(Long courseId) {
         Intent intent = new Intent(getBaseContext(), CourseConductorGuideRunnerActivity.class);
-        intent.putExtra("courseId",courseId);
+        intent.putExtra("courseId", courseId);
         intent.putExtra("startType", StartType.NEW);
         startActivity(intent);
     }

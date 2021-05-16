@@ -11,13 +11,6 @@ import com.trainer.courserunner.rooms.UserCourse;
 
 public class CourseConductorBuilder {
     boolean usedBuilder;
-    private void banRecycle() {
-        if (usedBuilder) {
-            throw new IllegalStateException();
-        }
-        usedBuilder = true;
-    }
-
     private MapDrawer mapDrawer;
     private Long courseId;
     private Long userCourseId;
@@ -25,13 +18,20 @@ public class CourseConductorBuilder {
     private StartType startType;
     private Context context;
 
-    public CourseConductorBuilder(){
-        this.usedBuilder=false;
-        this.mapDrawer=null;
-        this.courseId=null;
-        this.userCourseId=null;
-        this.modeType=null;
-        this.startType=null;
+    public CourseConductorBuilder() {
+        this.usedBuilder = false;
+        this.mapDrawer = null;
+        this.courseId = null;
+        this.userCourseId = null;
+        this.modeType = null;
+        this.startType = null;
+    }
+
+    private void banRecycle() {
+        if (usedBuilder) {
+            throw new IllegalStateException();
+        }
+        usedBuilder = true;
     }
 
     public void setMapDrawer(MapDrawer mapDrawer) {
@@ -58,13 +58,13 @@ public class CourseConductorBuilder {
         this.context = context;
     }
 
-    public CourseConductor build(){
+    public CourseConductor build() {
         banRecycle();
-        if(mapDrawer==null||modeType==null||startType==null||context==null){
+        if (mapDrawer == null || modeType == null || startType == null || context == null) {
             throw new IllegalArgumentException();
         }
 
-        if(startType==StartType.NEW) {
+        if (startType == StartType.NEW) {
             AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
             UserCourse userCourse = new UserCourse();
             userCourse.courseId = null;
@@ -74,13 +74,13 @@ public class CourseConductorBuilder {
             userCourseId = appDatabase.userCourseDao().insertDto(userCourse);
         }
 
-        switch (modeType){
+        switch (modeType) {
             case SKETCHBOOK:
-                return new CourseConductorSketchBook(mapDrawer, userCourseId,context);
+                return new CourseConductorSketchBook(mapDrawer, userCourseId, context);
             case GUIDERUNNER:
-                return new CourseConductorGuideRunner(mapDrawer,courseId,userCourseId,context);
+                return new CourseConductorGuideRunner(mapDrawer, courseId, userCourseId, context);
             case PROJECTRUNNER:
-                return new CourseConductorProjectRunner(mapDrawer, courseId, userCourseId,context);
+                return new CourseConductorProjectRunner(mapDrawer, courseId, userCourseId, context);
             default:
                 throw new IllegalStateException("Unexpected value: " + modeType);
         }

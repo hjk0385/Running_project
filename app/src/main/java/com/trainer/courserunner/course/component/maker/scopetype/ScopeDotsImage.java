@@ -10,13 +10,6 @@ import java.util.stream.Collectors;
 //병목현상 발생-> 멀티쓰레드로 최적화
 
 public class ScopeDotsImage extends ScopeDots {
-    static private boolean filterColorPixel(ScopeDotPixel scopeDotPixel) {
-        final int colorLimit = 100;
-        return scopeDotPixel.getRed() <= colorLimit ||
-                scopeDotPixel.getBlue() <= colorLimit ||
-                scopeDotPixel.getGreen() <= colorLimit;
-    }
-
     public ScopeDotsImage(Bitmap bitmap) {
         List<Pair<Integer, Integer>> pixelLocations = new ArrayList<>();
         for (int i = 0; i < bitmap.getWidth(); i++) {
@@ -40,6 +33,13 @@ public class ScopeDotsImage extends ScopeDots {
 
     public ScopeDotsImage(Bitmap bitmap, int resizeWidth, int resizeHeight) {
         this(Bitmap.createScaledBitmap(bitmap, resizeWidth, resizeHeight, true));
+    }
+
+    static private boolean filterColorPixel(ScopeDotPixel scopeDotPixel) {
+        final int colorLimit = 100;
+        return scopeDotPixel.getRed() <= colorLimit ||
+                scopeDotPixel.getBlue() <= colorLimit ||
+                scopeDotPixel.getGreen() <= colorLimit;
     }
 
 }

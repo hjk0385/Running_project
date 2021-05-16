@@ -17,13 +17,13 @@ public class CourseDrawerTimeLaps extends CourseDrawerUserRecord {
 
     public CourseDrawerTimeLaps(MapDrawer mapDrawer, Long userCourseId) {
         super(mapDrawer, userCourseId);
-        maxRecordCount= AppFunctionLoader.getAppDatabase().userCourseRecordDao().getUserLocationRecordCount(userCourseId);
-        currentRecordCount= Long.valueOf(0);
+        maxRecordCount = AppFunctionLoader.getAppDatabase().userCourseRecordDao().getUserLocationRecordCount(userCourseId);
+        currentRecordCount = Long.valueOf(0);
     }
 
     @Override
     protected List<DrawingPath> makeDrawing() {
-        currentRecordCount=(currentRecordCount+1)%maxRecordCount;
+        currentRecordCount = (currentRecordCount + 1) % maxRecordCount;
 
         //불러오기
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();

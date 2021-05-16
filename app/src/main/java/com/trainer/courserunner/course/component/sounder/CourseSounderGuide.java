@@ -10,23 +10,21 @@ import com.trainer.courserunner.rooms.UserCourseFlagDerived;
 public class CourseSounderGuide extends CourseComponent {
     Long courseId;
     Long userCoursedId;
+    boolean percentFlag25;
+    boolean percentFlag50;
+    boolean percentFlag75;
+    boolean percentFlag100;
+    VoiceType voiceType;
 
     public CourseSounderGuide(Long courseId, Long userCoursedId) {
         this.courseId = courseId;
         this.userCoursedId = userCoursedId;
 
-        percentFlag25=false;
-        percentFlag50=false;
-        percentFlag75=false;
-        percentFlag100=false;
+        percentFlag25 = false;
+        percentFlag50 = false;
+        percentFlag75 = false;
+        percentFlag100 = false;
     }
-
-    boolean percentFlag25;
-    boolean percentFlag50;
-    boolean percentFlag75;
-    boolean percentFlag100;
-
-    VoiceType voiceType;
 
     public void setVoiceType(VoiceType voiceType) {
         this.voiceType = voiceType;
@@ -45,74 +43,59 @@ public class CourseSounderGuide extends CourseComponent {
         */
 
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
-        int flagCount=appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
-        int passedFlagCount=UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId,userCoursedId);
+        int flagCount = appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
+        int passedFlagCount = UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId, userCoursedId);
 
-        if(passedFlagCount==(int)((double)flagCount*0.25))
-        {
+        if (passedFlagCount == (int) ((double) flagCount * 0.25)) {
             //25%지점
-            if(!percentFlag25){
+            if (!percentFlag25) {
                 //처음으로 지나가는 경우
-                percentFlag25=true;
-                if(voiceType==VoiceType.MALE) {
+                percentFlag25 = true;
+                if (voiceType == VoiceType.MALE) {
                     return new SoundCommandGuide(GuideSound.FINISHMAN);
-                }
-                else if(voiceType==VoiceType.FEMALE){
+                } else if (voiceType == VoiceType.FEMALE) {
                     return new SoundCommandGuide(GuideSound.FINISHWOMAN);
-                }
-                else if(voiceType==VoiceType.CHILD){
+                } else if (voiceType == VoiceType.CHILD) {
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
             }
 
-        }
-        else if(passedFlagCount==(int)((double)flagCount*0.50))
-        {
+        } else if (passedFlagCount == (int) ((double) flagCount * 0.50)) {
             //50%지점
-            if(!percentFlag50){
+            if (!percentFlag50) {
                 //처음으로 지나가는 경우
-                percentFlag50=true;
-                if(voiceType==VoiceType.MALE) {
+                percentFlag50 = true;
+                if (voiceType == VoiceType.MALE) {
                     return new SoundCommandGuide(GuideSound.FINISHMAN);
-                }
-                else if(voiceType==VoiceType.FEMALE){
+                } else if (voiceType == VoiceType.FEMALE) {
                     return new SoundCommandGuide(GuideSound.FINISHWOMAN);
-                }
-                else if(voiceType==VoiceType.CHILD){
+                } else if (voiceType == VoiceType.CHILD) {
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
             }
-        }
-        else if(passedFlagCount==(int)((double)flagCount*0.75))
-        {
+        } else if (passedFlagCount == (int) ((double) flagCount * 0.75)) {
             //75%지점
-            if(!percentFlag75){
+            if (!percentFlag75) {
                 //처음으로 지나가는 경우
-                percentFlag75=true;
-                if(voiceType==VoiceType.MALE) {
+                percentFlag75 = true;
+                if (voiceType == VoiceType.MALE) {
                     return new SoundCommandGuide(GuideSound.FINISHMAN);
-                }
-                else if(voiceType==VoiceType.FEMALE){
+                } else if (voiceType == VoiceType.FEMALE) {
                     return new SoundCommandGuide(GuideSound.FINISHWOMAN);
-                }
-                else if(voiceType==VoiceType.CHILD){
+                } else if (voiceType == VoiceType.CHILD) {
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
             }
-        }
-        else if(passedFlagCount==(int)((double)flagCount*1.0))
-        {
+        } else if (passedFlagCount == (int) ((double) flagCount * 1.0)) {
             //100%지점
-            if(!percentFlag100){
+            if (!percentFlag100) {
                 //처음으로 지나가는 경우
-                percentFlag100=true;
-                if(voiceType==VoiceType.MALE) {
+                percentFlag100 = true;
+                if (voiceType == VoiceType.MALE) {
                     return new SoundCommandGuide(GuideSound.FINISHMAN);
-                }
-                else if(voiceType==VoiceType.FEMALE){
+                } else if (voiceType == VoiceType.FEMALE) {
                     return new SoundCommandGuide(GuideSound.FINISHWOMAN);
-                }
-                else if(voiceType==VoiceType.CHILD){
+                } else if (voiceType == VoiceType.CHILD) {
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
             }
@@ -120,10 +103,10 @@ public class CourseSounderGuide extends CourseComponent {
         return null;
     }
 
-    protected void runInUiThread(Object object){
+    protected void runInUiThread(Object object) {
         super.runInUiThread(object);
-        if(object!=null){
-            ((SoundCommand)object).execute();
+        if (object != null) {
+            ((SoundCommand) object).execute();
         }
     }
 }

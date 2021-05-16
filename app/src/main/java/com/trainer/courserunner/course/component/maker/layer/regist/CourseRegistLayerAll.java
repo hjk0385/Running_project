@@ -8,7 +8,7 @@ import com.trainer.courserunner.rooms.CourseFlag;
 
 import java.util.List;
 
-public class CourseRegistLayerAll implements CourseRegistLayer{
+public class CourseRegistLayerAll implements CourseRegistLayer {
     @Override
     public Long apply(List<ScopeDotAddress> course) {
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
@@ -19,7 +19,7 @@ public class CourseRegistLayerAll implements CourseRegistLayer{
             courseFlag.courseFlagId = (long) i;
             courseFlag.courseFlagLatitude = course.get(i).getLatitude();
             courseFlag.courseFlagLongitude = course.get(i).getLongitude();
-            courseFlag.markerFlag=false;
+            courseFlag.markerFlag = false;
             appDatabase.courseFlagDao().insertDto(courseFlag);
         }
         return courseId;

@@ -1,10 +1,5 @@
 package com.trainer.courserunner.course;
 
-import android.os.AsyncTask;
-
-import com.trainer.courserunner.course.component.drawer.CourseDrawerTimeLaps;
-import com.trainer.courserunner.map.drawer.MapDrawer;
-
 public class CourseTimelaps {
 
     /*

@@ -3,9 +3,10 @@ package com.trainer.courserunner.course.component.sounder;
 import com.trainer.courserunner.Application.sound.GuideSound;
 import com.trainer.courserunner.Application.sound.SoundManagerGuide;
 
-public class SoundCommandGuide implements SoundCommand{
+public class SoundCommandGuide implements SoundCommand {
     GuideSound guideSound;
-    public SoundCommandGuide(GuideSound guideSound){
+
+    public SoundCommandGuide(GuideSound guideSound) {
         this.guideSound = guideSound;
     }
 

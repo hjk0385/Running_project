@@ -2,10 +2,8 @@ package com.trainer.courserunner.course.component.maker;
 
 import android.graphics.Bitmap;
 
-
 import com.trainer.courserunner.course.component.CourseComponent;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayer;
-
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationLayer;
 import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegistLayer;
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayer;
@@ -28,7 +26,16 @@ public class CourseMaker extends CourseComponent {
     private CourseRegistLayer courseRegistLayer;
     private MarkerSelectionLayer markerSelectionLayer;
 
-    public static class Builder{
+    @Override
+    protected Object runInWorkThread() {
+        ScopeDotsMap scopeDotsImageMap = quanzationLayer.apply(new ScopeDotsImage(bitmap), new ScopeDotsMap(scopeMapInfo));
+        List<ScopeDotAddress> course = lineConnectLayer.apply(scopeDotsImageMap, startLocation);
+        Long courseId = courseRegistLayer.apply(course);
+        markerSelectionLayer.apply(courseId);
+        return courseId;
+    }
+
+    public static class Builder {
         private Bitmap bitmap;
         private ScopeMapInfo scopeMapInfo;
         private ScopeDotAddress startLocation;
@@ -71,26 +78,17 @@ public class CourseMaker extends CourseComponent {
             this.finishEvent = finishEvent;
         }
 
-        public CourseMaker build(){
+        public CourseMaker build() {
             CourseMaker courseMaker = new CourseMaker();
-            courseMaker.bitmap=bitmap;
-            courseMaker.scopeMapInfo=scopeMapInfo;
-            courseMaker.startLocation=startLocation;
-            courseMaker.quanzationLayer=quanzationLayer;
-            courseMaker.lineConnectLayer=lineConnectLayer;
-            courseMaker.courseRegistLayer=courseRegistLayer;
-            courseMaker.markerSelectionLayer=markerSelectionLayer;
+            courseMaker.bitmap = bitmap;
+            courseMaker.scopeMapInfo = scopeMapInfo;
+            courseMaker.startLocation = startLocation;
+            courseMaker.quanzationLayer = quanzationLayer;
+            courseMaker.lineConnectLayer = lineConnectLayer;
+            courseMaker.courseRegistLayer = courseRegistLayer;
+            courseMaker.markerSelectionLayer = markerSelectionLayer;
             courseMaker.setFinishEventConsumer(finishEvent);
             return courseMaker;
         }
-    }
-
-    @Override
-    protected Object runInWorkThread() {
-        ScopeDotsMap scopeDotsImageMap = quanzationLayer.apply(new ScopeDotsImage(bitmap),new ScopeDotsMap(scopeMapInfo));
-        List<ScopeDotAddress> course = lineConnectLayer.apply(scopeDotsImageMap,startLocation);
-        Long courseId = courseRegistLayer.apply(course);
-        markerSelectionLayer.apply(courseId);
-        return courseId;
     }
 }

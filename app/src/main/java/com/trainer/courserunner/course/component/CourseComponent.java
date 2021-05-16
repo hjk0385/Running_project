@@ -1,6 +1,5 @@
 package com.trainer.courserunner.course.component;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import java.util.function.Consumer;
@@ -11,16 +10,19 @@ import java.util.function.Consumer;
 */
 public abstract class CourseComponent {
     Consumer<Object> finishEventConsumer;
-    public CourseComponent(){
-        finishEventConsumer=o -> {};
+
+    public CourseComponent() {
+        finishEventConsumer = o -> {
+        };
     }
 
     protected abstract Object runInWorkThread();
-    protected void runInUiThread(Object object){
+
+    protected void runInUiThread(Object object) {
         finishEventConsumer.accept(object);
     }
 
-    public void runComponent(){
+    public void runComponent() {
         new CourseComponentAsyncTask().execute();
     }
 
@@ -28,7 +30,7 @@ public abstract class CourseComponent {
         this.finishEventConsumer = finishEventConsumer;
     }
 
-    private class CourseComponentAsyncTask extends AsyncTask<Void,Void,Object> {
+    private class CourseComponentAsyncTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected Object doInBackground(Void... voids) {
             return runInWorkThread();

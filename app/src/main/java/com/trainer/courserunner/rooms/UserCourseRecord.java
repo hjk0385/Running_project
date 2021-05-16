@@ -6,8 +6,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 
-import com.google.firebase.database.annotations.NotNull;
-
 import java.util.Date;
 
 @Entity(tableName = "user_course_record",
@@ -23,7 +21,7 @@ import java.util.Date;
                         onDelete = ForeignKey.CASCADE)
         },
         indices = {
-            @Index("user_course_id")
+                @Index("user_course_id")
         }
 )
 public class UserCourseRecord {

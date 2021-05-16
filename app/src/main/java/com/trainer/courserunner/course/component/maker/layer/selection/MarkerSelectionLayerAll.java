@@ -8,8 +8,8 @@ public class MarkerSelectionLayerAll implements MarkerSelectionLayer {
     @Override
     public Long apply(Long courseId) {
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
-        CourseFlag[] courseFlags=appDatabase.courseFlagDao().getCourseFlags(courseId);
-        for(CourseFlag courseFlag:courseFlags){
+        CourseFlag[] courseFlags = appDatabase.courseFlagDao().getCourseFlags(courseId);
+        for (CourseFlag courseFlag : courseFlags) {
             courseFlag.markerFlag = true;
             appDatabase.courseFlagDao().updateDto(courseFlag);
         }

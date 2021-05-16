@@ -6,7 +6,7 @@ import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineConnectLayerDfs implements LineConnectLayer{
+public class LineConnectLayerDfs implements LineConnectLayer {
     @Override
     public List<ScopeDotAddress> apply(ScopeDotsMap scopeDots, ScopeDotAddress startAddress) {
         scopeDots = (ScopeDotsMap) scopeDots.clone();

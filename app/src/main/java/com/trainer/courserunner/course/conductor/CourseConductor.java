@@ -14,15 +14,16 @@ public abstract class CourseConductor {
     protected Integer currentColor;
 
 
-    public CourseConductor(MapDrawer mapDrawer,Long userCourseId, Context context){
-        this.mapDrawer=mapDrawer;
-        this.userCourseId=userCourseId;
-        this.currentColor=Color.RED;
-        this.context=context;
+    public CourseConductor(MapDrawer mapDrawer, Long userCourseId, Context context) {
+        this.mapDrawer = mapDrawer;
+        this.userCourseId = userCourseId;
+        this.currentColor = Color.RED;
+        this.context = context;
     }
 
     public void setCurrentColor(Integer currentColor) {
         this.currentColor = currentColor;
     }
+
     abstract public void refreshLocation(Location location);
 }

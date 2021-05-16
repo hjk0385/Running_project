@@ -16,10 +16,10 @@ public class CourseConductorGuideRunnerActivity extends CourseConductorActivity 
         courseConductorBuilder.setStartType(startType);
         courseConductorBuilder.setModeType(modeType);
         courseConductorBuilder.setContext(this);
-        Long courseId = getIntent().getLongExtra("courseId",-1);
+        Long courseId = getIntent().getLongExtra("courseId", -1);
         courseConductorBuilder.setCourseId(courseId);
-        if(startType==StartType.RESUME){
-            Long userCourseId=getIntent().getLongExtra("userCourseId",-1);
+        if (startType == StartType.RESUME) {
+            Long userCourseId = getIntent().getLongExtra("userCourseId", -1);
             courseConductorBuilder.setUserCourseId(userCourseId);
         }
         return courseConductorBuilder.build();
