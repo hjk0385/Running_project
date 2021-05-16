@@ -37,31 +37,20 @@ public class AppFunctionLoader extends Application {
         //앱DB미리채우기(디버그용)
         CourseMode courseMode;
         courseMode = new CourseMode();
-        courseMode.courseModeId = Long.valueOf(ModeType.GUIDERUNNER.ordinal());
+        courseMode.courseModeId = (long) ModeType.GUIDERUNNER.ordinal();
         courseMode.courseModeName = ModeType.GUIDERUNNER.name();
         appDatabase.courseModeDao().insertDto(courseMode);
 
-        courseMode.courseModeId = Long.valueOf(ModeType.PROJECTRUNNER.ordinal());
+        courseMode.courseModeId = (long) ModeType.PROJECTRUNNER.ordinal();
         courseMode.courseModeName = ModeType.PROJECTRUNNER.name();
         appDatabase.courseModeDao().insertDto(courseMode);
 
-        courseMode.courseModeId = Long.valueOf(ModeType.SKETCHBOOK.ordinal());
+        courseMode.courseModeId = (long) ModeType.SKETCHBOOK.ordinal();
         courseMode.courseModeName = ModeType.SKETCHBOOK.name();
         appDatabase.courseModeDao().insertDto(courseMode);
         //
 
-        //debug
-        Cursor cursor = roadAddressDatabase.rawQuery("SELECT * FROM addresstable limit 10", null);
-        while (cursor.moveToNext()) {
-            Log.v("DBCheck", "success");
-            Log.v("DBCheck", String.valueOf(cursor.getColumnCount()));
-            Log.v("DBCheck", String.valueOf(cursor.getDouble(cursor.getColumnIndex("latitude"))));
-            Log.v("DBCheck", String.valueOf(cursor.getDouble(cursor.getColumnIndex("longitude"))));
-            Log.v("DBCheck", String.valueOf(cursor.getColumnCount()));
-        }
-
         //사운드 매니저 초기화
         SoundManagerGuide.initSoundManager(this);
-        SoundManagerGuide.getSoundManager().playSound(GuideSound.FINISHWOMAN.ordinal());
     }
 }

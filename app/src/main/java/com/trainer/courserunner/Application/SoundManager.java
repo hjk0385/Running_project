@@ -8,14 +8,12 @@ import java.util.HashMap;
 public class SoundManager {
     private SoundPool mSoundPool;
     private HashMap<Integer, Integer> mSoundPoolMap;
-    private AudioManager mAudioManager;
     private Context mContext;
 
     public SoundManager(Context mContext, SoundPool mSoundPool) {
         this.mContext = mContext;
         this.mSoundPool = mSoundPool;
         mSoundPoolMap = new HashMap<Integer, Integer>();
-        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public void addSound(int index, int soundId) { //효과음 추가
@@ -23,8 +21,7 @@ public class SoundManager {
     }
 
     public int playSound(int index) { //효과음 재생
-        int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        return mSoundPool.play(mSoundPoolMap.get(index), streamVolume, streamVolume, 1, 0, 1f);
+        return mSoundPool.play(mSoundPoolMap.get(index), 0.9f, 0.9f, 0, 0, 1f);
     }
 
     public void stopSound(int streamId) {
