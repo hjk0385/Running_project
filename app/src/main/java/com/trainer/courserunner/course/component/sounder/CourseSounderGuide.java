@@ -1,7 +1,8 @@
 package com.trainer.courserunner.course.component.sounder;
 
 import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.Application.enumtype.GuideSound;
+import com.trainer.courserunner.Application.sound.GuideSound;
+import com.trainer.courserunner.Application.sound.VoiceType;
 import com.trainer.courserunner.course.component.CourseComponent;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.UserCourseFlagDerived;
@@ -10,10 +11,9 @@ public class CourseSounderGuide extends CourseComponent {
     Long courseId;
     Long userCoursedId;
 
-    public CourseSounderGuide(Long courseId, Long userCoursedId, GuideSound guideSound) {
+    public CourseSounderGuide(Long courseId, Long userCoursedId) {
         this.courseId = courseId;
         this.userCoursedId = userCoursedId;
-        this.guideSound = guideSound;
 
         percentFlag25=false;
         percentFlag50=false;
@@ -26,9 +26,10 @@ public class CourseSounderGuide extends CourseComponent {
     boolean percentFlag75;
     boolean percentFlag100;
 
-    GuideSound guideSound;
-    public void setGuideSound(GuideSound guideSound) {
-        this.guideSound = guideSound;
+    VoiceType voiceType;
+
+    public void setVoiceType(VoiceType voiceType) {
+        this.voiceType = voiceType;
     }
 
     @Override
@@ -52,24 +53,51 @@ public class CourseSounderGuide extends CourseComponent {
             //25%지점
             if(!percentFlag25){
                 //처음으로 지나가는 경우
-                return new SoundCommandGuide(guideSound);
+                percentFlag25=true;
+                if(voiceType==VoiceType.MALE) {
+                    return new SoundCommandGuide(GuideSound.FINISHMAN);
+                }
+                else if(voiceType==VoiceType.FEMALE){
+                    return new SoundCommandGuide(GuideSound.FINISHWOMAN);
+                }
+                else if(voiceType==VoiceType.CHILD){
+                    return new SoundCommandGuide(GuideSound.FINISHKID);
+                }
             }
+
         }
         else if(passedFlagCount==(int)((double)flagCount*0.50))
         {
             //50%지점
             if(!percentFlag50){
                 //처음으로 지나가는 경우
-                return new SoundCommandGuide(guideSound);
+                percentFlag50=true;
+                if(voiceType==VoiceType.MALE) {
+                    return new SoundCommandGuide(GuideSound.FINISHMAN);
+                }
+                else if(voiceType==VoiceType.FEMALE){
+                    return new SoundCommandGuide(GuideSound.FINISHWOMAN);
+                }
+                else if(voiceType==VoiceType.CHILD){
+                    return new SoundCommandGuide(GuideSound.FINISHKID);
+                }
             }
-
         }
         else if(passedFlagCount==(int)((double)flagCount*0.75))
         {
             //75%지점
             if(!percentFlag75){
                 //처음으로 지나가는 경우
-                return new SoundCommandGuide(guideSound);
+                percentFlag75=true;
+                if(voiceType==VoiceType.MALE) {
+                    return new SoundCommandGuide(GuideSound.FINISHMAN);
+                }
+                else if(voiceType==VoiceType.FEMALE){
+                    return new SoundCommandGuide(GuideSound.FINISHWOMAN);
+                }
+                else if(voiceType==VoiceType.CHILD){
+                    return new SoundCommandGuide(GuideSound.FINISHKID);
+                }
             }
         }
         else if(passedFlagCount==(int)((double)flagCount*1.0))
@@ -77,7 +105,16 @@ public class CourseSounderGuide extends CourseComponent {
             //100%지점
             if(!percentFlag100){
                 //처음으로 지나가는 경우
-                return new SoundCommandGuide(guideSound);
+                percentFlag100=true;
+                if(voiceType==VoiceType.MALE) {
+                    return new SoundCommandGuide(GuideSound.FINISHMAN);
+                }
+                else if(voiceType==VoiceType.FEMALE){
+                    return new SoundCommandGuide(GuideSound.FINISHWOMAN);
+                }
+                else if(voiceType==VoiceType.CHILD){
+                    return new SoundCommandGuide(GuideSound.FINISHKID);
+                }
             }
         }
         return null;

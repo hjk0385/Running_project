@@ -17,6 +17,8 @@ import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerAll;
+import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerPrecision;
+import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionOneTwo;
 import com.trainer.courserunner.course.conductor.activity.CourseConductorGuideRunnerActivity;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectPolicyDfsCustom;
@@ -44,7 +46,8 @@ public class NormalRunningActivity extends AppCompatActivity {
             builder.setScopeMapInfo(scopeMapInfo);
             builder.setStartLocation(new ScopeDotAddress(scopeMapInfo,currentLocation.getLongitude(),currentLocation.getLatitude()));
             builder.setFinishEvent(o -> startNextActivity((Long)o));
-            builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
+            //builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
+            builder.setMarkerSelectionLayer(new MarkerSelectionLayerPrecision(0.1));
 
             CourseMaker courseMaker = builder.build();
             courseMaker.runComponent();

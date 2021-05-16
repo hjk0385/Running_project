@@ -1,4 +1,4 @@
-package com.trainer.courserunner.Application.enumtype;
+package com.trainer.courserunner.Application.sound;
 
 public enum GuideSound {
     FINISHKID,
