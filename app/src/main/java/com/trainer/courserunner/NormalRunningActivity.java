@@ -17,12 +17,9 @@ import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
-import com.trainer.courserunner.course.component.maker.layer.line.LineConnectPolicyDfsCustom;
-import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationLayerProximate;
+import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayerDfsCustom;
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationMininumGuarantee;
 import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegistLayerAll;
-import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerAll;
-import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerPrecision;
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
@@ -41,7 +38,7 @@ public class NormalRunningActivity extends AppCompatActivity {
 
             CourseMaker.Builder builder = new CourseMaker.Builder();
             builder.setCourseRegistLayer(new CourseRegistLayerAll());
-            builder.setLineConnectLayer(new LineConnectPolicyDfsCustom(0.1));
+            builder.setLineConnectLayer(new LineConnectLayerDfsCustom(0.1));
             //builder.setQuanzationLayer(new QuanzationLayerProximate());
             builder.setQuanzationLayer(new QuanzationMininumGuarantee());
             builder.setBitmap(bitmap);

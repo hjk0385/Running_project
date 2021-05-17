@@ -1,5 +1,6 @@
 package com.trainer.courserunner.course.component.maker.layer.line;
 
+import com.trainer.courserunner.course.component.maker.scopetype.ScopeDot;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsMap;
 
@@ -8,17 +9,16 @@ import java.util.List;
 
 public class LineConnectLayerDfs implements LineConnectLayer {
     @Override
-    public List<ScopeDotAddress> apply(ScopeDotsMap scopeDots, ScopeDotAddress startAddress) {
-        scopeDots = (ScopeDotsMap) scopeDots.clone();
-
+    public List<ScopeDotAddress> apply(ScopeDotsMap scopeDotsMap, ScopeDotAddress startAddress) {
+        scopeDotsMap = (ScopeDotsMap) scopeDotsMap.clone();
         List<ScopeDotAddress> course = new ArrayList<>();
-        ScopeDotAddress currentScopeDotAddress = startAddress;
-        course.add(currentScopeDotAddress);
+        ScopeDotAddress currentAddress = startAddress;
+        course.add(currentAddress);
 
-        while (scopeDots.size() != 0) {
-            currentScopeDotAddress = (ScopeDotAddress) scopeDots.getClosestDot(currentScopeDotAddress);
-            scopeDots.remove(currentScopeDotAddress);
-            course.add(currentScopeDotAddress);
+        while (scopeDotsMap.size() > 0) {
+            currentAddress = (ScopeDotAddress) scopeDotsMap.getClosestDot(currentAddress);
+            course.add(currentAddress);
+            scopeDotsMap.remove(currentAddress);
         }
         course.add(startAddress);
         return course;

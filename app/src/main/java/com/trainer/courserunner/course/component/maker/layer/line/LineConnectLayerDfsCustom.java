@@ -7,10 +7,10 @@ import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineConnectPolicyDfsCustom implements LineConnectLayer {
+public class LineConnectLayerDfsCustom implements LineConnectLayer {
     double costLimit;
 
-    public LineConnectPolicyDfsCustom(double costLimit) {
+    public LineConnectLayerDfsCustom(double costLimit) {
         this.costLimit = costLimit;
     }
 
