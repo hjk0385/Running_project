@@ -19,11 +19,14 @@ import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectPolicyDfsCustom;
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationLayerProximate;
+import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationMininumGuarantee;
 import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegistLayerAll;
+import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerAll;
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerPrecision;
+import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
-import com.trainer.courserunner.course.conductor.activity.CourseConductorGuideRunnerActivity;
+import com.trainer.courserunner.course.activity.GuideRunnerActivity;
 import com.trainer.courserunner.loader.AssetLoader;
 
 public class NormalRunningActivity extends AppCompatActivity {
@@ -39,13 +42,14 @@ public class NormalRunningActivity extends AppCompatActivity {
             CourseMaker.Builder builder = new CourseMaker.Builder();
             builder.setCourseRegistLayer(new CourseRegistLayerAll());
             builder.setLineConnectLayer(new LineConnectPolicyDfsCustom(0.1));
-            builder.setQuanzationLayer(new QuanzationLayerProximate());
+            //builder.setQuanzationLayer(new QuanzationLayerProximate());
+            builder.setQuanzationLayer(new QuanzationMininumGuarantee());
             builder.setBitmap(bitmap);
             builder.setScopeMapInfo(scopeMapInfo);
             builder.setStartLocation(new ScopeDotAddress(scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
             builder.setFinishEvent(o -> startNextActivity((Long) o));
             //builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
-            builder.setMarkerSelectionLayer(new MarkerSelectionLayerPrecision(0.1));
+            builder.setMarkerSelectionLayer(new MarkerSelectionNone());
 
             CourseMaker courseMaker = builder.build();
             courseMaker.runComponent();
@@ -53,7 +57,7 @@ public class NormalRunningActivity extends AppCompatActivity {
     }
 
     private void startNextActivity(Long courseId) {
-        Intent intent = new Intent(getBaseContext(), CourseConductorGuideRunnerActivity.class);
+        Intent intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
         intent.putExtra("courseId", courseId);
         intent.putExtra("startType", StartType.NEW);
         startActivity(intent);

@@ -7,7 +7,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.trainer.courserunner.Application.enumtype.StartType;
-import com.trainer.courserunner.course.conductor.activity.CourseConductorSketchBookActivity;
+import com.trainer.courserunner.course.activity.SketchBookRunnerActivity;
 
 public class RunningActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class RunningActivity extends AppCompatActivity {
 
         Button imageButton2 = (Button) findViewById((R.id.Sketchbook_running_btn));
         imageButton2.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), CourseConductorSketchBookActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SketchBookRunnerActivity.class);
             intent.putExtra("startType", StartType.NEW);
             startActivity(intent);
         });

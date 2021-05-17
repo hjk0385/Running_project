@@ -1,4 +1,4 @@
-package com.trainer.courserunner.course.conductor.activity;
+package com.trainer.courserunner.course.activity;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
