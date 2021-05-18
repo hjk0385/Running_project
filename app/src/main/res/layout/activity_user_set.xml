@@ -112,23 +112,23 @@
         android:id="@+id/bmiResultTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        tools:text="23.111111"
         android:layout_alignBaseline="@+id/BMI"
         android:layout_marginStart="50dp"
         android:layout_toEndOf="@+id/BMI"
-        tools:ignore="RtlCompat" />
+        android:textSize="20dp"
+        tools:ignore="RtlCompat"
+        tools:text="23.111111" />
 
     <TextView
         android:id="@+id/result_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        tools:text="정상입니다."
         android:layout_alignBaseline="@+id/result"
         android:layout_marginStart="50dp"
         android:layout_toEndOf="@+id/result"
-        tools:ignore="RtlCompat" />
+        android:textSize="20dp"
+        tools:ignore="RtlCompat"
+        tools:text="정상입니다." />
 
 
 </RelativeLayout>

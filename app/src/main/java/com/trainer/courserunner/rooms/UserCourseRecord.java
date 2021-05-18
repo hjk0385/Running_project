@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 
 import java.util.Date;
 
@@ -18,6 +19,9 @@ import java.util.Date;
                         parentColumns = "user_course_id",
                         childColumns = "user_course_id",
                         onDelete = ForeignKey.CASCADE)
+        },
+        indices = {
+                @Index("user_course_id")
         }
 )
 public class UserCourseRecord {

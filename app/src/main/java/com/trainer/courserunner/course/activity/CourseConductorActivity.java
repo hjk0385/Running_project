@@ -16,7 +16,7 @@ import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.R;
-import com.trainer.courserunner.course.CourseConductor;
+import com.trainer.courserunner.course.conductor.CourseConductor;
 import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 
 
@@ -31,7 +31,7 @@ public abstract class CourseConductorActivity extends NavermapLocationActivity {
         super.onMapReady(naverMap);
         courseConductor = createCourseConductor();
         naverMap.addOnLocationChangeListener((Location location) -> {
-            courseConductor.update(null, location);
+            courseConductor.refreshLocation(location);
         });
     }
 

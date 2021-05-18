@@ -15,15 +15,15 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.trainer.courserunner.Application.StartType;
-import com.trainer.courserunner.course.activity.CourseConductorGuideRunnerActivity;
-import com.trainer.courserunner.course.maker.CourseMaker;
-import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyDfs;
-import com.trainer.courserunner.course.maker.policy.line.LineConnectPolicyDfsCustom;
-import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionAll;
-import com.trainer.courserunner.course.maker.policy.marker.MarkerSelectionRandom;
-import com.trainer.courserunner.course.maker.policy.quanzation.QuanzationImageToMapProximate;
-import com.trainer.courserunner.course.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.Application.enumtype.StartType;
+import com.trainer.courserunner.course.component.maker.CourseMaker;
+import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayerDfsCustom;
+import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationMininumGuarantee;
+import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegistLayerAll;
+import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionNone;
+import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
+import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.course.activity.GuideRunnerActivity;
 import com.trainer.courserunner.loader.AssetLoader;
 
 public class NormalRunningActivity extends AppCompatActivity {
@@ -34,24 +34,28 @@ public class NormalRunningActivity extends AppCompatActivity {
             //테스트코드
             ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
                     currentLocation.getLatitude(), currentLocation.getLongitude(), kilometer * 1000);
-            Bitmap image = AssetLoader.loadImage(this, "testbitmap2.png");
-            //
-            CourseMaker courseMaker = new CourseMaker(image, scopeMapInfo);
-            courseMaker.setQuanzationImageToMap(new QuanzationImageToMapProximate());
-            //courseMaker.setQuanzationImageToMap(new QuanzationImageToMapPrecision(0.25));
+            Bitmap bitmap = AssetLoader.loadImage(this, "testbitmap2.png");
 
-            //courseMaker.setMarkerSelection(new MarkerSelectionRandom(0.25));
-            courseMaker.setMarkerSelection(new MarkerSelectionAll());
-            courseMaker.setLineConnectPolicy(new LineConnectPolicyDfsCustom(0.1));
-            courseMaker.setCourseIdConsumer(this::startNextActivity);
-            courseMaker.setCurrentLocation(currentLocation);
-            courseMaker.run();
+            CourseMaker.Builder builder = new CourseMaker.Builder();
+            builder.setCourseRegistLayer(new CourseRegistLayerAll());
+            builder.setLineConnectLayer(new LineConnectLayerDfsCustom(0.1));
+            //builder.setQuanzationLayer(new QuanzationLayerProximate());
+            builder.setQuanzationLayer(new QuanzationMininumGuarantee());
+            builder.setBitmap(bitmap);
+            builder.setScopeMapInfo(scopeMapInfo);
+            builder.setStartLocation(new ScopeDotAddress(scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
+            builder.setFinishEvent(o -> startNextActivity((Long) o));
+            //builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
+            builder.setMarkerSelectionLayer(new MarkerSelectionNone());
+
+            CourseMaker courseMaker = builder.build();
+            courseMaker.runComponent();
         };
     }
 
     private void startNextActivity(Long courseId) {
-        Intent intent = new Intent(getBaseContext(), CourseConductorGuideRunnerActivity.class);
-        intent.putExtra("courseId",courseId);
+        Intent intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
+        intent.putExtra("courseId", courseId);
         intent.putExtra("startType", StartType.NEW);
         startActivity(intent);
     }

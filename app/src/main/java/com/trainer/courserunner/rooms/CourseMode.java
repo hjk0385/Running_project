@@ -3,10 +3,14 @@ package com.trainer.courserunner.rooms;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 
 @Entity(tableName = "course_mode",
         primaryKeys = {
                 "course_mode_id"
+        },
+        indices = {
+                @Index("course_mode_id")
         }
 )
 public class CourseMode {

@@ -2,7 +2,7 @@ package com.trainer.courserunner.rooms;
 
 import android.util.Log;
 
-import com.trainer.courserunner.Application.AppDatabaseLoader;
+import com.trainer.courserunner.Application.AppFunctionLoader;
 import com.trainer.courserunner.map.geo.DistanceConverter;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.stream.DoubleStream;
 public class UserCourseFlagDerived {
     static public CourseFlag[] getUnvistedUserCourseFlags(Long courseId, Long userCourseId) {
         //
-        AppDatabase appDatabase = AppDatabaseLoader.getAppDatabase();
+        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
         CourseFlag[] courseFlags = appDatabase.courseFlagDao().getCourseMarkerFlags(courseId);
         UserCourseRecord[] userCourseRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCourseId);
         //
