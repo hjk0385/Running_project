@@ -15,8 +15,11 @@ import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.naver.maps.map.NaverMap;
+import com.trainer.courserunner.Application.enumtype.ModeType;
+import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.conductor.CourseConductor;
+import com.trainer.courserunner.course.conductor.CourseConductorBuilder;
 import com.trainer.courserunner.map.drawer.NavermapLocationActivity;
 
 
@@ -41,6 +44,17 @@ public abstract class CourseConductorActivity extends NavermapLocationActivity {
         menuInflater.inflate(R.menu.menu_courseconductor, menu);
         return true;
     }
+
+    protected CourseConductorBuilder getDefaultCourseConductorBuilder(){
+        CourseConductorBuilder courseConductorBuilder = new CourseConductorBuilder();
+        courseConductorBuilder.setMapDrawer(this);
+        courseConductorBuilder.setContext(this);
+        courseConductorBuilder.setStartType((StartType) getIntent().getSerializableExtra("startType"));
+        courseConductorBuilder.setUserCourseId(getIntent().getLongExtra("userCourseId", -1));
+        courseConductorBuilder.setCourseId(getIntent().getLongExtra("courseId",-1));
+        return courseConductorBuilder;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
