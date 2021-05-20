@@ -42,6 +42,8 @@ public class CourseSounderGuide extends CourseComponent {
             0~12 : 3, 6, 9 ,12
         */
 
+
+
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
         int flagCount = appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
         int passedFlagCount = UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId, userCoursedId);

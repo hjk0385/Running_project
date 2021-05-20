@@ -2,6 +2,7 @@ package com.trainer.courserunner.Application;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.room.Room;
 
@@ -30,7 +31,9 @@ public class AppFunctionLoader extends Application {
         appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build();
         //지도DB불러오기
         String[] expansionFiles = ObbLoader.getAPKExpansionFiles(getApplicationContext(), 1, 0);
+
         String dbLocation = expansionFiles[0];
+
         roadAddressDatabase = SQLiteDatabase.openDatabase(dbLocation, null, SQLiteDatabase.OPEN_READONLY);
 
         //앱DB미리채우기(디버그용)

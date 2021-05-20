@@ -30,10 +30,7 @@ public class CourseConductorGuideRunner extends CourseConductorSketchBook {
         courseSounderGuide = new CourseSounderGuide(courseId, userCourseId);
 
         overseerUserRecord.setFinishEventConsumer((Object o) -> {
-            drawerUserRecord.runComponent();
-            drawerGuideLine.runComponent();
-            drawerGuideMarker.runComponent();
-
+            //component로 넘기기
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             String voiceType = prefs.getString("sound_list", "여성 목소리");
             if (Objects.equals(voiceType, "여성 목소리")) {
@@ -43,7 +40,11 @@ public class CourseConductorGuideRunner extends CourseConductorSketchBook {
             } else if (Objects.equals(voiceType, "아이 목소리")) {
                 courseSounderGuide.setVoiceType(VoiceType.CHILD);
             }
+            //
 
+            drawerUserRecord.runComponent();
+            drawerGuideLine.runComponent();
+            drawerGuideMarker.runComponent();
             courseSounderGuide.runComponent();
         });
     }

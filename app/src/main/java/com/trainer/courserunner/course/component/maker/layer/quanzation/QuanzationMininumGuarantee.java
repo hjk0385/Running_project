@@ -42,6 +42,7 @@ public class QuanzationMininumGuarantee extends QuanzationLayerProximate {
         //임의의 점 지우기(랜덤제거)
         Collections.shuffle(scopeDotsMapResult);
         scopeDotsMapResult.subList(0, (int) (PIXEL_LIMIT_PERCENTAGE*scopeDotsMapResult.size()));
+        //
         scopeDotsMapResult.addAll(scopeDotAddressMininumGuarantee);
         return scopeDotsMapResult;
     }
