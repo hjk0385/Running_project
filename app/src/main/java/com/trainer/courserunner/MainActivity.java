@@ -10,6 +10,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.trainer.courserunner.running.RunningActivity;
+import com.trainer.courserunner.running.mission.MissionActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

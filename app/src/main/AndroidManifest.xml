@@ -15,19 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <activity android:name=".CourseImageSelectionActivity"></activity>
+        <activity android:name=".running.normal.CourseImageSelectionActivity"></activity>
         <activity android:name=".SettingActivity" />
-        <activity android:name=".NewProjectActivity" /> <!-- 네이버지도 -->
+        <activity android:name=".running.project.NewProjectActivity" /> <!-- 네이버지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="hzqct6qd8n" /> <!-- 네이버지도 -->
         <!-- 엑티비티 -->
         <activity android:name=".UserSetActivity" />
-        <activity android:name=".ProjectRunningActivity" />
-        <activity android:name=".NormalRunningActivity" />
-        <activity android:name=".MissionActivity" />
+        <activity android:name=".running.project.ProjectRunningActivity" />
+        <activity android:name=".running.normal.NormalRunningActivity" />
+        <activity android:name=".running.mission.MissionActivity" />
         <activity android:name=".ResultActivity" />
-        <activity android:name=".RunningActivity" />
+        <activity android:name=".running.RunningActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

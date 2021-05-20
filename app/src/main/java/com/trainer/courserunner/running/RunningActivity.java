@@ -1,4 +1,4 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.running;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,10 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.trainer.courserunner.Application.enumtype.StartType;
+import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.activity.SketchBookRunnerActivity;
+import com.trainer.courserunner.running.normal.CourseImageSelectionActivity;
+import com.trainer.courserunner.running.project.ProjectRunningActivity;
 
 public class RunningActivity extends AppCompatActivity {
 

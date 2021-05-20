@@ -1,27 +1,20 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.running.normal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.trainer.courserunner.Application.enumtype.StartType;
-import com.trainer.courserunner.course.activity.GuideRunnerActivity;
+import com.trainer.courserunner.R;
 
-public class CourseImageSelectionActivity extends AppCompatActivity implements NextActivityInterface{
+public class CourseImageSelectionActivity extends AppCompatActivity implements NextActivityInterface {
     private Integer[] mThumbIds={
             R.drawable.courseimage_1,
             R.drawable.courseimage_2,

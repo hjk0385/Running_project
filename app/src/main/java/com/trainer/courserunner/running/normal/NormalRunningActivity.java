@@ -1,4 +1,4 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.running.normal;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,6 +16,8 @@ import android.widget.Button;
 import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.Application.enumtype.StartType;
+import com.trainer.courserunner.BaseRunningActivity;
+import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.activity.GuideRunnerActivity;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayerDfsCustom;
@@ -24,9 +26,8 @@ import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegist
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
-import com.trainer.courserunner.loader.AssetLoader;
 
-public class NormalRunningActivity extends BaseRunningActivity implements NextActivityInterface{
+public class NormalRunningActivity extends BaseRunningActivity implements NextActivityInterface {
     private Location currentLocation;
 
     private Button km2_btn;

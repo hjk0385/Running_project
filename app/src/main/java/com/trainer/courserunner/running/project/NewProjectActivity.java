@@ -1,8 +1,10 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.running.project;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.trainer.courserunner.R;
 
 public class NewProjectActivity extends AppCompatActivity {
 
