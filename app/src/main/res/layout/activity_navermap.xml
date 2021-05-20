@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".map.drawer.NavermapActivity">
 
-    <fragment
-        android:id="@+id/navermap_fragment"
-        android:name="com.naver.maps.map.MapFragment"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/navermap_frame"/>
 </LinearLayout>

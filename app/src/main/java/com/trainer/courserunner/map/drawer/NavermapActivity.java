@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.MapFragment;
@@ -32,14 +33,12 @@ public class NavermapActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     private void settingNavermap() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.navermap_fragment);
+        FragmentManager fm = getSupportFragmentManager();
+        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.navermap_frame);
         if (mapFragment == null) {
             mapFragment = MapFragment.newInstance();
-            fragmentManager.beginTransaction().add(R.id.navermap_fragment, mapFragment).commit();
+            fm.beginTransaction().add(R.id.navermap_frame, mapFragment).commit();
         }
-        mapFragment.getMapAsync(this);
-
     }
 
     @Override

@@ -24,6 +24,11 @@ public class DrawingAddress {
         this.longitude = courseFlag.courseFlagLongitude;
     }
 
+    public DrawingAddress(double latitude, double longitude){
+        this.latitude=latitude;
+        this.longitude=longitude;
+    }
+
     public Double getLatitude() {
         return latitude;
     }

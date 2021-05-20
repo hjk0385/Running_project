@@ -26,6 +26,7 @@ public abstract class NavermapLocationActivity extends NavermapActivity {
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         //naverMap.addOnLocationChangeListener(this::onLocationChangeListener);
+
     }
 
     @Override

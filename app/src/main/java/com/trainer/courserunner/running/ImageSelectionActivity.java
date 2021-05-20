@@ -1,4 +1,4 @@
-package com.trainer.courserunner.running.normal;
+package com.trainer.courserunner.running;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,9 +13,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.trainer.courserunner.R;
-import com.trainer.courserunner.running.RunningNextDataInterface;
 
-public class NormalRunningImageSelectionActivity extends AppCompatActivity implements RunningNextDataInterface {
+public class ImageSelectionActivity extends AppCompatActivity implements RunningNextDataInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +25,15 @@ public class NormalRunningImageSelectionActivity extends AppCompatActivity imple
         courseImageView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                NormalRunningImageSelectionActivity.this.nextActivity(adapterView.getAdapter().getItem(i));
+                //ImageSelectionActivity.this.nextActivity(adapterView.getAdapter().getItem(i));
             }
         });
     }
 
     @Override
-    public void nextActivity(Object sendData) {
-        Intent intent = new Intent(getBaseContext(), NormalRunningDistanceActivity.class);
-        intent.putExtra("drawableId", (Integer) sendData);
+    public void nextActivity(SettingRunning settingRunning) {
+        Intent intent = new Intent(getBaseContext(), DistanceActivity.class);
+        //intent.putExtra("drawableId", (Integer) sendData);
         startActivity(intent);
     }
 

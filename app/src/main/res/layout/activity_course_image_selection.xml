@@ -2,7 +2,7 @@
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".running.normal.NormalRunningImageSelectionActivity"
+    tools:context=".running.ImageSelectionActivity"
 
     android:id="@+id/courseImageView"
     android:layout_width="match_parent"
