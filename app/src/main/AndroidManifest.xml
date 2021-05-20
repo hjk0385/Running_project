@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <activity android:name=".running.normal.CourseImageSelectionActivity"></activity>
+        <activity android:name=".running.normal.NormalRunningImageSelectionActivity"></activity>
         <activity android:name=".SettingActivity" />
         <activity android:name=".running.project.NewProjectActivity" /> <!-- 네이버지도 -->
         <meta-data
@@ -24,7 +24,7 @@
         <!-- 엑티비티 -->
         <activity android:name=".UserSetActivity" />
         <activity android:name=".running.project.ProjectRunningActivity" />
-        <activity android:name=".running.normal.NormalRunningActivity" />
+        <activity android:name=".running.normal.NormalRunningDistanceActivity" />
         <activity android:name=".running.mission.MissionActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".running.RunningActivity" />

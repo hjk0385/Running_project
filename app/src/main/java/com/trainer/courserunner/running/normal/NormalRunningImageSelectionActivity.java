@@ -13,14 +13,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.trainer.courserunner.R;
+import com.trainer.courserunner.running.RunningNextDataInterface;
 
-public class CourseImageSelectionActivity extends AppCompatActivity implements NextActivityInterface {
-    private Integer[] mThumbIds={
-            R.drawable.courseimage_1,
-            R.drawable.courseimage_2,
-            R.drawable.courseimage_3,
-    };
-
+public class NormalRunningImageSelectionActivity extends AppCompatActivity implements RunningNextDataInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,20 +26,26 @@ public class CourseImageSelectionActivity extends AppCompatActivity implements N
         courseImageView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                CourseImageSelectionActivity.this.nextActivity(mThumbIds[i]);
+                NormalRunningImageSelectionActivity.this.nextActivity(adapterView.getAdapter().getItem(i));
             }
         });
     }
 
     @Override
     public void nextActivity(Object sendData) {
-        Intent intent = new Intent(getBaseContext(), NormalRunningActivity.class);
-        intent.putExtra("bitmap", (Integer) sendData);
+        Intent intent = new Intent(getBaseContext(), NormalRunningDistanceActivity.class);
+        intent.putExtra("drawableId", (Integer) sendData);
         startActivity(intent);
     }
 
 
     class ImageAdapter extends BaseAdapter{
+        private Integer[] mThumbIds={
+                R.drawable.courseimage_1,
+                R.drawable.courseimage_2,
+                R.drawable.courseimage_3,
+        };
+
         private Context mContext;
         public ImageAdapter(Context c){
             mContext=c;
@@ -57,7 +58,7 @@ public class CourseImageSelectionActivity extends AppCompatActivity implements N
 
         @Override
         public Object getItem(int i) {
-            return null;
+            return mThumbIds[i];
         }
 
         @Override

@@ -12,11 +12,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.Application.enumtype.StartType;
-import com.trainer.courserunner.BaseRunningActivity;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.activity.GuideRunnerActivity;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
@@ -26,9 +27,11 @@ import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegist
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.running.RunningNextDataInterface;
 
-public class NormalRunningActivity extends BaseRunningActivity implements NextActivityInterface {
+public class NormalRunningDistanceActivity extends AppCompatActivity implements RunningNextDataInterface {
     private Location currentLocation;
+    private Integer drawableId;
 
     private Button km2_btn;
     private Button km4_btn;
@@ -41,6 +44,10 @@ public class NormalRunningActivity extends BaseRunningActivity implements NextAc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_normal_running);
 
+        Intent intent = getIntent();
+        drawableId = intent.getIntExtra("drawableId",-1);
+
+        //
         km2_btn = (Button) findViewById(R.id.km2_btn);
         km2_btn.setOnClickListener(getMeterBtnListener(2));
 
@@ -55,8 +62,12 @@ public class NormalRunningActivity extends BaseRunningActivity implements NextAc
 
         km10_btn = (Button) findViewById(R.id.km10_btn);
         km10_btn.setOnClickListener(getMeterBtnListener(10));
-
-        lockWhenGetLocation();
+        //
+        km2_btn.setEnabled(false);
+        km4_btn.setEnabled(false);
+        km6_btn.setEnabled(false);
+        km8_btn.setEnabled(false);
+        km10_btn.setEnabled(false);
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
@@ -64,7 +75,11 @@ public class NormalRunningActivity extends BaseRunningActivity implements NextAc
             public void onLocationChanged(Location location) {
                 // 새로운 위치의 발견
                 currentLocation = location;
-                unlockWhenGetLocation();
+                km2_btn.setEnabled(true);
+                km4_btn.setEnabled(true);
+                km6_btn.setEnabled(true);
+                km8_btn.setEnabled(true);
+                km10_btn.setEnabled(true);
             }
 
             @Override
@@ -96,33 +111,13 @@ public class NormalRunningActivity extends BaseRunningActivity implements NextAc
         }
         locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, null);
     }
-    @Override
-    protected void lockWhenGetLocation() {
-        /*
-        km2_btn.setEnabled(false);
-        km4_btn.setEnabled(false);
-        km6_btn.setEnabled(false);
-        km8_btn.setEnabled(false);
-        km10_btn.setEnabled(false);
-
-         */
-    }
-
-    @Override
-    protected void unlockWhenGetLocation() {
-        km2_btn.setEnabled(true);
-        km4_btn.setEnabled(true);
-        km6_btn.setEnabled(true);
-        km8_btn.setEnabled(true);
-        km10_btn.setEnabled(true);
-    }
 
     View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
             //테스트코드
             ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
                     currentLocation.getLatitude(), currentLocation.getLongitude(), kilometer * 1000);
-            Bitmap bitmap = BitmapFactory.decodeResource(NormalRunningActivity.this.getResources(),getIntent().getIntExtra("bitmap",-1));
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),drawableId);
 
             CourseMaker.Builder builder = new CourseMaker.Builder();
             builder.setCourseRegistLayer(new CourseRegistLayerAll());

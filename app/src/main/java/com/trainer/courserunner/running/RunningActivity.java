@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.activity.SketchBookRunnerActivity;
-import com.trainer.courserunner.running.normal.CourseImageSelectionActivity;
+import com.trainer.courserunner.running.normal.NormalRunningImageSelectionActivity;
 import com.trainer.courserunner.running.project.ProjectRunningActivity;
 
 public class RunningActivity extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class RunningActivity extends AppCompatActivity {
 
         Button imageButton = (Button) findViewById((R.id.nornal_running_btn));
         imageButton.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), CourseImageSelectionActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NormalRunningImageSelectionActivity.class);
             startActivity(intent);
         });
 
