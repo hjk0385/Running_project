@@ -18,7 +18,7 @@ public class RunningActivity extends AppCompatActivity {
 
         Button imageButton = (Button) findViewById((R.id.nornal_running_btn));
         imageButton.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), NormalRunningActivity.class);
+            Intent intent = new Intent(getApplicationContext(), CourseImageSelectionActivity.class);
             startActivity(intent);
         });
 
