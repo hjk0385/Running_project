@@ -43,23 +43,22 @@ public class NormalDistanceActivity extends AppCompatActivity {
             CourseMaker.Builder builder = new CourseMaker.Builder();
             builder.setCourseRegistLayer(new CourseRegistLayerAll());
             builder.setLineConnectLayer(new LineConnectLayerDfsCustom(0.1));
-            //builder.setQuanzationLayer(new QuanzationLayerProximate());
             builder.setQuanzationLayer(new QuanzationMininumGuarantee());
             builder.setBitmap(bitmap);
             builder.setScopeMapInfo(scopeMapInfo);
             builder.setStartLocation(new ScopeDotAddress(scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
-            builder.setFinishEvent(o -> {
-                        Intent intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
-                        intent.putExtra("courseId", (Long)o);
-                        intent.putExtra("startType", StartType.NEW);
-                        startActivity(intent);
-                    });
-            //builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
+            builder.setFinishEvent(this::nextActivity);
             builder.setMarkerSelectionLayer(new MarkerSelectionNone());
-
             CourseMaker courseMaker = builder.build();
             courseMaker.runComponent();
         };
+    }
+
+    protected void nextActivity(Object courseId){
+        Intent intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
+        intent.putExtra("courseId", (Long)courseId);
+        intent.putExtra("startType", StartType.NEW);
+        startActivity(intent);
     }
 
     @Override
