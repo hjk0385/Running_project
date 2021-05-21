@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".settingrun.ImageSelectionActivity"></activity>
+        <activity android:name=".SettingActivity" />
         <activity android:name=".NewProjectActivity" /> <!-- 네이버지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -23,7 +24,7 @@
         <!-- 엑티비티 -->
         <activity android:name=".UserSetActivity" />
         <activity android:name=".ProjectRunningActivity" />
-        <activity android:name=".NormalRunningActivity" />
+        <activity android:name=".settingrun.DistanceActivity" />
         <activity android:name=".MissionActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".RunningActivity" />
@@ -36,12 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity" />
-
-        <activity android:name=".course.activity.SketchBookRunnerActivity">
-
-        </activity>
+        <activity android:name=".course.activity.SketchBookRunnerActivity"></activity>
         <activity android:name=".course.activity.GuideRunnerActivity" />
-
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.settingrun;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.trainer.courserunner.Application.enumtype.StartType;
+import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayerDfsCustom;
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationMininumGuarantee;
@@ -26,7 +27,7 @@ import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.course.activity.GuideRunnerActivity;
 import com.trainer.courserunner.loader.AssetLoader;
 
-public class NormalRunningActivity extends AppCompatActivity {
+public class DistanceActivity extends AppCompatActivity {
     Location currentLocation;
 
     View.OnClickListener getMeterBtnListener(double kilometer) {
