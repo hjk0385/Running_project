@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +13,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.trainer.courserunner.R;
+import com.trainer.courserunner.settingrun.normal.NormalDistanceActivity;
 
-public class ImageSelectionActivity extends AppCompatActivity implements RunningSettingInterface{
+public abstract class ImageSelectionActivity extends AppCompatActivity implements RunningSettingInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +33,6 @@ public class ImageSelectionActivity extends AppCompatActivity implements Running
                 nextActivity(runningSetting);
             }
         });
-    }
-
-    @Override
-    public void nextActivity(RunningSetting runningSetting) {
-        Intent intent = new Intent(getApplicationContext(),DistanceActivity.class);
-        intent.putExtra("runningSetting",runningSetting);
-        startActivity(intent);
     }
 
     static class ImageAdapter extends BaseAdapter {

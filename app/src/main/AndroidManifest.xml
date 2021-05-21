@@ -23,11 +23,11 @@
             android:value="hzqct6qd8n" /> <!-- 네이버지도 -->
         <!-- 엑티비티 -->
         <activity android:name=".UserSetActivity" />
-        <activity android:name=".ProjectRunningActivity" />
-        <activity android:name=".settingrun.DistanceActivity" />
+        <activity android:name=".settingrun.project.ProjectRunningActivity" />
+        <activity android:name=".settingrun.normal.NormalDistanceActivity" />
         <activity android:name=".MissionActivity" />
         <activity android:name=".ResultActivity" />
-        <activity android:name=".RunningActivity" />
+        <activity android:name=".settingrun.RunningActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

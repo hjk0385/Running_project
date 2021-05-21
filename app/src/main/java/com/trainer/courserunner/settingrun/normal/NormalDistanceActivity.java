@@ -1,4 +1,4 @@
-package com.trainer.courserunner.settingrun;
+package com.trainer.courserunner.settingrun.normal;
 
 import android.Manifest;
 import android.content.Context;
@@ -27,8 +27,9 @@ import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.course.activity.GuideRunnerActivity;
 import com.trainer.courserunner.loader.AssetLoader;
+import com.trainer.courserunner.settingrun.RunningSetting;
 
-public class DistanceActivity extends AppCompatActivity {
+public class NormalDistanceActivity extends AppCompatActivity {
     Location currentLocation;
 
     View.OnClickListener getMeterBtnListener(double kilometer) {
@@ -47,20 +48,18 @@ public class DistanceActivity extends AppCompatActivity {
             builder.setBitmap(bitmap);
             builder.setScopeMapInfo(scopeMapInfo);
             builder.setStartLocation(new ScopeDotAddress(scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
-            builder.setFinishEvent(o -> startNextActivity((Long) o));
+            builder.setFinishEvent(o -> {
+                        Intent intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
+                        intent.putExtra("courseId", (Long)o);
+                        intent.putExtra("startType", StartType.NEW);
+                        startActivity(intent);
+                    });
             //builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
             builder.setMarkerSelectionLayer(new MarkerSelectionNone());
 
             CourseMaker courseMaker = builder.build();
             courseMaker.runComponent();
         };
-    }
-
-    private void startNextActivity(Long courseId) {
-        Intent intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
-        intent.putExtra("courseId", courseId);
-        intent.putExtra("startType", StartType.NEW);
-        startActivity(intent);
     }
 
     @Override

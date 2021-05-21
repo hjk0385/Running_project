@@ -1,10 +1,12 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.settingrun.project;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.trainer.courserunner.R;
 
 public class ProjectRunningActivity extends AppCompatActivity {
 
