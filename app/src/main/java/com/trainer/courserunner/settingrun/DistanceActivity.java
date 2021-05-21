@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -35,7 +36,8 @@ public class DistanceActivity extends AppCompatActivity {
             //테스트코드
             ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
                     currentLocation.getLatitude(), currentLocation.getLongitude(), kilometer * 1000);
-            Bitmap bitmap = AssetLoader.loadImage(this, "testbitmap2.png");
+            RunningSetting runningSetting= (RunningSetting) getIntent().getSerializableExtra("runningSetting");
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),runningSetting.getDrawableId());
 
             CourseMaker.Builder builder = new CourseMaker.Builder();
             builder.setCourseRegistLayer(new CourseRegistLayerAll());
@@ -64,7 +66,7 @@ public class DistanceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_normal_running);
+        setContentView(R.layout.activity_distance);
 
         //버튼 리스너 등록
         Button km2_btn = (Button) findViewById(R.id.km2_btn);

@@ -7,22 +7,30 @@ import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
 import java.io.Serializable;
 
 public class RunningSetting implements Serializable {
-    Bitmap bitmap;
-    ScopeMapInfo scopeMapInfo;
-
-    public void setScopeMapInfo(ScopeMapInfo scopeMapInfo) {
-        this.scopeMapInfo = scopeMapInfo;
+    Integer drawableId;
+    double latitude;
+    double longitude;
+    public Integer getDrawableId() {
+        return drawableId;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setDrawableId(Integer drawableId) {
+        this.drawableId = drawableId;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public ScopeMapInfo getScopeMapInfo() {
-        return scopeMapInfo;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

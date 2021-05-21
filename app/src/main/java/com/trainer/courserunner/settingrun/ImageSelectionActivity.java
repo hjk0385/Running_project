@@ -28,11 +28,9 @@ public class ImageSelectionActivity extends AppCompatActivity implements Running
         courseImageView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), (Integer) adapterView.getAdapter().getItem(i));
-
                 Intent intent=getIntent();
                 RunningSetting runningSetting= (RunningSetting) intent.getSerializableExtra("runningSetting");
-                runningSetting.setBitmap(bitmap);
+                runningSetting.setDrawableId((Integer) adapterView.getAdapter().getItem(i));
                 nextActivity(runningSetting);
             }
         });
