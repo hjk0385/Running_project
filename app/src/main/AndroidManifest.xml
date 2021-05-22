@@ -15,15 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
+        <activity android:name=".record.ProjectRecordActivity"></activity>
         <activity android:name=".settingrun.normal.NormalImageSelectionActivity" />
         <activity android:name=".settingrun.normal.NormalDistanceActivity" />
-
         <activity android:name=".settingrun.project.ProjectRunningActivity" />
-        <activity android:name=".settingrun.project.ProjectImageSelectionActivity"/>
-        <activity android:name=".settingrun.project.ProjectDistanceActivity"/>
-
-        <activity android:name=".course.activity.ProjectRunnerActivity"/>
-
+        <activity android:name=".settingrun.project.ProjectImageSelectionActivity" />
+        <activity android:name=".settingrun.project.ProjectDistanceActivity" />
+        <activity android:name=".course.activity.ProjectRunnerActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".NewProjectActivity" /> <!-- 네이버지도 -->
         <meta-data
@@ -31,8 +29,6 @@
             android:value="hzqct6qd8n" /> <!-- 네이버지도 -->
         <!-- 엑티비티 -->
         <activity android:name=".UserSetActivity" />
-
-
         <activity android:name=".MissionActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".settingrun.RunningActivity" />
