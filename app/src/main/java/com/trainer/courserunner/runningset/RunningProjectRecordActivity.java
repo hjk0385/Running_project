@@ -19,13 +19,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class RunningProjectRecordActivity extends ListActivity {
+    UserCourse[] userCourses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        UserCourse[] userCourses = AppFunctionLoader.getAppDatabase().userCourseDao().getUserCourse(ModeType.PROJECTRUNNER.ordinal());
-
+        userCourses = AppFunctionLoader.getAppDatabase().userCourseDao().getUserCourse(ModeType.PROJECTRUNNER.ordinal());
         List<String> datas = Arrays.stream(userCourses).map(new Function<UserCourse, String>() {
             @Override
             public String apply(UserCourse userCourse) {
@@ -40,9 +39,13 @@ public class RunningProjectRecordActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        UserCourse selectUserCourse=userCourses[position];
+        //
         Intent intent = new Intent(getBaseContext(), ProjectRunnerActivity.class);
-
-        intent.putExtra("startType", StartType.RESUME);
+        intent.putExtra("startType",StartType.RESUME);
+        intent.putExtra("userCourseId",selectUserCourse.userCourseId);
+        intent.putExtra("courseId",selectUserCourse.courseId);
+        //
         startActivity(intent);
     }
 }
