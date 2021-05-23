@@ -51,6 +51,7 @@ public abstract class CourseConductorActivity extends NavermapLocationActivity {
         courseConductorBuilder.setStartType((StartType) getIntent().getSerializableExtra("startType"));
         courseConductorBuilder.setUserCourseId(getIntent().getLongExtra("userCourseId", -1));
         courseConductorBuilder.setCourseId(getIntent().getLongExtra("courseId", -1));
+        Log.v("CourseId", String.valueOf(getIntent().getLongExtra("courseId", -1)));
         return courseConductorBuilder;
     }
 

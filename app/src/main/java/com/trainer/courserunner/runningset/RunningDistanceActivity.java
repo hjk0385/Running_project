@@ -29,6 +29,7 @@ import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayerDfsCustom;
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationMininumGuarantee;
 import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegistLayerAll;
+import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionLayerAll;
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
@@ -61,7 +62,7 @@ public class RunningDistanceActivity extends AppCompatActivity {
             builder.setScopeMapInfo(scopeMapInfo);
             builder.setStartLocation(new ScopeDotAddress(scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
             builder.setFinishEvent(this::nextActivity);
-            builder.setMarkerSelectionLayer(new MarkerSelectionNone());
+            builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
             //
             CourseMaker courseMaker = builder.build();
             courseMaker.runComponent();

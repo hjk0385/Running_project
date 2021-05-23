@@ -67,7 +67,7 @@ public class CourseConductorBuilder {
         if (startType == StartType.NEW) {
             AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
             UserCourse userCourse = new UserCourse();
-            userCourse.courseId = null;
+            userCourse.courseId = courseId;
             userCourse.userCourseId = null;
             userCourse.courseModeId = (long) modeType.ordinal();
             userCourse.userCourseName = null;

@@ -3,6 +3,7 @@ package com.trainer.courserunner.runningset;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -45,6 +46,9 @@ public class RunningProjectRecordActivity extends ListActivity {
         intent.putExtra("startType",StartType.RESUME);
         intent.putExtra("userCourseId",selectUserCourse.userCourseId);
         intent.putExtra("courseId",selectUserCourse.courseId);
+        Log.v("selectUserCourse", String.valueOf(selectUserCourse.userCourseId));
+        Log.v("selectUserCourse", String.valueOf(selectUserCourse.courseId));
+        Log.v("CourseId", String.valueOf(intent.getLongExtra("courseId", -1)));
         //
         startActivity(intent);
     }
