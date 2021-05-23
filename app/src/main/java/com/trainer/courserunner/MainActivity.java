@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         });
         Button imageButton2 = (Button) findViewById((R.id.result_btn));
         imageButton2.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+            Intent intent = new Intent(getApplicationContext(), RecordShowActivity.class);
             startActivity(intent);
         });
         Button imageButton3 = (Button) findViewById((R.id.mission_btn));
