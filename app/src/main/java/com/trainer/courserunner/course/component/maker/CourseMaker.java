@@ -14,7 +14,6 @@ import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 //출력 : Long , CourseId;
 public class CourseMaker extends CourseComponent {

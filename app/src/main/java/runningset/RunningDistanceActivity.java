@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import com.trainer.courserunner.Application.enumtype.ModeType;
 import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.R;
+import com.trainer.courserunner.course.activity.GuideRunnerActivity;
 import com.trainer.courserunner.course.activity.ProjectRunnerActivity;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayerDfsCustom;
@@ -27,9 +28,6 @@ import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegist
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
-import com.trainer.courserunner.course.activity.GuideRunnerActivity;
-
-import runningset.RunningSetting;
 
 public class RunningDistanceActivity extends AppCompatActivity {
     RunningSetting runningSetting;
@@ -44,10 +42,10 @@ public class RunningDistanceActivity extends AppCompatActivity {
     View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
             ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
-                            currentLocation.getLatitude(),
-                            currentLocation.getLongitude(),
-                            kilometer * 1000);
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),runningSetting.getDrawableId());
+                    currentLocation.getLatitude(),
+                    currentLocation.getLongitude(),
+                    kilometer * 1000);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), runningSetting.getDrawableId());
             //
             CourseMaker.Builder builder = new CourseMaker.Builder();
             builder.setCourseRegistLayer(new CourseRegistLayerAll());
@@ -69,7 +67,7 @@ public class RunningDistanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distance);
         //Running Setting
-        runningSetting=(RunningSetting)getIntent().getSerializableExtra("runningSetting");
+        runningSetting = (RunningSetting) getIntent().getSerializableExtra("runningSetting");
 
         //
         mBtnKm2 = (Button) findViewById(R.id.km2_btn);
@@ -80,7 +78,7 @@ public class RunningDistanceActivity extends AppCompatActivity {
 
 
         //버튼 이름 변경
-        if(runningSetting.getModeType()== ModeType.GUIDERUNNER){
+        if (runningSetting.getModeType() == ModeType.GUIDERUNNER) {
             mBtnKm2.setText("2km");
             mBtnKm4.setText("4km");
             mBtnKm6.setText("6km");
@@ -92,8 +90,7 @@ public class RunningDistanceActivity extends AppCompatActivity {
             mBtnKm6.setOnClickListener(getMeterBtnListener(6));
             mBtnKm8.setOnClickListener(getMeterBtnListener(8));
             mBtnKm10.setOnClickListener(getMeterBtnListener(10));
-        }
-        else if(runningSetting.getModeType()==ModeType.PROJECTRUNNER){
+        } else if (runningSetting.getModeType() == ModeType.PROJECTRUNNER) {
             mBtnKm2.setText("4km");
             mBtnKm4.setText("8km");
             mBtnKm6.setText("12km");
@@ -105,8 +102,7 @@ public class RunningDistanceActivity extends AppCompatActivity {
             mBtnKm6.setOnClickListener(getMeterBtnListener(12));
             mBtnKm8.setOnClickListener(getMeterBtnListener(16));
             mBtnKm10.setOnClickListener(getMeterBtnListener(20));
-        }
-        else{
+        } else {
             throw new IllegalArgumentException();
         }
 
@@ -114,7 +110,7 @@ public class RunningDistanceActivity extends AppCompatActivity {
         gettingCurruntLocation();
     }
 
-    private void gettingCurruntLocation(){
+    private void gettingCurruntLocation() {
         //위치를 가져오기 전까지 비활성화
         mBtnKm2.setEnabled(false);
         mBtnKm4.setEnabled(false);
@@ -167,19 +163,17 @@ public class RunningDistanceActivity extends AppCompatActivity {
 
     }
 
-    protected void nextActivity(Object courseId){
+    protected void nextActivity(Object courseId) {
         Intent intent = null;
-        if(runningSetting.getModeType()==ModeType.GUIDERUNNER){
+        if (runningSetting.getModeType() == ModeType.GUIDERUNNER) {
             intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
-            intent.putExtra("courseId", (Long)courseId);
+            intent.putExtra("courseId", (Long) courseId);
             intent.putExtra("startType", StartType.NEW);
-        }
-        else if(runningSetting.getModeType()==ModeType.PROJECTRUNNER){
+        } else if (runningSetting.getModeType() == ModeType.PROJECTRUNNER) {
             intent = new Intent(getBaseContext(), ProjectRunnerActivity.class);
-            intent.putExtra("courseId", (Long)courseId);
+            intent.putExtra("courseId", (Long) courseId);
             intent.putExtra("startType", StartType.NEW);
-        }
-        else{
+        } else {
             throw new IllegalArgumentException();
         }
         startActivity(intent);

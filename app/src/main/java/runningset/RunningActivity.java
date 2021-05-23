@@ -10,7 +10,6 @@ import com.trainer.courserunner.Application.enumtype.ModeType;
 import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.activity.SketchBookRunnerActivity;
-import com.trainer.courserunner.settingrun.normal.NormalRunningImageSelectionActivity;
 
 public class RunningActivity extends AppCompatActivity {
 
@@ -22,14 +21,14 @@ public class RunningActivity extends AppCompatActivity {
         Button imageButton = (Button) findViewById((R.id.nornal_running_btn));
         imageButton.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), RunningImageSelectionActivity.class);
-            intent.putExtra("runningSetting",new RunningSetting(ModeType.GUIDERUNNER));
+            intent.putExtra("runningSetting", new RunningSetting(ModeType.GUIDERUNNER));
             startActivity(intent);
         });
 
         Button imageButton1 = (Button) findViewById((R.id.project_running_btn));
         imageButton1.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), RunningImageSelectionActivity.class);
-            intent.putExtra("runningSetting",new RunningSetting(ModeType.PROJECTRUNNER));
+            intent.putExtra("runningSetting", new RunningSetting(ModeType.PROJECTRUNNER));
             startActivity(intent);
         });
 

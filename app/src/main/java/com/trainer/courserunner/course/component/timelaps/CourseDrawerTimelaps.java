@@ -19,7 +19,7 @@ public class CourseDrawerTimelaps extends CourseDrawerUserRecord {
 
     public CourseDrawerTimelaps(MapDrawer mapDrawer, Long userCourseId) {
         super(mapDrawer, userCourseId);
-        currentSize=0;
+        currentSize = 0;
     }
 
     @Override
@@ -27,10 +27,10 @@ public class CourseDrawerTimelaps extends CourseDrawerUserRecord {
         //불러오기
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
         //임시구현
-        lastSize=appDatabase.userCourseRecordDao().getUserLocationRecordCount(userCourseId)-1;
-        currentSize=(currentSize+1)%lastSize;
+        lastSize = appDatabase.userCourseRecordDao().getUserLocationRecordCount(userCourseId) - 1;
+        currentSize = (currentSize + 1) % lastSize;
         //
-        UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecordsLimit(userCourseId,currentSize);
+        UserCourseRecord[] userLocationRecords = appDatabase.userCourseRecordDao().getUserLocationRecordsLimit(userCourseId, currentSize);
         //생성
         List<DrawingPath> drawingPathList = new ArrayList<>();
         int i = 0;
