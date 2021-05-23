@@ -28,7 +28,7 @@
 
         <activity android:name=".map.drawer.NavermapActivity"/>
         <activity android:name=".map.drawer.NavermapLocationActivity"/>
-        <activity android:name=".record.ProjectRecordActivity"/>
+        <activity android:name=".runningset.RunningProjectRecordActivity"/>
         <activity android:name=".runningset.RunningActivity"/>
         <activity android:name=".runningset.RunningImageSelectionActivity"/>
         <activity android:name=".runningset.RunningDistanceActivity"/>
@@ -36,9 +36,9 @@
         <activity android:name=".course.activity.CourseConductorActivity"/>
         <activity android:name=".course.activity.GuideRunnerActivity"/>
         <activity android:name=".course.activity.SketchBookRunnerActivity"/>
+        <activity android:name=".runningset.RunningProject"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MissionActivity"/>
-        <activity android:name=".NewProjectActivity"/>
         <activity android:name=".ResultActivity"/>
         <activity android:name=".SettingActivity"/>
         <activity android:name=".SignupActivity"/>

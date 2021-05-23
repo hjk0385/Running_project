@@ -1,4 +1,4 @@
-package com.trainer.courserunner.record;
+package com.trainer.courserunner.runningset;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class ProjectRecordActivity extends ListActivity {
+public class RunningProjectRecordActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
