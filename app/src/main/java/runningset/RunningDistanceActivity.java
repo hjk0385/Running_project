@@ -1,4 +1,4 @@
-package com.trainer.courserunner.settingrun.normal;
+package runningset;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,8 +16,10 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.trainer.courserunner.Application.enumtype.ModeType;
 import com.trainer.courserunner.Application.enumtype.StartType;
 import com.trainer.courserunner.R;
+import com.trainer.courserunner.course.activity.ProjectRunnerActivity;
 import com.trainer.courserunner.course.component.maker.CourseMaker;
 import com.trainer.courserunner.course.component.maker.layer.line.LineConnectLayerDfsCustom;
 import com.trainer.courserunner.course.component.maker.layer.quanzation.QuanzationMininumGuarantee;
@@ -26,20 +28,27 @@ import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSel
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.course.activity.GuideRunnerActivity;
-import com.trainer.courserunner.loader.AssetLoader;
-import com.trainer.courserunner.settingrun.RunningSetting;
 
-public class NormalDistanceActivity extends AppCompatActivity {
+import runningset.RunningSetting;
+
+public class RunningDistanceActivity extends AppCompatActivity {
+    RunningSetting runningSetting;
     Location currentLocation;
+    //
+    Button mBtnKm2;
+    Button mBtnKm4;
+    Button mBtnKm6;
+    Button mBtnKm8;
+    Button mBtnKm10;
 
     View.OnClickListener getMeterBtnListener(double kilometer) {
         return (View view) -> {
-            //테스트코드
             ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
-                    currentLocation.getLatitude(), currentLocation.getLongitude(), kilometer * 1000);
-            RunningSetting runningSetting= (RunningSetting) getIntent().getSerializableExtra("runningSetting");
+                            currentLocation.getLatitude(),
+                            currentLocation.getLongitude(),
+                            kilometer * 1000);
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(),runningSetting.getDrawableId());
-
+            //
             CourseMaker.Builder builder = new CourseMaker.Builder();
             builder.setCourseRegistLayer(new CourseRegistLayerAll());
             builder.setLineConnectLayer(new LineConnectLayerDfsCustom(0.1));
@@ -49,45 +58,69 @@ public class NormalDistanceActivity extends AppCompatActivity {
             builder.setStartLocation(new ScopeDotAddress(scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
             builder.setFinishEvent(this::nextActivity);
             builder.setMarkerSelectionLayer(new MarkerSelectionNone());
+            //
             CourseMaker courseMaker = builder.build();
             courseMaker.runComponent();
         };
-    }
-
-    protected void nextActivity(Object courseId){
-        Intent intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
-        intent.putExtra("courseId", (Long)courseId);
-        intent.putExtra("startType", StartType.NEW);
-        startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distance);
+        //Running Setting
+        runningSetting=(RunningSetting)getIntent().getSerializableExtra("runningSetting");
 
-        //버튼 리스너 등록
-        Button km2_btn = (Button) findViewById(R.id.km2_btn);
-        km2_btn.setOnClickListener(getMeterBtnListener(2));
+        //
+        mBtnKm2 = (Button) findViewById(R.id.km2_btn);
+        mBtnKm4 = (Button) findViewById(R.id.km4_btn);
+        mBtnKm6 = (Button) findViewById(R.id.km6_btn);
+        mBtnKm8 = (Button) findViewById(R.id.km8_btn);
+        mBtnKm10 = (Button) findViewById(R.id.km10_btn);
 
-        Button km4_btn = (Button) findViewById(R.id.km4_btn);
-        km4_btn.setOnClickListener(getMeterBtnListener(4));
 
-        Button km6_btn = (Button) findViewById(R.id.km6_btn);
-        km6_btn.setOnClickListener(getMeterBtnListener(6));
+        //버튼 이름 변경
+        if(runningSetting.getModeType()== ModeType.GUIDERUNNER){
+            mBtnKm2.setText("2km");
+            mBtnKm4.setText("4km");
+            mBtnKm6.setText("6km");
+            mBtnKm8.setText("8km");
+            mBtnKm10.setText("10km");
 
-        Button km8_btn = (Button) findViewById(R.id.km8_btn);
-        km8_btn.setOnClickListener(getMeterBtnListener(8));
+            mBtnKm2.setOnClickListener(getMeterBtnListener(2));
+            mBtnKm4.setOnClickListener(getMeterBtnListener(4));
+            mBtnKm6.setOnClickListener(getMeterBtnListener(6));
+            mBtnKm8.setOnClickListener(getMeterBtnListener(8));
+            mBtnKm10.setOnClickListener(getMeterBtnListener(10));
+        }
+        else if(runningSetting.getModeType()==ModeType.PROJECTRUNNER){
+            mBtnKm2.setText("4km");
+            mBtnKm4.setText("8km");
+            mBtnKm6.setText("12km");
+            mBtnKm8.setText("16km");
+            mBtnKm10.setText("20km");
 
-        Button km10_btn = (Button) findViewById(R.id.km10_btn);
-        km10_btn.setOnClickListener(getMeterBtnListener(10));
+            mBtnKm2.setOnClickListener(getMeterBtnListener(4));
+            mBtnKm4.setOnClickListener(getMeterBtnListener(8));
+            mBtnKm6.setOnClickListener(getMeterBtnListener(12));
+            mBtnKm8.setOnClickListener(getMeterBtnListener(16));
+            mBtnKm10.setOnClickListener(getMeterBtnListener(20));
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
 
+        //위치 불러오기
+        gettingCurruntLocation();
+    }
+
+    private void gettingCurruntLocation(){
         //위치를 가져오기 전까지 비활성화
-        km2_btn.setEnabled(false);
-        km4_btn.setEnabled(false);
-        km6_btn.setEnabled(false);
-        km8_btn.setEnabled(false);
-        km10_btn.setEnabled(false);
+        mBtnKm2.setEnabled(false);
+        mBtnKm4.setEnabled(false);
+        mBtnKm6.setEnabled(false);
+        mBtnKm8.setEnabled(false);
+        mBtnKm10.setEnabled(false);
 
         //현재위치 가져오기
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -96,11 +129,11 @@ public class NormalDistanceActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 // 새로운 위치의 발견
                 currentLocation = location;
-                km2_btn.setEnabled(true);
-                km4_btn.setEnabled(true);
-                km6_btn.setEnabled(true);
-                km8_btn.setEnabled(true);
-                km10_btn.setEnabled(true);
+                mBtnKm2.setEnabled(true);
+                mBtnKm4.setEnabled(true);
+                mBtnKm6.setEnabled(true);
+                mBtnKm8.setEnabled(true);
+                mBtnKm10.setEnabled(true);
             }
 
             @Override
@@ -131,5 +164,24 @@ public class NormalDistanceActivity extends AppCompatActivity {
             return;
         }
         locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, null);
+
+    }
+
+    protected void nextActivity(Object courseId){
+        Intent intent = null;
+        if(runningSetting.getModeType()==ModeType.GUIDERUNNER){
+            intent = new Intent(getBaseContext(), GuideRunnerActivity.class);
+            intent.putExtra("courseId", (Long)courseId);
+            intent.putExtra("startType", StartType.NEW);
+        }
+        else if(runningSetting.getModeType()==ModeType.PROJECTRUNNER){
+            intent = new Intent(getBaseContext(), ProjectRunnerActivity.class);
+            intent.putExtra("courseId", (Long)courseId);
+            intent.putExtra("startType", StartType.NEW);
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
+        startActivity(intent);
     }
 }

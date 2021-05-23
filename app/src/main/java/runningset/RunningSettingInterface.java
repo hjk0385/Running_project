@@ -1,4 +1,4 @@
-package com.trainer.courserunner.settingrun;
+package runningset;
 
 public interface RunningSettingInterface {
     public void nextActivity(RunningSetting runningSetting);

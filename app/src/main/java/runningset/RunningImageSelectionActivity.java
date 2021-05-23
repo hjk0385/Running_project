@@ -1,4 +1,4 @@
-package com.trainer.courserunner.settingrun;
+package runningset;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,48 +13,63 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.trainer.courserunner.R;
-import com.trainer.courserunner.settingrun.normal.NormalDistanceActivity;
 
-public abstract class ImageSelectionActivity extends AppCompatActivity implements RunningSettingInterface {
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
+public abstract class RunningImageSelectionActivity extends AppCompatActivity implements RunningSettingInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_normal_running_image_selection);
+        setContentView(R.layout.activity_running_image_selection);
+
+        RunningSetting runningSetting = (RunningSetting) getIntent().getSerializableExtra("runningSetting");
 
         GridView courseImageView=(GridView)findViewById(R.id.courseImageView);
         courseImageView.setAdapter(new ImageAdapter(this));
         courseImageView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent=getIntent();
-                RunningSetting runningSetting= (RunningSetting) intent.getSerializableExtra("runningSetting");
-                runningSetting.setDrawableId((Integer) adapterView.getAdapter().getItem(i));
-                nextActivity(runningSetting);
+                if (runningSetting != null) {
+                    runningSetting.setDrawableId((Integer) adapterView.getAdapter().getItem(i));
+                    nextActivity(runningSetting);
+                }
+                else{
+                    throw new IllegalArgumentException();
+                }
             }
         });
     }
 
     static class ImageAdapter extends BaseAdapter {
-        private final Integer[] mThumbIds={
-                R.drawable.courseimage_1,
-                R.drawable.courseimage_2,
-                R.drawable.courseimage_3,
-        };
+        private final List<Integer> mThumbIds;
 
         private final Context mContext;
         public ImageAdapter(Context c){
             mContext=c;
+            mThumbIds=new ArrayList<>();
+            Field[] drawablesFields = R.drawable.class.getFields();
+            for(Field field:drawablesFields){
+                try {
+                    String fieldName=field.getName();
+                    if(fieldName.matches("courseimage.*")){
+                        mThumbIds.add(field.getInt(null));
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @Override
         public int getCount() {
-            return mThumbIds.length;
+            return mThumbIds.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return mThumbIds[i];
+            return mThumbIds.get(i);
         }
 
         @Override
@@ -73,7 +88,7 @@ public abstract class ImageSelectionActivity extends AppCompatActivity implement
             }else{
                 imageView=(ImageView)view;
             }
-            imageView.setImageResource(mThumbIds[i]);
+            imageView.setImageResource(mThumbIds.get(i));
             return imageView;
         }
     }

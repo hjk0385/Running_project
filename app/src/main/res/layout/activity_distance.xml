@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settingrun.normal.NormalDistanceActivity">
+    tools:context="runningset.RunningDistanceActivity">
 
     <Button
         android:id="@+id/km2_btn"

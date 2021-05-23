@@ -16,10 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
         <activity android:name=".record.ProjectRecordActivity"></activity>
-        <activity android:name=".settingrun.normal.NormalImageSelectionActivity" />
-        <activity android:name=".settingrun.normal.NormalDistanceActivity" />
+        <activity android:name=".settingrun.normal.NormalRunningImageSelectionActivity" />
+        <activity android:name="runningset.RunningDistanceActivity" />
         <activity android:name=".settingrun.project.ProjectRunningActivity" />
-        <activity android:name=".settingrun.project.ProjectImageSelectionActivity" />
+        <activity android:name=".settingrun.project.ProjectRunningImageSelectionActivity" />
         <activity android:name=".settingrun.project.ProjectDistanceActivity" />
         <activity android:name=".course.activity.ProjectRunnerActivity" />
         <activity android:name=".SettingActivity" />
@@ -31,7 +31,7 @@
         <activity android:name=".UserSetActivity" />
         <activity android:name=".MissionActivity" />
         <activity android:name=".ResultActivity" />
-        <activity android:name=".settingrun.RunningActivity" />
+        <activity android:name="runningset.RunningActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

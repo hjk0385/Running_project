@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.trainer.courserunner.settingrun.RunningActivity;
+import runningset.RunningActivity;
 
 public class MainActivity extends AppCompatActivity {
 
