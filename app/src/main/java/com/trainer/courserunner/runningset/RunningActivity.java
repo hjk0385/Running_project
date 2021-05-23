@@ -1,4 +1,4 @@
-package runningset;
+package com.trainer.courserunner.runningset;
 
 import android.content.Intent;
 import android.os.Bundle;

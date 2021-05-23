@@ -1,20 +1,24 @@
-package runningset;
+package com.trainer.courserunner.runningset;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.trainer.courserunner.Application.enumtype.ModeType;
 import com.trainer.courserunner.Application.enumtype.StartType;
@@ -28,6 +32,8 @@ import com.trainer.courserunner.course.component.maker.layer.regist.CourseRegist
 import com.trainer.courserunner.course.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeMapInfo;
+
+import java.util.Objects;
 
 public class RunningDistanceActivity extends AppCompatActivity {
     RunningSetting runningSetting;
@@ -45,7 +51,7 @@ public class RunningDistanceActivity extends AppCompatActivity {
                     currentLocation.getLatitude(),
                     currentLocation.getLongitude(),
                     kilometer * 1000);
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), runningSetting.getDrawableId());
+            Bitmap bitmap = ((BitmapDrawable) Objects.requireNonNull(ContextCompat.getDrawable(this, runningSetting.getDrawableId()))).getBitmap();
             //
             CourseMaker.Builder builder = new CourseMaker.Builder();
             builder.setCourseRegistLayer(new CourseRegistLayerAll());
@@ -68,7 +74,6 @@ public class RunningDistanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_distance);
         //Running Setting
         runningSetting = (RunningSetting) getIntent().getSerializableExtra("runningSetting");
-
         //
         mBtnKm2 = (Button) findViewById(R.id.km2_btn);
         mBtnKm4 = (Button) findViewById(R.id.km4_btn);

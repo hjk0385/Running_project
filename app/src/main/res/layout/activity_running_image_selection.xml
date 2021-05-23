@@ -7,4 +7,4 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:stretchMode="columnWidth"
-    tools:context="runningset.RunningImageSelectionActivity"></GridView>
+    tools:context=".runningset.RunningImageSelectionActivity"></GridView>

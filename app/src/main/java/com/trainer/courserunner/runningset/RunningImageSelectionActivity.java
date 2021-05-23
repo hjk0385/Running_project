@@ -1,7 +1,9 @@
-package runningset;
+package com.trainer.courserunner.runningset;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,13 +13,14 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.trainer.courserunner.Application.enumtype.ModeType;
 import com.trainer.courserunner.R;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class RunningImageSelectionActivity extends AppCompatActivity implements RunningSettingInterface {
+public class RunningImageSelectionActivity extends AppCompatActivity implements RunningSettingInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,13 @@ public abstract class RunningImageSelectionActivity extends AppCompatActivity im
         });
     }
 
+    @Override
+    public void nextActivity(RunningSetting runningSetting) {
+        Intent intent = new Intent(getApplicationContext(), RunningDistanceActivity.class);
+        intent.putExtra("runningSetting", runningSetting);
+        startActivity(intent);
+    }
+
     static class ImageAdapter extends BaseAdapter {
         private final List<Integer> mThumbIds;
 
@@ -52,7 +62,7 @@ public abstract class RunningImageSelectionActivity extends AppCompatActivity im
             for (Field field : drawablesFields) {
                 try {
                     String fieldName = field.getName();
-                    if (fieldName.matches("courseimage.*")) {
+                    if (fieldName.contains("courseimage")) {
                         mThumbIds.add(field.getInt(null));
                     }
                 } catch (IllegalAccessException e) {

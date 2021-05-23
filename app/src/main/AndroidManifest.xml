@@ -15,24 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
-        <activity android:name=".record.ProjectRecordActivity"></activity>
-        <activity android:name=".settingrun.normal.NormalRunningImageSelectionActivity" />
-        <activity android:name="runningset.RunningDistanceActivity" />
-        <activity android:name=".settingrun.project.ProjectRunningActivity" />
-        <activity android:name=".settingrun.project.ProjectRunningImageSelectionActivity" />
-        <activity android:name=".settingrun.project.ProjectDistanceActivity" />
-        <activity android:name=".course.activity.ProjectRunnerActivity" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".NewProjectActivity" /> <!-- 네이버지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="hzqct6qd8n" /> <!-- 네이버지도 -->
-        <!-- 엑티비티 -->
-        <activity android:name=".UserSetActivity" />
-        <activity android:name=".MissionActivity" />
-        <activity android:name=".ResultActivity" />
-        <activity android:name="runningset.RunningActivity" />
-        <activity android:name=".LoginActivity" />
+            android:value="hzqct6qd8n" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,9 +25,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".course.activity.SketchBookRunnerActivity" />
-        <activity android:name=".course.activity.GuideRunnerActivity" />
+
+        <activity android:name=".map.drawer.NavermapActivity"/>
+        <activity android:name=".map.drawer.NavermapLocationActivity"/>
+        <activity android:name=".record.ProjectRecordActivity"/>
+        <activity android:name=".runningset.RunningActivity"/>
+        <activity android:name=".runningset.RunningImageSelectionActivity"/>
+        <activity android:name=".runningset.RunningDistanceActivity"/>
+        <activity android:name=".course.activity.ProjectRunnerActivity"/>
+        <activity android:name=".course.activity.CourseConductorActivity"/>
+        <activity android:name=".course.activity.GuideRunnerActivity"/>
+        <activity android:name=".course.activity.SketchBookRunnerActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".MissionActivity"/>
+        <activity android:name=".NewProjectActivity"/>
+        <activity android:name=".ResultActivity"/>
+        <activity android:name=".SettingActivity"/>
+        <activity android:name=".SignupActivity"/>
+        <activity android:name=".UserSetActivity"/>
     </application>
 
 </manifest>
