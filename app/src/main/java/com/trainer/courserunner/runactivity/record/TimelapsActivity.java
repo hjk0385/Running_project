@@ -75,6 +75,8 @@ public class TimelapsActivity extends NavermapActivity {
 
         @Override
         protected List<DrawingPath> makeDrawing() {
+            currentNumber=(currentNumber+1)%maxNumber;
+
             Object[] objects= Arrays.stream(userLocationloadRecords).limit(currentNumber).toArray();
             UserCourseRecord[] userLocationRecords = new UserCourseRecord[objects.length];
             for(int i=0;i<objects.length;i++){
