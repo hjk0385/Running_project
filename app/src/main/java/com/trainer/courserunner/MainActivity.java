@@ -10,7 +10,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.trainer.courserunner.runningset.RunningActivity;
+import com.trainer.courserunner.runactivity.record.RecordListActivity;
+import com.trainer.courserunner.runactivity.set.RunningActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         });
         Button imageButton2 = (Button) findViewById((R.id.result_btn));
         imageButton2.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), RecordShowActivity.class);
+            Intent intent = new Intent(getApplicationContext(), RecordListActivity.class);
             startActivity(intent);
         });
         Button imageButton3 = (Button) findViewById((R.id.mission_btn));

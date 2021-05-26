@@ -27,25 +27,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".map.drawer.NavermapActivity"/>
-        <activity android:name=".map.drawer.NavermapLocationActivity"/>
-        <activity android:name=".runningset.RunningProjectRecordActivity"/>
-        <activity android:name=".runningset.RunningActivity"/>
-        <activity android:name=".runningset.RunningImageSelectionActivity"/>
-        <activity android:name=".runningset.RunningDistanceActivity"/>
-        <activity android:name=".course.activity.ProjectRunnerActivity"/>
-        <activity android:name=".course.activity.CourseConductorActivity"/>
-        <activity android:name=".course.activity.GuideRunnerActivity"/>
-        <activity android:name=".course.activity.SketchBookRunnerActivity"/>
-        <activity android:name=".runningset.RunningProject"/>
+        <activity android:name=".Application.mapdrawer.NavermapActivity"/>
+        <activity android:name=".Application.mapdrawer.NavermapLocationActivity"/>
+        <activity android:name=".runactivity.set.RunningProjectRecordActivity"/>
+        <activity android:name=".runactivity.set.RunningActivity"/>
+        <activity android:name=".runactivity.set.RunningImageSelectionActivity"/>
+        <activity android:name=".runactivity.set.RunningDistanceActivity"/>
+        <activity android:name=".runactivity.run.ProjectRunnerActivity"/>
+        <activity android:name=".runactivity.run.CourseConductorActivity"/>
+        <activity android:name=".runactivity.run.GuideRunnerActivity"/>
+        <activity android:name=".runactivity.run.SketchBookRunnerActivity"/>
+        <activity android:name=".runactivity.set.RunningProject"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MissionActivity"/>
         <activity android:name=".ResultActivity"/>
         <activity android:name=".SettingActivity"/>
         <activity android:name=".SignupActivity"/>
         <activity android:name=".UserSetActivity"/>
-        <activity android:name=".course.activity.TimelapsActivity"/>
-        <activity android:name=".RecordShowActivity"/>
+        <activity android:name=".runactivity.record.TimelapsActivity"/>
+        <activity android:name=".runactivity.record.RecordListActivity"/>
     </application>
 
 </manifest>
