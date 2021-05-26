@@ -1,4 +1,4 @@
-package com.trainer.courserunner;
+package com.trainer.courserunner.runningset;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.trainer.courserunner.Application.enumtype.ModeType;
 import com.trainer.courserunner.Application.enumtype.StartType;
+import com.trainer.courserunner.R;
 import com.trainer.courserunner.course.activity.SketchBookRunnerActivity;
 
 public class RunningActivity extends AppCompatActivity {
@@ -18,13 +20,15 @@ public class RunningActivity extends AppCompatActivity {
 
         Button imageButton = (Button) findViewById((R.id.nornal_running_btn));
         imageButton.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), NormalRunningActivity.class);
+            Intent intent = new Intent(getApplicationContext(), RunningImageSelectionActivity.class);
+            intent.putExtra("runningSetting", new RunningSetting(ModeType.GUIDERUNNER));
             startActivity(intent);
         });
 
         Button imageButton1 = (Button) findViewById((R.id.project_running_btn));
         imageButton1.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), ProjectRunningActivity.class);
+            Intent intent = new Intent(getApplicationContext(), RunningProject.class);
+            intent.putExtra("runningSetting", new RunningSetting(ModeType.PROJECTRUNNER));
             startActivity(intent);
         });
 

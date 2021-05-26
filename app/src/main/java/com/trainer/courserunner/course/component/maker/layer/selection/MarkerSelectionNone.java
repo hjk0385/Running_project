@@ -5,7 +5,7 @@ import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.CourseFlag;
 
 //아무 마커도 생성하고 싶지 않은 경우
-public class MarkerSelectionNone implements MarkerSelectionLayer{
+public class MarkerSelectionNone implements MarkerSelectionLayer {
     @Override
     public Long apply(Long courseId) {
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();

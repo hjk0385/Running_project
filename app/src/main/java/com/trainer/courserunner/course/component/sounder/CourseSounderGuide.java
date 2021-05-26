@@ -1,5 +1,9 @@
 package com.trainer.courserunner.course.component.sounder;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.trainer.courserunner.Application.AppFunctionLoader;
 import com.trainer.courserunner.Application.sound.GuideSound;
 import com.trainer.courserunner.Application.sound.VoiceType;
@@ -7,27 +11,27 @@ import com.trainer.courserunner.course.component.CourseComponent;
 import com.trainer.courserunner.rooms.AppDatabase;
 import com.trainer.courserunner.rooms.UserCourseFlagDerived;
 
+import java.util.Objects;
+
 public class CourseSounderGuide extends CourseComponent {
+    Context context;
     Long courseId;
     Long userCoursedId;
     boolean percentFlag25;
     boolean percentFlag50;
     boolean percentFlag75;
     boolean percentFlag100;
-    VoiceType voiceType;
 
-    public CourseSounderGuide(Long courseId, Long userCoursedId) {
+
+    public CourseSounderGuide(Long courseId, Long userCoursedId, Context context) {
         this.courseId = courseId;
         this.userCoursedId = userCoursedId;
+        this.context=context;
 
         percentFlag25 = false;
         percentFlag50 = false;
         percentFlag75 = false;
         percentFlag100 = false;
-    }
-
-    public void setVoiceType(VoiceType voiceType) {
-        this.voiceType = voiceType;
     }
 
     @Override
@@ -42,6 +46,17 @@ public class CourseSounderGuide extends CourseComponent {
             0~12 : 3, 6, 9 ,12
         */
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String voiceTypeData = prefs.getString("sound_list", "여성 목소리");
+        VoiceType voiceType=VoiceType.FEMALE;
+        if (Objects.equals(voiceTypeData, "여성 목소리")) {
+            voiceType=VoiceType.FEMALE;
+        } else if (Objects.equals(voiceTypeData, "남성 목소리")) {
+            voiceType=VoiceType.MALE;
+        } else if (Objects.equals(voiceTypeData, "아이 목소리")) {
+            voiceType=VoiceType.CHILD;
+        }
+
         AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
         int flagCount = appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
         int passedFlagCount = UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId, userCoursedId);
@@ -49,6 +64,7 @@ public class CourseSounderGuide extends CourseComponent {
         if (passedFlagCount == (int) ((double) flagCount * 0.25)) {
             //25%지점
             if (!percentFlag25) {
+                /*
                 //처음으로 지나가는 경우
                 percentFlag25 = true;
                 if (voiceType == VoiceType.MALE) {
@@ -58,12 +74,15 @@ public class CourseSounderGuide extends CourseComponent {
                 } else if (voiceType == VoiceType.CHILD) {
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
+
+                 */
             }
 
         } else if (passedFlagCount == (int) ((double) flagCount * 0.50)) {
             //50%지점
             if (!percentFlag50) {
                 //처음으로 지나가는 경우
+                /*
                 percentFlag50 = true;
                 if (voiceType == VoiceType.MALE) {
                     return new SoundCommandGuide(GuideSound.FINISHMAN);
@@ -72,10 +91,13 @@ public class CourseSounderGuide extends CourseComponent {
                 } else if (voiceType == VoiceType.CHILD) {
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
+
+                 */
             }
         } else if (passedFlagCount == (int) ((double) flagCount * 0.75)) {
             //75%지점
             if (!percentFlag75) {
+                /*
                 //처음으로 지나가는 경우
                 percentFlag75 = true;
                 if (voiceType == VoiceType.MALE) {
@@ -85,6 +107,8 @@ public class CourseSounderGuide extends CourseComponent {
                 } else if (voiceType == VoiceType.CHILD) {
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
+
+                 */
             }
         } else if (passedFlagCount == (int) ((double) flagCount * 1.0)) {
             //100%지점

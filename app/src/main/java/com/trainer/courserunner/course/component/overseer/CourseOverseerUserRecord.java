@@ -39,8 +39,7 @@ public class CourseOverseerUserRecord extends CourseComponent {
         userCourseRecord.userCourseRecordColor = currentLineColor;
         userCourseRecord.userCourseRecordDate = new Date();
 
-        appDatabase.userCourseRecordDao().insertDto(userCourseRecord);
-        return null;
+        return appDatabase.userCourseRecordDao().insertDto(userCourseRecord);
 
     }
 

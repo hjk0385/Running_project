@@ -1,6 +1,5 @@
 package com.trainer.courserunner.course.component.maker.layer.line;
 
-import com.trainer.courserunner.course.component.maker.scopetype.ScopeDot;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.course.component.maker.scopetype.ScopeDotsMap;
 

@@ -26,10 +26,10 @@ public class LineConnectLayerDfsCustom implements LineConnectLayer {
             course.add(currentAddress);
             scopeDotsMap.remove(currentAddress);
 
-            List<ScopeDot> deleteAddresses=new ArrayList<>();
-            for(ScopeDot innerLoopAddress:scopeDotsMap){
-                double cost=innerLoopAddress.getCost(currentAddress);
-                if(cost<costLimit){
+            List<ScopeDot> deleteAddresses = new ArrayList<>();
+            for (ScopeDot innerLoopAddress : scopeDotsMap) {
+                double cost = innerLoopAddress.getCost(currentAddress);
+                if (cost < costLimit) {
                     deleteAddresses.add(innerLoopAddress);
                 }
             }

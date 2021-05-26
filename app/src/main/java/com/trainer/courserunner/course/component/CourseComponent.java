@@ -30,6 +30,10 @@ public abstract class CourseComponent {
         this.finishEventConsumer = finishEventConsumer;
     }
 
+    public Consumer<Object> getFinishEventConsumer() {
+        return finishEventConsumer;
+    }
+
     private class CourseComponentAsyncTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected Object doInBackground(Void... voids) {
