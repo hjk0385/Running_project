@@ -82,7 +82,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="250dp"
-        android:text="결과보기" />
+        android:text="결과보기"
+        android:onClick="onBtnResult"/>
 
     <TextView
         android:id="@+id/BMI"

@@ -1,22 +1,35 @@
 package com.trainer.courserunner;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MissionActivity extends AppCompatActivity {
-    static final String[] LIST_MENU = {"3일 연속 달리기", "프로젝트 하나 성공하기", "총 달린 거리 5Km 이상"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mission);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.activity_list_item, LIST_MENU);
+        final TextView text = findViewById(R.id.text);
+        ListView listView=findViewById(R.id.listview1);
 
-        ListView listView = (ListView) findViewById(R.id.listview1);
-        listView.setAdapter(adapter);
+        List<String> list = new ArrayList<>();
+        list.add("2km 달리기 5회 성공");
+        list.add("프로젝트 달리기 1회 성공");
+        list.add("스케치북 달리기 1회 이상 시도");
+        list.add("SNS 1회 이상 공유하기");
+
+        ArrayAdapter adpater = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+        listView.setAdapter(adpater);
+
     }
 }
