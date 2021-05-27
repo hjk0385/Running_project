@@ -5,11 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.room.Room;
 
-import com.trainer.courserunner.Application.enumtype.ModeType;
+import com.trainer.courserunner.Application.trainertype.ModeType;
 import com.trainer.courserunner.Application.sound.SoundManagerGuide;
-import com.trainer.courserunner.loader.ObbLoader;
-import com.trainer.courserunner.rooms.AppDatabase;
-import com.trainer.courserunner.rooms.CourseMode;
+import com.trainer.courserunner.Application.loader.ObbLoader;
+import com.trainer.courserunner.Application.rooms.AppDatabase;
+import com.trainer.courserunner.Application.rooms.CourseMode;
 
 
 public class AppFunctionLoader extends Application {
@@ -27,7 +27,8 @@ public class AppFunctionLoader extends Application {
     public void onCreate() {
         super.onCreate();
         //앱DB불러오기
-        appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build();
+        //appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build();
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"test.db").allowMainThreadQueries().build();
         //지도DB불러오기
         String[] expansionFiles = ObbLoader.getAPKExpansionFiles(getApplicationContext(), 1, 0);
         String dbLocation = expansionFiles[0];
