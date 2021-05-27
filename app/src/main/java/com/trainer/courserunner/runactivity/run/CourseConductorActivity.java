@@ -33,6 +33,7 @@ public abstract class CourseConductorActivity extends NavermapLocationActivity {
         super.onMapReady(naverMap);
         courseConductor = createCourseConductor();
         naverMap.addOnLocationChangeListener((Location location) -> {
+            //종료시 onlocationchangeListener을 제거해야 한다.
             courseConductor.refreshLocation(location);
         });
     }
