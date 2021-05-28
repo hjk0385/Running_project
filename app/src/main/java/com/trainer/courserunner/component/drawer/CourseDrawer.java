@@ -34,7 +34,7 @@ public abstract class CourseDrawer extends CourseComponent {
 
     abstract protected void drawOverlay(List<DrawingPath> drawing);
 
-    final protected void clearOverlay() {
+    final public void clearOverlay() {
         if (overlayObjs != null) {
             for (Object overlayObj : overlayObjs) {
                 mapDrawer.clearDraw(overlayObj);

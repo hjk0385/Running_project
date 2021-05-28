@@ -27,29 +27,30 @@ public class AppFunctionLoader extends Application {
     public void onCreate() {
         super.onCreate();
         //앱DB불러오기
-        appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build();
-        //appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"test.db").allowMainThreadQueries().build();
+        //appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build();
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"test.db").allowMainThreadQueries().build();
         //지도DB불러오기
         String[] expansionFiles = ObbLoader.getAPKExpansionFiles(getApplicationContext(), 1, 0);
         String dbLocation = expansionFiles[0];
         roadAddressDatabase = SQLiteDatabase.openDatabase(dbLocation, null, SQLiteDatabase.OPEN_READONLY);
 
-        //앱DB미리채우기(디버그용)
-        CourseMode courseMode;
-        courseMode = new CourseMode();
-        courseMode.courseModeId = (long) ModeType.GUIDERUNNER.ordinal();
-        courseMode.courseModeName = ModeType.GUIDERUNNER.name();
-        appDatabase.courseModeDao().insertDto(courseMode);
+        if(AppFunctionLoader.getAppDatabase().courseModeDao().getCourseModeCount()<=0){
+            //앱DB미리채우기
+            CourseMode courseMode;
+            courseMode = new CourseMode();
+            courseMode.courseModeId = (long) ModeType.GUIDERUNNER.ordinal();
+            courseMode.courseModeName = ModeType.GUIDERUNNER.name();
+            appDatabase.courseModeDao().insertDto(courseMode);
 
-        courseMode.courseModeId = (long) ModeType.PROJECTRUNNER.ordinal();
-        courseMode.courseModeName = ModeType.PROJECTRUNNER.name();
-        appDatabase.courseModeDao().insertDto(courseMode);
+            courseMode.courseModeId = (long) ModeType.PROJECTRUNNER.ordinal();
+            courseMode.courseModeName = ModeType.PROJECTRUNNER.name();
+            appDatabase.courseModeDao().insertDto(courseMode);
 
-        courseMode.courseModeId = (long) ModeType.SKETCHBOOK.ordinal();
-        courseMode.courseModeName = ModeType.SKETCHBOOK.name();
-        appDatabase.courseModeDao().insertDto(courseMode);
-        //
-
+            courseMode.courseModeId = (long) ModeType.SKETCHBOOK.ordinal();
+            courseMode.courseModeName = ModeType.SKETCHBOOK.name();
+            appDatabase.courseModeDao().insertDto(courseMode);
+            //
+        }
         //사운드 매니저 초기화
         SoundManagerGuide.initSoundManager(this);
     }

@@ -7,4 +7,7 @@ import androidx.room.Query;
 public interface CourseModeDao extends BaseDao<CourseMode> {
     @Query("SELECT * FROM course_mode WHERE course_mode_name=:course_mode_name")
     CourseMode getCourseMode(String course_mode_name);
+
+    @Query("SELECT COUNT(*) FROM course_mode")
+    long getCourseModeCount();
 }

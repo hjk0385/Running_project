@@ -21,6 +21,11 @@ public abstract class NavermapLocationActivity extends NavermapActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
         naverMap.setLocationSource(locationSource);
