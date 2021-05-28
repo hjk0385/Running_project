@@ -62,7 +62,7 @@ public class SamsungHealthSetting extends AppCompatActivity {
                     }
                 }
             };
-}
+
 
 
     private final HealthDataStore.ConnectionListener mConnectionListener = new HealthDataStore.ConnectionListener() {
