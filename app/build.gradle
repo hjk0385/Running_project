@@ -69,4 +69,6 @@ dependencies {
     implementation 'com.jraska:falcon:2.1.1'
     //miband
     implementation 'com.jellygom:miband-sdk:0.2.1'
+    //galaxy fit
+    implementation name: 'samsung-health-data-1.5.0.aar', ext:'arr'
 }
