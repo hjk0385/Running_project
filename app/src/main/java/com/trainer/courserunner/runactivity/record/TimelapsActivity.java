@@ -23,23 +23,49 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class TimelapsActivity extends NavermapActivity {
-    MapDrawer mapDrawer;
-
     long userCourseId;
     UserCourseRecord[] userLocationloadRecords;
 
-    TimelapsRunner timelapsRunner;
+    MapDrawer mapDrawer;
+    TimelapsDrawer timelapsDrawer;
     ScheduledExecutorService scheduledExecutorService;
 
-    final long defaultMiliseconds=1000;
-    double currentMultiple=1;
+    long refreshMiliseconds=1000;
 
-    private long currentTimelapsMiliseconds(){
-        return (long)((double)defaultMiliseconds*currentMultiple);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_record, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.timelaps_speed_05:
+                refreshMiliseconds=2000;
+                break;
+            case R.id.timelaps_speed_1:
+                refreshMiliseconds=1000;
+                break;
+            case R.id.timelaps_speed_2:
+                refreshMiliseconds=500;
+                break;
+            case R.id.timelaps_speed_3:
+                refreshMiliseconds=300;
+                break;
+            case R.id.timelaps_speed_4:
+                refreshMiliseconds=250;
+                break;
+            default:
+                break;
+        }
+        stopTimelaps();
+        runTimelaps();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -50,7 +76,6 @@ public class TimelapsActivity extends NavermapActivity {
             throw new IllegalArgumentException();
         }
         mapDrawer = this;
-        //
         new TimelapsActivityStarter().execute();
     }
 
@@ -65,47 +90,16 @@ public class TimelapsActivity extends NavermapActivity {
             stopTimelaps();
         }
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutorService.scheduleWithFixedDelay(timelapsRunner, 0, currentTimelapsMiliseconds(), TimeUnit.MILLISECONDS);
+        scheduledExecutorService.scheduleWithFixedDelay(timelapsDrawer, 0, refreshMiliseconds, TimeUnit.MILLISECONDS);
     }
 
     public void stopTimelaps(){
-        timelapsRunner.clearOverlay();
+        timelapsDrawer.clearOverlay();
         scheduledExecutorService.shutdown();
         scheduledExecutorService=null;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_record, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.timelaps_speed_05:
-                currentMultiple=2;
-                break;
-            case R.id.timelaps_speed_1:
-                currentMultiple=1;
-                break;
-            case R.id.timelaps_speed_2:
-                currentMultiple=0.5;
-                break;
-            case R.id.timelaps_speed_3:
-                currentMultiple=0.3;
-                break;
-            case R.id.timelaps_speed_4:
-                currentMultiple=0.25;
-                break;
-            default:
-                break;
-        }
-        stopTimelaps();
-        runTimelaps();
-        return super.onOptionsItemSelected(item);
-    }
 
     class TimelapsActivityStarter extends AsyncTask<Void,Void,Void> {
         @Override
@@ -114,7 +108,7 @@ public class TimelapsActivity extends NavermapActivity {
                     .getAppDatabase()
                     .userCourseRecordDao()
                     .getUserLocationRecords(userCourseId);
-            timelapsRunner=new TimelapsRunner(mapDrawer);
+            timelapsDrawer =new TimelapsDrawer(mapDrawer);
             return null;
         }
 
@@ -125,11 +119,11 @@ public class TimelapsActivity extends NavermapActivity {
         }
     }
 
-    class TimelapsRunner extends CourseDrawerPolyline implements Runnable{
+    class TimelapsDrawer extends CourseDrawerPolyline implements Runnable{
         int currentNumber;
         int maxNumber;
 
-        public TimelapsRunner(MapDrawer mapDrawer) {
+        public TimelapsDrawer(MapDrawer mapDrawer) {
             super(mapDrawer);
             this.maxNumber=userLocationloadRecords.length;
             this.currentNumber=0;
