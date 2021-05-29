@@ -1,6 +1,6 @@
 package com.trainer.courserunner.runactivity.set;
 
-import com.trainer.courserunner.Application.trainertype.ModeType;
+import com.trainer.courserunner.trainertype.ModeType;
 
 import java.io.Serializable;
 

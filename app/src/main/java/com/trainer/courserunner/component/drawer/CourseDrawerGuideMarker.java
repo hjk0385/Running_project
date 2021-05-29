@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.trainer.courserunner.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
-import com.trainer.courserunner.Application.mapdrawer.MapDrawer;
+import com.trainer.courserunner.mapdrawer.MapDrawer;
 import com.trainer.courserunner.Application.rooms.CourseFlag;
 import com.trainer.courserunner.Application.rooms.UserCourseFlagDerived;
 

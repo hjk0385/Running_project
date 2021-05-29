@@ -6,17 +6,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.runactivity.record.TimelapsActivity;
+import com.trainer.courserunner.Application.ApplicationBoot;
 import com.trainer.courserunner.Application.rooms.UserCourse;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class RecordListActivity extends ListActivity {
@@ -42,7 +38,7 @@ public class RecordListActivity extends ListActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            userCourses=AppFunctionLoader.getAppDatabase().userCourseDao().getAllUserCourse();
+            userCourses= ApplicationBoot.getAppDatabase().userCourseDao().getAllUserCourse();
             return null;
         }
 

@@ -1,4 +1,4 @@
-package com.trainer.courserunner.Application.mapdrawer;
+package com.trainer.courserunner.mapdrawer;
 
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
 

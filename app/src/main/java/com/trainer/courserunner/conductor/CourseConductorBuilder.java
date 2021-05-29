@@ -2,10 +2,10 @@ package com.trainer.courserunner.conductor;
 
 import android.content.Context;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.Application.trainertype.ModeType;
-import com.trainer.courserunner.Application.trainertype.StartType;
-import com.trainer.courserunner.Application.mapdrawer.MapDrawer;
+import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.trainertype.ModeType;
+import com.trainer.courserunner.trainertype.StartType;
+import com.trainer.courserunner.mapdrawer.MapDrawer;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.UserCourse;
 
@@ -65,7 +65,7 @@ public class CourseConductorBuilder {
         }
 
         if (startType == StartType.NEW) {
-            AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
+            AppDatabase appDatabase = ApplicationBoot.getAppDatabase();
             UserCourse userCourse = new UserCourse();
             if(modeType==ModeType.SKETCHBOOK){
                 userCourse.courseId=null;

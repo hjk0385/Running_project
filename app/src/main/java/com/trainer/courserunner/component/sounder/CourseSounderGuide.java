@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
+import com.trainer.courserunner.Application.ApplicationBoot;
 import com.trainer.courserunner.Application.sound.GuideSound;
 import com.trainer.courserunner.Application.sound.VoiceType;
 import com.trainer.courserunner.component.CourseComponent;
@@ -57,7 +57,7 @@ public class CourseSounderGuide extends CourseComponent {
             voiceType=VoiceType.CHILD;
         }
 
-        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
+        AppDatabase appDatabase = ApplicationBoot.getAppDatabase();
         int flagCount = appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
         int passedFlagCount = UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId, userCoursedId);
 

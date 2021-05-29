@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.Application.trainertype.ModeType;
-import com.trainer.courserunner.Application.trainertype.StartType;
+import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.trainertype.ModeType;
+import com.trainer.courserunner.trainertype.StartType;
 import com.trainer.courserunner.runactivity.run.ProjectRunnerActivity;
 import com.trainer.courserunner.Application.rooms.UserCourse;
 
@@ -25,7 +25,7 @@ public class RunningProjectRecordActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userCourses = AppFunctionLoader.getAppDatabase().userCourseDao().getUserCourse(ModeType.PROJECTRUNNER.ordinal());
+        userCourses = ApplicationBoot.getAppDatabase().userCourseDao().getUserCourse(ModeType.PROJECTRUNNER.ordinal());
         List<String> datas = Arrays.stream(userCourses).map(new Function<UserCourse, String>() {
             @Override
             public String apply(UserCourse userCourse) {

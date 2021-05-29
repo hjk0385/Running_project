@@ -1,6 +1,6 @@
 package com.trainer.courserunner.component.maker.layer.selection;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
+import com.trainer.courserunner.Application.ApplicationBoot;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.CourseFlag;
 
@@ -13,7 +13,7 @@ public class MarkerSelectionLayerPrecision implements MarkerSelectionLayer {
 
     @Override
     public Long apply(Long courseId) {
-        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
+        AppDatabase appDatabase = ApplicationBoot.getAppDatabase();
         CourseFlag[] courseFlags = appDatabase.courseFlagDao().getCourseFlags(courseId);
         for (CourseFlag courseFlag : courseFlags) {
             if (Math.random() < precision) {

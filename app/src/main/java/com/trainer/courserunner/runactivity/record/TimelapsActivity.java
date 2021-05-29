@@ -8,14 +8,14 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.naver.maps.map.NaverMap;
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.Application.mapdrawer.MapDrawer;
+import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.mapdrawer.MapDrawer;
 import com.trainer.courserunner.Application.rooms.UserCourseRecord;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.component.drawer.CourseDrawerPolyline;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
-import com.trainer.courserunner.Application.mapdrawer.NavermapActivity;
+import com.trainer.courserunner.mapdrawer.NavermapActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,7 +104,7 @@ public class TimelapsActivity extends NavermapActivity {
     class TimelapsActivityStarter extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            userLocationloadRecords=AppFunctionLoader
+            userLocationloadRecords= ApplicationBoot
                     .getAppDatabase()
                     .userCourseRecordDao()
                     .getUserLocationRecords(userCourseId);

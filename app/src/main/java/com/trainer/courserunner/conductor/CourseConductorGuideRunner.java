@@ -7,7 +7,7 @@ import com.trainer.courserunner.component.drawer.CourseDrawer;
 import com.trainer.courserunner.component.drawer.CourseDrawerGuideLine;
 import com.trainer.courserunner.component.drawer.CourseDrawerGuideMarker;
 import com.trainer.courserunner.component.sounder.CourseSounderGuide;
-import com.trainer.courserunner.Application.mapdrawer.MapDrawer;
+import com.trainer.courserunner.mapdrawer.MapDrawer;
 
 public class CourseConductorGuideRunner extends CourseConductorSketchBook {
     Long courseId;

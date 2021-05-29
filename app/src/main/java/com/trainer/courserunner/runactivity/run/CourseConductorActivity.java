@@ -15,11 +15,11 @@ import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.naver.maps.map.NaverMap;
-import com.trainer.courserunner.Application.trainertype.StartType;
+import com.trainer.courserunner.trainertype.StartType;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.conductor.CourseConductor;
 import com.trainer.courserunner.conductor.CourseConductorBuilder;
-import com.trainer.courserunner.Application.mapdrawer.NavermapLocationActivity;
+import com.trainer.courserunner.mapdrawer.NavermapLocationActivity;
 
 
 //이 엑티비티를 사용해서 만든다.

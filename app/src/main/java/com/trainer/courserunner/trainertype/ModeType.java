@@ -1,4 +1,4 @@
-package com.trainer.courserunner.Application.trainertype;
+package com.trainer.courserunner.trainertype;
 
 public enum ModeType {
     SKETCHBOOK,

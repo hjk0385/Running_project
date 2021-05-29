@@ -1,6 +1,6 @@
 package com.trainer.courserunner.component.maker.scopetype;
 
-import com.trainer.courserunner.Application.geo.DistanceConverter;
+import com.trainer.courserunner.geo.DistanceConverter;
 
 public class ScopeMapInfo implements ScopeInfo {
     private final double startLatitude;

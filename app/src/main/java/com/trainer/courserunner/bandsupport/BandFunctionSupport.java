@@ -1,4 +1,4 @@
-package com.trainer.courserunner.Application.bandsupport;
+package com.trainer.courserunner.bandsupport;
 
 public interface BandFunctionSupport extends BaseFunctionSupport{
     /*

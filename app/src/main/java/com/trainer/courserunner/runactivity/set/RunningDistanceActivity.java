@@ -17,8 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.trainer.courserunner.Application.trainertype.ModeType;
-import com.trainer.courserunner.Application.trainertype.StartType;
+import com.trainer.courserunner.trainertype.ModeType;
+import com.trainer.courserunner.trainertype.StartType;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.runactivity.run.GuideRunnerActivity;
 import com.trainer.courserunner.runactivity.run.ProjectRunnerActivity;

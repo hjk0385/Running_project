@@ -1,6 +1,6 @@
 package com.trainer.courserunner.component.maker.layer.regist;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
+import com.trainer.courserunner.Application.ApplicationBoot;
 import com.trainer.courserunner.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.Course;
@@ -11,7 +11,7 @@ import java.util.List;
 public class CourseRegistLayerAll implements CourseRegistLayer {
     @Override
     public Long apply(List<ScopeDotAddress> course) {
-        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
+        AppDatabase appDatabase = ApplicationBoot.getAppDatabase();
         Long courseId = appDatabase.courseDao().insertDto(new Course());
         for (int i = 0; i < course.size(); i++) {
             CourseFlag courseFlag = new CourseFlag();
