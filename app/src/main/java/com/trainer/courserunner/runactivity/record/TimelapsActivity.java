@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.mapdrawer.MapDrawer;
 import com.trainer.courserunner.Application.rooms.UserCourseRecord;
 import com.trainer.courserunner.R;
@@ -104,8 +105,8 @@ public class TimelapsActivity extends NavermapActivity {
     class TimelapsActivityStarter extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            userLocationloadRecords= ApplicationBoot
-                    .getAppDatabase()
+            userLocationloadRecords= AppDatabaseConnector
+                    .getAppDatabaseConnection()
                     .userCourseRecordDao()
                     .getUserLocationRecords(userCourseId);
             timelapsDrawer =new TimelapsDrawer(mapDrawer);

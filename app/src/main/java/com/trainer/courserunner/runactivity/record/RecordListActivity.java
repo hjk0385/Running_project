@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourse;
 
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class RecordListActivity extends ListActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            userCourses= ApplicationBoot.getAppDatabase().userCourseDao().getAllUserCourse();
+            userCourses= AppDatabaseConnector.getAppDatabaseConnection().userCourseDao().getAllUserCourse();
             return null;
         }
 

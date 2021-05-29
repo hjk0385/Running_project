@@ -29,9 +29,6 @@ public class CourseConductorGuideRunner extends CourseConductorSketchBook {
             drawerGuideLine.runComponent();
             drawerGuideMarker.runComponent();
             courseSounderGuide.runComponent();
-
-            courseCapture.setScreenshotName(String.valueOf(o));
-            courseCapture.runComponent();
         });
     }
 }

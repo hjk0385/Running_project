@@ -1,6 +1,7 @@
 package com.trainer.courserunner.Application;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import com.trainer.courserunner.Application.mapdb.RoadAddressConnector;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
@@ -11,7 +12,15 @@ public class ApplicationBoot extends Application {
     public void onCreate() {
         super.onCreate();
         AppDatabaseConnector.initappDatabaseConnection(this);
-        RoadAddressConnector.initConnection();
         SoundManagerGuide.initSoundManager(this);
+        new ApplicationBackgroundBoot().execute();
+    }
+
+    class ApplicationBackgroundBoot extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected Void doInBackground(Void... voids) {
+            RoadAddressConnector.initConnection();
+            return null;
+        }
     }
 }
