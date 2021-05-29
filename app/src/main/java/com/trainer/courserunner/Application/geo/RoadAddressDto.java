@@ -1,15 +1,15 @@
 package com.trainer.courserunner.Application.geo;
 
-public class RoadAddress {
+public class RoadAddressDto {
     private Double longitude;//x
     private Double latitude;//y
 
-    public RoadAddress() {
+    public RoadAddressDto() {
         this.longitude = null;
         this.latitude = null;
     }
 
-    public RoadAddress(Double longitude, Double latitude) {
+    public RoadAddressDto(Double longitude, Double latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }
