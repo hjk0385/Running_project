@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.trainer.courserunner.Application.geo.RoadAddressConnector;
 import com.trainer.courserunner.runactivity.record.RecordListActivity;
 import com.trainer.courserunner.runactivity.set.RunningActivity;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MissionActivity.class);
             startActivity(intent);
         });
+        //test
+        RoadAddressConnector.getConnection();
     }
 
     @Override

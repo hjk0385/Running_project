@@ -1,6 +1,7 @@
 package com.trainer.courserunner.Application.geo;
 
 import android.os.StrictMode;
+import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,6 +21,7 @@ public class RoadAddressConnector {
         if(connection==null) {
             try {
                 connection = DriverManager.getConnection(url, username, password);
+                Log.v("success","asdbasb");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
