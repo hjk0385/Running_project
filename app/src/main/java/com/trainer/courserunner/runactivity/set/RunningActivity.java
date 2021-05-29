@@ -6,10 +6,10 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.trainer.courserunner.trainertype.ModeType;
-import com.trainer.courserunner.trainertype.StartType;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.runactivity.run.SketchBookRunnerActivity;
+import com.trainer.courserunner.trainertype.ModeType;
+import com.trainer.courserunner.trainertype.StartType;
 
 public class RunningActivity extends AppCompatActivity {
 

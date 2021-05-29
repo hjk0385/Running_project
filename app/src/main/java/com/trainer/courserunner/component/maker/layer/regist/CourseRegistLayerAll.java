@@ -1,11 +1,10 @@
 package com.trainer.courserunner.component.maker.layer.regist;
 
-import com.trainer.courserunner.Application.ApplicationBoot;
-import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
-import com.trainer.courserunner.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.Course;
 import com.trainer.courserunner.Application.rooms.CourseFlag;
+import com.trainer.courserunner.component.maker.scopetype.ScopeDotAddress;
 
 import java.util.List;
 

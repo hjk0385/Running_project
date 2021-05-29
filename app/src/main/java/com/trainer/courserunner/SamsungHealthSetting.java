@@ -1,11 +1,11 @@
 package com.trainer.courserunner;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
 import com.samsung.android.sdk.healthdata.HealthConstants;
@@ -22,31 +22,6 @@ public class SamsungHealthSetting extends AppCompatActivity {
     public static final String APP_TAG = "SimpleHealth";
 
     private static SamsungHealthSetting mInstance = null;
-    private HealthDataStore mStore;
-    private HealthConnectionErrorResult mConnError;
-    private Set<HealthPermissionManager.PermissionKey> mKeySet;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_samsung_health_setting);
-
-        mInstance = this;
-        mKeySet = new HashSet<HealthPermissionManager.PermissionKey>();
-        mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
-        // Create a HealthDataStore instance and set its listener
-        mStore = new HealthDataStore(this, mConnectionListener);
-        // Request the connection to the health data store
-        mStore.connectService();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        mStore.disconnectService();
-        super.onDestroy();
-    }
-
     private final HealthResultHolder.ResultListener<HealthPermissionManager.PermissionResult> mPermissionListener =
             new HealthResultHolder.ResultListener<HealthPermissionManager.PermissionResult>() {
 
@@ -62,9 +37,9 @@ public class SamsungHealthSetting extends AppCompatActivity {
                     }
                 }
             };
-
-
-
+    private HealthDataStore mStore;
+    private HealthConnectionErrorResult mConnError;
+    private Set<HealthPermissionManager.PermissionKey> mKeySet;
     private final HealthDataStore.ConnectionListener mConnectionListener = new HealthDataStore.ConnectionListener() {
 
         @Override
@@ -101,6 +76,27 @@ public class SamsungHealthSetting extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_samsung_health_setting);
+
+        mInstance = this;
+        mKeySet = new HashSet<HealthPermissionManager.PermissionKey>();
+        mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
+        // Create a HealthDataStore instance and set its listener
+        mStore = new HealthDataStore(this, mConnectionListener);
+        // Request the connection to the health data store
+        mStore.connectService();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        mStore.disconnectService();
+        super.onDestroy();
+    }
+
     private void showConnectionFailureDialog(HealthConnectionErrorResult error) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -108,7 +104,7 @@ public class SamsungHealthSetting extends AppCompatActivity {
         String message = "Connection with Samsung Health is not available";
 
         if (mConnError.hasResolution()) {
-            switch(error.getErrorCode()) {
+            switch (error.getErrorCode()) {
                 case HealthConnectionErrorResult.PLATFORM_NOT_INSTALLED:
                     message = "Please install Samsung Health";
                     break;

@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-public class GalaxyFitFunctionSupporter extends FunctionSupporter implements BandFunctionSupport{
+public class GalaxyFitFunctionSupporter extends FunctionSupporter implements BandFunctionSupport {
     private final HealthDataStore mStore;
     private final StepCountObserver mStepCountObserver;
 
@@ -34,7 +34,7 @@ public class GalaxyFitFunctionSupporter extends FunctionSupporter implements Ban
         mStepCountObserver = new StepCountObserver() {
             @Override
             public void onChanged(int count) {
-                currentStep=count;
+                currentStep = count;
             }
         };
 

@@ -1,7 +1,7 @@
 package com.trainer.courserunner.component.maker.scopetype;
 
-import com.trainer.courserunner.Application.mapdb.RoadAddressDto;
 import com.trainer.courserunner.Application.mapdb.RoadAddressDao;
+import com.trainer.courserunner.Application.mapdb.RoadAddressDto;
 
 import java.util.List;
 import java.util.stream.Collectors;

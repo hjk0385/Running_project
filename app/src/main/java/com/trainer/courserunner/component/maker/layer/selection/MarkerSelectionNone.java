@@ -1,6 +1,5 @@
 package com.trainer.courserunner.component.maker.layer.selection;
 
-import com.trainer.courserunner.Application.ApplicationBoot;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.CourseFlag;

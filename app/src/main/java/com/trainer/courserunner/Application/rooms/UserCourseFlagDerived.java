@@ -2,7 +2,6 @@ package com.trainer.courserunner.Application.rooms;
 
 import android.util.Log;
 
-import com.trainer.courserunner.Application.ApplicationBoot;
 import com.trainer.courserunner.geo.DistanceConverter;
 
 import java.util.ArrayList;

@@ -1,12 +1,11 @@
 package com.trainer.courserunner.component.drawer;
 
-import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
+import com.trainer.courserunner.Application.rooms.UserCourseRecord;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.mapdrawer.MapDrawer;
-import com.trainer.courserunner.Application.rooms.AppDatabase;
-import com.trainer.courserunner.Application.rooms.UserCourseRecord;
 
 import java.util.ArrayList;
 import java.util.List;

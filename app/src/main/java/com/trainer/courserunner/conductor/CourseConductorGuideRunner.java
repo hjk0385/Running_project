@@ -22,7 +22,7 @@ public class CourseConductorGuideRunner extends CourseConductorSketchBook {
 
         drawerGuideLine = new CourseDrawerGuideLine(mapDrawer, courseId);
         drawerGuideMarker = new CourseDrawerGuideMarker(mapDrawer, courseId, userCourseId);
-        courseSounderGuide = new CourseSounderGuide(courseId, userCourseId,context);
+        courseSounderGuide = new CourseSounderGuide(courseId, userCourseId, context);
 
         overseerUserRecord.setFinishEventConsumer((Object o) -> {
             drawerUserRecord.runComponent();

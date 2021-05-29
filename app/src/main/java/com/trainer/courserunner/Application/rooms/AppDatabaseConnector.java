@@ -8,12 +8,12 @@ import com.trainer.courserunner.trainertype.ModeType;
 
 public class AppDatabaseConnector {
     static private AppDatabase appDatabaseConnection = null;
-    static private String dbName="test.db";
+    static private String dbName = "test.db";
 
-    static public void initappDatabaseConnection(Context applicationContext){
-        appDatabaseConnection = Room.databaseBuilder(applicationContext, AppDatabase.class,dbName).allowMainThreadQueries().build();
+    static public void initappDatabaseConnection(Context applicationContext) {
+        appDatabaseConnection = Room.databaseBuilder(applicationContext, AppDatabase.class, dbName).allowMainThreadQueries().build();
 
-        if(AppDatabaseConnector.getAppDatabaseConnection().courseModeDao().getCourseModeCount()<=0){
+        if (AppDatabaseConnector.getAppDatabaseConnection().courseModeDao().getCourseModeCount() <= 0) {
             //앱DB미리채우기
             CourseMode courseMode;
             courseMode = new CourseMode();
@@ -31,12 +31,8 @@ public class AppDatabaseConnector {
             //
         }
     }
-    static public AppDatabase getAppDatabaseConnection(){
-        if(appDatabaseConnection!=null) {
-            return appDatabaseConnection;
-        }
-        else{
-            throw new IllegalStateException();
-        }
+
+    static public AppDatabase getAppDatabaseConnection() {
+        return appDatabaseConnection;
     }
 }

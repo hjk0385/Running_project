@@ -10,14 +10,14 @@ import com.jellygom.miband_sdk.MiBandIO.Listener.RealtimeStepListener;
 import com.jellygom.miband_sdk.MiBandIO.MibandCallback;
 import com.jellygom.miband_sdk.Miband;
 
-public class MiBandFunctionSupporter extends FunctionSupporter implements BandFunctionSupport{
+public class MiBandFunctionSupporter extends FunctionSupporter implements BandFunctionSupport {
     private final Miband miband;
-    private final MibandCallback mibandCallback=new MibandCallback() {
+    private final MibandCallback mibandCallback = new MibandCallback() {
         @Override
         public void onSuccess(Object data, int status) {
             switch (status) {
                 case MibandCallback.STATUS_SEARCH_DEVICE:
-                    miband.connect((BluetoothDevice)data,this);
+                    miband.connect((BluetoothDevice) data, this);
                     break;
                 case MibandCallback.STATUS_CONNECT:
                     break;
@@ -68,18 +68,18 @@ public class MiBandFunctionSupporter extends FunctionSupporter implements BandFu
         super(context);
         miband = new Miband(context);
 
-        BluetoothAdapter bluetoothAdapter = ((BluetoothManager)context.getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
-        miband.searchDevice(bluetoothAdapter,mibandCallback);
+        BluetoothAdapter bluetoothAdapter = ((BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
+        miband.searchDevice(bluetoothAdapter, mibandCallback);
         miband.setHeartRateScanListener(new HeartrateListener() {
             @Override
             public void onNotify(int heartRate) {
-                currentHeartRate=heartRate;
+                currentHeartRate = heartRate;
             }
         });
         miband.setRealtimeStepListener(new RealtimeStepListener() {
             @Override
             public void onNotify(int steps) {
-                currentStep=steps;
+                currentStep = steps;
             }
         });
     }

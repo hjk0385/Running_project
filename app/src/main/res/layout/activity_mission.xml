@@ -10,12 +10,11 @@
     tools:showIn="@layout/activity_mission">
 
     <TextView
+        android:id="@id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@id/text"
         android:text="이번 달 미션은?"
-        android:textSize="15dp"
-        />
+        android:textSize="15dp" />
 
     <ListView
         android:id="@+id/listview1"

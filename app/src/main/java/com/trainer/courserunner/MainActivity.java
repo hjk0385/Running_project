@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MissionActivity.class);
             startActivity(intent);
         });
-        //test
-        RoadAddressConnector.getConnection();
     }
 
     @Override

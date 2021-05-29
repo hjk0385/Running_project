@@ -16,17 +16,17 @@ public class RunningProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_running);
 
-        Button btnNewProject=findViewById(R.id.new_project);
+        Button btnNewProject = findViewById(R.id.new_project);
         btnNewProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RunningImageSelectionActivity.class);
-                intent.putExtra("runningSetting",getIntent().getSerializableExtra("runningSetting"));
+                intent.putExtra("runningSetting", getIntent().getSerializableExtra("runningSetting"));
                 startActivity(intent);
             }
         });
 
-        Button btnResumeProject=findViewById(R.id.project);
+        Button btnResumeProject = findViewById(R.id.project);
         btnResumeProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

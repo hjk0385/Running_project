@@ -2,13 +2,12 @@ package com.trainer.courserunner.component.drawer;
 
 import android.graphics.Color;
 
-import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
+import com.trainer.courserunner.Application.rooms.CourseFlag;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.mapdrawer.MapDrawer;
-import com.trainer.courserunner.Application.rooms.AppDatabase;
-import com.trainer.courserunner.Application.rooms.CourseFlag;
 
 import java.util.ArrayList;
 import java.util.List;

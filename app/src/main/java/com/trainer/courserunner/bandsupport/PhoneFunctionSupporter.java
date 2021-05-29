@@ -14,15 +14,16 @@ public class PhoneFunctionSupporter extends FunctionSupporter implements BaseFun
 
     public PhoneFunctionSupporter(Context context) {
         super(context);
-        sensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         Sensor sensorStep = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(this, sensorStep,SensorManager.SENSOR_DELAY_GAME);
+        sensorManager.registerListener(this, sensorStep, SensorManager.SENSOR_DELAY_GAME);
         //
-        initStep=-1;
-        currentStep=-1;
+        initStep = -1;
+        currentStep = -1;
     }
-    public void destructor(){
-        if(sensorManager!=null) {
+
+    public void destructor() {
+        if (sensorManager != null) {
             sensorManager.unregisterListener(this);
         }
     }
@@ -34,13 +35,13 @@ public class PhoneFunctionSupporter extends FunctionSupporter implements BaseFun
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if(sensorEvent.sensor.getType()==Sensor.TYPE_STEP_COUNTER){
-            int sensorStep=(int)sensorEvent.values[0];
-            if(initStep==-1||currentStep==-1){
-                initStep=sensorStep;
-                currentStep=0;
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            int sensorStep = (int) sensorEvent.values[0];
+            if (initStep == -1 || currentStep == -1) {
+                initStep = sensorStep;
+                currentStep = 0;
             }
-            currentStep=initStep-sensorStep;
+            currentStep = initStep - sensorStep;
         }
     }
 

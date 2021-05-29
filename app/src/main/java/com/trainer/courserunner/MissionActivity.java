@@ -1,8 +1,6 @@
 package com.trainer.courserunner;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,7 +18,7 @@ public class MissionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mission);
 
         final TextView text = findViewById(R.id.text);
-        ListView listView=findViewById(R.id.listview1);
+        ListView listView = findViewById(R.id.listview1);
 
         List<String> list = new ArrayList<>();
         list.add("2km 달리기 5회 성공");

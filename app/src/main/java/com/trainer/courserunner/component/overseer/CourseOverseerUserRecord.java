@@ -3,12 +3,11 @@ package com.trainer.courserunner.component.overseer;
 import android.graphics.Color;
 import android.location.Location;
 
-import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
+import com.trainer.courserunner.Application.rooms.UserCourseRecord;
 import com.trainer.courserunner.component.CourseComponent;
 import com.trainer.courserunner.geo.DistanceConverter;
-import com.trainer.courserunner.Application.rooms.AppDatabase;
-import com.trainer.courserunner.Application.rooms.UserCourseRecord;
 
 import java.util.Date;
 

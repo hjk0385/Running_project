@@ -4,7 +4,8 @@ import android.content.Context;
 
 public class FunctionSupporter {
     protected Context context;
-    public FunctionSupporter(Context context){
-        this.context=context;
+
+    public FunctionSupporter(Context context) {
+        this.context = context;
     }
 }

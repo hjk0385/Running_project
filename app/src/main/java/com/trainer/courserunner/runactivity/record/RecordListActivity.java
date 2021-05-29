@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.trainer.courserunner.Application.ApplicationBoot;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourse;
 
@@ -31,15 +30,15 @@ public class RecordListActivity extends ListActivity {
         UserCourse userCourse = userCourses[position];
 
         Intent intent = new Intent(getBaseContext(), TimelapsActivity.class);
-        intent.putExtra("userCourseId",userCourse.userCourseId);
+        intent.putExtra("userCourseId", userCourse.userCourseId);
         startActivity(intent);
     }
 
-    class RecordListStarter extends AsyncTask<Void,Void,Void>{
+    class RecordListStarter extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            userCourses= AppDatabaseConnector.getAppDatabaseConnection().userCourseDao().getAllUserCourse();
+            userCourses = AppDatabaseConnector.getAppDatabaseConnection().userCourseDao().getAllUserCourse();
             return null;
         }
 
@@ -48,9 +47,9 @@ public class RecordListActivity extends ListActivity {
             super.onPostExecute(unused);
             List<String> userCourseNameList;
             userCourseNameList = Arrays.stream(userCourses)
-                                        .map(userCourse -> String.valueOf(userCourse.userCourseId))
-                                        .collect(Collectors.toList());
-            ArrayAdapter<String> userCourseAdapter = new ArrayAdapter<>(RecordListActivity.this, android.R.layout.simple_list_item_1,userCourseNameList);
+                    .map(userCourse -> String.valueOf(userCourse.userCourseId))
+                    .collect(Collectors.toList());
+            ArrayAdapter<String> userCourseAdapter = new ArrayAdapter<>(RecordListActivity.this, android.R.layout.simple_list_item_1, userCourseNameList);
             setListAdapter(userCourseAdapter);
         }
     }

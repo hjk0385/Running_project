@@ -17,11 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.trainer.courserunner.trainertype.ModeType;
-import com.trainer.courserunner.trainertype.StartType;
 import com.trainer.courserunner.R;
-import com.trainer.courserunner.runactivity.run.GuideRunnerActivity;
-import com.trainer.courserunner.runactivity.run.ProjectRunnerActivity;
 import com.trainer.courserunner.component.maker.CourseMaker;
 import com.trainer.courserunner.component.maker.layer.line.LineConnectLayerDfsCustom;
 import com.trainer.courserunner.component.maker.layer.quanzation.QuanzationMininumGuarantee;
@@ -29,6 +25,10 @@ import com.trainer.courserunner.component.maker.layer.regist.CourseRegistLayerAl
 import com.trainer.courserunner.component.maker.layer.selection.MarkerSelectionLayerAll;
 import com.trainer.courserunner.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.component.maker.scopetype.ScopeMapInfo;
+import com.trainer.courserunner.runactivity.run.GuideRunnerActivity;
+import com.trainer.courserunner.runactivity.run.ProjectRunnerActivity;
+import com.trainer.courserunner.trainertype.ModeType;
+import com.trainer.courserunner.trainertype.StartType;
 
 import java.util.Objects;
 
