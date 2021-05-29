@@ -13,7 +13,7 @@ import java.util.stream.DoubleStream;
 public class UserCourseFlagDerived {
     static public CourseFlag[] getUnvistedUserCourseFlags(Long courseId, Long userCourseId) {
         //
-        AppDatabase appDatabase = ApplicationBoot.getAppDatabase();
+        AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
         CourseFlag[] courseFlags = appDatabase.courseFlagDao().getCourseMarkerFlags(courseId);
         UserCourseRecord[] userCourseRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCourseId);
         //

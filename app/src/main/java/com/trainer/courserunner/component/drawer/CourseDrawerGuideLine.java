@@ -3,6 +3,7 @@ package com.trainer.courserunner.component.drawer;
 import android.graphics.Color;
 
 import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
 import com.trainer.courserunner.mapdrawer.MapDrawer;
@@ -23,7 +24,7 @@ public class CourseDrawerGuideLine extends CourseDrawerPolyline {
     @Override
     protected List<DrawingPath> makeDrawing() {
         //불러오기
-        AppDatabase appDatabase = ApplicationBoot.getAppDatabase();
+        AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
         CourseFlag[] courseFlags = appDatabase.courseFlagDao().getCourseFlags(courseId);
         //생성
         List<DrawingPath> drawingPathList = new ArrayList<>();

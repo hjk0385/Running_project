@@ -3,6 +3,7 @@ package com.trainer.courserunner.conductor;
 import android.content.Context;
 
 import com.trainer.courserunner.Application.ApplicationBoot;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.trainertype.ModeType;
 import com.trainer.courserunner.trainertype.StartType;
 import com.trainer.courserunner.mapdrawer.MapDrawer;
@@ -65,7 +66,7 @@ public class CourseConductorBuilder {
         }
 
         if (startType == StartType.NEW) {
-            AppDatabase appDatabase = ApplicationBoot.getAppDatabase();
+            AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
             UserCourse userCourse = new UserCourse();
             if(modeType==ModeType.SKETCHBOOK){
                 userCourse.courseId=null;
