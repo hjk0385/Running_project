@@ -26,12 +26,12 @@ public abstract class CourseComponent {
         new CourseComponentAsyncTask().execute();
     }
 
-    public void setFinishEventConsumer(Consumer<Object> finishEventConsumer) {
-        this.finishEventConsumer = finishEventConsumer;
-    }
-
     public Consumer<Object> getFinishEventConsumer() {
         return finishEventConsumer;
+    }
+
+    public void setFinishEventConsumer(Consumer<Object> finishEventConsumer) {
+        this.finishEventConsumer = finishEventConsumer;
     }
 
     private class CourseComponentAsyncTask extends AsyncTask<Void, Void, Object> {

@@ -8,14 +8,14 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.naver.maps.map.NaverMap;
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.Application.mapdrawer.MapDrawer;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourseRecord;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.component.drawer.CourseDrawerPolyline;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
-import com.trainer.courserunner.Application.mapdrawer.NavermapActivity;
+import com.trainer.courserunner.mapdrawer.MapDrawer;
+import com.trainer.courserunner.mapdrawer.NavermapActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +33,7 @@ public class TimelapsActivity extends NavermapActivity {
     TimelapsDrawer timelapsDrawer;
     ScheduledExecutorService scheduledExecutorService;
 
-    long refreshMiliseconds=1000;
+    long refreshMiliseconds = 1000;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,21 +44,28 @@ public class TimelapsActivity extends NavermapActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        if(item.getItemId()==R.id.timelaps_all){
+            stopTimelaps();
+            timelapsDrawer.currentNumber=timelapsDrawer.maxNumber-2;
+            timelapsDrawer.run();
+            return super.onOptionsItemSelected(item);
+        }
+
+        switch (item.getItemId()) {
             case R.id.timelaps_speed_05:
-                refreshMiliseconds=2000;
+                refreshMiliseconds = 2000;
                 break;
             case R.id.timelaps_speed_1:
-                refreshMiliseconds=1000;
+                refreshMiliseconds = 1000;
                 break;
             case R.id.timelaps_speed_2:
-                refreshMiliseconds=500;
+                refreshMiliseconds = 500;
                 break;
             case R.id.timelaps_speed_3:
-                refreshMiliseconds=300;
+                refreshMiliseconds = 300;
                 break;
             case R.id.timelaps_speed_4:
-                refreshMiliseconds=250;
+                refreshMiliseconds = 250;
                 break;
             default:
                 break;
@@ -71,8 +78,8 @@ public class TimelapsActivity extends NavermapActivity {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         super.onMapReady(naverMap);
-        userCourseId=getIntent().getLongExtra("userCourseId",-1);
-        if(userCourseId==-1){
+        userCourseId = getIntent().getLongExtra("userCourseId", -1);
+        if (userCourseId == -1) {
             throw new IllegalArgumentException();
         }
         mapDrawer = this;
@@ -85,30 +92,31 @@ public class TimelapsActivity extends NavermapActivity {
         stopTimelaps();
     }
 
-    public void runTimelaps(){
-        if(scheduledExecutorService!=null){
+    public void runTimelaps() {
+        if (scheduledExecutorService != null) {
             stopTimelaps();
         }
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         scheduledExecutorService.scheduleWithFixedDelay(timelapsDrawer, 0, refreshMiliseconds, TimeUnit.MILLISECONDS);
     }
 
-    public void stopTimelaps(){
+    public void stopTimelaps() {
         timelapsDrawer.clearOverlay();
-        scheduledExecutorService.shutdown();
-        scheduledExecutorService=null;
+        if(scheduledExecutorService!=null) {
+            scheduledExecutorService.shutdown();
+        }
+        scheduledExecutorService = null;
     }
 
 
-
-    class TimelapsActivityStarter extends AsyncTask<Void,Void,Void> {
+    class TimelapsActivityStarter extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            userLocationloadRecords=AppFunctionLoader
-                    .getAppDatabase()
+            userLocationloadRecords = AppDatabaseConnector
+                    .getAppDatabaseConnection()
                     .userCourseRecordDao()
                     .getUserLocationRecords(userCourseId);
-            timelapsDrawer =new TimelapsDrawer(mapDrawer);
+            timelapsDrawer = new TimelapsDrawer(mapDrawer);
             return null;
         }
 
@@ -119,24 +127,24 @@ public class TimelapsActivity extends NavermapActivity {
         }
     }
 
-    class TimelapsDrawer extends CourseDrawerPolyline implements Runnable{
+    class TimelapsDrawer extends CourseDrawerPolyline implements Runnable {
         int currentNumber;
         int maxNumber;
 
         public TimelapsDrawer(MapDrawer mapDrawer) {
             super(mapDrawer);
-            this.maxNumber=userLocationloadRecords.length;
-            this.currentNumber=0;
+            this.maxNumber = userLocationloadRecords.length;
+            this.currentNumber = 0;
         }
 
         @Override
         protected List<DrawingPath> makeDrawing() {
-            currentNumber=(currentNumber+1)%maxNumber;
+            currentNumber = (currentNumber + 1) % maxNumber;
 
-            Object[] objects= Arrays.stream(userLocationloadRecords).limit(currentNumber).toArray();
+            Object[] objects = Arrays.stream(userLocationloadRecords).limit(currentNumber).toArray();
             UserCourseRecord[] userLocationRecords = new UserCourseRecord[objects.length];
-            for(int i=0;i<objects.length;i++){
-                userLocationRecords[i]=(UserCourseRecord) objects[i];
+            for (int i = 0; i < objects.length; i++) {
+                userLocationRecords[i] = (UserCourseRecord) objects[i];
             }
 
             //생성

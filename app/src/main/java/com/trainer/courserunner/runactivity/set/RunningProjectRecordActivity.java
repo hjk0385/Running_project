@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.Application.trainertype.ModeType;
-import com.trainer.courserunner.Application.trainertype.StartType;
-import com.trainer.courserunner.runactivity.run.ProjectRunnerActivity;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourse;
+import com.trainer.courserunner.runactivity.run.ProjectRunnerActivity;
+import com.trainer.courserunner.trainertype.ModeType;
+import com.trainer.courserunner.trainertype.StartType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +25,7 @@ public class RunningProjectRecordActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userCourses = AppFunctionLoader.getAppDatabase().userCourseDao().getUserCourse(ModeType.PROJECTRUNNER.ordinal());
+        userCourses = AppDatabaseConnector.getAppDatabaseConnection().userCourseDao().getUserCourse(ModeType.PROJECTRUNNER.ordinal());
         List<String> datas = Arrays.stream(userCourses).map(new Function<UserCourse, String>() {
             @Override
             public String apply(UserCourse userCourse) {
@@ -40,12 +40,12 @@ public class RunningProjectRecordActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        UserCourse selectUserCourse=userCourses[position];
+        UserCourse selectUserCourse = userCourses[position];
         //
         Intent intent = new Intent(getBaseContext(), ProjectRunnerActivity.class);
-        intent.putExtra("startType",StartType.RESUME);
-        intent.putExtra("userCourseId",selectUserCourse.userCourseId);
-        intent.putExtra("courseId",selectUserCourse.courseId);
+        intent.putExtra("startType", StartType.RESUME);
+        intent.putExtra("userCourseId", selectUserCourse.userCourseId);
+        intent.putExtra("courseId", selectUserCourse.courseId);
         Log.v("selectUserCourse", String.valueOf(selectUserCourse.userCourseId));
         Log.v("selectUserCourse", String.valueOf(selectUserCourse.courseId));
         Log.v("CourseId", String.valueOf(intent.getLongExtra("courseId", -1)));

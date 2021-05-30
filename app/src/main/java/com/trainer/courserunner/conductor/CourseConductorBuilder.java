@@ -2,12 +2,12 @@ package com.trainer.courserunner.conductor;
 
 import android.content.Context;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.Application.trainertype.ModeType;
-import com.trainer.courserunner.Application.trainertype.StartType;
-import com.trainer.courserunner.Application.mapdrawer.MapDrawer;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourse;
+import com.trainer.courserunner.mapdrawer.MapDrawer;
+import com.trainer.courserunner.trainertype.ModeType;
+import com.trainer.courserunner.trainertype.StartType;
 
 public class CourseConductorBuilder {
     boolean usedBuilder;
@@ -65,12 +65,11 @@ public class CourseConductorBuilder {
         }
 
         if (startType == StartType.NEW) {
-            AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
+            AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
             UserCourse userCourse = new UserCourse();
-            if(modeType==ModeType.SKETCHBOOK){
-                userCourse.courseId=null;
-            }
-            else{
+            if (modeType == ModeType.SKETCHBOOK) {
+                userCourse.courseId = null;
+            } else {
                 userCourse.courseId = courseId;
             }
             userCourse.userCourseId = null;

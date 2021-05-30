@@ -3,11 +3,11 @@ package com.trainer.courserunner.component.overseer;
 import android.graphics.Color;
 import android.location.Location;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.component.CourseComponent;
-import com.trainer.courserunner.Application.geo.DistanceConverter;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourseRecord;
+import com.trainer.courserunner.component.CourseComponent;
+import com.trainer.courserunner.geo.DistanceConverter;
 
 import java.util.Date;
 
@@ -29,7 +29,7 @@ public class CourseOverseerUserRecord extends CourseComponent {
     @Override
     protected Object runInWorkThread() {
 
-        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
+        AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
 
         UserCourseRecord userCourseRecord = new UserCourseRecord();
         userCourseRecord.userCourseId = usercourseId;

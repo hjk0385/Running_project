@@ -6,17 +6,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
-import com.trainer.courserunner.runactivity.record.TimelapsActivity;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourse;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class RecordListActivity extends ListActivity {
@@ -34,15 +30,15 @@ public class RecordListActivity extends ListActivity {
         UserCourse userCourse = userCourses[position];
 
         Intent intent = new Intent(getBaseContext(), TimelapsActivity.class);
-        intent.putExtra("userCourseId",userCourse.userCourseId);
+        intent.putExtra("userCourseId", userCourse.userCourseId);
         startActivity(intent);
     }
 
-    class RecordListStarter extends AsyncTask<Void,Void,Void>{
+    class RecordListStarter extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            userCourses=AppFunctionLoader.getAppDatabase().userCourseDao().getAllUserCourse();
+            userCourses = AppDatabaseConnector.getAppDatabaseConnection().userCourseDao().getAllUserCourse();
             return null;
         }
 
@@ -51,9 +47,9 @@ public class RecordListActivity extends ListActivity {
             super.onPostExecute(unused);
             List<String> userCourseNameList;
             userCourseNameList = Arrays.stream(userCourses)
-                                        .map(userCourse -> String.valueOf(userCourse.userCourseId))
-                                        .collect(Collectors.toList());
-            ArrayAdapter<String> userCourseAdapter = new ArrayAdapter<>(RecordListActivity.this, android.R.layout.simple_list_item_1,userCourseNameList);
+                    .map(userCourse -> String.valueOf(userCourse.userCourseId))
+                    .collect(Collectors.toList());
+            ArrayAdapter<String> userCourseAdapter = new ArrayAdapter<>(RecordListActivity.this, android.R.layout.simple_list_item_1, userCourseNameList);
             setListAdapter(userCourseAdapter);
         }
     }

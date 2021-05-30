@@ -6,6 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="left"
-    android:stretchMode="columnWidth"
     android:orientation="horizontal"
+    android:stretchMode="columnWidth"
     tools:context=".runactivity.set.RunningImageSelectionActivity"></GridView>

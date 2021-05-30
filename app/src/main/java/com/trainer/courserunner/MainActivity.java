@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.trainer.courserunner.Application.mapdb.RoadAddressConnector;
 import com.trainer.courserunner.runactivity.record.RecordListActivity;
 import com.trainer.courserunner.runactivity.set.RunningActivity;
 

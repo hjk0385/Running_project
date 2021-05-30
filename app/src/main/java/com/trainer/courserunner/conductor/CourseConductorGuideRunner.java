@@ -7,7 +7,7 @@ import com.trainer.courserunner.component.drawer.CourseDrawer;
 import com.trainer.courserunner.component.drawer.CourseDrawerGuideLine;
 import com.trainer.courserunner.component.drawer.CourseDrawerGuideMarker;
 import com.trainer.courserunner.component.sounder.CourseSounderGuide;
-import com.trainer.courserunner.Application.mapdrawer.MapDrawer;
+import com.trainer.courserunner.mapdrawer.MapDrawer;
 
 public class CourseConductorGuideRunner extends CourseConductorSketchBook {
     Long courseId;
@@ -22,16 +22,13 @@ public class CourseConductorGuideRunner extends CourseConductorSketchBook {
 
         drawerGuideLine = new CourseDrawerGuideLine(mapDrawer, courseId);
         drawerGuideMarker = new CourseDrawerGuideMarker(mapDrawer, courseId, userCourseId);
-        courseSounderGuide = new CourseSounderGuide(courseId, userCourseId,context);
+        courseSounderGuide = new CourseSounderGuide(courseId, userCourseId, context);
 
         overseerUserRecord.setFinishEventConsumer((Object o) -> {
             drawerUserRecord.runComponent();
             drawerGuideLine.runComponent();
             drawerGuideMarker.runComponent();
             courseSounderGuide.runComponent();
-
-            courseCapture.setScreenshotName(String.valueOf(o));
-            courseCapture.runComponent();
         });
     }
 }

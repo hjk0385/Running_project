@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.trainer.courserunner.Application.AppFunctionLoader;
+import com.trainer.courserunner.Application.rooms.AppDatabase;
+import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
+import com.trainer.courserunner.Application.rooms.UserCourseFlagDerived;
 import com.trainer.courserunner.Application.sound.GuideSound;
 import com.trainer.courserunner.Application.sound.VoiceType;
 import com.trainer.courserunner.component.CourseComponent;
-import com.trainer.courserunner.Application.rooms.AppDatabase;
-import com.trainer.courserunner.Application.rooms.UserCourseFlagDerived;
 
 import java.util.Objects;
 
@@ -26,7 +26,7 @@ public class CourseSounderGuide extends CourseComponent {
     public CourseSounderGuide(Long courseId, Long userCoursedId, Context context) {
         this.courseId = courseId;
         this.userCoursedId = userCoursedId;
-        this.context=context;
+        this.context = context;
 
         percentFlag25 = false;
         percentFlag50 = false;
@@ -48,16 +48,16 @@ public class CourseSounderGuide extends CourseComponent {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String voiceTypeData = prefs.getString("sound_list", "여성 목소리");
-        VoiceType voiceType=VoiceType.FEMALE;
+        VoiceType voiceType = VoiceType.FEMALE;
         if (Objects.equals(voiceTypeData, "여성 목소리")) {
-            voiceType=VoiceType.FEMALE;
+            voiceType = VoiceType.FEMALE;
         } else if (Objects.equals(voiceTypeData, "남성 목소리")) {
-            voiceType=VoiceType.MALE;
+            voiceType = VoiceType.MALE;
         } else if (Objects.equals(voiceTypeData, "아이 목소리")) {
-            voiceType=VoiceType.CHILD;
+            voiceType = VoiceType.CHILD;
         }
 
-        AppDatabase appDatabase = AppFunctionLoader.getAppDatabase();
+        AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
         int flagCount = appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
         int passedFlagCount = UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId, userCoursedId);
 

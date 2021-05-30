@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 
-import com.trainer.courserunner.Application.mapdrawer.MapDrawer;
+import com.trainer.courserunner.mapdrawer.MapDrawer;
 
 public abstract class CourseConductor {
     //정보

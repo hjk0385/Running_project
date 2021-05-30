@@ -1,4 +1,4 @@
-package com.trainer.courserunner.Application.geo;
+package com.trainer.courserunner.geo;
 
 public class DistanceConverter {
     // result = m
