@@ -44,6 +44,13 @@ public class TimelapsActivity extends NavermapActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.timelaps_all){
+            stopTimelaps();
+            timelapsDrawer.currentNumber=timelapsDrawer.maxNumber-2;
+            timelapsDrawer.run();
+            return super.onOptionsItemSelected(item);
+        }
+
         switch (item.getItemId()) {
             case R.id.timelaps_speed_05:
                 refreshMiliseconds = 2000;
@@ -95,7 +102,9 @@ public class TimelapsActivity extends NavermapActivity {
 
     public void stopTimelaps() {
         timelapsDrawer.clearOverlay();
-        scheduledExecutorService.shutdown();
+        if(scheduledExecutorService!=null) {
+            scheduledExecutorService.shutdown();
+        }
         scheduledExecutorService = null;
     }
 
