@@ -27,6 +27,7 @@ public class RunningImageSelectionActivity extends AppCompatActivity implements 
         RunningSetting runningSetting = (RunningSetting) getIntent().getSerializableExtra("runningSetting");
 
         GridView courseImageView = (GridView) findViewById(R.id.courseImageView);
+        courseImageView.setNumColumns(3);
         courseImageView.setAdapter(new ImageAdapter(this));
         courseImageView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

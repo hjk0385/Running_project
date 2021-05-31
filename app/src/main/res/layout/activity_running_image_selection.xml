@@ -8,4 +8,4 @@
     android:gravity="left"
     android:orientation="horizontal"
     android:stretchMode="columnWidth"
-    tools:context=".runactivity.set.RunningImageSelectionActivity"></GridView>
+    tools:context=".runactivity.set.RunningImageSelectionActivity" />
