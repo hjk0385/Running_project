@@ -7,6 +7,8 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourseRecord;
@@ -123,9 +125,13 @@ public class TimelapsActivity extends NavermapActivity {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
+            if(userLocationloadRecords.length>0){
+                naverMap.moveCamera(CameraUpdate.scrollTo(new LatLng(userLocationloadRecords[0].userCourseRecordLatitude,userLocationloadRecords[0].userCourseRecordLongitude)));
+            }
             runTimelaps();
         }
     }
+
 
     class TimelapsDrawer extends CourseDrawerPolyline implements Runnable {
         int currentNumber;
