@@ -18,7 +18,7 @@ import com.naver.maps.map.NaverMap;
 import com.trainer.courserunner.R;
 import com.trainer.courserunner.conductor.CourseConductor;
 import com.trainer.courserunner.conductor.CourseConductorBuilder;
-import com.trainer.courserunner.mapdrawer.NavermapLocationActivity;
+import com.trainer.courserunner.runactivity.papermap.NavermapLocationActivity;
 import com.trainer.courserunner.trainertype.StartType;
 
 

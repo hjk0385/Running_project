@@ -16,8 +16,8 @@ import com.trainer.courserunner.R;
 import com.trainer.courserunner.component.drawer.CourseDrawerPolyline;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingAddress;
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
-import com.trainer.courserunner.mapdrawer.MapDrawer;
-import com.trainer.courserunner.mapdrawer.NavermapActivity;
+import com.trainer.courserunner.runactivity.papermap.MapDrawer;
+import com.trainer.courserunner.runactivity.papermap.NavermapActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;

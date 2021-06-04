@@ -5,7 +5,7 @@ import android.content.Context;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourse;
-import com.trainer.courserunner.mapdrawer.MapDrawer;
+import com.trainer.courserunner.runactivity.papermap.MapDrawer;
 import com.trainer.courserunner.trainertype.ModeType;
 import com.trainer.courserunner.trainertype.StartType;
 

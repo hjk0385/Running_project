@@ -5,7 +5,7 @@ import android.location.Location;
 
 import com.trainer.courserunner.component.drawer.CourseDrawerUserRecord;
 import com.trainer.courserunner.component.overseer.CourseOverseerUserRecord;
-import com.trainer.courserunner.mapdrawer.MapDrawer;
+import com.trainer.courserunner.runactivity.papermap.MapDrawer;
 
 public class CourseConductorSketchBook extends CourseConductor {
     //컴포넌트

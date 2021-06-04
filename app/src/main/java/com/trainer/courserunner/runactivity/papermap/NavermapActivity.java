@@ -1,4 +1,4 @@
-package com.trainer.courserunner.mapdrawer;
+package com.trainer.courserunner.runactivity.papermap;
 
 import android.os.Bundle;
 

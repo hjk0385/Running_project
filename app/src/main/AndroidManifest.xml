@@ -26,8 +26,8 @@
         </activity>
         <activity android:name=".SamsungHealthSetting" />
         <activity android:name=".MainActivity"/>
-        <activity android:name=".mapdrawer.NavermapActivity" />
-        <activity android:name=".mapdrawer.NavermapLocationActivity" />
+        <activity android:name=".runactivity.papermap.NavermapActivity" />
+        <activity android:name=".runactivity.papermap.NavermapLocationActivity" />
         <activity android:name=".runactivity.set.RunningProjectRecordActivity" />
         <activity android:name=".runactivity.set.RunningActivity" />
         <activity android:name=".runactivity.set.RunningImageSelectionActivity" />

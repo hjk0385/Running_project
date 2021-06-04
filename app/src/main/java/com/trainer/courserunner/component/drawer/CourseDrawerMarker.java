@@ -1,7 +1,7 @@
 package com.trainer.courserunner.component.drawer;
 
 import com.trainer.courserunner.component.drawer.drawtype.DrawingPath;
-import com.trainer.courserunner.mapdrawer.MapDrawer;
+import com.trainer.courserunner.runactivity.papermap.MapDrawer;
 
 import java.util.List;
 
