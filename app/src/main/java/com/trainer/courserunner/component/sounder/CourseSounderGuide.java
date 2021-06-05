@@ -1,6 +1,7 @@
 package com.trainer.courserunner.component.sounder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -9,9 +10,12 @@ import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourseFlagDerived;
 import com.trainer.courserunner.Application.sound.GuideSound;
 import com.trainer.courserunner.Application.sound.VoiceType;
+import com.trainer.courserunner.ExerciseResultsActivity;
 import com.trainer.courserunner.component.CourseComponent;
 
 import java.util.Objects;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class CourseSounderGuide extends CourseComponent {
     Context context;
@@ -120,6 +124,7 @@ public class CourseSounderGuide extends CourseComponent {
                 } else if (voiceType == VoiceType.FEMALE) {
                     return new SoundCommandGuide(GuideSound.FINISHWOMAN);
                 } else if (voiceType == VoiceType.CHILD) {
+
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
             }
@@ -131,6 +136,9 @@ public class CourseSounderGuide extends CourseComponent {
         super.runInUiThread(object);
         if (object != null) {
             ((SoundCommand) object).execute();
+            Intent intent = new Intent(context, ExerciseResultsActivity.class);
+            context.startActivities(new Intent[]{intent});
         }
     }
+
 }
