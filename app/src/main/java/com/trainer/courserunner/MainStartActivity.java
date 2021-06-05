@@ -1,5 +1,6 @@
 package com.trainer.courserunner;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -23,11 +24,16 @@ public class MainStartActivity extends AppCompatActivity {
     private Button mBtnLoad;
     private Button mBtnExerciseInfo;
     private Button mBtnMission;
+    private Boolean isLogin;
+
+    private int REQUEST_LOGIN=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_start);
+
+        isLogin=false;
 
         mBtnLoginLogout=findViewById(R.id.btn_loginlogout);
         mBtnNewStart=findViewById(R.id.btn_newstart);
@@ -39,7 +45,14 @@ public class MainStartActivity extends AppCompatActivity {
         mBtnLoginLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                if(!isLogin) {
+                    Intent intent=new Intent(MainStartActivity.this,LoginActivity.class);
+                    startActivityForResult(intent,REQUEST_LOGIN);
+                }
+                else{
+                    isLogin=false;
+                }
+                updateLoginLogoutText();
             }
         });
 
@@ -76,6 +89,27 @@ public class MainStartActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),MissionActivity.class));
             }
         });
+        updateLoginLogoutText();
+    }
+
+    void updateLoginLogoutText(){
+        if(isLogin==true){
+            mBtnLoginLogout.setText("로그아웃");
+        }
+        else{
+            mBtnLoginLogout.setText("로그인");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_LOGIN){
+            if(resultCode==RESULT_OK) {
+                isLogin = true;
+            }
+        }
+        updateLoginLogoutText();
     }
 
     @Override

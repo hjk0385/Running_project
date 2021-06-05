@@ -61,8 +61,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    Intent intent = new Intent();
+                    intent.putExtra("result",true);
+                    setResult(RESULT_OK,intent);
                     finish();
                 } else {
                 }
