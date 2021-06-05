@@ -58,8 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:background="@drawable/shape_main_btn">
+        android:orientation="horizontal">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -100,13 +99,13 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:padding="0dp"
-        android:background="@drawable/shape_main_btn">
+        android:padding="0dp">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/shape_main_btn">
 
             <Button
                 android:id="@+id/btn_exersicecal"
