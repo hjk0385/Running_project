@@ -75,21 +75,21 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_setting"
+            android:id="@+id/btn_exersicecal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:text="설정"
+            android:text="운동정보"
             android:textColor="@color/black"/>
 
         <Button
-            android:id="@+id/btn_empty"
+            android:id="@+id/btn_mission"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:text="없음"
+            android:text="Misson"
             android:textColor="@color/black" />
     </LinearLayout>
 
