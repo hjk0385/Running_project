@@ -4,7 +4,7 @@ import com.trainer.courserunner.geo.DistanceConverter;
 
 public class UserCourseAnalyzer {
     //m기준
-    public double getDistance(long userCourseId){
+    static public double getDistance(long userCourseId){
         UserCourseDetail[] userCourseDetails= AppDatabaseConnector.getAppDatabaseConnection()
                 .userCourseDetailDao()
                 .getUserCourseDetailWhereUserCourseIdOrder(userCourseId);
