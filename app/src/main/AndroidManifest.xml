@@ -14,18 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CourseRunner">
+        <activity android:name=".MainStartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="hzqct6qd8n" />
 
         <activity android:name=".PrepareActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".SamsungHealthSetting" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".runactivity.papermap.NavermapActivity" />
         <activity android:name=".runactivity.papermap.NavermapLocationActivity" />
         <activity android:name=".runactivity.set.RunningProjectRecordActivity" />

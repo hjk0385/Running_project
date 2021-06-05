@@ -29,7 +29,7 @@ public class RunningProjectRecordActivity extends ListActivity {
         List<String> datas = Arrays.stream(userCourses).map(new Function<UserCourse, String>() {
             @Override
             public String apply(UserCourse userCourse) {
-                return String.valueOf(userCourse.userCourseId);
+                return ModeType.PROJECTRUNNER.name() + "-" + String.valueOf(userCourse.userCourseId);
             }
         }).collect(Collectors.toList());
 

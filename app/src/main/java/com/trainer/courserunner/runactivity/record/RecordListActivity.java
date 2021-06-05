@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourse;
+import com.trainer.courserunner.trainertype.ModeType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +48,20 @@ public class RecordListActivity extends ListActivity {
             super.onPostExecute(unused);
             List<String> userCourseNameList;
             userCourseNameList = Arrays.stream(userCourses)
-                    .map(userCourse -> String.valueOf(userCourse.userCourseId))
+                    .map(userCourse -> {
+                        String typeName="None";
+                        if(userCourse.courseModeId == ModeType.GUIDERUNNER.ordinal()){
+                            typeName=ModeType.GUIDERUNNER.name();
+                        }
+                        else if(userCourse.courseModeId == ModeType.PROJECTRUNNER.ordinal()){
+                            typeName=ModeType.PROJECTRUNNER.name();
+                        }
+                        else if(userCourse.courseModeId == ModeType.SKETCHBOOK.ordinal()){
+                            typeName=ModeType.SKETCHBOOK.name();
+                        }
+                        typeName+="-";
+                        return typeName+String.valueOf(userCourse.userCourseId);
+                    })
                     .collect(Collectors.toList());
             ArrayAdapter<String> userCourseAdapter = new ArrayAdapter<>(RecordListActivity.this, android.R.layout.simple_list_item_1, userCourseNameList);
             setListAdapter(userCourseAdapter);
