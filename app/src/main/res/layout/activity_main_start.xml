@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainStartActivity" >
+    tools:context=".MainStartActivity"
+    >
 
     <ImageView
         android:id="@+id/imageView7"
@@ -19,14 +20,21 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_loginlogout"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="로그인/로그아웃"
-            android:textColor="@color/black"
-            android:background="@drawable/shape_main_btn"/>
+            android:background="@drawable/shape_main_btn">
+
+            <Button
+                android:id="@+id/btn_loginlogout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#B7F2FF"
+                android:text="로그인/로그아웃"
+                android:textColor="@color/black" />
+        </FrameLayout>
 
         <Button
             android:id="@+id/btn_userlog"
@@ -36,6 +44,13 @@
             android:backgroundTint="#B7F2FF"
             android:text="기록확인"
             android:textColor="@color/black" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </FrameLayout>
 
     </LinearLayout>
 
