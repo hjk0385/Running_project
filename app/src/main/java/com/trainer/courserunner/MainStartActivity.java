@@ -67,7 +67,7 @@ public class MainStartActivity extends AppCompatActivity {
         mBtnExerciseInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),ExerciseResultsActivity.class));
+                startActivity(new Intent(getApplicationContext(),ResultActivity.class));
             }
         });
         mBtnMission.setOnClickListener(new View.OnClickListener() {

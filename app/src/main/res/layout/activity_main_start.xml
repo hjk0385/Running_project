@@ -20,23 +20,19 @@
         android:orientation="horizontal">
 
         <Button
-
-
             android:id="@+id/btn_loginlogout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
             android:text="로그인/로그아웃"
             android:textColor="@color/black" />
 
         <Button
-            android:drawableTop="@drawable/outline_face_black_18"
             android:id="@+id/btn_userlog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#B7F2FF"
             android:text="기록확인"
             android:textColor="@color/black" />
 
@@ -53,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#B7F2FF"
             android:text="새시작"
             android:textColor="@color/black" />
 
@@ -61,7 +57,7 @@
             android:id="@+id/btn_load"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#B7F2FF"
             android:layout_weight="1"
             android:textColor="@color/black"
             android:text="불러오기"/>
@@ -72,14 +68,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="0dp">
 
         <Button
             android:id="@+id/btn_exersicecal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#B7F2FF"
             android:text="운동정보"
             android:textColor="@color/black"/>
 
@@ -88,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#B7F2FF"
             android:text="Misson"
             android:textColor="@color/black" />
     </LinearLayout>
