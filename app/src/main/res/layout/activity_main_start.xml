@@ -20,6 +20,8 @@
         android:orientation="horizontal">
 
         <Button
+
+
             android:id="@+id/btn_loginlogout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,6 +31,7 @@
             android:textColor="@color/black" />
 
         <Button
+            android:drawableTop="@drawable/outline_face_black_18"
             android:id="@+id/btn_userlog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,7 +81,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:text="설정"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btn_empty"
