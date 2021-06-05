@@ -1,6 +1,11 @@
 package com.trainer.courserunner.Application.rooms;
 
+import androidx.core.util.Pair;
+
 import com.trainer.courserunner.geo.DistanceConverter;
+
+import java.util.Arrays;
+import java.util.Date;
 
 public class UserCourseAnalyzer {
     //m기준
@@ -23,4 +28,16 @@ public class UserCourseAnalyzer {
         return fullDistance;
     }
 
+    static public Pair<Date, Date> getStartEndTime(long userCourseId){
+        UserCourseDetail[] userCourseDetails= AppDatabaseConnector.getAppDatabaseConnection()
+                .userCourseDetailDao()
+                .getUserCourseDetailWhereUserCourseIdOrder(userCourseId);
+        if(userCourseDetails.length==0){
+            return null;
+        }
+
+        Date startDate= userCourseDetails[0].userCourseRecordDate;
+        Date endDate=userCourseDetails[userCourseDetails.length-1].userCourseRecordDate;
+        return new Pair<>(startDate,endDate);
+    }
 }

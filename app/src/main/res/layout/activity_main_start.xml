@@ -25,7 +25,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="로그인/로그아웃"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:background="@drawable/shape_main_btn"/>
 
         <Button
             android:id="@+id/btn_userlog"
