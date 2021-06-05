@@ -40,4 +40,30 @@ public class UserCourseAnalyzer {
         Date endDate=userCourseDetails[userCourseDetails.length-1].userCourseRecordDate;
         return new Pair<>(startDate,endDate);
     }
+
+    static public double allExerciseDistance(){
+        UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
+                .userCourseDao()
+                .getAllUserCourse();
+        double distances=0;
+        for(int i=0;i<userCourses.length;i++){
+            distances+=getDistance(userCourses[i].userCourseId);
+        }
+        return distances;
+    }
+
+    static public long allExersiceTime(){
+        UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
+                .userCourseDao()
+                .getAllUserCourse();
+        long exerciseTimes=0;
+        for(int i=0;i<userCourses.length;i++){
+            Pair<Date,Date> dateStartEndPair=getStartEndTime(userCourses[i].userCourseId);
+            long exerciseTime=DateConverters.dateToTimestamp(dateStartEndPair.second)-DateConverters.dateToTimestamp(dateStartEndPair.first);
+            exerciseTimes+=exerciseTime;
+        }
+        return exerciseTimes;
+
+    }
+
 }

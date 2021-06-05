@@ -36,20 +36,20 @@
                 android:textColor="@color/black" />
         </FrameLayout>
 
-        <Button
-            android:id="@+id/btn_userlog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="#B7F2FF"
-            android:text="기록확인"
-            android:textColor="@color/black" />
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/shape_main_btn">
 
+            <Button
+                android:id="@+id/btn_userlog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#B7F2FF"
+                android:text="기록확인"
+                android:textColor="@color/black" />
         </FrameLayout>
 
     </LinearLayout>
@@ -58,25 +58,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/shape_main_btn">
 
-        <Button
-            android:id="@+id/btn_newstart"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#B7F2FF"
-            android:text="새시작"
-            android:textColor="@color/black" />
+            android:background="@drawable/shape_main_btn">
 
-        <Button
-            android:id="@+id/btn_load"
+            <Button
+                android:id="@+id/btn_newstart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#B7F2FF"
+                android:text="새시작"
+                android:textColor="@color/black" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="#B7F2FF"
             android:layout_weight="1"
-            android:textColor="@color/black"
-            android:text="불러오기"/>
+            android:background="@drawable/shape_main_btn">
+
+            <Button
+                android:id="@+id/btn_load"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#B7F2FF"
+                android:text="불러오기"
+                android:textColor="@color/black" />
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -85,25 +100,39 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:padding="0dp">
+        android:padding="0dp"
+        android:background="@drawable/shape_main_btn">
 
-        <Button
-            android:id="@+id/btn_exersicecal"
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_exersicecal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#B7F2FF"
+                android:text="운동정보"
+                android:textColor="@color/black" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#B7F2FF"
-            android:text="운동정보"
-            android:textColor="@color/black"/>
+            android:background="@drawable/shape_main_btn">
 
-        <Button
-            android:id="@+id/btn_mission"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="#B7F2FF"
-            android:text="Misson"
-            android:textColor="@color/black" />
+            <Button
+                android:id="@+id/btn_mission"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#B7F2FF"
+                android:text="Misson"
+                android:textColor="@color/black" />
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>
