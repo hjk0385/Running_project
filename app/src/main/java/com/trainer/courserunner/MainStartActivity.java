@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.trainer.courserunner.runactivity.record.RecordListActivity;
+import com.trainer.courserunner.runactivity.set.RunningActivity;
+import com.trainer.courserunner.runactivity.set.RunningProjectRecordActivity;
 import com.trainer.courserunner.runactivity.set.RunningSetting;
 
 public class MainStartActivity extends AppCompatActivity {
@@ -45,14 +47,21 @@ public class MainStartActivity extends AppCompatActivity {
         mBtnNewStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), RunningActivity.class));
             }
         });
 
         mBtnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RunningSetting.class));
+                startActivity(new Intent(getApplicationContext(), RunningProjectRecordActivity.class));
+            }
+        });
+
+        mBtnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),SettingActivity.class));
             }
         });
 
