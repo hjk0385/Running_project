@@ -3,7 +3,6 @@ package com.trainer.courserunner.Application;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.trainer.courserunner.Application.mapdb.RoadAddressConnector;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.sound.SoundManagerGuide;
