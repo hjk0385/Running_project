@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
@@ -64,57 +65,11 @@ public class CourseSounderGuide extends CourseComponent {
         AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
         int flagCount = appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
         int passedFlagCount = UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId, userCoursedId);
+        Log.v("FLAGCOUNT", String.valueOf(flagCount));
+        Log.v("PASSEDFLAGCOUNT", String.valueOf(passedFlagCount));
 
-        if (passedFlagCount == (int) ((double) flagCount * 0.25)) {
-            //25%지점
-            if (!percentFlag25) {
-                /*
-                //처음으로 지나가는 경우
-                percentFlag25 = true;
-                if (voiceType == VoiceType.MALE) {
-                    return new SoundCommandGuide(GuideSound.FINISHMAN);
-                } else if (voiceType == VoiceType.FEMALE) {
-                    return new SoundCommandGuide(GuideSound.FINISHWOMAN);
-                } else if (voiceType == VoiceType.CHILD) {
-                    return new SoundCommandGuide(GuideSound.FINISHKID);
-                }
 
-                 */
-            }
-
-        } else if (passedFlagCount == (int) ((double) flagCount * 0.50)) {
-            //50%지점
-            if (!percentFlag50) {
-                //처음으로 지나가는 경우
-                /*
-                percentFlag50 = true;
-                if (voiceType == VoiceType.MALE) {
-                    return new SoundCommandGuide(GuideSound.FINISHMAN);
-                } else if (voiceType == VoiceType.FEMALE) {
-                    return new SoundCommandGuide(GuideSound.FINISHWOMAN);
-                } else if (voiceType == VoiceType.CHILD) {
-                    return new SoundCommandGuide(GuideSound.FINISHKID);
-                }
-
-                 */
-            }
-        } else if (passedFlagCount == (int) ((double) flagCount * 0.75)) {
-            //75%지점
-            if (!percentFlag75) {
-                /*
-                //처음으로 지나가는 경우
-                percentFlag75 = true;
-                if (voiceType == VoiceType.MALE) {
-                    return new SoundCommandGuide(GuideSound.FINISHMAN);
-                } else if (voiceType == VoiceType.FEMALE) {
-                    return new SoundCommandGuide(GuideSound.FINISHWOMAN);
-                } else if (voiceType == VoiceType.CHILD) {
-                    return new SoundCommandGuide(GuideSound.FINISHKID);
-                }
-
-                 */
-            }
-        } else if (passedFlagCount == (int) ((double) flagCount * 1.0)) {
+        if (passedFlagCount <= 1) {
             //100%지점
             if (!percentFlag100) {
                 //처음으로 지나가는 경우
@@ -124,7 +79,6 @@ public class CourseSounderGuide extends CourseComponent {
                 } else if (voiceType == VoiceType.FEMALE) {
                     return new SoundCommandGuide(GuideSound.FINISHWOMAN);
                 } else if (voiceType == VoiceType.CHILD) {
-
                     return new SoundCommandGuide(GuideSound.FINISHKID);
                 }
             }
@@ -137,6 +91,7 @@ public class CourseSounderGuide extends CourseComponent {
         if (object != null) {
             ((SoundCommand) object).execute();
             Intent intent = new Intent(context, ExerciseResultsActivity.class);
+            intent.putExtra("userCourseId",userCoursedId);
             context.startActivities(new Intent[]{intent});
         }
     }

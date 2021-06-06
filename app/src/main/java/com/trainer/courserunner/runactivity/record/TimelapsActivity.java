@@ -48,7 +48,7 @@ public class TimelapsActivity extends NavermapActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.timelaps_all){
             stopTimelaps();
-            timelapsDrawer.currentNumber=timelapsDrawer.maxNumber-2;
+            timelapsDrawer.currentNumber=timelapsDrawer.maxNumber-1;
             timelapsDrawer.run();
             return super.onOptionsItemSelected(item);
         }
@@ -145,7 +145,7 @@ public class TimelapsActivity extends NavermapActivity {
 
         @Override
         protected List<DrawingPath> makeDrawing() {
-            currentNumber = (currentNumber + 1) % maxNumber;
+            currentNumber = (currentNumber + 1) % (maxNumber+1);
 
             Object[] objects = Arrays.stream(userLocationloadRecords).limit(currentNumber).toArray();
             UserCourseRecord[] userLocationRecords = new UserCourseRecord[objects.length];

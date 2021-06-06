@@ -23,6 +23,8 @@ import com.trainer.courserunner.component.maker.layer.line.LineConnectLayerDfsCu
 import com.trainer.courserunner.component.maker.layer.quanzation.QuanzationMininumGuarantee;
 import com.trainer.courserunner.component.maker.layer.regist.CourseRegistLayerAll;
 import com.trainer.courserunner.component.maker.layer.selection.MarkerSelectionLayerAll;
+import com.trainer.courserunner.component.maker.layer.selection.MarkerSelectionLayerStatic;
+import com.trainer.courserunner.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.component.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.runactivity.run.GuideRunnerActivity;
@@ -47,7 +49,7 @@ public class RunningDistanceActivity extends AppCompatActivity {
             ScopeMapInfo scopeMapInfo = ScopeMapInfo.makeScopeMapInfoOriginLeftDown(
                     currentLocation.getLatitude(),
                     currentLocation.getLongitude(),
-                    kilometer * 1000);
+                    kilometer * 500);
             Bitmap bitmap = ((BitmapDrawable) Objects.requireNonNull(ContextCompat.getDrawable(this, runningSetting.getDrawableId()))).getBitmap();
             //
             CourseMaker.Builder builder = new CourseMaker.Builder();
@@ -59,6 +61,8 @@ public class RunningDistanceActivity extends AppCompatActivity {
             builder.setStartLocation(new ScopeDotAddress(scopeMapInfo, currentLocation.getLongitude(), currentLocation.getLatitude()));
             builder.setFinishEvent(this::nextActivity);
             builder.setMarkerSelectionLayer(new MarkerSelectionLayerAll());
+            //builder.setMarkerSelectionLayer(new MarkerSelectionLayerStatic());
+            //builder.setMarkerSelectionLayer(new MarkerSelectionNone());
             //
             CourseMaker courseMaker = builder.build();
             courseMaker.runComponent();

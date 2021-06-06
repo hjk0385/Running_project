@@ -27,7 +27,7 @@ public class UserCourseFlagDerived {
                 distanceStreamBuilder.accept(distance);
             }
             double minDistance = distanceStreamBuilder.build().min().orElse(99999999);
-            if (minDistance >= 150) {
+            if (minDistance >= 500) {
                 unvisitedFlagList.add(courseFlag);
             } else {
                 Log.v("MinDISTANCE", String.valueOf(minDistance));
