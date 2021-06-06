@@ -33,16 +33,17 @@
             android:layout_marginRight="8dp" />
 
         <TextView
-            android:id="@+id/textView_month_distance"
+            android:id="@+id/textView_exercise_distance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/textView_month_calorie"
+            android:id="@+id/textView_exercise_calorie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

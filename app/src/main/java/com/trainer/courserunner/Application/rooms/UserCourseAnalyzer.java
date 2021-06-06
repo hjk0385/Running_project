@@ -66,52 +66,30 @@ public class UserCourseAnalyzer {
         return exerciseTimes;
 
     }
-
-    static public Double getStartEndTimeDistance(Date prevDate, Date nextDate) {
+    
+    static public Double getStartEndTimeDistance(Date startDate, Date endDate) {
         UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
                 .userCourseDao()
                 .getAllUserCourse();
-        double distances = 0;
-        for (int i = 0; i < userCourses.length; i++) {
-            Pair<Date, Date> dateStartEndPair = getStartEndTime(userCourses[i].userCourseId);
-            long startTime=prevDate.getTime();
-            long endTime=nextDate.getTime();
 
-            long selectStartTime=dateStartEndPair.first.getTime();
-            long selectEndTime=dateStartEndPair.second.getTime();
-            if (selectStartTime<startTime&&startTime<selectEndTime) {
-                distances += getDistance(userCourses[i].userCourseId);
+        double allDistance=0;
+        for(UserCourse userCourse:userCourses){
+            UserCourseRecord[] userCourseRecords = AppDatabaseConnector.getAppDatabaseConnection()
+                    .userCourseRecordDao()
+                    .getUserLocationRecords(userCourse.userCourseId);
+            for(int i=1;i<userCourseRecords.length;i++){
+                UserCourseRecord userCourseRecord1=userCourseRecords[i-1];
+                UserCourseRecord userCourseRecord2=userCourseRecords[i];
+
+                if(userCourseRecord2.userCourseRecordDate.after(startDate)&&userCourseRecord2.userCourseRecordDate.before(endDate)) {
+                    allDistance += DistanceConverter.getDistance(
+                            userCourseRecord1.userCourseRecordLatitude,
+                            userCourseRecord1.userCourseRecordLongitude,
+                            userCourseRecord2.userCourseRecordLatitude,
+                            userCourseRecord2.userCourseRecordLongitude);
+                }
             }
         }
-        return distances;
+        return allDistance;
     }
-
-    static public Long getStartEndTimeExercise(Date prevDate, Date nextDate) {
-        UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
-                .userCourseDao()
-                .getAllUserCourse();
-        long exerciseTimes = 0;
-        for (int i = 0; i < userCourses.length; i++) {
-            Pair<Date, Date> dateStartEndPair = getStartEndTime(userCourses[i].userCourseId);
-            long startTime=prevDate.getTime();
-            long endTime=nextDate.getTime();
-
-            long selectStartTime=dateStartEndPair.first.getTime();
-            long selectEndTime=dateStartEndPair.second.getTime();
-
-            Log.v("TEST",String.valueOf(startTime));
-            Log.v("TEST",String.valueOf(endTime));
-            Log.v("TEST",String.valueOf(selectStartTime));
-            Log.v("TEST",String.valueOf(selectEndTime));
-
-
-            if (selectStartTime<startTime&&startTime<selectEndTime) {
-                long exerciseTime = DateConverters.dateToTimestamp(dateStartEndPair.second) - DateConverters.dateToTimestamp(dateStartEndPair.first);
-                exerciseTimes += exerciseTime;
-            }
-        }
-        return exerciseTimes;
-
-    }
-
 }

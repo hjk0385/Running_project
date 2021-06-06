@@ -8,7 +8,7 @@ import com.trainer.courserunner.trainertype.ModeType;
 
 public class AppDatabaseConnector {
     static private AppDatabase appDatabaseConnection = null;
-    static private String dbName = "test1.db";
+    static private String dbName = "test5.db";
 
     static public void initappDatabaseConnection(Context applicationContext) {
         appDatabaseConnection = Room.databaseBuilder(applicationContext, AppDatabase.class, dbName).allowMainThreadQueries().build();
