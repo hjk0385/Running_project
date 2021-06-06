@@ -1,11 +1,21 @@
 package com.trainer.courserunner;
 
 import android.os.Bundle;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.trainer.courserunner.Application.rooms.UserCourseAnalyzer;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class ResultActivity extends AppCompatActivity {
+    private CalendarView calendarView;
     private TextView textViewMonthCalorie;
     private TextView textViewMonthDistance;
 
@@ -16,8 +26,21 @@ public class ResultActivity extends AppCompatActivity {
 
         textViewMonthCalorie=findViewById(R.id.textView_month_calorie);
         textViewMonthDistance=findViewById(R.id.textView_month_distance);
-
-
-
+        calendarView=findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd", Locale.KOREAN);
+                String stringPrevDate=String.valueOf(year)+"/"+String.valueOf(month)+"/"+String.valueOf(day);
+                try {
+                    Date prevDate=sdf.parse(stringPrevDate);
+                    Date nextDate = new Date(prevDate.getTime() + 86400000);
+                    textViewMonthCalorie.setText(UserCourseAnalyzer.allExerciseDistance().toString());
+                    textViewMonthDistance.setText(UserCourseAnalyzer.allExersiceTime().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

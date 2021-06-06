@@ -4,63 +4,92 @@ import androidx.core.util.Pair;
 
 import com.trainer.courserunner.geo.DistanceConverter;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class UserCourseAnalyzer {
     //m기준
-    static public double getDistance(long userCourseId){
-        UserCourseDetail[] userCourseDetails= AppDatabaseConnector.getAppDatabaseConnection()
+    static public double getDistance(long userCourseId) {
+        UserCourseDetail[] userCourseDetails = AppDatabaseConnector.getAppDatabaseConnection()
                 .userCourseDetailDao()
                 .getUserCourseDetailWhereUserCourseIdOrder(userCourseId);
-        if(userCourseDetails.length==0){
+        if (userCourseDetails.length == 0) {
             return -1;
         }
 
-        double fullDistance=0;
-        for(int i=1;i<userCourseDetails.length;i++){
-            double latitude1=userCourseDetails[i-1].userCourseRecordLatitude;
-            double longitude1=userCourseDetails[i-1].userCourseRecordLongitude;
-            double latitude2=userCourseDetails[i].userCourseRecordLatitude;
-            double longitude2=userCourseDetails[i].userCourseRecordLongitude;
-            fullDistance+=DistanceConverter.getDistance(latitude1,longitude1,latitude2,longitude2);
+        double fullDistance = 0;
+        for (int i = 1; i < userCourseDetails.length; i++) {
+            double latitude1 = userCourseDetails[i - 1].userCourseRecordLatitude;
+            double longitude1 = userCourseDetails[i - 1].userCourseRecordLongitude;
+            double latitude2 = userCourseDetails[i].userCourseRecordLatitude;
+            double longitude2 = userCourseDetails[i].userCourseRecordLongitude;
+            fullDistance += DistanceConverter.getDistance(latitude1, longitude1, latitude2, longitude2);
         }
         return fullDistance;
     }
 
-    static public Pair<Date, Date> getStartEndTime(long userCourseId){
-        UserCourseDetail[] userCourseDetails= AppDatabaseConnector.getAppDatabaseConnection()
+    static public Pair<Date, Date> getStartEndTime(long userCourseId) {
+        UserCourseDetail[] userCourseDetails = AppDatabaseConnector.getAppDatabaseConnection()
                 .userCourseDetailDao()
                 .getUserCourseDetailWhereUserCourseIdOrder(userCourseId);
-        if(userCourseDetails.length==0){
+        if (userCourseDetails.length == 0) {
             return null;
         }
 
-        Date startDate= userCourseDetails[0].userCourseRecordDate;
-        Date endDate=userCourseDetails[userCourseDetails.length-1].userCourseRecordDate;
-        return new Pair<>(startDate,endDate);
+        Date startDate = userCourseDetails[0].userCourseRecordDate;
+        Date endDate = userCourseDetails[userCourseDetails.length - 1].userCourseRecordDate;
+        return new Pair<>(startDate, endDate);
     }
 
-    static public double allExerciseDistance(){
+    static public Double allExerciseDistance() {
         UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
                 .userCourseDao()
                 .getAllUserCourse();
-        double distances=0;
-        for(int i=0;i<userCourses.length;i++){
-            distances+=getDistance(userCourses[i].userCourseId);
+        double distances = 0;
+        for (int i = 0; i < userCourses.length; i++) {
+            distances += getDistance(userCourses[i].userCourseId);
         }
         return distances;
     }
 
-    static public long allExersiceTime(){
+    static public Long allExersiceTime() {
         UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
                 .userCourseDao()
                 .getAllUserCourse();
-        long exerciseTimes=0;
-        for(int i=0;i<userCourses.length;i++){
-            Pair<Date,Date> dateStartEndPair=getStartEndTime(userCourses[i].userCourseId);
-            long exerciseTime=DateConverters.dateToTimestamp(dateStartEndPair.second)-DateConverters.dateToTimestamp(dateStartEndPair.first);
-            exerciseTimes+=exerciseTime;
+        long exerciseTimes = 0;
+        for (int i = 0; i < userCourses.length; i++) {
+            Pair<Date, Date> dateStartEndPair = getStartEndTime(userCourses[i].userCourseId);
+            long exerciseTime = DateConverters.dateToTimestamp(dateStartEndPair.second) - DateConverters.dateToTimestamp(dateStartEndPair.first);
+            exerciseTimes += exerciseTime;
+        }
+        return exerciseTimes;
+
+    }
+
+    static public Double getStartEndTimeDistance(Date prevDate, Date nextDate) {
+        UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
+                .userCourseDao()
+                .getAllUserCourse();
+        double distances = 0;
+        for (int i = 0; i < userCourses.length; i++) {
+            Pair<Date, Date> dateStartEndPair = getStartEndTime(userCourses[i].userCourseId);
+            if (prevDate.after(dateStartEndPair.first) && nextDate.before(dateStartEndPair.second)) {
+                distances += getDistance(userCourses[i].userCourseId);
+            }
+        }
+        return distances;
+    }
+
+    static public Long getStartEndTimeExercise(Date prevDate, Date nextDate) {
+        UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
+                .userCourseDao()
+                .getAllUserCourse();
+        long exerciseTimes = 0;
+        for (int i = 0; i < userCourses.length; i++) {
+            Pair<Date, Date> dateStartEndPair = getStartEndTime(userCourses[i].userCourseId);
+            if (prevDate.after(dateStartEndPair.first) && nextDate.before(dateStartEndPair.second)) {
+                long exerciseTime = DateConverters.dateToTimestamp(dateStartEndPair.second) - DateConverters.dateToTimestamp(dateStartEndPair.first);
+                exerciseTimes += exerciseTime;
+            }
         }
         return exerciseTimes;
 

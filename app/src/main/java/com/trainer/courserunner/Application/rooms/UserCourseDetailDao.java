@@ -3,6 +3,8 @@ package com.trainer.courserunner.Application.rooms;
 import androidx.room.Dao;
 import androidx.room.Query;
 
+import java.util.Date;
+
 @Dao
 public interface UserCourseDetailDao {
     @Query("SELECT * FROM usercoursedetail")
