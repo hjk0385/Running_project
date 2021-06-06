@@ -1,5 +1,7 @@
 package com.trainer.courserunner.Application.rooms;
 
+import android.util.Log;
+
 import androidx.core.util.Pair;
 
 import com.trainer.courserunner.geo.DistanceConverter;
@@ -72,7 +74,12 @@ public class UserCourseAnalyzer {
         double distances = 0;
         for (int i = 0; i < userCourses.length; i++) {
             Pair<Date, Date> dateStartEndPair = getStartEndTime(userCourses[i].userCourseId);
-            if (prevDate.after(dateStartEndPair.first) && nextDate.before(dateStartEndPair.second)) {
+            long startTime=prevDate.getTime();
+            long endTime=nextDate.getTime();
+
+            long selectStartTime=dateStartEndPair.first.getTime();
+            long selectEndTime=dateStartEndPair.second.getTime();
+            if (selectStartTime<startTime&&startTime<selectEndTime) {
                 distances += getDistance(userCourses[i].userCourseId);
             }
         }
@@ -86,7 +93,19 @@ public class UserCourseAnalyzer {
         long exerciseTimes = 0;
         for (int i = 0; i < userCourses.length; i++) {
             Pair<Date, Date> dateStartEndPair = getStartEndTime(userCourses[i].userCourseId);
-            if (prevDate.after(dateStartEndPair.first) && nextDate.before(dateStartEndPair.second)) {
+            long startTime=prevDate.getTime();
+            long endTime=nextDate.getTime();
+
+            long selectStartTime=dateStartEndPair.first.getTime();
+            long selectEndTime=dateStartEndPair.second.getTime();
+
+            Log.v("TEST",String.valueOf(startTime));
+            Log.v("TEST",String.valueOf(endTime));
+            Log.v("TEST",String.valueOf(selectStartTime));
+            Log.v("TEST",String.valueOf(selectEndTime));
+
+
+            if (selectStartTime<startTime&&startTime<selectEndTime) {
                 long exerciseTime = DateConverters.dateToTimestamp(dateStartEndPair.second) - DateConverters.dateToTimestamp(dateStartEndPair.first);
                 exerciseTimes += exerciseTime;
             }

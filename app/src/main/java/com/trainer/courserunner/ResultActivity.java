@@ -1,6 +1,7 @@
 package com.trainer.courserunner;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
@@ -32,11 +33,12 @@ public class ResultActivity extends AppCompatActivity {
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
                 SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd", Locale.KOREAN);
                 String stringPrevDate=String.valueOf(year)+"/"+String.valueOf(month)+"/"+String.valueOf(day);
+                Log.v("TIMER",stringPrevDate);
                 try {
                     Date prevDate=sdf.parse(stringPrevDate);
                     Date nextDate = new Date(prevDate.getTime() + 86400000);
-                    textViewMonthCalorie.setText(UserCourseAnalyzer.allExerciseDistance().toString());
-                    textViewMonthDistance.setText(UserCourseAnalyzer.allExersiceTime().toString());
+                    textViewMonthCalorie.setText(UserCourseAnalyzer.getStartEndTimeDistance(prevDate,nextDate).toString());
+                    textViewMonthDistance.setText(UserCourseAnalyzer.getStartEndTimeExercise(prevDate,nextDate).toString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
