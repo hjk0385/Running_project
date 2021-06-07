@@ -9,10 +9,12 @@ import android.util.Log;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.UserCourseFlagDerived;
+import com.trainer.courserunner.Application.rooms.UserCourseRecord;
 import com.trainer.courserunner.Application.sound.GuideSound;
 import com.trainer.courserunner.Application.sound.VoiceType;
 import com.trainer.courserunner.ExerciseResultsActivity;
 import com.trainer.courserunner.component.CourseComponent;
+import com.trainer.courserunner.geo.DistanceConverter;
 
 import java.util.Objects;
 
@@ -65,21 +67,25 @@ public class CourseSounderGuide extends CourseComponent {
         AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
         int flagCount = appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
         int passedFlagCount = UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId, userCoursedId);
-        Log.v("FLAGCOUNT", String.valueOf(flagCount));
-        Log.v("PASSEDFLAGCOUNT", String.valueOf(passedFlagCount));
-
+        UserCourseRecord[] userCourseRecords =appDatabase.userCourseRecordDao().getUserLocationRecords(userCoursedId);
 
         if (passedFlagCount <= 1) {
-            //100%지점
-            if (!percentFlag100) {
-                //처음으로 지나가는 경우
-                percentFlag100 = true;
-                if (voiceType == VoiceType.MALE) {
-                    return new SoundCommandGuide(GuideSound.FINISHMAN);
-                } else if (voiceType == VoiceType.FEMALE) {
-                    return new SoundCommandGuide(GuideSound.FINISHWOMAN);
-                } else if (voiceType == VoiceType.CHILD) {
-                    return new SoundCommandGuide(GuideSound.FINISHKID);
+            UserCourseRecord startRecord=userCourseRecords[0];
+            UserCourseRecord endRecord=userCourseRecords[userCourseRecords.length-1];
+
+            if(DistanceConverter.getDistance(startRecord.userCourseRecordLatitude,startRecord.userCourseRecordLongitude,
+                    endRecord.userCourseRecordLatitude,endRecord.userCourseRecordLongitude)<100){
+                //100%지점
+                if (!percentFlag100) {
+                    //처음으로 지나가는 경우
+                    percentFlag100 = true;
+                    if (voiceType == VoiceType.MALE) {
+                        return new SoundCommandGuide(GuideSound.FINISHMAN);
+                    } else if (voiceType == VoiceType.FEMALE) {
+                        return new SoundCommandGuide(GuideSound.FINISHWOMAN);
+                    } else if (voiceType == VoiceType.CHILD) {
+                        return new SoundCommandGuide(GuideSound.FINISHKID);
+                    }
                 }
             }
         }

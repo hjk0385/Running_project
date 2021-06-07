@@ -1,9 +1,14 @@
 package com.trainer.courserunner;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.trainer.courserunner.runactivity.record.RecordListActivity;
 import com.trainer.courserunner.runactivity.set.RunningActivity;
@@ -18,6 +24,8 @@ import com.trainer.courserunner.runactivity.set.RunningProjectRecordActivity;
 import com.trainer.courserunner.runactivity.set.RunningSetting;
 
 public class MainStartActivity extends AppCompatActivity {
+    private static final int PERMISSION_REQUEST = 0;
+
     private Button mBtnLoginLogout;
     private Button mBtnNewStart;
     private Button mBtnUserLog;
@@ -90,6 +98,29 @@ public class MainStartActivity extends AppCompatActivity {
             }
         });
         updateLoginLogoutText();
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            requestPermission();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @org.jetbrains.annotations.NotNull String[] permissions, @NonNull @org.jetbrains.annotations.NotNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "권한이 필요합니다.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET},
+                PERMISSION_REQUEST);
     }
 
     void updateLoginLogoutText(){

@@ -3,20 +3,21 @@
     <PreferenceCategory android:title="개인정보 설정">
         <EditTextPreference
             android:key="name"
-            android:summary="홍길동"
+            android:summary=" "
             android:title="이름" />
         <EditTextPreference
             android:key="email"
-            android:summary="hjk0385@gmail.com"
+            android:summary=" "
             android:title="이메일" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="효과음 설정">
+        <!--
         <SwitchPreference
             android:key="sound"
             android:summary="사용안함"
             android:title="효과음" />
-
+        -->
         <ListPreference
             android:entries="@array/array_voice"
             android:entryValues="@array/array_voice"
