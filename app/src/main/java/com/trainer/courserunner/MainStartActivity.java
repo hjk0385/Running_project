@@ -1,11 +1,5 @@
 package com.trainer.courserunner;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,10 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.trainer.courserunner.runactivity.record.RecordListActivity;
 import com.trainer.courserunner.runactivity.set.RunningActivity;
 import com.trainer.courserunner.runactivity.set.RunningProjectRecordActivity;
-import com.trainer.courserunner.runactivity.set.RunningSetting;
 
 public class MainStartActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST = 0;
@@ -34,31 +33,30 @@ public class MainStartActivity extends AppCompatActivity {
     private Button mBtnMission;
     private Boolean isLogin;
 
-    private int REQUEST_LOGIN=1;
+    private int REQUEST_LOGIN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_start);
 
-        isLogin=false;
+        isLogin = false;
 
-        mBtnLoginLogout=findViewById(R.id.btn_loginlogout);
-        mBtnNewStart=findViewById(R.id.btn_newstart);
-        mBtnLoad=findViewById(R.id.btn_load);
-        mBtnUserLog=findViewById(R.id.btn_userlog);
-        mBtnExerciseInfo=findViewById(R.id.btn_exersicecal);
-        mBtnMission=findViewById(R.id.btn_mission);
+        mBtnLoginLogout = findViewById(R.id.btn_loginlogout);
+        mBtnNewStart = findViewById(R.id.btn_newstart);
+        mBtnLoad = findViewById(R.id.btn_load);
+        mBtnUserLog = findViewById(R.id.btn_userlog);
+        mBtnExerciseInfo = findViewById(R.id.btn_exersicecal);
+        mBtnMission = findViewById(R.id.btn_mission);
 
         mBtnLoginLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isLogin) {
-                    Intent intent=new Intent(MainStartActivity.this,LoginActivity.class);
-                    startActivityForResult(intent,REQUEST_LOGIN);
-                }
-                else{
-                    isLogin=false;
+                if (!isLogin) {
+                    Intent intent = new Intent(MainStartActivity.this, LoginActivity.class);
+                    startActivityForResult(intent, REQUEST_LOGIN);
+                } else {
+                    isLogin = false;
                 }
                 updateLoginLogoutText();
             }
@@ -88,13 +86,13 @@ public class MainStartActivity extends AppCompatActivity {
         mBtnExerciseInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),ResultActivity.class));
+                startActivity(new Intent(getApplicationContext(), ResultActivity.class));
             }
         });
         mBtnMission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),MissionActivity.class));
+                startActivity(new Intent(getApplicationContext(), MissionActivity.class));
             }
         });
         updateLoginLogoutText();
@@ -123,11 +121,10 @@ public class MainStartActivity extends AppCompatActivity {
                 PERMISSION_REQUEST);
     }
 
-    void updateLoginLogoutText(){
-        if(isLogin==true){
+    void updateLoginLogoutText() {
+        if (isLogin == true) {
             mBtnLoginLogout.setText("로그아웃");
-        }
-        else{
+        } else {
             mBtnLoginLogout.setText("로그인");
         }
     }
@@ -135,8 +132,8 @@ public class MainStartActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_LOGIN){
-            if(resultCode==RESULT_OK) {
+        if (requestCode == REQUEST_LOGIN) {
+            if (resultCode == RESULT_OK) {
                 isLogin = true;
             }
         }

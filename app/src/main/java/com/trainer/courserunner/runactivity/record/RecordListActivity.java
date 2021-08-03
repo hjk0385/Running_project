@@ -49,18 +49,16 @@ public class RecordListActivity extends ListActivity {
             List<String> userCourseNameList;
             userCourseNameList = Arrays.stream(userCourses)
                     .map(userCourse -> {
-                        String typeName="None";
-                        if(userCourse.courseModeId == ModeType.GUIDERUNNER.ordinal()){
-                            typeName=ModeType.GUIDERUNNER.name();
+                        String typeName = "None";
+                        if (userCourse.courseModeId == ModeType.GUIDERUNNER.ordinal()) {
+                            typeName = ModeType.GUIDERUNNER.name();
+                        } else if (userCourse.courseModeId == ModeType.PROJECTRUNNER.ordinal()) {
+                            typeName = ModeType.PROJECTRUNNER.name();
+                        } else if (userCourse.courseModeId == ModeType.SKETCHBOOK.ordinal()) {
+                            typeName = ModeType.SKETCHBOOK.name();
                         }
-                        else if(userCourse.courseModeId == ModeType.PROJECTRUNNER.ordinal()){
-                            typeName=ModeType.PROJECTRUNNER.name();
-                        }
-                        else if(userCourse.courseModeId == ModeType.SKETCHBOOK.ordinal()){
-                            typeName=ModeType.SKETCHBOOK.name();
-                        }
-                        typeName+="-";
-                        return typeName+String.valueOf(userCourse.userCourseId);
+                        typeName += "-";
+                        return typeName + String.valueOf(userCourse.userCourseId);
                     })
                     .collect(Collectors.toList());
             ArrayAdapter<String> userCourseAdapter = new ArrayAdapter<>(RecordListActivity.this, android.R.layout.simple_list_item_1, userCourseNameList);

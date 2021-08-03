@@ -23,8 +23,6 @@ import com.trainer.courserunner.component.maker.layer.line.LineConnectLayerDfsCu
 import com.trainer.courserunner.component.maker.layer.quanzation.QuanzationMininumGuarantee;
 import com.trainer.courserunner.component.maker.layer.regist.CourseRegistLayerAll;
 import com.trainer.courserunner.component.maker.layer.selection.MarkerSelectionLayerAll;
-import com.trainer.courserunner.component.maker.layer.selection.MarkerSelectionLayerStatic;
-import com.trainer.courserunner.component.maker.layer.selection.MarkerSelectionNone;
 import com.trainer.courserunner.component.maker.scopetype.ScopeDotAddress;
 import com.trainer.courserunner.component.maker.scopetype.ScopeMapInfo;
 import com.trainer.courserunner.runactivity.run.GuideRunnerActivity;

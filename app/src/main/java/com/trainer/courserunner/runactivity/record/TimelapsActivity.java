@@ -46,9 +46,9 @@ public class TimelapsActivity extends NavermapActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.timelaps_all){
+        if (item.getItemId() == R.id.timelaps_all) {
             stopTimelaps();
-            timelapsDrawer.currentNumber=timelapsDrawer.maxNumber-1;
+            timelapsDrawer.currentNumber = timelapsDrawer.maxNumber - 1;
             timelapsDrawer.run();
             return super.onOptionsItemSelected(item);
         }
@@ -104,7 +104,7 @@ public class TimelapsActivity extends NavermapActivity {
 
     public void stopTimelaps() {
         timelapsDrawer.clearOverlay();
-        if(scheduledExecutorService!=null) {
+        if (scheduledExecutorService != null) {
             scheduledExecutorService.shutdown();
         }
         scheduledExecutorService = null;
@@ -125,8 +125,8 @@ public class TimelapsActivity extends NavermapActivity {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
-            if(userLocationloadRecords.length>0){
-                naverMap.moveCamera(CameraUpdate.scrollTo(new LatLng(userLocationloadRecords[0].userCourseRecordLatitude,userLocationloadRecords[0].userCourseRecordLongitude)));
+            if (userLocationloadRecords.length > 0) {
+                naverMap.moveCamera(CameraUpdate.scrollTo(new LatLng(userLocationloadRecords[0].userCourseRecordLatitude, userLocationloadRecords[0].userCourseRecordLongitude)));
             }
             runTimelaps();
         }
@@ -145,7 +145,7 @@ public class TimelapsActivity extends NavermapActivity {
 
         @Override
         protected List<DrawingPath> makeDrawing() {
-            currentNumber = (currentNumber + 1) % (maxNumber+1);
+            currentNumber = (currentNumber + 1) % (maxNumber + 1);
 
             Object[] objects = Arrays.stream(userLocationloadRecords).limit(currentNumber).toArray();
             UserCourseRecord[] userLocationRecords = new UserCourseRecord[objects.length];

@@ -1,7 +1,5 @@
 package com.trainer.courserunner.Application.rooms;
 
-import android.util.Log;
-
 import androidx.core.util.Pair;
 
 import com.trainer.courserunner.geo.DistanceConverter;
@@ -66,22 +64,22 @@ public class UserCourseAnalyzer {
         return exerciseTimes;
 
     }
-    
+
     static public Double getStartEndTimeDistance(Date startDate, Date endDate) {
         UserCourse[] userCourses = AppDatabaseConnector.getAppDatabaseConnection()
                 .userCourseDao()
                 .getAllUserCourse();
 
-        double allDistance=0;
-        for(UserCourse userCourse:userCourses){
+        double allDistance = 0;
+        for (UserCourse userCourse : userCourses) {
             UserCourseRecord[] userCourseRecords = AppDatabaseConnector.getAppDatabaseConnection()
                     .userCourseRecordDao()
                     .getUserLocationRecords(userCourse.userCourseId);
-            for(int i=1;i<userCourseRecords.length;i++){
-                UserCourseRecord userCourseRecord1=userCourseRecords[i-1];
-                UserCourseRecord userCourseRecord2=userCourseRecords[i];
+            for (int i = 1; i < userCourseRecords.length; i++) {
+                UserCourseRecord userCourseRecord1 = userCourseRecords[i - 1];
+                UserCourseRecord userCourseRecord2 = userCourseRecords[i];
 
-                if(userCourseRecord2.userCourseRecordDate.after(startDate)&&userCourseRecord2.userCourseRecordDate.before(endDate)) {
+                if (userCourseRecord2.userCourseRecordDate.after(startDate) && userCourseRecord2.userCourseRecordDate.before(endDate)) {
                     allDistance += DistanceConverter.getDistance(
                             userCourseRecord1.userCourseRecordLatitude,
                             userCourseRecord1.userCourseRecordLongitude,

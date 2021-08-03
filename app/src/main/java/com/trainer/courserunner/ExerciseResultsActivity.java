@@ -1,13 +1,11 @@
 package com.trainer.courserunner;
 
+import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
-import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.widget.TextView;
-
-import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.DateConverters;
 import com.trainer.courserunner.Application.rooms.UserCourseAnalyzer;
 
@@ -25,21 +23,21 @@ public class ExerciseResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_results);
 
-        v1=(TextView) findViewById(R.id.input_distance);
-        v2=(TextView) findViewById(R.id.input_time);
-        v3=(TextView) findViewById(R.id.input_calorie);
+        v1 = (TextView) findViewById(R.id.input_distance);
+        v2 = (TextView) findViewById(R.id.input_time);
+        v3 = (TextView) findViewById(R.id.input_calorie);
 
-        long userCourseId=getIntent().getLongExtra("userCourseId",-1);
-        Double distance=UserCourseAnalyzer.getDistance(userCourseId);
-        Pair<Date,Date> startEndTime =UserCourseAnalyzer.getStartEndTime(userCourseId);
-        long time= DateConverters.dateToTimestamp(startEndTime.second)-DateConverters.dateToTimestamp(startEndTime.first);
-        Date date=DateConverters.fromTimestamp(time);
+        long userCourseId = getIntent().getLongExtra("userCourseId", -1);
+        Double distance = UserCourseAnalyzer.getDistance(userCourseId);
+        Pair<Date, Date> startEndTime = UserCourseAnalyzer.getStartEndTime(userCourseId);
+        long time = DateConverters.dateToTimestamp(startEndTime.second) - DateConverters.dateToTimestamp(startEndTime.first);
+        Date date = DateConverters.fromTimestamp(time);
 
-        SimpleDateFormat format=new SimpleDateFormat("HH:mm:ss", Locale.US);
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
 
-        double distance2= (double) Math.round(distance);
-        int calorie=(int) ((distance2/1000)*80);
-        v1.setText(String.valueOf((int)distance2)+"m");
+        double distance2 = (double) Math.round(distance);
+        int calorie = (int) ((distance2 / 1000) * 80);
+        v1.setText(String.valueOf((int) distance2) + "m");
         v2.setText(format.format(date));
         v3.setText(String.valueOf(calorie));
         //1시간당 칼로리

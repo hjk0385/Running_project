@@ -4,7 +4,7 @@ import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 import com.trainer.courserunner.Application.rooms.CourseFlag;
 
-public class MarkerSelectionLayerStatic implements MarkerSelectionLayer{
+public class MarkerSelectionLayerStatic implements MarkerSelectionLayer {
     @Override
     public Long apply(Long courseId) {
         AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
@@ -13,7 +13,7 @@ public class MarkerSelectionLayerStatic implements MarkerSelectionLayer{
             courseFlag.markerFlag = false;
             appDatabase.courseFlagDao().updateDto(courseFlag);
         }
-        courseFlags[0].markerFlag=true;
+        courseFlags[0].markerFlag = true;
         appDatabase.courseFlagDao().updateDto(courseFlags[0]);
         return courseId;
     }

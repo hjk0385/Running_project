@@ -1,9 +1,6 @@
 package com.trainer.courserunner.Application.mapdb;
 
-import android.util.Log;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class RoadAddressConnector {
@@ -14,21 +11,22 @@ public class RoadAddressConnector {
     private static String password = "xD6oaEUn4AXa";
     //
     private static Connection connection = null;
-    public static void startConnection(){
+
+    public static void startConnection() {
         ConnectionClass connectionClass = new ConnectionClass();
-        connection = connectionClass.getConnection(username,password,database,address);
+        connection = connectionClass.getConnection(username, password, database, address);
     }
 
     public static Connection getConnection() {
         return connection;
     }
 
-    public static void closeConnection(){
+    public static void closeConnection() {
         try {
-            if(connection!=null) {
+            if (connection != null) {
                 connection.close();
             }
-            connection=null;
+            connection = null;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
