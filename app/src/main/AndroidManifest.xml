@@ -29,8 +29,8 @@
         <activity android:name=".PrepareActivity">
 
         </activity>
-        <activity android:name=".ExerciseResultsActivity"/>
-        <activity android:name=".MissionActivity"/>
+        <activity android:name=".ExerciseResultsActivity" />
+        <activity android:name=".MissionActivity" />
         <activity android:name=".SamsungHealthSetting" />
         <activity android:name=".MainActivity" />
         <activity android:name=".runactivity.papermap.NavermapActivity" />

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
@@ -17,8 +16,6 @@ import com.trainer.courserunner.component.CourseComponent;
 import com.trainer.courserunner.geo.DistanceConverter;
 
 import java.util.Objects;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class CourseSounderGuide extends CourseComponent {
     Context context;
@@ -67,14 +64,14 @@ public class CourseSounderGuide extends CourseComponent {
         AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
         int flagCount = appDatabase.courseFlagDao().getCountCourseMarkerFlags(courseId);
         int passedFlagCount = UserCourseFlagDerived.getCountUnvistedUserCourseFlags(courseId, userCoursedId);
-        UserCourseRecord[] userCourseRecords =appDatabase.userCourseRecordDao().getUserLocationRecords(userCoursedId);
+        UserCourseRecord[] userCourseRecords = appDatabase.userCourseRecordDao().getUserLocationRecords(userCoursedId);
 
         if (passedFlagCount <= 1) {
-            UserCourseRecord startRecord=userCourseRecords[0];
-            UserCourseRecord endRecord=userCourseRecords[userCourseRecords.length-1];
+            UserCourseRecord startRecord = userCourseRecords[0];
+            UserCourseRecord endRecord = userCourseRecords[userCourseRecords.length - 1];
 
-            if(DistanceConverter.getDistance(startRecord.userCourseRecordLatitude,startRecord.userCourseRecordLongitude,
-                    endRecord.userCourseRecordLatitude,endRecord.userCourseRecordLongitude)<100){
+            if (DistanceConverter.getDistance(startRecord.userCourseRecordLatitude, startRecord.userCourseRecordLongitude,
+                    endRecord.userCourseRecordLatitude, endRecord.userCourseRecordLongitude) < 100) {
                 //100%지점
                 if (!percentFlag100) {
                     //처음으로 지나가는 경우
@@ -97,7 +94,7 @@ public class CourseSounderGuide extends CourseComponent {
         if (object != null) {
             ((SoundCommand) object).execute();
             Intent intent = new Intent(context, ExerciseResultsActivity.class);
-            intent.putExtra("userCourseId",userCoursedId);
+            intent.putExtra("userCourseId", userCoursedId);
             context.startActivities(new Intent[]{intent});
         }
     }

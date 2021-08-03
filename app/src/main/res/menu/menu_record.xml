@@ -17,6 +17,5 @@
         android:title="4x" />
     <item
         android:id="@+id/timelaps_all"
-        android:title="전체"
-        />
+        android:title="전체" />
 </menu>

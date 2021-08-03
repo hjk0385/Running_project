@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainStartActivity"
-    >
+    tools:context=".MainStartActivity">
 
     <ImageView
         android:id="@+id/imageView7"
@@ -17,8 +16,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#B7F2FF">
+        android:background="#B7F2FF"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,13 +75,13 @@
 
                 <Button
                     android:id="@+id/btn_newstart"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="#B7F2FF"
                     android:text="새시작"
-                    android:textColor="@color/black"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    android:textColor="@color/black" />
             </FrameLayout>
 
             <FrameLayout
@@ -93,13 +92,13 @@
 
                 <Button
                     android:id="@+id/btn_load"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="#B7F2FF"
                     android:text="불러오기"
-                    android:textColor="@color/black"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    android:textColor="@color/black" />
             </FrameLayout>
 
         </LinearLayout>
@@ -119,13 +118,13 @@
 
                 <Button
                     android:id="@+id/btn_exersicecal"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="#B7F2FF"
                     android:text="운동정보"
-                    android:textColor="@color/black"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    android:textColor="@color/black" />
             </FrameLayout>
 
             <FrameLayout
@@ -136,13 +135,13 @@
 
                 <Button
                     android:id="@+id/btn_mission"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="#B7F2FF"
                     android:text="Misson"
-                    android:textColor="@color/black"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    android:textColor="@color/black" />
             </FrameLayout>
         </LinearLayout>
     </LinearLayout>

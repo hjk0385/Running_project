@@ -7,7 +7,7 @@ public class AddressDot extends BaseDot {
     double latitude;
 
     public AddressDot(double x, double y,
-                       double normalizeX, double normalizeY) {
+                      double normalizeX, double normalizeY) {
         super(normalizeX, normalizeY);
         this.latitude = y;
         this.longitude = x;

@@ -1,6 +1,5 @@
 package com.trainer.courserunner.Application.rooms;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.DatabaseView;
 

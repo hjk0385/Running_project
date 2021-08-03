@@ -11,11 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.trainer.courserunner.Application.mapdb.RoadAddressConnector;
 import com.trainer.courserunner.Application.rooms.AppDatabase;
 import com.trainer.courserunner.Application.rooms.AppDatabaseConnector;
 
-import java.sql.Connection;
 import java.util.concurrent.TimeUnit;
 
 public class PrepareActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -26,9 +24,9 @@ public class PrepareActivity extends AppCompatActivity implements ActivityCompat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prepare);
 
-        while(true){
+        while (true) {
             AppDatabase appDatabase = AppDatabaseConnector.getAppDatabaseConnection();
-            if(appDatabase!=null){
+            if (appDatabase != null) {
                 break;
             }
 

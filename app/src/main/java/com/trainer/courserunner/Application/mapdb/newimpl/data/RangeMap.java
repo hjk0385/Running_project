@@ -1,8 +1,5 @@
 package com.trainer.courserunner.Application.mapdb.newimpl.data;
 
-import com.trainer.courserunner.Application.mapdb.newimpl.data.AddressVO;
-
-
 import java.util.List;
 
 public class RangeMap {

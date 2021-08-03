@@ -6,10 +6,6 @@ import com.trainer.courserunner.Application.mapdb.newimpl.data.RangeMapInfo;
 import com.trainer.courserunner.Application.mapdb.newimpl.supplier.RangeMapAddressSupplier;
 import com.trainer.courserunner.component.maker.scopetype.ScopeMapInfo;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -28,7 +24,7 @@ public class RoadAddressDao {
             RangeMap rangeMap = rangeMapAddressSupplier.get().get();
             List<AddressVO> addressVOList = rangeMap.getMapVoList();
 
-            for(AddressVO addressVO: addressVOList){
+            for (AddressVO addressVO : addressVOList) {
                 RoadAddressDto roadAddressDto = new RoadAddressDto();
                 roadAddressDto.setLatitude(addressVO.getLatitude());
                 roadAddressDto.setLongitude(addressVO.getLongitude());

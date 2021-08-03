@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExerciseResultsActivity"
-    android:background="#4D000000">
+    android:background="#4D000000"
+    tools:context=".ExerciseResultsActivity">
 
     <EditText
         android:id="@+id/input_calorie"

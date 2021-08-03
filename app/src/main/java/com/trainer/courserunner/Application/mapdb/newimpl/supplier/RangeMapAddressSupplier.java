@@ -8,8 +8,6 @@ import com.trainer.courserunner.Application.mapdb.newimpl.data.CompressSnappyRes
 import com.trainer.courserunner.Application.mapdb.newimpl.data.RangeMap;
 import com.trainer.courserunner.Application.mapdb.newimpl.data.RangeMapInfo;
 
-import okhttp3.*;
-
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -17,6 +15,12 @@ import java.util.concurrent.Future;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class RangeMapAddressSupplier implements Supplier<Future<RangeMap>> {
     //연결 정보
@@ -43,7 +47,7 @@ public class RangeMapAddressSupplier implements Supplier<Future<RangeMap>> {
         this.request = new Request.Builder()
                 .url(URL)
                 .post(requestBody)
-                .addHeader("x-ncp-apigw-api-key", "hhRjkcHcLQ7YBTkji8A7An1rdhNyPXkCWNm9IROB")
+                .addHeader("x-ncp-apigw-api-key", "ScMpxUPyqupCh28jAmS4AOdxrOTBvDH7DseRHoNF")
                 .build();
     }
 
@@ -54,7 +58,7 @@ public class RangeMapAddressSupplier implements Supplier<Future<RangeMap>> {
             OkHttpClient client = new OkHttpClient();
             try (Response response = client.newCall(request).execute()) {
                 String responseText = Objects.requireNonNull(response.body()).string();
-                Log.v("temp",responseText);
+                Log.v("temp", responseText);
                 RangeMap rangeMap = Stream.of(responseText)
                         .map(responseTextData -> gson.fromJson(responseText, JsonObject.class))
                         .map(responseJson -> responseJson.getAsJsonPrimitive("compressRangeMapJsonBase64").getAsString())
