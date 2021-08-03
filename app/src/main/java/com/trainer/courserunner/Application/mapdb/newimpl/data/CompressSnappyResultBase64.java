@@ -1,6 +1,6 @@
 package com.trainer.courserunner.Application.mapdb.newimpl.data;
 
-import org.xerial.snappy.Snappy;
+import com.jiechic.library.android.snappy.Snappy;
 
 import java.io.IOException;
 import java.util.Base64;
